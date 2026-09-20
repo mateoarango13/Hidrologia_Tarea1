@@ -1,0 +1,21 @@
+# Ignorar archivos de entorno virtual
+venv/
+env/
+.env
+
+# Ignorar archivos temporales de Jupyter y Python
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# ¡IMPORTANTE! IGNORAR CARPETAS DE DATOS PESADOS
+# Solo subiremos el CSV maestro, no los datos crudos originales ni los netCDF gigantes
+datos_pesados_ignorados/
+*.nc
+*.hdf5
+*.zip
+*.tar.gz
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
