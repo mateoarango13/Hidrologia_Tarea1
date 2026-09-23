@@ -49,3 +49,25 @@ Si eres un agente de IA asistiendo a cualquiera de los integrantes del equipo:
 - [ ] **Fase 2:** Análisis estadístico y comparación de precipitación (Local vs GPM IMERG).
 - [ ] **Fase 3:** Estimación de evapotranspiración (Hargreaves / Thornthwaite / Balance).
 - [ ] **Fase 4:** Balance hídrico de cuenca, almacenamiento e informe escrito final.
+
+---
+
+## 🤝 Flujo de trabajo colaborativo y handoff IA
+Este repositorio está pensado para trabajo en equipo con control de versiones y traspaso de contexto entre integrantes e IA.
+
+1. Cada integrante trabaja sobre la rama del proyecto y conserva la estructura de `scripts/`, `datos/`, `figuras/` y `documentos/`.
+2. Antes de iniciar, cada agente debe leer [AGENTS.md](AGENTS.md) y [BITACORA_AGENTES.md](BITACORA_AGENTES.md).
+3. Al finalizar la tarea, debe dejar un resumen estructurado en formato legible para IA usando el template de [documentos/handoff_template.yaml](documentos/handoff_template.yaml).
+4. Luego de la entrega, el responsable comparte el cambio en GitHub Desktop y hace commit/push para sincronizar el repositorio.
+
+> Importante: este proyecto usa la base de datos maestra en [datos/datos_mensuales_maipo.csv](datos/datos_mensuales_maipo.csv) como única fuente de verdad para todos los análisis.
+
+---
+
+## 🔧 Requisitos del entorno local
+- Python 3.10+ recomendado.
+- Librerías principales: `pandas`, `numpy`, `matplotlib`, `scipy`, `seaborn`.
+- Para la descarga satelital: `earthengine-api` y `geopandas`.
+- Git/GitHub Desktop debe quedar instalado en la máquina del equipo para sincronizar los cambios.
+
+En este entorno actual no está disponible `git` en el PATH; por tanto, el registro operativo y la sincronización final deben hacerse desde GitHub Desktop o instalando Git en el sistema.
