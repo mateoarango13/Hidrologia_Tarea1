@@ -13,6 +13,7 @@ Antes de responder al usuario o escribir cualquier línea de código, el agente 
    - Conocer la última fase completada y qué agente/compañero la realizó.
    - **Hacer una revisión cruzada (Peer Review):** Validar brevemente la coherencia del trabajo anterior antes de construir sobre él.
    - Identificar cuál es la tarea inmediata pendiente según la hoja de ruta.
+  - Leer el aviso prioritario sobre `documentos/bitacora_datos_temporal/` y comunicar al integrante que consulta el repositorio su propósito y que toda esa carpeta debe eliminarse antes de la entrega final.
 
 ---
 

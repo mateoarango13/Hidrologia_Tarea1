@@ -1,0 +1,63 @@
+project:
+  name: "Tarea 1 - Hidrología"
+  basin: "Río Maipo en El Manzano"
+  camels_code: "5710001"
+  area_km2: 4837.4
+  dataset_master: "datos/datos_mensuales_maipo.csv"
+  temporal_window: "1980-01 to 2020-03"
+  months: 483
+
+status:
+  phase_1: "completed|pending|in_progress"
+  phase_2: "completed|pending|in_progress"
+  phase_3: "completed|pending|in_progress"
+  phase_4: "completed|pending|in_progress"
+
+team:
+  responsible: "Nombre del integrante"
+  ia_agent: "Nombre de la IA o herramienta"
+  date: "YYYY-MM-DD"
+
+validation:
+  local_precip_missing_pct: 0.0
+  discharge_missing_pct: 0.0
+  max_missing_allowed_pct: 10
+  temporal_requirement_met: true
+  outer_join_required: true
+
+artifacts:
+  scripts:
+    - "scripts/NN_analisis_x.py"
+  data:
+    - "datos/datos_mensuales_maipo.csv"
+  figures:
+    - "figuras/figura_x.png"
+
+summary:
+  objective: "Descripción breve del objetivo de la fase"
+  methods:
+    - "Método o script ejecutado"
+    - "Fórmulas o métricas aplicadas"
+  findings:
+    - "Hallazgo principal 1"
+    - "Hallazgo principal 2"
+
+metrics:
+  r_pearson: null
+  rho_spearman: null
+  pbias_percent: null
+  rmse: null
+  mae: null
+  notes: "Resultados relevantes de la fase"
+
+next_actions:
+  - "Qué debe hacer el siguiente integrante"
+  - "Qué archivo debe tomar como base"
+  - "Qué se debe dejar en la bitácora"
+
+handoff_for_ia:
+  source_of_truth: "datos/datos_mensuales_maipo.csv"
+  constraints:
+    - "No recortar la serie local al periodo satelital"
+    - "Usar el dataset maestro como entrada para todos los análisis"
+    - "Registrar el estado final en BITACORA_AGENTES.md"

@@ -6,6 +6,12 @@
 > 2. Haz un breve **Peer Review** (revisión de pares) del código y figuras producidas antes de continuar.
 > 3. Al terminar tu labor en esta sesión, **agrega una nueva entrada** al final de este archivo siguiendo la plantilla.
 
+## AVISO PRIORITARIO: REGISTRO TEMPORAL DEL EQUIPO
+- Existe `documentos/bitacora_datos_temporal/`, una carpeta temporal compartida para que los roles A, B, C y D registren datos, métodos, resultados verificables, limitaciones y su interpretación por separado.
+- **Antes de entregar el trabajo final, se debe borrar la carpeta completa `documentos/bitacora_datos_temporal/` con todos sus archivos y confirmar que no esté incluida en el ZIP final.** No borrar por error los scripts, las figuras oficiales, el dataset maestro ni esta bitácora, que están fuera de esa carpeta.
+- **Instrucción para cada IA que lea esta bitácora:** informar proactivamente al integrante con quien trabaja que existe esta carpeta temporal, explicar su propósito y recordarle que debe eliminarse completa antes de la entrega final. Esta comunicación debe hacerse cada vez que un integrante consulte la bitácora mediante una IA.
+- Hasta la limpieza previa a la entrega, los registros son evidencia de trabajo y apoyo para redactar/sustentar; no reemplazan los datos fuente ni el informe final. Distinguir siempre resultados calculados, interpretación y preguntas pendientes.
+
 ---
 
 ## ÍNDICE DE SESIONES Y AVANCE DEL PROYECTO
@@ -144,7 +150,7 @@ next_actions:
 
 ## ENTRADA #3: ASIGNACIÓN DEL ROL MODELADOR Y EXIGENCIA DE RIGOR RUBRICA
 - **Fecha:** 2026-09-22
-- **Integrante Responsable:** Equipo / estudiante asignado al rol modelador
+- **Integrante Responsable:** Santiago Ortega — Rol B (Modelador)
 - **Agente de IA utilizado:** GitHub Copilot
 - **Estado de la Fase:** EN CURSO
 
@@ -187,59 +193,137 @@ next_actions:
 - Generar figuras reproducibles y guardarlas en `figuras/`.
 - Registrar la nueva entrega en la bitácora con métricas, hallazgos y limitaciones.
 
-### 7. Checklist Operativo del Rol Modelador (Punto 2)
+### 7. Checklist Operativo — Santiago Ortega, Rol B (Modelador)
 #### 7.1. Preparación y validación
-- [ ] Cargar el dataset maestro `datos/datos_mensuales_maipo.csv`.
-- [ ] Definir el período común de análisis y documentarlo explícitamente.
-- [ ] Confirmar que la comparación es entre meses coincidentes y válidos.
-- [ ] Registrar la cantidad de pares y la ventana temporal.
+- [x] Cargar el dataset maestro `datos/datos_mensuales_maipo.csv`.
+- [x] Definir ventanas por análisis sin recortar las series locales para igualar la cobertura de IMERG.
+- [x] Usar meses coincidentes y válidos; informar periodo, número de observaciones y tratamiento de faltantes para cada comparación, rezago y modelo.
+- [x] Documentar las columnas, fuentes, unidades y transformaciones del dataset.
 
-#### 7.2. Diagramas de dispersión
-- [ ] Graficar IMERG vs precipitación local con línea 1:1.
-- [ ] Graficar precipitación local vs caudal.
-- [ ] Graficar IMERG vs caudal.
-- [ ] Colorear por mes calendario o estación climática.
-- [ ] Describir dirección, forma, dispersión y valores influyentes.
+#### 7.2. Relaciones y diagramas de dispersión
+- [x] Graficar IMERG frente a precipitación de referencia, con línea 1:1 y escalas comparables.
+- [x] Graficar precipitación de referencia frente a caudal.
+- [x] Graficar IMERG frente a caudal.
+- [x] Definir ejes y unidades; para lluvia–caudal presentar `Q` y apoyar la comparación de láminas con `R` cuando sea pertinente.
+- [x] Colorear por mes calendario o estación climática e indicar periodo y tamaño de muestra.
+- [ ] Interpretar dirección, forma, fuerza, dispersión, agrupamientos, valores influyentes y cambios de variabilidad con la magnitud.
+- [x] Para IMERG frente a precipitación de referencia calcular sesgo medio firmado `PI - PL` en unidades originales, MAE y RMSE; explicar el signo respecto a la referencia. Si se informa PBIAS, definir fórmula, denominador y convención de signo.
+- [x] Calcular Pearson (`r`) y Spearman (`rho`) e interpretar sus diferencias. No presentar correlación como prueba de causalidad ni como evidencia suficiente de capacidad predictiva.
 
-#### 7.3. Métricas estadísticas
-- [ ] Calcular Pearson (`r`).
-- [ ] Calcular Spearman (`rho`).
-- [ ] Calcular sesgo medio (PBIAS o equivalente).
-- [ ] Calcular MAE.
-- [ ] Calcular RMSE.
-- [ ] Interpretar las diferencias entre correlación y concordancia.
+#### 7.3. Rezagos y anomalías
+- [ ] Evaluar si la precipitación de meses anteriores ayuda a explicar el caudal; definir el sentido de cada rezago y justificarlo considerando almacenamiento, nieve o regulación.
+- [ ] No usar precipitación futura para predecir caudal pasado.
+- [x] Comparar exploratoriamente relaciones originales con anomalías mensuales, retirando la climatología del mes calendario según la guía.
+- [ ] Apoyar al grupo calculando anomalías `a = X - media mensual` y estandarizadas `z = (X - media mensual) / desviación estándar mensual` para las variables acordadas.
+- [ ] Documentar y justificar un periodo de referencia fijo; reportar años válidos por mes y advertir desviaciones estándar nulas, pequeñas o calculadas con pocos datos.
+- [ ] Para anomalías usadas en modelos con evaluación temporal, calcular la climatología solo con el bloque de ajuste y aplicarla sin recalcularla al bloque de evaluación.
 
-#### 7.4. Relación lluvia–caudal y rezagos
-- [ ] Evaluar si la lluvia de meses anteriores ayuda a explicar el caudal.
-- [ ] Definir el sentido del rezago y justificarlo físicamente.
-- [ ] Explorar si la relación cambia al retirar la climatología anual.
-- [ ] Comparar variables originales con anomalías mensuales.
+#### 7.4. Modelos candidatos
+- [ ] Evaluar precipitación de referencia estimada a partir de IMERG.
+- [ ] Evaluar caudal estimado a partir de precipitación de referencia o IMERG.
+- [ ] Usar regresión lineal como referencia y comparar alternativas razonables solo si la evidencia justifica transformaciones, relaciones no lineales sencillas o rezagos.
+- [ ] No forzar un modelo si los datos no respaldan capacidad explicativa suficiente.
+- [ ] Documentar ecuación, variables, unidades, parámetros, supuestos, rango de aplicación y tratamiento de ceros o transformaciones.
+- [ ] Justificar el modelo seleccionado frente a alternativas y discutir plausibilidad física. Aclarar que una relación lluvia–caudal no reemplaza el balance hídrico ni garantiza conservación de masa.
 
-#### 7.5. Modelación
-- [ ] Evaluar regresión lineal como referencia.
-- [ ] Justificar si existe una relación aprovechable para predicción.
-- [ ] Considerar transformaciones o relaciones no lineales solo si hay evidencia.
-- [ ] Documentar ecuación, variables, unidades, parámetros y supuestos.
-- [ ] Explicar por qué el modelo propuesto es razonable y cuáles son sus limitaciones.
+#### 7.5. Evaluación temporal fuera del ajuste
+- [ ] Separar ajuste y evaluación mediante bloques temporales o años completos; justificar la partición y no mezclar aleatoriamente meses dependientes.
+- [ ] Seleccionar modelos, rezagos, transformaciones y climatologías para modelar exclusivamente con los datos de ajuste.
+- [ ] En el periodo de evaluación calcular sesgo, MAE y RMSE.
+- [ ] Comparar precipitación estimada con IMERG sin corrección y caudal estimado con la climatología mensual del caudal; calcular ambas referencias usando solo el ajuste.
+- [ ] Examinar residuos frente al tiempo, valor estimado y mes calendario; revisar estacionalidad residual, predicciones físicamente implausibles y estabilidad entre periodos.
+- [ ] Concluir si la relación es aprovechable, para qué condiciones funciona y si mejora frente a la referencia. Un resultado negativo bien sustentado también es válido.
 
-#### 7.6. Evaluación fuera del ajuste
-- [ ] Separar datos de ajuste y validación por bloques temporales o años completos.
-- [ ] Evaluar error fuera del ajuste con MAE y RMSE.
-- [ ] Revisar residuos frente al tiempo, al valor estimado y al mes calendario.
-- [ ] Comparar contra una referencia simple (p. ej., IMERG sin corrección o climatología mensual del caudal).
-- [ ] Concluir si la relación es útil, débil o no aplicable.
+#### 7.6. Interpretación, incertidumbre y fuentes
+- [ ] Interpretar resultados con mecanismos pertinentes a la cuenca y los datos; considerar orografía, nieve, almacenamiento o regulación solo cuando exista evidencia.
+- [ ] Distinguir asociación, explicación física y predicción; discutir incertidumbres, limitaciones y explicaciones alternativas.
+- [ ] Revisar posibles fuentes compartidas: IMERG Final incorpora pluviómetros y la precipitación de referencia podría incluir información satelital.
+- [ ] Respaldar afirmaciones metodológicas y físicas con literatura revisada por pares o documentación técnica oficial; registrar referencias y DOI o enlace verificable.
+- [ ] Vincular las conclusiones con resultados reproducibles, no solo con inspección visual.
 
-#### 7.7. Sustentación científica
-- [ ] Cada afirmación metodológica debe tener base en literatura revisada por pares.
-- [ ] Cada conclusión debe estar respaldada por evidencia empírica y no por intuición visual.
-- [ ] Documentar DOI o referencia oficial de las fuentes consultadas.
-- [ ] No usar material no académico como fuente principal.
+#### 7.7. Entregables y aporte al equipo
+- [ ] Producir el análisis reproducible del rol B desde el dataset maestro.
+- [ ] Guardar figuras y tablas legibles, con unidades, periodos y tamaños de muestra, en `figuras/` o en la ubicación acordada por el equipo.
+- [ ] Entregar métricas, decisiones metodológicas, interpretación, limitaciones y referencias para integrar el informe y preparar la defensa oral.
+- [ ] Registrar estado, archivos, validaciones, hallazgos y próximos pasos en la bitácora.
 
-#### 7.8. Entregables mínimos del rol
-- [ ] Script reproducible: `scripts/04_analisis_precipitacion.py`
-- [ ] Figuras guardadas en `figuras/`
-- [ ] Resumen de métricas y hallazgos físicos
-- [ ] Registro actualizado en la bitácora con estado de avance y próximos pasos
+---
+
+## ENTRADA #4: ROL B — ASIGNACIÓN Y DISEÑO DEL ANÁLISIS
+- **Fecha:** 2026-09-28
+- **Integrante Responsable:** Santiago Ortega
+- **Agente de IA utilizado:** GitHub Copilot
+- **Estado de la Fase:** EN CURSO — paso 1 completado; gráficos y métricas descriptivas iniciales del punto 2 completados
+
+### 1. Revisión de Pares
+- Se revisó la checklist de la entrada #3 contra el punto 2, la sección 3.2 de anomalías y la rúbrica de la guía `documentos/tarea_1_202602.pdf`.
+- La checklist ampliada quedó asignada a Santiago Ortega y se incorporó en la sección 7 de la entrada #3. Los criterios grupales se identifican como aportes, no como entregables individuales del rol B.
+
+### 2. Resumen de lo Realizado
+- Se completó la preparación y diseño inicial del análisis del rol B leyendo el CSV maestro y contabilizando cobertura, faltantes y pares válidos sin imputar datos.
+- Se definió trabajar por pares completos válidos en cada análisis y mantener las series locales completas, sin recortarlas al periodo de IMERG.
+- Se mapearon las columnas del CSV: `date` (fecha mensual), `P_local_mm` (precipitación de referencia, mm/mes), `P_IMERG_mm` (IMERG, mm/mes), `Caudal_m3s` (caudal, m3/s), `Q_lamina_mm` (lámina equivalente, mm/mes) y `Temp_C` (temperatura, °C).
+- Se creó `scripts/04_analisis_precipitacion.py`, que genera los tres diagramas de dispersión del punto 2.1, dos paneles complementarios con `Q_lamina_mm`, y una tabla reproducible de métricas.
+- Los puntos se colorean por mes calendario; cada panel informa sus ejes, unidades, ventana y cantidad de pares. IMERG frente a precipitación de referencia incluye la línea 1:1 con escalas comparables.
+
+### 3. Validaciones y Resultados del Paso 1
+- El CSV tiene **484 filas mensuales**, de 1980-01 a 2020-04; la secuencia es continua y no hay fechas duplicadas.
+- Precipitación de referencia: 483 valores válidos; falta 2020-04 (1/484; 0.21%).
+- IMERG: 238 valores válidos de 2000-06 a 2020-03 (246/484 vacíos fuera de esa cobertura).
+- Caudal y lámina equivalente: 470 valores válidos cada uno; 14/484 vacíos (2.89%).
+- Temperatura: 238 valores válidos de 2000-06 a 2020-03.
+- Pares válidos para el diseño: precipitación de referencia–IMERG, **238** (2000-06 a 2020-03); precipitación de referencia–caudal, **469** (1980-01 a 2020-03); IMERG–caudal, **230** (2000-06 a 2020-03). Los conteos son iguales al usar `Q_lamina_mm` en lugar de `Caudal_m3s`.
+- En precipitación IMERG frente a referencia: Pearson `r = 0.8875`, Spearman `rho = 0.8245`, sesgo medio `PI - PL = -5.503 mm/mes`, MAE `= 27.344 mm/mes`, RMSE `= 48.656 mm/mes` y PBIAS `= -8.764%`, calculado como `100 * sum(PI - PL) / sum(PL)`. El sesgo agregado es negativo con esta convención; no implica que todos los meses estén subestimados.
+- Correlaciones de series mensuales originales: precipitación local–caudal `r = -0.2009`, `rho = -0.3931`; IMERG–caudal `r = -0.2772`, `rho = -0.4234`. Son asociaciones contemporáneas que conservan el ciclo anual; no se interpretan todavía como relación hidrológica independiente. La diferencia Pearson–Spearman muestra que la asociación monotónica medida por rangos es más negativa, pero debe reevaluarse con anomalías mensuales y rezagos.
+- La climatología de precipitación local y caudal muestra máximos mensuales distintos: precipitación en junio (179.01 mm/mes) y caudal en diciembre (210.71 m3/s); los mínimos son marzo (10.85 mm/mes) y agosto (64.81 m3/s), respectivamente. La correlación entre las 12 medias climatológicas es `r = -0.7676` (solo descripción del ciclo anual, no una prueba inferencial). Esto es consistente con el signo negativo contemporáneo en series originales y con un posible desfase estacional asociado al almacenamiento y deshielo, que debe contrastarse con bibliografía regional.
+- Al restar a cada mes su propia media climatológica calculada con los mismos pares válidos del periodo analizado, la asociación contemporánea pasa a ser débilmente positiva: precipitación local–caudal `r = 0.1648`, `rho = 0.1426` (469 pares); IMERG–caudal `r = 0.1789`, `rho = 0.2325` (230 pares). Para anomalías con lluvia en `t-k` frente a caudal en `t`, los rezagos exploratorios de 5 y 6 meses alcanzan para precipitación local `r = 0.3827` y `0.4553`, y para IMERG `r = 0.4095` y `0.3924`, respectivamente. Estas asociaciones no demuestran causalidad ni desempeño predictivo: las climatologías se estimaron sobre el periodo completo, los rezagos se exploraron en la misma muestra y la autocorrelación debe considerarse. No son resultados de validación fuera de muestra.
+- La distribución del error IMERG–referencia refuerza que el sesgo medio no representa cada mes: IMERG es menor en 103 pares y mayor en 135, mientras el sesgo medio es `-5.503 mm/mes` pero la mediana del error es `+3.856 mm/mes`. Los cinco mayores errores absolutos aportan 52.35% de la suma de errores cuadrados; se deben revisar como meses influyentes, no excluir sin justificación.
+- La inspección inicial muestra dispersión positiva entre productos de precipitación, agrupamiento estacional y amplitud creciente de las diferencias en valores altos; la línea 1:1 facilita examinar concordancia además de correlación. Interpretación física definitiva, valores influyentes y comportamiento de los residuos quedan pendientes de análisis adicional.
+- Se detectó una discrepancia documental: `AGENTS.md` y entradas anteriores describen 483 meses hasta 2020-03, precipitación local sin faltantes y menos de 2% de faltantes en caudal. El CSV actual contiene 484 filas hasta 2020-04, un faltante en precipitación local y 2.89% de faltantes en caudal. No se modificó el CSV ni `AGENTS.md`; se debe reconciliar esta diferencia antes de citar esas cifras como validación oficial.
+
+### 4. Archivos Modificados o Generados
+- `BITACORA_AGENTES.md`: checklist aprobada asignada a Santiago Ortega y registro del paso 1.
+- `documentos/checklist_modelador_propuesta.md`: copia de revisión aprobada; la versión oficial está en esta bitácora.
+- `scripts/04_analisis_precipitacion.py`: análisis de pares mensuales y generación de dispersogramas/métricas.
+- `figuras/figura_2_1_relaciones_scatter.png`: tres relaciones requeridas y dos apoyos con lámina, resolución de 300 DPI.
+- `figuras/tabla_2_1_metricas_relaciones.csv`: tamaños de muestra, ventanas, correlaciones y métricas de concordancia entre productos.
+- `datos/datos_mensuales_maipo.csv`: solo lectura; no modificado.
+
+### 5. Próximos Pasos
+- Completar la interpretación descriptiva de los diagramas, examinar valores influyentes y cambios de dispersión con la magnitud.
+- Repetir el análisis de anomalías/rezagos con una climatología estimada solo en el bloque de ajuste; reportar la climatología fija y los años válidos por mes.
+- Evaluar rezagos candidatos de 5–6 meses con bloques temporales, considerando autocorrelación y comparando frente a la climatología mensual del caudal.
+- Mantener explícitos los periodos y tamaños de muestra definidos aquí; tratar faltantes con casos válidos por análisis, sin rellenarlos.
+- Reconciliar con el equipo la diferencia entre los metadatos/handoffs previos y la cobertura/missingness observada en el CSV.
+
+---
+
+## ENTRADA #5: CREACIÓN DE REGISTRO TEMPORAL OBJETIVO POR ROLES
+- **Fecha:** 2026-09-28
+- **Integrante Responsable:** Equipo; rol B inicial documentado por Santiago Ortega
+- **Agente de IA utilizado:** GitHub Copilot
+- **Estado de la Fase:** EN CURSO
+
+### 1. Revisión de Pares
+- Se verificó el protocolo de agentes, la bitácora vigente y la asignación A–D descrita en `documentos/plan_trabajo_equipo.pdf`.
+- Los resultados existentes del rol B están separados entre métricas reproducibles, resultados exploratorios e interpretación por validar; no se convierten en afirmaciones causales.
+
+### 2. Resumen de lo Realizado
+- Se creó `documentos/bitacora_datos_temporal/` con instrucciones comunes, una sección/archivo independiente para cada rol A–D y un registro inicial de los resultados del rol B.
+- Se añadió a este handoff un aviso prioritario que exige borrar toda la carpeta temporal antes de preparar la entrega final e instruye explícitamente a cada IA que lea la bitácora a comunicar ese requisito al integrante.
+- Se actualizó `AGENTS.md` para dirigir a los agentes al aviso de limpieza cuando lean este handoff.
+
+### 3. Archivos Clave
+- `documentos/bitacora_datos_temporal/00_INSTRUCCIONES.md`: formato común, reglas de trazabilidad y protocolo de limpieza.
+- `documentos/bitacora_datos_temporal/rol_a_explorador.md`
+- `documentos/bitacora_datos_temporal/rol_b_modelador.md`
+- `documentos/bitacora_datos_temporal/rol_c_tendencias_y_fourier.md`
+- `documentos/bitacora_datos_temporal/rol_d_climatologia_global.md`
+
+### 4. Validación y Próximos Pasos
+- Se conservaron los nombres A–D del plan de equipo. Solo el registro del rol B se prellenó con resultados existentes del CSV maestro; los otros roles quedan vacíos para que sus responsables registren su propia evidencia.
+- Los integrantes deben añadir resultados con unidades, periodo, n, datos faltantes, método, archivos reproducibles, límites e interpretación separada. No completar campos con valores supuestos.
+- Antes de la entrega, borrar íntegramente `documentos/bitacora_datos_temporal/` y comprobar que no aparezca en el paquete final.
 
 ---
 

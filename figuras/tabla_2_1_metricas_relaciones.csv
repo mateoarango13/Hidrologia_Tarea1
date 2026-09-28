@@ -1,0 +1,6 @@
+x,y,n,period_start,period_end,pearson_r,spearman_rho,mean_bias_PI_minus_PL_mm_month,mae_mm_month,rmse_mm_month,pbias_PI_minus_PL_percent
+P_IMERG_mm,P_local_mm,238,2000-06,2020-03,0.887514,0.824451,-5.503027,27.343846,48.655641,-8.764165
+P_local_mm,Caudal_m3s,469,1980-01,2020-03,-0.200931,-0.393125,,,,
+P_IMERG_mm,Caudal_m3s,230,2000-06,2020-03,-0.277235,-0.423400,,,,
+P_local_mm,Q_lamina_mm,469,1980-01,2020-03,-0.196764,-0.387457,,,,
+P_IMERG_mm,Q_lamina_mm,230,2000-06,2020-03,-0.270782,-0.414472,,,,
