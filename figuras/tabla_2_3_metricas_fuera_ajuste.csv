@@ -1,0 +1,9 @@
+task,predictor,target,model,test_start,test_end,n,bias_pred_minus_obs,mae,rmse,negative_predictions,minimum_prediction,maximum_prediction
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,2016-01,2020-03,51,-0.981804,18.839963,32.578074,0,2.827578,197.996544
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,2016-01,2020-03,51,0.640247,20.853246,30.738910,0,0.000000,261.230098
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,2012-01,2020-03,91,47.721909,48.651971,61.004062,0,68.416321,231.029952
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),2012-01,2020-03,91,47.490338,54.348572,59.709935,0,68.975266,133.734350
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,2012-01,2020-03,91,40.661084,41.915312,51.433624,0,64.733137,240.622618
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,2016-01,2020-03,51,40.484145,42.414948,55.101530,0,66.703779,220.970133
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),2016-01,2020-03,51,36.165680,47.050793,51.993544,0,57.661212,130.942979
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,2016-01,2020-03,51,26.395936,35.192406,49.120176,0,17.156438,302.766026

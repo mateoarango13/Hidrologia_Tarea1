@@ -21,18 +21,18 @@ Antes de responder al usuario o escribir cualquier línea de código, el agente 
 
 ### A. Dataset Maestro Único: `datos/datos_mensuales_maipo.csv`
 - Todos los análisis (gráficos, balances, correlaciones, modelos) **DEBEN** alimentarse de este archivo maestro.
-- **Rango temporal consolidado:** Enero 1980 a Marzo 2020 (483 meses / > 40 años).
-- **Regla estricta de longitud temporal:** La tarea exige al menos 25 años de registro. El registro local (precipitación observada y caudal) tiene 40 años completos. Los datos satelitales (GPM IMERG) inician en junio del 2000 (~20 años). **BAJO NINGUNA CIRCUNSTANCIA** se debe recortar la serie local de 40 años al periodo del satélite; se utiliza unión externa (*outer join*), rellenando con `NaN` los periodos donde el satélite aún no existía.
+- **Rango temporal del CSV auditado:** Enero 1980 a Abril 2020 (484 filas mensuales). La precipitación local tiene un faltante en 2020-04 y el caudal tiene 14 faltantes; no describir todas las filas como meses con observación válida.
+- **Regla estricta de longitud temporal:** La tarea exige al menos 25 años de registro. Conservar todo el periodo local disponible y no recortarlo a la cobertura satelital, que inicia en junio de 2000; usar unión externa (*outer join*) y conservar `NaN` donde una fuente no existe.
 
 ### B. Unidades Hidrológicas Estándar
 - **Área de la cuenca:** $4837.4 \text{ km}^2$ ($4.8374 \times 10^9 \text{ m}^2$).
-- **Precipitación local (CR2MET / Estaciones):** `precip_local_mm` en $\text{mm/mes}$.
-- **Precipitación satelital (GPM IMERG V07):** `precip_sat_imerg_mm` en $\text{mm/mes}$.
+- **Precipitación local (referencia CR2MET/observacional según la procedencia del proyecto):** `P_local_mm` en $\text{mm/mes}$. Confirmar los metadatos de la fuente antes de afirmar estaciones concretas o independencia respecto de otros productos.
+- **Precipitación satelital:** `P_IMERG_mm` en $\text{mm/mes}$. `scripts/02_descargar_satelite.py` selecciona `NASA/GPM_L3/IMERG_MONTHLY_V06` (IMERG Final mensual V06; DOI de producto `10.5067/GPM/IMERG/3B-MONTH/06`). La versión que originó el CSV debe confirmarse; no etiquetar sus valores como V07 hasta reconciliar la procedencia. DOI de V07: `10.5067/GPM/IMERG/3B-MONTH/07`.
 - **Caudal medio mensual:**
-  - En volumen/tiempo: `caudal_m3_s` en $\text{m}^3/\text{s}$.
-  - En lámina equivalente: `caudal_mm` en $\text{mm/mes}$, calculado como:
+  - En volumen/tiempo: `Caudal_m3s` en $\text{m}^3/\text{s}$.
+  - En lámina equivalente: `Q_lamina_mm` en $\text{mm/mes}$, calculado como:
     $$Q_{\text{mm}} = \frac{Q_{\text{m}^3/\text{s}} \times (\text{días del mes} \times 86400)}{4837.4 \times 10^6 \text{ m}^2} \times 1000$$
-- **Temperatura ERA5-Land:** `temp_era5_c` en $^{\circ}\text{C}$.
+- **Temperatura ERA5-Land:** `Temp_C` en $^{\circ}\text{C}$.
 
 ### C. Estructura del Repositorio
 - `datos/`: Únicamente datasets procesados livianos (el CSV maestro `datos_mensuales_maipo.csv`).

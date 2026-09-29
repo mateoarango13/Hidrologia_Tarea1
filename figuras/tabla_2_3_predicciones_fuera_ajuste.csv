@@ -1,0 +1,529 @@
+task,predictor,target,model,split,date,year,calendar_month,season,observed,predicted,residual_pred_minus_obs,outer_test_start,training_end,inner_tuning_start,selected_lag_months
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2016-01-01,2016,1,Verano,12.537874,47.959580,35.421705,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2016-02-01,2016,2,Verano,0.438773,15.275524,14.836751,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2016-03-01,2016,3,Otono,0.182688,16.168267,15.985579,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2016-04-01,2016,4,Otono,372.242191,197.996544,-174.245647,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2016-05-01,2016,5,Otono,108.699412,101.271118,-7.428294,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2016-06-01,2016,6,Invierno,103.483391,64.709962,-38.773429,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2016-07-01,2016,7,Invierno,166.646598,127.637466,-39.009132,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2016-08-01,2016,8,Invierno,51.729532,33.058528,-18.671004,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2016-09-01,2016,9,Primavera,2.937864,12.760315,9.822451,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2016-10-01,2016,10,Primavera,64.712366,46.445690,-18.266676,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2016-11-01,2016,11,Primavera,8.482571,25.735465,17.252895,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2016-12-01,2016,12,Verano,30.618299,29.915872,-0.702427,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2017-01-01,2017,1,Verano,1.764504,6.250466,4.485962,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2017-02-01,2017,2,Verano,31.944873,34.422867,2.477995,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2017-03-01,2017,3,Otono,7.054711,17.321354,10.266642,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2017-04-01,2017,4,Otono,63.149704,71.768923,8.619219,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2017-05-01,2017,5,Otono,102.639826,112.896363,10.256537,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2017-06-01,2017,6,Invierno,101.132256,129.470410,28.338154,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2017-07-01,2017,7,Invierno,60.170333,90.965265,30.794932,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2017-08-01,2017,8,Invierno,84.865059,94.474526,9.609467,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2017-09-01,2017,9,Primavera,56.558566,38.423381,-18.135185,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2017-10-01,2017,10,Primavera,57.113871,49.440263,-7.673609,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2017-11-01,2017,11,Primavera,18.984322,19.133588,0.149266,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2017-12-01,2017,12,Verano,3.427101,12.635483,9.208382,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2018-01-01,2018,1,Verano,17.961765,14.757780,-3.203985,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2018-02-01,2018,2,Verano,5.779832,13.849626,8.069794,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2018-03-01,2018,3,Otono,2.046523,5.993760,3.947237,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2018-04-01,2018,4,Otono,28.677434,16.065288,-12.612146,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2018-05-01,2018,5,Otono,47.833846,70.075206,22.241360,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2018-06-01,2018,6,Invierno,68.308731,98.641927,30.333196,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2018-07-01,2018,7,Invierno,96.097489,115.062683,18.965194,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2018-08-01,2018,8,Invierno,35.816547,31.773887,-4.042660,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2018-09-01,2018,9,Primavera,141.523692,64.027850,-77.495843,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2018-10-01,2018,10,Primavera,81.404420,38.256200,-43.148220,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2018-11-01,2018,11,Primavera,20.561164,19.261482,-1.299682,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2018-12-01,2018,12,Verano,25.472913,13.243402,-12.229511,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2019-01-01,2019,1,Verano,5.667022,11.232795,5.565773,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2019-02-01,2019,2,Verano,7.264291,11.514585,4.250295,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2019-03-01,2019,3,Otono,1.823017,12.390103,10.567085,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2019-04-01,2019,4,Otono,3.683835,13.804561,10.120726,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2019-05-01,2019,5,Otono,66.343725,45.681792,-20.661934,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2019-06-01,2019,6,Invierno,92.811898,102.849336,10.037438,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2019-07-01,2019,7,Invierno,20.420281,73.436113,53.015832,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2019-08-01,2019,8,Invierno,13.302321,48.682444,35.380123,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2019-09-01,2019,9,Primavera,22.840775,33.094927,10.254152,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2019-10-01,2019,10,Primavera,15.328923,18.577411,3.248488,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2019-11-01,2019,11,Primavera,3.353470,12.485291,9.131821,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2019-12-01,2019,12,Verano,5.622992,2.846906,-2.776086,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2020-01-01,2020,1,Verano,15.580000,10.500409,-5.079591,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2020-02-01,2020,2,Verano,0.095675,9.996716,9.901042,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,outer_temporal_test,2020-03-01,2020,3,Otono,0.000000,2.827578,2.827578,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2016-01-01,2016,1,Verano,12.537874,49.509802,36.971927,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2016-02-01,2016,2,Verano,0.438773,3.388648,2.949875,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2016-03-01,2016,3,Otono,0.182688,4.648416,4.465728,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2016-04-01,2016,4,Otono,372.242191,261.230098,-111.012093,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2016-05-01,2016,5,Otono,108.699412,124.738828,16.039416,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2016-06-01,2016,6,Invierno,103.483391,73.146617,-30.336774,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2016-07-01,2016,7,Invierno,166.646598,161.944933,-4.701666,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2016-08-01,2016,8,Invierno,51.729532,28.482617,-23.246916,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2016-09-01,2016,9,Primavera,2.937864,0.000000,-2.937864,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2016-10-01,2016,10,Primavera,64.712366,47.373521,-17.338845,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2016-11-01,2016,11,Primavera,8.482571,18.148890,9.666319,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2016-12-01,2016,12,Verano,30.618299,24.047949,-6.570350,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2017-01-01,2017,1,Verano,1.764504,0.000000,-1.764504,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2017-02-01,2017,2,Verano,31.944873,30.407864,-1.537009,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2017-03-01,2017,3,Otono,7.054711,6.275561,-0.779151,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2017-04-01,2017,4,Otono,63.149704,83.107664,19.957960,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2017-05-01,2017,5,Otono,102.639826,141.143454,38.503628,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2017-06-01,2017,6,Invierno,101.132256,164.531438,63.399182,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2017-07-01,2017,7,Invierno,60.170333,110.196023,50.025690,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2017-08-01,2017,8,Invierno,84.865059,115.148015,30.282956,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2017-09-01,2017,9,Primavera,56.558566,36.053072,-20.505494,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2017-10-01,2017,10,Primavera,57.113871,51.599225,-5.514647,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2017-11-01,2017,11,Primavera,18.984322,8.832842,-10.151479,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2017-12-01,2017,12,Verano,3.427101,0.000000,-3.427101,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2018-01-01,2018,1,Verano,17.961765,2.658049,-15.303716,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2018-02-01,2018,2,Verano,5.779832,1.376534,-4.403298,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2018-03-01,2018,3,Otono,2.046523,0.000000,-2.046523,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2018-04-01,2018,4,Otono,28.677434,4.503101,-24.174334,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2018-05-01,2018,5,Otono,47.833846,80.717625,32.883779,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2018-06-01,2018,6,Invierno,68.308731,121.028721,52.719990,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2018-07-01,2018,7,Invierno,96.097489,144.200393,48.102905,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2018-08-01,2018,8,Invierno,35.816547,26.669832,-9.146715,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2018-09-01,2018,9,Primavera,141.523692,72.184073,-69.339619,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2018-10-01,2018,10,Primavera,81.404420,35.817160,-45.587261,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2018-11-01,2018,11,Primavera,20.561164,9.013317,-11.547847,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2018-12-01,2018,12,Verano,25.472913,0.521078,-24.951835,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2019-01-01,2019,1,Verano,5.667022,0.000000,-5.667022,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2019-02-01,2019,2,Verano,7.264291,0.000000,-7.264291,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2019-03-01,2019,3,Otono,1.823017,0.000000,-1.823017,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2019-04-01,2019,4,Otono,3.683835,1.312941,-2.370894,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2019-05-01,2019,5,Otono,66.343725,46.295567,-20.048158,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2019-06-01,2019,6,Invierno,92.811898,126.965884,34.153987,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2019-07-01,2019,7,Invierno,20.420281,85.460270,65.039990,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2019-08-01,2019,8,Invierno,13.302321,50.529850,37.227529,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2019-09-01,2019,9,Primavera,22.840775,28.533979,5.693205,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2019-10-01,2019,10,Primavera,15.328923,8.048009,-7.280914,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2019-11-01,2019,11,Primavera,3.353470,0.000000,-3.353470,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2019-12-01,2019,12,Verano,5.622992,0.000000,-5.622992,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2020-01-01,2020,1,Verano,15.580000,0.000000,-15.580000,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2020-02-01,2020,2,Verano,0.095675,0.000000,-0.095675,2016-01,2015-12,2013-01,
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Lineal corregido,outer_temporal_test,2020-03-01,2020,3,Otono,0.000000,0.000000,0.000000,2016-01,2015-12,2013-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2012-01-01,2012,1,Verano,81.729032,227.646872,145.917839,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2012-02-01,2012,2,Verano,80.810345,167.272167,86.461822,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2012-03-01,2012,3,Otono,73.612903,113.805503,40.192600,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2012-04-01,2012,4,Otono,55.180000,79.944144,24.764144,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2012-05-01,2012,5,Otono,53.635484,74.901707,21.266223,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2012-06-01,2012,6,Invierno,45.916667,68.416321,22.499655,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2012-07-01,2012,7,Invierno,42.735484,69.898788,27.163305,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2012-08-01,2012,8,Invierno,34.938710,69.050991,34.112281,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2012-09-01,2012,9,Primavera,48.010000,78.239740,30.229740,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2012-10-01,2012,10,Primavera,53.541935,108.851752,55.309816,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2012-11-01,2012,11,Primavera,129.836667,170.071935,40.235269,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2012-12-01,2012,12,Verano,134.851613,231.029952,96.178339,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2013-01-01,2013,1,Verano,145.096774,227.646872,82.550097,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2013-02-01,2013,2,Verano,101.032143,167.272167,66.240024,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2013-03-01,2013,3,Otono,69.645161,113.805503,44.160342,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2013-04-01,2013,4,Otono,52.026667,79.944144,27.917477,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2013-05-01,2013,5,Otono,44.619355,74.901707,30.282352,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2013-06-01,2013,6,Invierno,50.493333,68.416321,17.922988,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2013-07-01,2013,7,Invierno,46.838710,69.898788,23.060079,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2013-08-01,2013,8,Invierno,50.232258,69.050991,18.818733,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2013-09-01,2013,9,Primavera,56.950000,78.239740,21.289740,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2013-10-01,2013,10,Primavera,79.577419,108.851752,29.274333,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2013-11-01,2013,11,Primavera,111.813333,170.071935,58.258602,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2013-12-01,2013,12,Verano,137.322581,231.029952,93.707371,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2014-01-01,2014,1,Verano,124.729032,227.646872,102.917839,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2014-02-01,2014,2,Verano,89.378571,167.272167,77.893595,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2014-03-01,2014,3,Otono,71.509677,113.805503,42.295826,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2014-04-01,2014,4,Otono,59.389286,79.944144,20.554858,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2014-05-01,2014,5,Otono,50.051613,74.901707,24.850094,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2014-06-01,2014,6,Invierno,48.900000,68.416321,19.516321,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2014-07-01,2014,7,Invierno,44.719355,69.898788,25.179434,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2014-08-01,2014,8,Invierno,45.661290,69.050991,23.389700,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2014-09-01,2014,9,Primavera,46.766667,78.239740,31.473074,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2014-10-01,2014,10,Primavera,89.945161,108.851752,18.906591,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2014-11-01,2014,11,Primavera,112.143333,170.071935,57.928602,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2014-12-01,2014,12,Verano,96.167742,231.029952,134.862210,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2015-01-01,2015,1,Verano,94.987097,227.646872,132.659775,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2015-02-01,2015,2,Verano,77.271429,167.272167,90.000738,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2015-03-01,2015,3,Otono,62.409091,113.805503,51.396412,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2015-12-01,2015,12,Verano,203.684211,231.029952,27.345742,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-01-01,2016,1,Verano,169.225806,227.646872,58.421065,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-02-01,2016,2,Verano,129.517241,167.272167,37.754925,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-03-01,2016,3,Otono,99.719355,113.805503,14.086148,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-04-01,2016,4,Otono,114.130000,79.944144,-34.185856,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-05-01,2016,5,Otono,75.300000,74.901707,-0.398293,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-06-01,2016,6,Invierno,76.150000,68.416321,-7.733679,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-07-01,2016,7,Invierno,65.316129,69.898788,4.582659,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-08-01,2016,8,Invierno,67.183871,69.050991,1.867120,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-09-01,2016,9,Primavera,76.423333,78.239740,1.816407,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-10-01,2016,10,Primavera,88.361290,108.851752,20.490462,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-11-01,2016,11,Primavera,137.233333,170.071935,32.838602,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-12-01,2016,12,Verano,170.677419,231.029952,60.352533,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-01-01,2017,1,Verano,186.000000,227.646872,41.646872,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-02-01,2017,2,Verano,148.857143,167.272167,18.415024,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-03-01,2017,3,Otono,86.870968,113.805503,26.934535,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-04-01,2017,4,Otono,70.420000,79.944144,9.524144,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-05-01,2017,5,Otono,60.927586,74.901707,13.974121,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-06-01,2017,6,Invierno,59.866667,68.416321,8.549655,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-07-01,2017,7,Invierno,55.461290,69.898788,14.437498,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-08-01,2017,8,Invierno,51.287097,69.050991,17.763894,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-09-01,2017,9,Primavera,57.913333,78.239740,20.326407,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-10-01,2017,10,Primavera,82.338710,108.851752,26.513042,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-11-01,2017,11,Primavera,111.973333,170.071935,58.098602,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-12-01,2017,12,Verano,138.967742,231.029952,92.062210,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-01-01,2018,1,Verano,109.425806,227.646872,118.221065,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-02-01,2018,2,Verano,104.617857,167.272167,62.654309,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-03-01,2018,3,Otono,60.416129,113.805503,53.389374,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-04-01,2018,4,Otono,52.566667,79.944144,27.377477,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-05-01,2018,5,Otono,35.216129,74.901707,39.685578,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-06-01,2018,6,Invierno,36.256667,68.416321,32.159655,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-07-01,2018,7,Invierno,34.345161,69.898788,35.553627,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-08-01,2018,8,Invierno,37.319355,69.050991,31.731636,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-09-01,2018,9,Primavera,47.073333,78.239740,31.166407,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-10-01,2018,10,Primavera,54.509677,108.851752,54.342074,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-11-01,2018,11,Primavera,88.243333,170.071935,81.828602,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-12-01,2018,12,Verano,109.038710,231.029952,121.991242,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-01-01,2019,1,Verano,106.329032,227.646872,121.317839,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-02-01,2019,2,Verano,94.017857,167.272167,73.254309,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-03-01,2019,3,Otono,67.154839,113.805503,46.650664,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-04-01,2019,4,Otono,56.530000,79.944144,23.414144,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-05-01,2019,5,Otono,38.490774,74.901707,36.410933,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-06-01,2019,6,Invierno,28.798467,68.416321,39.617855,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-07-01,2019,7,Invierno,24.811226,69.898788,45.087563,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-08-01,2019,8,Invierno,31.219355,69.050991,37.831636,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-09-01,2019,9,Primavera,47.707300,78.239740,30.532440,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-10-01,2019,10,Primavera,44.006613,108.851752,64.845139,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-11-01,2019,11,Primavera,65.043933,170.071935,105.028002,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-12-01,2019,12,Verano,64.845452,231.029952,166.184500,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2020-01-01,2020,1,Verano,85.460516,227.646872,142.186355,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2020-02-01,2020,2,Verano,63.965966,167.272167,103.306201,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2020-03-01,2020,3,Otono,54.002516,113.805503,59.802987,2012-01,2011-12,2008-01,
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2012-01-01,2012,1,Verano,81.729032,129.396750,47.667718,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2012-02-01,2012,2,Verano,80.810345,132.874319,52.063974,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2012-03-01,2012,3,Otono,73.612903,133.396484,59.783580,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2012-04-01,2012,4,Otono,55.180000,128.105771,72.925771,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2012-05-01,2012,5,Otono,53.635484,109.628833,55.993350,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2012-06-01,2012,6,Invierno,45.916667,94.578208,48.661542,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2012-07-01,2012,7,Invierno,42.735484,128.825816,86.090332,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2012-08-01,2012,8,Invierno,34.938710,125.339314,90.400604,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2012-09-01,2012,9,Primavera,48.010000,132.960168,84.950168,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2012-10-01,2012,10,Primavera,53.541935,122.370545,68.828610,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2012-11-01,2012,11,Primavera,129.836667,131.635044,1.798377,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2012-12-01,2012,12,Verano,134.851613,120.638920,-14.212693,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2013-01-01,2013,1,Verano,145.096774,131.233326,-13.863449,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2013-02-01,2013,2,Verano,101.032143,129.994680,28.962537,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2013-03-01,2013,3,Otono,69.645161,133.627462,63.982301,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2013-04-01,2013,4,Otono,52.026667,132.054038,80.027371,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2013-05-01,2013,5,Otono,44.619355,104.419984,59.800629,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2013-06-01,2013,6,Invierno,50.493333,119.689399,69.196066,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2013-07-01,2013,7,Invierno,46.838710,128.683939,81.845229,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2013-08-01,2013,8,Invierno,50.232258,116.354870,66.122612,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2013-09-01,2013,9,Primavera,56.950000,120.033002,63.083002,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2013-10-01,2013,10,Primavera,79.577419,131.670221,52.092801,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2013-11-01,2013,11,Primavera,111.813333,132.111275,20.297942,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2013-12-01,2013,12,Verano,137.322581,132.820534,-4.502047,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2014-01-01,2014,1,Verano,124.729032,130.231717,5.502685,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2014-02-01,2014,2,Verano,89.378571,127.101825,37.723253,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2014-03-01,2014,3,Otono,71.509677,132.702737,61.193060,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2014-04-01,2014,4,Otono,59.389286,129.273482,69.884196,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2014-05-01,2014,5,Otono,50.051613,116.270201,66.218588,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2014-06-01,2014,6,Invierno,48.900000,113.734871,64.834871,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2014-07-01,2014,7,Invierno,44.719355,117.314321,72.594966,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2014-08-01,2014,8,Invierno,45.661290,124.770288,79.108997,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2014-09-01,2014,9,Primavera,46.766667,113.809312,67.042645,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2014-10-01,2014,10,Primavera,89.945161,130.882027,40.936866,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2014-11-01,2014,11,Primavera,112.143333,130.155613,18.012280,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2014-12-01,2014,12,Verano,96.167742,131.023740,34.855998,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2015-01-01,2015,1,Verano,94.987097,133.546026,38.558930,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2015-02-01,2015,2,Verano,77.271429,132.373731,55.102303,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2015-03-01,2015,3,Otono,62.409091,131.935667,69.526576,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2015-12-01,2015,12,Verano,203.684211,133.367087,-70.317123,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-01-01,2016,1,Verano,169.225806,131.553132,-37.672674,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-02-01,2016,2,Verano,129.517241,133.658017,4.140775,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-03-01,2016,3,Otono,99.719355,133.702568,33.983213,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-04-01,2016,4,Otono,114.130000,68.975266,-45.154734,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-05-01,2016,5,Otono,75.300000,114.823881,39.523881,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-06-01,2016,6,Invierno,76.150000,115.731314,39.581314,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-07-01,2016,7,Invierno,65.316129,104.742792,39.426663,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-08-01,2016,8,Invierno,67.183871,124.734948,57.551077,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-09-01,2016,9,Primavera,76.423333,133.223249,56.799916,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-10-01,2016,10,Primavera,88.361290,122.476321,34.115030,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-11-01,2016,11,Primavera,137.233333,132.258635,-4.974698,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-12-01,2016,12,Verano,170.677419,128.407676,-42.269744,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-01-01,2017,1,Verano,186.000000,133.427379,-52.572621,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-02-01,2017,2,Verano,148.857143,128.176891,-20.680252,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-03-01,2017,3,Otono,86.870968,132.507040,45.636072,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-04-01,2017,4,Otono,70.420000,122.748177,52.328177,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-05-01,2017,5,Otono,60.927586,115.878069,54.950483,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-06-01,2017,6,Invierno,59.866667,116.140342,56.273675,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-07-01,2017,7,Invierno,55.461290,123.266499,67.805209,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-08-01,2017,8,Invierno,51.287097,118.970351,67.683254,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-09-01,2017,9,Primavera,57.913333,123.894840,65.981506,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-10-01,2017,10,Primavera,82.338710,123.798233,41.459523,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-11-01,2017,11,Primavera,111.973333,130.431642,18.458309,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-12-01,2017,12,Verano,138.967742,133.138136,-5.829606,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-01-01,2018,1,Verano,109.425806,130.609537,21.183730,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-02-01,2018,2,Verano,104.617857,132.728831,28.110974,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-03-01,2018,3,Otono,60.416129,133.378316,72.962187,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-04-01,2018,4,Otono,52.566667,128.745328,76.178662,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-05-01,2018,5,Otono,35.216129,125.412682,90.196553,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-06-01,2018,6,Invierno,36.256667,121.850660,85.593993,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-07-01,2018,7,Invierno,34.345161,117.016242,82.671080,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-08-01,2018,8,Invierno,37.319355,127.503335,90.183980,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-09-01,2018,9,Primavera,47.073333,109.113431,62.040098,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-10-01,2018,10,Primavera,54.509677,119.572399,65.062722,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-11-01,2018,11,Primavera,88.243333,130.157318,41.913985,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-12-01,2018,12,Verano,109.038710,129.302820,20.264110,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-01-01,2019,1,Verano,106.329032,132.748457,26.419424,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-02-01,2019,2,Verano,94.017857,132.470579,38.452722,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-03-01,2019,3,Otono,67.154839,133.417199,66.262361,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-04-01,2019,4,Otono,56.530000,133.093472,76.563472,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-05-01,2019,5,Otono,38.490774,122.192513,83.701738,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-06-01,2019,6,Invierno,28.798467,117.587837,88.789370,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-07-01,2019,7,Invierno,24.811226,130.181828,105.370602,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-08-01,2019,8,Invierno,31.219355,131.420141,100.200787,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-09-01,2019,9,Primavera,47.707300,129.760734,82.053434,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-10-01,2019,10,Primavera,44.006613,131.067573,87.060960,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-11-01,2019,11,Primavera,65.043933,133.150946,68.107013,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-12-01,2019,12,Verano,64.845452,132.756117,67.910665,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2020-01-01,2020,1,Verano,85.460516,131.023893,45.563377,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2020-02-01,2020,2,Verano,63.965966,133.717706,69.751740,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2020-03-01,2020,3,Otono,54.002516,133.734350,79.731834,2012-01,2011-12,2008-01,0.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2012-01-01,2012,1,Verano,81.729032,197.692980,115.963948,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2012-02-01,2012,2,Verano,80.810345,171.954552,91.144207,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2012-03-01,2012,3,Otono,73.612903,92.125699,18.512796,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2012-04-01,2012,4,Otono,55.180000,73.434307,18.254307,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2012-05-01,2012,5,Otono,53.635484,73.151457,19.515973,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2012-06-01,2012,6,Invierno,45.916667,64.733137,18.816471,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2012-07-01,2012,7,Invierno,42.735484,74.134100,31.398616,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2012-08-01,2012,8,Invierno,34.938710,67.000375,32.061665,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2012-09-01,2012,9,Primavera,48.010000,74.708091,26.698091,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2012-10-01,2012,10,Primavera,53.541935,102.631358,49.089423,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2012-11-01,2012,11,Primavera,129.836667,168.865188,39.028521,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2012-12-01,2012,12,Verano,134.851613,240.622618,105.771005,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2013-01-01,2013,1,Verano,145.096774,185.976049,40.879274,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2013-02-01,2013,2,Verano,101.032143,141.515528,40.483385,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2013-03-01,2013,3,Otono,69.645161,87.322903,17.677741,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2013-04-01,2013,4,Otono,52.026667,89.118467,37.091800,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2013-05-01,2013,5,Otono,44.619355,72.183358,27.564003,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2013-06-01,2013,6,Invierno,50.493333,87.594918,37.101585,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2013-07-01,2013,7,Invierno,46.838710,70.862951,24.024241,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2013-08-01,2013,8,Invierno,50.232258,72.129340,21.897082,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2013-09-01,2013,9,Primavera,56.950000,74.296692,17.346692,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2013-10-01,2013,10,Primavera,79.577419,95.599045,16.021626,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2013-11-01,2013,11,Primavera,111.813333,178.142742,66.329408,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2013-12-01,2013,12,Verano,137.322581,195.896731,58.574150,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2014-01-01,2014,1,Verano,124.729032,186.228748,61.499716,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2014-02-01,2014,2,Verano,89.378571,157.517843,68.139272,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2014-03-01,2014,3,Otono,71.509677,110.347655,38.837978,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2014-04-01,2014,4,Otono,59.389286,72.554687,13.165402,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2014-05-01,2014,5,Otono,50.051613,71.335135,21.283522,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2014-06-01,2014,6,Invierno,48.900000,65.898077,16.998077,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2014-07-01,2014,7,Invierno,44.719355,72.646929,27.927574,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2014-08-01,2014,8,Invierno,45.661290,77.281844,31.620554,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2014-09-01,2014,9,Primavera,46.766667,75.943733,29.177066,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2014-10-01,2014,10,Primavera,89.945161,100.551531,10.606370,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2014-11-01,2014,11,Primavera,112.143333,157.036158,44.892824,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2014-12-01,2014,12,Verano,96.167742,206.502423,110.334682,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2015-01-01,2015,1,Verano,94.987097,206.479330,111.492233,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2015-02-01,2015,2,Verano,77.271429,142.529028,65.257599,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2015-03-01,2015,3,Otono,62.409091,121.432755,59.023664,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2015-12-01,2015,12,Verano,203.684211,173.847940,-29.836271,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-01-01,2016,1,Verano,169.225806,237.857650,68.631844,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-02-01,2016,2,Verano,129.517241,201.080139,71.562898,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-03-01,2016,3,Otono,99.719355,118.908486,19.189131,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-04-01,2016,4,Otono,114.130000,108.245893,-5.884107,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-05-01,2016,5,Otono,75.300000,75.668650,0.368650,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-06-01,2016,6,Invierno,76.150000,64.924604,-11.225396,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-07-01,2016,7,Invierno,65.316129,70.293339,4.977209,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-08-01,2016,8,Invierno,67.183871,65.604520,-1.579351,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-09-01,2016,9,Primavera,76.423333,74.162921,-2.260413,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-10-01,2016,10,Primavera,88.361290,207.949513,119.588223,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-11-01,2016,11,Primavera,137.233333,159.612217,22.378884,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-12-01,2016,12,Verano,170.677419,202.946531,32.269112,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-01-01,2017,1,Verano,186.000000,228.870654,42.870654,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-02-01,2017,2,Verano,148.857143,142.591972,-6.265171,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-03-01,2017,3,Otono,86.870968,86.854325,-0.016643,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-04-01,2017,4,Otono,70.420000,88.930069,18.510069,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-05-01,2017,5,Otono,60.927586,71.072672,10.145085,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-06-01,2017,6,Invierno,59.866667,73.757880,13.891213,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-07-01,2017,7,Invierno,55.461290,66.955092,11.493802,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-08-01,2017,8,Invierno,51.287097,75.367028,24.079932,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-09-01,2017,9,Primavera,57.913333,76.292292,18.378958,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-10-01,2017,10,Primavera,82.338710,112.173841,29.835132,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-11-01,2017,11,Primavera,111.973333,157.734588,45.761255,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-12-01,2017,12,Verano,138.967742,202.218006,63.250264,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-01-01,2018,1,Verano,109.425806,195.877824,86.452017,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-02-01,2018,2,Verano,104.617857,152.859375,48.241518,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-03-01,2018,3,Otono,60.416129,103.469283,43.053154,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-04-01,2018,4,Otono,52.566667,86.575592,34.008926,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-05-01,2018,5,Otono,35.216129,74.326753,39.110624,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-06-01,2018,6,Invierno,36.256667,65.332391,29.075725,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-07-01,2018,7,Invierno,34.345161,71.973990,37.628829,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-08-01,2018,8,Invierno,37.319355,67.259506,29.940151,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-09-01,2018,9,Primavera,47.073333,74.740450,27.667117,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-10-01,2018,10,Primavera,54.509677,101.492233,46.982556,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-11-01,2018,11,Primavera,88.243333,140.752359,52.509025,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-12-01,2018,12,Verano,109.038710,192.047280,83.008570,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-01-01,2019,1,Verano,106.329032,207.010244,100.681212,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-02-01,2019,2,Verano,94.017857,137.661160,43.643303,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-03-01,2019,3,Otono,67.154839,129.796652,62.641814,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-04-01,2019,4,Otono,56.530000,94.102283,37.572283,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-05-01,2019,5,Otono,38.490774,74.815355,36.324581,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-06-01,2019,6,Invierno,28.798467,72.163526,43.365060,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-07-01,2019,7,Invierno,24.811226,68.164330,43.353104,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-08-01,2019,8,Invierno,31.219355,67.719481,36.500126,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-09-01,2019,9,Primavera,47.707300,74.671194,26.963894,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-10-01,2019,10,Primavera,44.006613,93.747694,49.741082,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-11-01,2019,11,Primavera,65.043933,146.487846,81.443913,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-12-01,2019,12,Verano,64.845452,199.639853,134.794401,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2020-01-01,2020,1,Verano,85.460516,183.560837,98.100321,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2020-02-01,2020,2,Verano,63.965966,130.684882,66.718916,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2020-03-01,2020,3,Otono,54.002516,93.021458,39.018942,2012-01,2011-12,2008-01,6.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-01-01,2016,1,Verano,169.225806,214.388427,45.162621,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-02-01,2016,2,Verano,129.517241,158.112276,28.595034,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-03-01,2016,3,Otono,99.719355,108.718498,8.999143,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-04-01,2016,4,Otono,114.130000,77.790129,-36.339871,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-05-01,2016,5,Otono,75.300000,72.718888,-2.581112,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-06-01,2016,6,Invierno,76.150000,66.703779,-9.446221,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-07-01,2016,7,Invierno,65.316129,67.744422,2.428293,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-08-01,2016,8,Invierno,67.183871,66.870399,-0.313472,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-09-01,2016,9,Primavera,76.423333,75.868524,-0.554809,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-10-01,2016,10,Primavera,88.361290,105.894874,17.533583,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-11-01,2016,11,Primavera,137.233333,165.471275,28.237941,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2016-12-01,2016,12,Verano,170.677419,220.970133,50.292714,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-01-01,2017,1,Verano,186.000000,214.388427,28.388427,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-02-01,2017,2,Verano,148.857143,158.112276,9.255133,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-03-01,2017,3,Otono,86.870968,108.718498,21.847530,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-04-01,2017,4,Otono,70.420000,77.790129,7.370129,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-05-01,2017,5,Otono,60.927586,72.718888,11.791302,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-06-01,2017,6,Invierno,59.866667,66.703779,6.837113,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-07-01,2017,7,Invierno,55.461290,67.744422,12.283132,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-08-01,2017,8,Invierno,51.287097,66.870399,15.583302,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-09-01,2017,9,Primavera,57.913333,75.868524,17.955191,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-10-01,2017,10,Primavera,82.338710,105.894874,23.556164,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-11-01,2017,11,Primavera,111.973333,165.471275,53.497941,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2017-12-01,2017,12,Verano,138.967742,220.970133,82.002391,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-01-01,2018,1,Verano,109.425806,214.388427,104.962621,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-02-01,2018,2,Verano,104.617857,158.112276,53.494419,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-03-01,2018,3,Otono,60.416129,108.718498,48.302369,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-04-01,2018,4,Otono,52.566667,77.790129,25.223463,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-05-01,2018,5,Otono,35.216129,72.718888,37.502759,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-06-01,2018,6,Invierno,36.256667,66.703779,30.447113,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-07-01,2018,7,Invierno,34.345161,67.744422,33.399261,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-08-01,2018,8,Invierno,37.319355,66.870399,29.551044,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-09-01,2018,9,Primavera,47.073333,75.868524,28.795191,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-10-01,2018,10,Primavera,54.509677,105.894874,51.385196,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-11-01,2018,11,Primavera,88.243333,165.471275,77.227941,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2018-12-01,2018,12,Verano,109.038710,220.970133,111.931423,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-01-01,2019,1,Verano,106.329032,214.388427,108.059395,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-02-01,2019,2,Verano,94.017857,158.112276,64.094419,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-03-01,2019,3,Otono,67.154839,108.718498,41.563659,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-04-01,2019,4,Otono,56.530000,77.790129,21.260129,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-05-01,2019,5,Otono,38.490774,72.718888,34.228114,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-06-01,2019,6,Invierno,28.798467,66.703779,37.905313,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-07-01,2019,7,Invierno,24.811226,67.744422,42.933196,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-08-01,2019,8,Invierno,31.219355,66.870399,35.651044,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-09-01,2019,9,Primavera,47.707300,75.868524,28.161224,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-10-01,2019,10,Primavera,44.006613,105.894874,61.888261,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-11-01,2019,11,Primavera,65.043933,165.471275,100.427341,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2019-12-01,2019,12,Verano,64.845452,220.970133,156.124682,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2020-01-01,2020,1,Verano,85.460516,214.388427,128.927911,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2020-02-01,2020,2,Verano,63.965966,158.112276,94.146310,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,outer_temporal_test,2020-03-01,2020,3,Otono,54.002516,108.718498,54.715982,2016-01,2015-12,2012-01,
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-01-01,2016,1,Verano,169.225806,113.996879,-55.228928,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-02-01,2016,2,Verano,129.517241,126.269041,-3.248200,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-03-01,2016,3,Otono,99.719355,125.933836,26.214481,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-04-01,2016,4,Otono,114.130000,57.661212,-56.468788,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-05-01,2016,5,Otono,75.300000,93.979538,18.679538,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-06-01,2016,6,Invierno,76.150000,107.707469,31.557469,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-07-01,2016,7,Invierno,65.316129,84.079539,18.763410,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-08-01,2016,8,Invierno,67.183871,119.591904,52.408033,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-09-01,2016,9,Primavera,76.423333,127.213449,50.790116,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-10-01,2016,10,Primavera,88.361290,114.565312,26.204021,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-11-01,2016,11,Primavera,137.233333,122.341558,-14.891776,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2016-12-01,2016,12,Verano,170.677419,120.771904,-49.905515,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-01-01,2017,1,Verano,186.000000,129.657758,-56.342242,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-02-01,2017,2,Verano,148.857143,119.079624,-29.777519,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-03-01,2017,3,Otono,86.870968,125.500876,38.629909,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-04-01,2017,4,Otono,70.420000,105.056980,34.636980,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-05-01,2017,5,Otono,60.927586,89.614507,28.686921,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-06-01,2017,6,Invierno,59.866667,83.391308,23.524641,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-07-01,2017,7,Invierno,55.461290,97.849165,42.387875,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-08-01,2017,8,Invierno,51.287097,96.531512,45.244416,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-09-01,2017,9,Primavera,57.913333,117.577517,59.664184,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-10-01,2017,10,Primavera,82.338710,113.440914,31.102204,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-11-01,2017,11,Primavera,111.973333,124.820421,12.847088,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2017-12-01,2017,12,Verano,138.967742,127.260321,-11.707421,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-01-01,2018,1,Verano,109.425806,126.463443,17.037637,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-02-01,2018,2,Verano,104.617857,126.804436,22.186579,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-03-01,2018,3,Otono,60.416129,129.754145,69.338016,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-04-01,2018,4,Otono,52.566667,125.972502,73.405835,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-05-01,2018,5,Otono,35.216129,105.692935,70.476806,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-06-01,2018,6,Invierno,36.256667,94.966743,58.710076,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-07-01,2018,7,Invierno,34.345161,88.801101,54.455939,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-08-01,2018,8,Invierno,37.319355,120.074260,82.754905,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-09-01,2018,9,Primavera,47.073333,107.963587,60.890254,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-10-01,2018,10,Primavera,54.509677,117.640290,63.130613,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-11-01,2018,11,Primavera,88.243333,124.772400,36.529066,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2018-12-01,2018,12,Verano,109.038710,127.032060,17.993350,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-01-01,2019,1,Verano,106.329032,127.787000,21.457968,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-02-01,2019,2,Verano,94.017857,127.681194,33.663337,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-03-01,2019,3,Otono,67.154839,127.352456,60.197617,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-04-01,2019,4,Otono,56.530000,126.821357,70.291357,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-05-01,2019,5,Otono,38.490774,114.852139,76.361365,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-06-01,2019,6,Invierno,28.798467,93.386951,64.588484,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-07-01,2019,7,Invierno,24.811226,104.430986,79.619760,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-08-01,2019,8,Invierno,31.219355,113.725459,82.506104,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-09-01,2019,9,Primavera,47.707300,119.578238,71.870938,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-10-01,2019,10,Primavera,44.006613,125.029254,81.022641,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-11-01,2019,11,Primavera,65.043933,127.316714,62.272781,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2019-12-01,2019,12,Verano,64.845452,130.935722,66.090270,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2020-01-01,2020,1,Verano,85.460516,128.061995,42.601479,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2020-02-01,2020,2,Verano,63.965966,128.251121,64.285155,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),outer_temporal_test,2020-03-01,2020,3,Otono,54.002516,130.942979,76.940463,2016-01,2015-12,2012-01,0.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-01-01,2016,1,Verano,169.225806,169.620798,0.394991,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-02-01,2016,2,Verano,129.517241,86.841501,-42.675741,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-03-01,2016,3,Otono,99.719355,102.599779,2.880424,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-04-01,2016,4,Otono,114.130000,137.503512,23.373512,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-05-01,2016,5,Otono,75.300000,78.124094,2.824094,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-06-01,2016,6,Invierno,76.150000,100.166762,24.016762,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-07-01,2016,7,Invierno,65.316129,59.538448,-5.777681,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-08-01,2016,8,Invierno,67.183871,51.508072,-15.675799,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-09-01,2016,9,Primavera,76.423333,81.945980,5.522647,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-10-01,2016,10,Primavera,88.361290,94.538884,6.177594,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-11-01,2016,11,Primavera,137.233333,153.808239,16.574905,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2016-12-01,2016,12,Verano,170.677419,302.766026,132.088607,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-01-01,2017,1,Verano,186.000000,210.319192,24.319192,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-02-01,2017,2,Verano,148.857143,101.772596,-47.084546,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-03-01,2017,3,Otono,86.870968,96.954441,10.083473,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-04-01,2017,4,Otono,70.420000,17.848675,-52.571325,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-05-01,2017,5,Otono,60.927586,41.399885,-19.527701,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-06-01,2017,6,Invierno,59.866667,63.047765,3.181098,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-07-01,2017,7,Invierno,55.461290,57.693063,2.231773,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-08-01,2017,8,Invierno,51.287097,58.355818,7.068721,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-09-01,2017,9,Primavera,57.913333,59.470791,1.557457,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-10-01,2017,10,Primavera,82.338710,104.856537,22.517827,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-11-01,2017,11,Primavera,111.973333,154.429586,42.456253,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2017-12-01,2017,12,Verano,138.967742,234.747566,95.779824,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-01-01,2018,1,Verano,109.425806,216.583520,107.157714,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-02-01,2018,2,Verano,104.617857,136.669126,32.051269,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-03-01,2018,3,Otono,60.416129,77.193420,16.777291,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-04-01,2018,4,Otono,52.566667,50.943029,-1.623638,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-05-01,2018,5,Otono,35.216129,55.228572,20.012443,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-06-01,2018,6,Invierno,36.256667,64.661407,28.404740,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-07-01,2018,7,Invierno,34.345161,54.135604,19.790443,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-08-01,2018,8,Invierno,37.319355,49.044183,11.724828,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-09-01,2018,9,Primavera,47.073333,64.055005,16.981671,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-10-01,2018,10,Primavera,54.509677,93.770531,39.260854,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-11-01,2018,11,Primavera,88.243333,148.325649,60.082316,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2018-12-01,2018,12,Verano,109.038710,204.731350,95.692641,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-01-01,2019,1,Verano,106.329032,193.509100,87.180068,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-02-01,2019,2,Verano,94.017857,120.057025,26.039168,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-03-01,2019,3,Otono,67.154839,90.178449,23.023610,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-04-01,2019,4,Otono,56.530000,17.156438,-39.373562,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-05-01,2019,5,Otono,38.490774,69.025683,30.534909,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-06-01,2019,6,Invierno,28.798467,58.634812,29.836345,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-07-01,2019,7,Invierno,24.811226,54.204521,29.393295,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-08-01,2019,8,Invierno,31.219355,49.371764,18.152409,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-09-01,2019,9,Primavera,47.707300,62.155547,14.448247,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-10-01,2019,10,Primavera,44.006613,92.512281,48.505668,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-11-01,2019,11,Primavera,65.043933,151.772354,86.728420,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2019-12-01,2019,12,Verano,64.845452,203.513145,138.667693,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2020-01-01,2020,1,Verano,85.460516,180.364572,94.904056,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2020-02-01,2020,2,Verano,63.965966,122.324212,58.358246,2016-01,2015-12,2012-01,8.000000
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,outer_temporal_test,2020-03-01,2020,3,Otono,54.002516,67.747738,13.745222,2016-01,2015-12,2012-01,8.000000
