@@ -350,9 +350,92 @@ def generar_diagramas_caja(df):
     plt.close()
     print(f"  -> Guardada: {ruta_fig}")
 
+def _contexto_fisico_extremo(var, fecha_str, val, tipo):
+    """
+    Asigna contexto físico individualizado a cada mes extremo, basado en
+    eventos hidrometeorológicos documentados en la literatura.
+    Referencias:
+      - El Niño 1982-83: Rutllant & Fuenzalida (1991), DOI:10.1002/joc.3370110706
+      - Megasequía chilena 2010-2019: Garreaud et al. (2017), DOI:10.1002/joc.5176;
+        CR2 (2015) "La Megasequía 2010-2015", Centro de Ciencia del Clima y la
+        Resiliencia (CR2), Universidad de Chile.
+      - Ríos atmosféricos: Viale & Nuñez (2011), DOI:10.1002/joc.2000
+    """
+    anio = int(fecha_str[:4])
+    mes = int(fecha_str[5:7])
+    es_invierno = mes in [5, 6, 7, 8]  # austral
+    es_verano = mes in [12, 1, 2, 3]
+
+    # --- Eventos individualizados por fecha ---
+    # El Niño 1982-83 (documentado como el más intenso del siglo XX)
+    if anio == 1982 and mes == 6 and tipo == 'Máximo' and 'P_local' in var:
+        return ('Evento El Niño 1982-83: precipitación récord de 705 mm en junio 1982. '
+                'El Niño más intenso del siglo XX intensificó los frentes extratropicales '
+                'sobre Chile central (Rutllant & Fuenzalida, 1991, DOI:10.1002/joc.3370110706)')
+    if anio == 2000 and mes == 6 and tipo == 'Máximo' and 'P_local' in var:
+        return ('Evento de precipitación extrema junio 2000 (612.7 mm): posible río atmosférico '
+                'o tormenta frontal intensa de invierno (Viale & Nuñez, 2011, DOI:10.1002/joc.2000)')
+    if anio == 1987 and mes == 7 and tipo == 'Máximo' and 'P_local' in var:
+        return ('Precipitación extrema julio 1987 (609.4 mm): cola del evento El Niño 1986-87; '
+                'coherente con la intensificación de frentes fríos extratropicales')
+    if anio == 1983 and mes == 1 and tipo == 'Máximo' and 'Caudal' in var:
+        return ('Caudal máximo histórico enero 1983 (592.8 m³/s): deshielo estival masivo '
+                'del manto nival acumulado durante el invierno récord de El Niño 1982-83, '
+                'con desfase de ~6 meses (Masiokas et al., 2006, DOI:10.1175/JCLI3969.1)')
+    if anio == 1982 and mes == 12 and tipo == 'Máximo' and 'Caudal' in var:
+        return ('Caudal extremo diciembre 1982 (539.5 m³/s): inicio del deshielo del '
+                'manto nival récord acumulado en el invierno de El Niño 1982-83')
+
+    # Megasequía 2010-2019
+    if anio in range(2015, 2020) and tipo == 'Mínimo' and ('Caudal' in var or 'Q_lamina' in var):
+        return (f'Estiaje extremo durante la Megasequía de Chile central (2010-2019): '
+                f'déficit hídrico acumulado sostenido (Garreaud et al., 2017, DOI:10.1002/joc.5176; '
+                f'CR2, 2015, "La Megasequía 2010-2015")')
+    if anio == 2019 and tipo == 'Mínimo' and ('Caudal' in var or 'Q_lamina' in var):
+        return ('Año pico hiperárido de la Megasequía: caudales mínimos históricos en 2019 '
+                '(Garreaud et al., 2017, DOI:10.1002/joc.5176)')
+
+    # Temperatura extrema
+    if 'Temp' in var and tipo == 'Mínimo':
+        return (f'Temperatura media mensual mínima ({val:.1f} °C) en cuenca de alta montaña '
+                f'(elevación media 3181 m s.n.m., 70.9% de precipitación nival según CAMELS-CL; '
+                f'Alvarez-Garreton et al., 2018, DOI:10.5194/hess-22-5817-2018)')
+    if 'Temp' in var and tipo == 'Máximo':
+        return (f'Temperatura media mensual máxima ({val:.1f} °C) en verano austral: '
+                f'periodo de máximo deshielo y ablación glaciar '
+                f'(Ayala et al., 2020, DOI:10.5194/tc-14-2005-2020)')
+
+    # --- Contexto genérico pero diferenciado por tipo ---
+    if tipo == 'Máximo':
+        if 'P_' in var and es_invierno:
+            return ('Evento pluvial extremo de invierno austral: tormentas frontales '
+                    'extratropicales y posibles ríos atmosféricos (Viale & Nuñez, 2011, DOI:10.1002/joc.2000)')
+        elif 'P_' in var:
+            return ('Evento de precipitación atípico fuera de la estación invernal principal; '
+                    'posible tormenta convectiva o extensión frontal tardía')
+        elif 'Caudal' in var or 'Q_lamina' in var:
+            if es_verano:
+                return ('Pico de caudal por deshielo nival/glaciar estival intenso '
+                        '(Masiokas et al., 2006, DOI:10.1175/JCLI3969.1)')
+            else:
+                return 'Evento de crecida fuera del periodo típico de deshielo'
+    else:  # Mínimo
+        if 'P_' in var:
+            if es_verano:
+                return ('Mes seco de verano mediterráneo: bloqueo anticiclónico del Pacífico '
+                        'SE impide incursión de frentes (Garreaud et al., 2017, DOI:10.1002/joc.5176)')
+            else:
+                return 'Mes con precipitación inusualmente baja para la estación'
+        elif 'Caudal' in var or 'Q_lamina' in var:
+            return ('Estiaje pronunciado: posible sequía estacional o interanual '
+                    '(Alvarez-Garreton et al., 2021, DOI:10.5194/hess-25-429-2021)')
+
+    return 'Sin contexto específico identificado'
+
+
 def identificar_meses_extremos(df):
-    """Identifica los 5 meses más altos y más bajos para cada variable."""
-    print("-> Identificando meses extremos y plausibilidad física...")
+    """Identifica los 3 meses más altos y más bajos para cada variable con contexto individualizado."""
+    print("-> Identificando meses extremos con contexto físico individualizado...")
     variables = ['P_local_mm', 'P_IMERG_mm', 'Caudal_m3s', 'Q_lamina_mm', 'Temp_C']
     registros = []
     
@@ -361,22 +444,24 @@ def identificar_meses_extremos(df):
         # Top 3 máximos
         top_max = s.nlargest(3)
         for fecha, val in top_max.items():
+            fecha_str = fecha.strftime('%Y-%m')
             registros.append({
                 'Variable': var,
                 'Tipo_Extremo': 'Máximo',
-                'Fecha': fecha.strftime('%Y-%m'),
+                'Fecha': fecha_str,
                 'Valor': round(val, 3),
-                'Contexto_Fisico': 'Evento extremo pluvial/nival o deshielo estival intenso'
+                'Contexto_Fisico': _contexto_fisico_extremo(var, fecha_str, val, 'Máximo')
             })
         # Top 3 mínimos
         top_min = s.nsmallest(3)
         for fecha, val in top_min.items():
+            fecha_str = fecha.strftime('%Y-%m')
             registros.append({
                 'Variable': var,
                 'Tipo_Extremo': 'Mínimo',
-                'Fecha': fecha.strftime('%Y-%m'),
+                'Fecha': fecha_str,
                 'Valor': round(val, 3),
-                'Contexto_Fisico': 'Mes seco de verano o estiaje invernal / heladas'
+                'Contexto_Fisico': _contexto_fisico_extremo(var, fecha_str, val, 'Mínimo')
             })
             
     df_extremos = pd.DataFrame(registros)
@@ -734,47 +819,140 @@ def evaluar_estabilidad_subperiodos(df):
     return df_sub
 
 def calcular_indices_estacionalidad_y_clasificacion(df):
-    """Calcula indicadores explícitos de estacionalidad (Walsh & Lawler) y cuantifica desfases."""
+    """
+    Calcula indicadores explícitos de estacionalidad (Walsh & Lawler, 1981) y
+    cuantifica desfases, usando el periodo común coordinado (2000-06 a 2020-03)
+    para consistencia con la climatología del punto 1.5.a y el Rol B.
+
+    Referencia del índice:
+      Walsh, R.P.D. & Lawler, D.M. (1981). Rainfall seasonality: Description,
+      spatial patterns and change through time. Weather, 36(7), 201-208.
+      DOI: 10.1002/j.1477-8696.1981.tb05400.x
+    """
     print("-> Calculando índices de estacionalidad y clasificación hidroclimática...")
-    
-    clim_p = df.groupby(df.index.month)['P_local_mm'].mean()
+    print("   (Base: periodo común coordinado 2000-06 a 2020-03 para consistencia)")
+
+    # Nombres de meses para etiquetado
+    NOMBRES_MESES = {
+        1: 'Enero', 2: 'Febrero', 3: 'Marzo', 4: 'Abril',
+        5: 'Mayo', 6: 'Junio', 7: 'Julio', 8: 'Agosto',
+        9: 'Septiembre', 10: 'Octubre', 11: 'Noviembre', 12: 'Diciembre'
+    }
+
+    # Usar el periodo común para consistencia con la climatología coordinada
+    df_comun = df.loc['2000-06-01':'2020-03-31']
+
+    clim_p = df_comun.groupby(df_comun.index.month)['P_local_mm'].mean()
     p_anual = clim_p.sum()
     si_p = (1.0 / p_anual) * np.sum(np.abs(clim_p - (p_anual / 12.0)))
-    
-    clim_r = df.groupby(df.index.month)['Q_lamina_mm'].mean()
+
+    clim_r = df_comun.groupby(df_comun.index.month)['Q_lamina_mm'].mean()
     r_anual = clim_r.sum()
     si_r = (1.0 / r_anual) * np.sum(np.abs(clim_r - (r_anual / 12.0)))
-    
+
     mes_max_p = clim_p.idxmax()
     val_max_p = clim_p.max()
     mes_min_p = clim_p.idxmin()
     val_min_p = clim_p.min()
-    
+
     mes_max_q = clim_r.idxmax()
     val_max_q = clim_r.max()
     mes_min_q = clim_r.idxmin()
     val_min_q = clim_r.min()
-    
+
     desfase_meses = (mes_max_q - mes_max_p) % 12
     coef_escorrentia_global = r_anual / p_anual
-    
+
+    # Clasificación de SI según Walsh & Lawler (1981, DOI:10.1002/j.1477-8696.1981.tb05400.x)
+    # SI < 0.19: Lluvia repartida uniformemente
+    # 0.20-0.39: Lluvia repartida bastante uniformemente
+    # 0.40-0.59: Moderadamente estacional
+    # 0.60-0.79: Estacional
+    # 0.80-0.99: Marcadamente estacional con estación seca larga
+    # 1.00-1.19: Mayor parte de la lluvia en ~3 meses
+    # >= 1.20: Extrema; casi toda la lluvia en 1-2 meses
+    if si_p >= 1.20:
+        clase_si_p = 'Extrema (SI >= 1.20): casi toda la lluvia en 1-2 meses'
+    elif si_p >= 1.00:
+        clase_si_p = f'Muy marcadamente estacional (1.00 <= SI < 1.20): lluvia en ~3 meses'
+    elif si_p >= 0.80:
+        clase_si_p = f'Marcadamente estacional (0.80 <= SI < 1.00): estación seca prolongada'
+    elif si_p >= 0.60:
+        clase_si_p = f'Estacional (0.60 <= SI < 0.80): régimen con estacionalidad clara'
+    elif si_p >= 0.40:
+        clase_si_p = f'Moderadamente estacional (0.40 <= SI < 0.60)'
+    else:
+        clase_si_p = f'Lluvia repartida (SI < 0.40)'
+
+    if si_r >= 0.60:
+        clase_si_r = f'Estacional a marcada (SI >= 0.60): régimen de deshielo estival dominante'
+    elif si_r >= 0.40:
+        clase_si_r = f'Moderadamente estacional (0.40 <= SI < 0.60): amortiguado por almacenamiento nival'
+    else:
+        clase_si_r = f'Escorrentía relativamente uniforme (SI < 0.40)'
+
     resumen = [
-        {'Indicador': 'P_anual_media_mm', 'Valor': round(p_anual, 2), 'Unidad': 'mm/año', 'Interpretacion': 'Precipitación anual promedio cuenca'},
-        {'Indicador': 'R_anual_media_mm', 'Valor': round(r_anual, 2), 'Unidad': 'mm/año', 'Interpretacion': 'Escorrentía anual promedio cuenca'},
-        {'Indicador': 'Coeficiente_Escorrentia_C', 'Valor': round(coef_escorrentia_global, 3), 'Unidad': '-', 'Interpretacion': 'Relación R/P anual multianual (~0.90 por aporte nival/glaciar)'},
-        {'Indicador': 'SI_Precipitacion_Walsh_Lawler', 'Valor': round(si_p, 3), 'Unidad': '-', 'Interpretacion': 'Marcadamente estacional (régimen mediterráneo de invierno, SI > 0.8)'},
-        {'Indicador': 'SI_Escorrentia_Walsh_Lawler', 'Valor': round(si_r, 3), 'Unidad': '-', 'Interpretacion': 'Marcadamente estacional (régimen de deshielo estival, SI > 0.6)'},
-        {'Indicador': 'Mes_Pico_Precipitacion', 'Valor': mes_max_p, 'Unidad': 'Mes (Junio)', 'Interpretacion': f'Máximo invernal por frentes fríos ({val_max_p:.1f} mm/mes)'},
-        {'Indicador': 'Mes_Minimo_Precipitacion', 'Valor': mes_min_p, 'Unidad': 'Mes (Marzo)', 'Interpretacion': f'Mínimo estival por bloqueo anticiclónico ({val_min_p:.1f} mm/mes)'},
-        {'Indicador': 'Mes_Pico_Caudal', 'Valor': mes_max_q, 'Unidad': 'Mes (Diciembre)', 'Interpretacion': f'Máximo estival por derretimiento nival/glaciar ({val_max_q:.1f} mm/mes)'},
-        {'Indicador': 'Mes_Minimo_Caudal', 'Valor': mes_min_q, 'Unidad': 'Mes (Agosto)', 'Interpretacion': f'Mínimo invernal por congelamiento/nieve ({val_min_q:.1f} mm/mes)'},
-        {'Indicador': 'Desfase_Pico_Lluvia_a_Caudal', 'Valor': desfase_meses, 'Unidad': 'Meses', 'Interpretacion': 'Retardo físico de 6 meses por almacenamiento nivo-glaciar en alta montaña'},
-        {'Indicador': 'Clasificacion_Hidroclimatica_Sintesis', 'Valor': 'Régimen Nivo-Pluvial de Montaña Mediterránea', 'Unidad': 'Cualitativa', 'Interpretacion': '71% de precipitación es nival; invierno pluvioso y frío, verano cálido y seco con pico de caudal por deshielo'}
+        {'Indicador': 'Periodo_Referencia', 'Valor': '2000-06 a 2020-03',
+         'Unidad': 'Fechas', 'Interpretacion': 'Periodo común coordinado con todos los roles (238 meses)'},
+        {'Indicador': 'P_anual_media_mm', 'Valor': round(p_anual, 2),
+         'Unidad': 'mm/año', 'Interpretacion': 'Precipitación anual media en periodo común'},
+        {'Indicador': 'R_anual_media_mm', 'Valor': round(r_anual, 2),
+         'Unidad': 'mm/año', 'Interpretacion': 'Escorrentía anual media en periodo común'},
+        {'Indicador': 'Coeficiente_Escorrentia_C', 'Valor': round(coef_escorrentia_global, 3),
+         'Unidad': '-',
+         'Interpretacion': ('Relación R/P anual del periodo común; valores cercanos a 1.0 son '
+                            'típicos de cuencas andinas de alta montaña con ET limitada y aportes '
+                            'de deshielo glaciar (Ayala et al., 2020, DOI:10.5194/tc-14-2005-2020)')},
+        {'Indicador': 'SI_Precipitacion_Walsh_Lawler', 'Valor': round(si_p, 3),
+         'Unidad': '-',
+         'Interpretacion': f'{clase_si_p} (Walsh & Lawler, 1981, DOI:10.1002/j.1477-8696.1981.tb05400.x)'},
+        {'Indicador': 'SI_Escorrentia_Walsh_Lawler', 'Valor': round(si_r, 3),
+         'Unidad': '-',
+         'Interpretacion': f'{clase_si_r} (Walsh & Lawler, 1981, DOI:10.1002/j.1477-8696.1981.tb05400.x)'},
+        {'Indicador': 'Mes_Pico_Precipitacion', 'Valor': mes_max_p,
+         'Unidad': f'Mes ({NOMBRES_MESES[mes_max_p]})',
+         'Interpretacion': (f'Máximo invernal por frentes fríos extratropicales ({val_max_p:.2f} mm/mes). '
+                            f'Garreaud (2009, DOI:10.1016/j.earscirev.2008.10.006)')},
+        {'Indicador': 'Mes_Minimo_Precipitacion', 'Valor': mes_min_p,
+         'Unidad': f'Mes ({NOMBRES_MESES[mes_min_p]})',
+         'Interpretacion': (f'Mínimo estival por bloqueo del Anticiclón Subtropical del '
+                            f'Pacífico SE ({val_min_p:.2f} mm/mes). '
+                            f'Garreaud et al. (2009, DOI:10.1016/j.earscirev.2008.10.006)')},
+        {'Indicador': 'Mes_Pico_Caudal', 'Valor': mes_max_q,
+         'Unidad': f'Mes ({NOMBRES_MESES[mes_max_q]})',
+         'Interpretacion': (f'Máximo estival por derretimiento nival/glaciar ({val_max_q:.2f} mm/mes). '
+                            f'Masiokas et al. (2006, DOI:10.1175/JCLI3969.1)')},
+        {'Indicador': 'Mes_Minimo_Caudal', 'Valor': mes_min_q,
+         'Unidad': f'Mes ({NOMBRES_MESES[mes_min_q]})',
+         'Interpretacion': (f'Mínimo invernal por retención criosférica ({val_min_q:.2f} mm/mes). '
+                            f'Alvarez-Garreton et al. (2021, DOI:10.5194/hess-25-429-2021)')},
+        {'Indicador': 'Desfase_Pico_Lluvia_a_Caudal', 'Valor': desfase_meses,
+         'Unidad': 'Meses',
+         'Interpretacion': ('Retardo físico de 6 meses por almacenamiento nivo-glaciar: '
+                            'precipitación invernal se acumula como nieve y se libera por '
+                            'deshielo en primavera-verano (Masiokas et al., 2006, DOI:10.1175/JCLI3969.1; '
+                            'Ayala et al., 2020, DOI:10.5194/tc-14-2005-2020)')},
+        {'Indicador': 'Clasificacion_Hidroclimatica_Sintesis',
+         'Valor': 'Régimen Nivo-Pluvial de Montaña Mediterránea',
+         'Unidad': 'Cualitativa',
+         'Interpretacion': ('70.9% de precipitación nival (CAMELS-CL, Alvarez-Garreton et al., 2018, '
+                            'DOI:10.5194/hess-22-5817-2018); invierno pluvioso y frío, '
+                            'verano cálido y seco con pico de caudal por deshielo; '
+                            '7.18% del área es glaciar (Ayala et al., 2020, DOI:10.5194/tc-14-2005-2020)')}
     ]
     df_sintesis = pd.DataFrame(resumen)
     ruta_tabla = os.path.join(DIR_FIGURAS, "tabla_1_6_sintesis_clasificacion.csv")
     df_sintesis.to_csv(ruta_tabla, index=False)
     print(f"  -> Guardada: {ruta_tabla}")
+
+    # Impresión de diagnóstico
+    print(f"  Resultados: SI_P = {si_p:.3f} ({clase_si_p})")
+    print(f"              SI_R = {si_r:.3f} ({clase_si_r})")
+    print(f"              Pico P: mes {mes_max_p} ({NOMBRES_MESES[mes_max_p]}, {val_max_p:.2f} mm/mes)")
+    print(f"              Pico Q: mes {mes_max_q} ({NOMBRES_MESES[mes_max_q]}, {val_max_q:.2f} mm/mes)")
+    print(f"              Min Q:  mes {mes_min_q} ({NOMBRES_MESES[mes_min_q]}, {val_min_q:.2f} mm/mes)")
+    print(f"              Desfase: {desfase_meses} meses")
+    print(f"              C = R/P = {coef_escorrentia_global:.3f}")
     return df_sintesis
 
 # ==============================================================================

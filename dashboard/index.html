@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Hidroclimático — Río Maipo</title>
+    
+    <!-- Fuentes premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
+    <!-- Estilos locales -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar lateral -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fa-solid fa-water"></i>
+                </div>
+                <h2>Proyecto Hidrología</h2>
+                <p>Cuenca 5710001 — Río Maipo</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" data-target="dashboard-home">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Resumen Ejecutivo</span>
+                </button>
+                <div class="nav-section">Fases del Proyecto</div>
+                <button class="nav-btn" data-target="rol-a">
+                    <i class="fa-solid fa-compass"></i>
+                    <span>Rol A: Explorador</span>
+                </button>
+                <button class="nav-btn" data-target="rol-b">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Rol B: Modelador</span>
+                </button>
+                <button class="nav-btn disabled" data-target="rol-c">
+                    <i class="fa-solid fa-wave-square"></i>
+                    <span>Rol C: Tendencias (Próximamente)</span>
+                </button>
+                <button class="nav-btn disabled" data-target="rol-d">
+                    <i class="fa-solid fa-globe"></i>
+                    <span>Rol D: Teleconexiones (Próximamente)</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <i class="fa-solid fa-user-group"></i>
+                    <div>
+                        <p class="name">Equipo de Trabajo</p>
+                        <p class="role">Tarea 1</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <!-- Barra superior -->
+            <header class="topbar">
+                <div class="page-title">
+                    <h1 id="current-page-title">Resumen Ejecutivo</h1>
+                </div>
+                <div class="topbar-actions">
+                    <a href="../documentos/tarea_1_202602.pdf" target="_blank" class="action-btn" title="Ver Guía de Tarea">
+                        <i class="fa-solid fa-file-pdf"></i>
+                    </a>
+                    <button class="action-btn theme-toggle" title="Cambiar Tema">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Vistas (Tabs) -->
+            <div class="views-container">
+                
+                <!-- VISTA: HOME -->
+                <section id="dashboard-home" class="view active">
+                    <div class="welcome-card glass-panel">
+                        <h2>Análisis Hidroclimático del Río Maipo en El Manzano</h2>
+                        <p>Este dashboard interactivo presenta los resultados del análisis hidrológico y climático para la cuenca CAMELS-CL 5710001. Selecciona un rol en el panel lateral para explorar los datos dinámicamente.</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card glass-panel">
+                            <div class="stat-icon"><i class="fa-solid fa-ruler-combined"></i></div>
+                            <div class="stat-content">
+                                <h3>Área de la Cuenca</h3>
+                                <p class="stat-value">4837.4 <span class="unit">km²</span></p>
+                            </div>
+                        </div>
+                        <div class="stat-card glass-panel">
+                            <div class="stat-icon"><i class="fa-solid fa-mountain"></i></div>
+                            <div class="stat-content">
+                                <h3>Elevación Media</h3>
+                                <p class="stat-value">3181 <span class="unit">m s.n.m.</span></p>
+                            </div>
+                        </div>
+                        <div class="stat-card glass-panel">
+                            <div class="stat-icon"><i class="fa-regular fa-snowflake"></i></div>
+                            <div class="stat-content">
+                                <h3>Fracción Nival</h3>
+                                <p class="stat-value">70.9 <span class="unit">%</span></p>
+                            </div>
+                        </div>
+                        <div class="stat-card glass-panel">
+                            <div class="stat-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                            <div class="stat-content">
+                                <h3>Periodo de Análisis</h3>
+                                <p class="stat-value">1980 - 2020</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="chart-container glass-panel full-width">
+                            <div class="chart-header">
+                                <h3>Disponibilidad Temporal de Datos (Heatmap)</h3>
+                                <p class="subtitle">Validación QA/QC del registro maestro mensual</p>
+                            </div>
+                            <div id="chart-disponibilidad" class="plotly-chart"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VISTA: ROL A -->
+                <section id="rol-a" class="view">
+                    <div class="header-section">
+                        <h2>Rol A: Explorador (Climatología)</h2>
+                        <p>Caracterización de la cuenca, ciclo anual, identificación de eventos extremos y clasificación hidroclimática.</p>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="chart-container glass-panel full-width">
+                            <div class="chart-header">
+                                <h3>Ciclo Anual de Precipitación y Caudal</h3>
+                                <p class="subtitle">Evidencia del régimen Nivo-Pluvial (Periodo Común 2000-2020)</p>
+                            </div>
+                            <div id="chart-ciclo-anual" class="plotly-chart"></div>
+                        </div>
+
+                        <div class="chart-container glass-panel">
+                            <div class="chart-header">
+                                <h3>Distribución Estadística (Precipitación)</h3>
+                                <p class="subtitle">Frecuencia de intensidades pluviométricas</p>
+                            </div>
+                            <div id="chart-hist-precip" class="plotly-chart"></div>
+                        </div>
+
+                        <div class="chart-container glass-panel">
+                            <div class="chart-header">
+                                <h3>Impacto de la Megasequía (Subperiodos)</h3>
+                                <p class="subtitle">Comparación 1980-1999 vs 2000-2020</p>
+                            </div>
+                            <div id="chart-subperiodos" class="plotly-chart"></div>
+                        </div>
+                    </div>
+
+                    <!-- Tabla dinámica -->
+                    <div class="table-container glass-panel">
+                        <div class="chart-header">
+                            <h3>Síntesis y Clasificación Hidroclimática</h3>
+                        </div>
+                        <div class="custom-table-wrapper" id="tabla-sintesis-rol-a">
+                            <!-- Inyectado por JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VISTA: ROL B -->
+                <section id="rol-b" class="view">
+                    <div class="header-section">
+                        <h2>Rol B: Modelador (Relaciones y Validación)</h2>
+                        <p>Evaluación de productos satelitales (IMERG), análisis de rezagos por almacenamiento nival y validación de modelos temporales.</p>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="chart-container glass-panel">
+                            <div class="chart-header">
+                                <h3>Comparación IMERG vs Pluviómetro (CR2MET)</h3>
+                                <p class="subtitle">Relación 1:1 coloreada por estación climática</p>
+                            </div>
+                            <div id="chart-scatter-imerg" class="plotly-chart"></div>
+                        </div>
+
+                        <div class="chart-container glass-panel">
+                            <div class="chart-header">
+                                <h3>Rezagos Lluvia-Caudal (Efecto Memoria Nival)</h3>
+                                <p class="subtitle">Correlación de anomalías estandarizadas vs tiempo de rezago</p>
+                            </div>
+                            <div id="chart-rezagos" class="plotly-chart"></div>
+                        </div>
+
+                        <div class="chart-container glass-panel full-width">
+                            <div class="chart-header">
+                                <h3>Validación Temporal Fuera de Muestra (Holdout)</h3>
+                                <p class="subtitle">Comparación de Caudal Observado vs Modelado por Bloques Externos</p>
+                            </div>
+                            <div id="chart-validacion-temporal" class="plotly-chart"></div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Archivo JS de datos autogenerado -->
+    <script src="js/data.js"></script>
+    <!-- Lógica de la aplicación -->
+    <script src="js/app.js"></script>
+</body>
+</html>
