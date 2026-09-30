@@ -216,7 +216,7 @@ next_actions:
 - [x] No usar precipitación futura para predecir caudal pasado; los rezagos se definieron como lluvia previa frente a caudal actual.
 - [x] Comparar exploratoriamente relaciones originales con anomalías mensuales, retirando la climatología del mes calendario según la guía.
 - [x] Apoyar al grupo calculando anomalías `a = X - media mensual` y estandarizadas `z = (X - media mensual) / desviación estándar mensual` para las variables acordadas.
-- [x] Usar un periodo de referencia fijo común (2000-06 a 2020-03); reportar años válidos por mes y revisar desviaciones estándar nulas, pequeñas o calculadas con pocos datos.
+- [x] Rol B usa un periodo de referencia fijo común (2000-06 a 2020-03), informa años válidos y revisa desviaciones estándar; pendiente confirmar con Rol A que sea la referencia integrada del punto 1.5.
 - [x] Para anomalías usadas en modelos con evaluación temporal, calcular la climatología solo con el bloque de ajuste y aplicarla sin recalcularla al bloque de evaluación.
 
 #### 7.4. Modelos candidatos
@@ -232,7 +232,7 @@ next_actions:
 - [x] Seleccionar modelos, rezagos, transformaciones y climatologías para modelar exclusivamente con los datos de ajuste.
 - [x] En el periodo de evaluación calcular sesgo, MAE y RMSE.
 - [x] Comparar precipitación estimada con IMERG sin corrección y caudal estimado con la climatología mensual del caudal; calcular ambas referencias usando solo el ajuste.
-- [ ] Examinar residuos frente al tiempo, valor estimado y mes calendario; revisar estacionalidad residual, predicciones físicamente implausibles y estabilidad entre periodos. (Se generaron diagnósticos temporales, mensuales y anuales, pero solo hay una partición externa; falta evaluar estabilidad con bloques independientes adicionales.)
+- [x] Examinar residuos frente al tiempo, valor estimado y mes calendario; revisar estacionalidad residual, predicciones físicamente implausibles y estabilidad entre periodos. (Tres bloques externos y desgloses por bloque: entrada #9 y registro B-20260930-06. Auditorías de máximos: entradas #10 y #12, registros B-20260930-07 y B-20260930-09. La revisión empírica no sustituye límites físicos independientes.)
 - [x] Concluir si la relación es aprovechable, para qué condiciones funciona y si mejora frente a la referencia. Un resultado negativo bien sustentado también es válido.
 
 #### 7.6. Interpretación, incertidumbre y fuentes
@@ -402,6 +402,144 @@ next_actions:
 - Auditar si estaciones CR2MET y GPCC se solapan; hasta entonces, evitar afirmaciones de independencia o solapamiento efectivo.
 - Para evaluar estabilidad, añadir evaluación de origen rodante o bloques externos adicionales; revisar el pico predicho de 302.8 m3/s y residuos por mes/estación.
 - Antes de entrega, eliminar completa `documentos/bitacora_datos_temporal/` y excluirla del ZIP.
+
+---
+
+## ENTRADA #8: REVISIÓN DE CUMPLIMIENTO DEL ROL B FRENTE A LA GUÍA Y EL PLAN
+- **Fecha:** 2026-09-30
+- **Integrante Responsable:** Santiago Ortega — Rol B (revisión solicitada)
+- **Agente de IA utilizado:** GitHub Copilot
+- **Estado de la Fase:** AVANCE SUSTANCIAL; cumplimiento completo pendiente
+
+### 1. Alcance de la revisión
+- Se contrastaron `documentos/plan_trabajo_equipo.pdf`, los apartados 2.1–2.3 y 3.2 de `documentos/tarea_1_202602.pdf`, la checklist oficial de la entrada #3, `documentos/bitacora_datos_temporal/rol_b_modelador.md`, su dossier bibliográfico, los scripts 04–06 y las tablas generadas.
+
+### 2. Trabajo con evidencia suficiente
+- Se verificó la comparación de precipitación local–IMERG, las tres dispersiones principales, el apoyo de lámina, correlaciones, métricas de error, grupos por estación/intensidad y sensibilidad a meses extremos, con resultados rastreables al CSV maestro.
+- Se verificó el cálculo de anomalías y valores estandarizados para las variables acordadas, con periodo de referencia explícito, cobertura mensual y rezagos definidos como lluvia previa frente a caudal actual. Los registros identifican correctamente estos rezagos como exploratorios.
+- Se verificaron modelos para estimar lluvia local desde IMERG y caudal desde lluvia local o IMERG, con selección interna, climatología de modelo calculada en ajuste, referencias simples y un bloque cronológico externo. Se generan diagnósticos de residuos frente al tiempo y predicción, además de desgloses por mes, estación y año.
+- Resultados fuera de ajuste: lluvia local desde IMERG reduce RMSE de 32.58 a 30.74 mm/mes, pero aumenta MAE de 18.84 a 20.85 mm/mes. Los modelos de anomalías con rezago reducen MAE/RMSE frente a las referencias de caudal en sus bloques evaluados, pero mantienen sesgo positivo.
+
+### 3. Pendientes que impiden declararlo completo
+- La guía, apartado 2.3, pide discutir estabilidad entre periodos. El script usa una sola partición externa por objetivo; los diagnósticos desglosados provienen de esos mismos tests y no acreditan estabilidad en bloques externos independientes. Falta evaluación de origen rodante o varios bloques retenidos.
+- Sigue sin confirmarse qué versión/corrida/exportación de IMERG originó `P_IMERG_mm`: el script de descarga apunta a V06, mientras los registros históricos mencionaron V07. También falta resolver la trazabilidad de la referencia local y comprobar si comparte estaciones concretas con los pluviómetros de IMERG Final. No presentar estas dependencias como hechos hasta auditarlas.
+- Revisar el máximo de 302.77 m3/s del modelo Q desde IMERG y documentar su plausibilidad frente a los valores observados; que las predicciones sean no negativas no basta para validar su plausibilidad física.
+- El plan plantea una rama y un Jupyter Notebook independiente por integrante; en el estado revisado no hay notebooks y solo aparecen `main` y `origin/main`. El uso de scripts 04–06 se ajusta a la estructura de scripts numerados definida por `AGENTS.md`, pero no demuestra cumplimiento del flujo de ramas/notebook del plan. Confirmar con el equipo si esa adaptación fue aceptada. La bitácora de Rol A aún no registra su climatología; al integrar, confirmar que el periodo de referencia de anomalías acordado es coherente con el punto 1.5.
+- El propio plan adapta el requisito de grupos de tres a cuatro integrantes bajo la condición de autorización docente; verificar que exista esa aprobación. El `README.md` todavía enumera únicamente los scripts 01–03, por lo que actualizarlo al preparar el paquete reproducible con el flujo y requisitos del Rol B.
+
+### 4. Conclusión y siguiente paso
+- El alcance del Rol B en el plan está ampliamente cubierto, pero no se debe marcar como cumplido al 100% mientras falte la prueba de estabilidad entre bloques y se mantengan sin resolver las advertencias de procedencia necesarias para la interpretación final.
+- Antes de la entrega, borrar la carpeta completa `documentos/bitacora_datos_temporal/` y excluirla del ZIP final.
+
+---
+
+## ENTRADA #9: ROL B — EVALUACIÓN DE ESTABILIDAD EN TRES BLOQUES EXTERNOS
+- **Fecha:** 2026-09-30
+- **Integrante Responsable:** Santiago Ortega — Rol B
+- **Agente de IA utilizado:** GitHub Copilot
+- **Estado de la Fase:** Comparación multibloque ejecutada; revisión de plausibilidad y procedencia aún pendiente
+
+### 1. Revisión de pares y corrección
+- Se atendió el pendiente señalado en la entrada #8 y el apartado 2.3 de la guía: el resumen previo por año/mes/estación describía una sola prueba externa y no demostraba estabilidad entre periodos.
+- Se actualizó `scripts/06_modelos_validacion_temporal.py` para usar tres ventanas externas cronológicas no solapadas: 2010-01–2012-12, 2013-01–2015-12 y 2016-01–2020-03. Cada ventana usa tres años previos de selección interna y un ajuste expansivo con datos anteriores al test. Selección de modelos/rezagos y climatologías se rehace por ventana; no se usa información futura.
+- Los desgloses por año, mes y estación ahora incluyen el bloque externo. Se añadió `figuras/tabla_2_3_metricas_por_bloque.csv`; las predicciones registran `outer_fold` y la variante elegida. Los gráficos de residuos temporales marcan los límites de bloques.
+
+### 2. Resultados fuera de muestra
+- Precipitación local estimada desde IMERG: n=36, 36 y 51. IMERG sin corrección obtuvo MAE/RMSE de 17.25/23.51, 18.96/25.14 y 18.84/32.58 mm/mes. La corrección seleccionada en cada ajuste (lineal, log-lineal, lineal) obtuvo 21.94/31.79, 22.50/37.97 y 20.85/30.74 mm/mes. La corrección no mejora MAE en ningún bloque y solo mejora RMSE en el último; no hay evidencia de mejora uniforme.
+- Caudal desde precipitación local: n=36, 28 y 51; los rezagos seleccionados fueron 6, 7 y 7 meses. Frente a la climatología mensual Q (MAE/RMSE 50.76/64.97, 48.02/58.47 y 42.41/55.10 m3/s), el modelo de anomalías obtuvo 43.21/54.78, 38.44/48.54 y 38.04/48.80 m3/s. El sesgo permaneció positivo: +42.90, +36.86 y +34.67 m3/s.
+- Caudal desde IMERG: n=36, 28 y 51; los rezagos seleccionados fueron 10, 7 y 7 meses. Frente a la misma climatología Q, el modelo de anomalías obtuvo MAE/RMSE 49.25/64.06, 33.67/45.53 y 36.05/47.32 m3/s. El sesgo permaneció positivo: +48.16, +31.78 y +26.37 m3/s.
+- El modelo de anomalías con rezago mejora MAE y RMSE frente a la climatología y la regresión contemporánea en cada bloque para ambos predictores de caudal. Es estabilidad descriptiva dentro de estas ventanas, no garantía de desempeño futuro ni prueba causal.
+
+### 3. Límites y próximos pasos
+- Las ventanas de test no se solapan, pero los entrenamientos son expansivos: observaciones evaluadas en bloques anteriores pasan a ser históricas en los siguientes. Los resultados no deben tratarse como réplicas estadísticamente independientes.
+- No hubo predicciones negativas. El máximo de la corrección de lluvia seleccionada fue 398.42 mm/mes y el máximo de Q predicho fue 276.62 m3/s desde precipitación local y 263.62 m3/s desde IMERG; verificar su plausibilidad frente a observaciones antes de interpretarlos.
+- Sigue pendiente confirmar la versión/corrida que originó `P_IMERG_mm` y la trazabilidad/posible dependencia de las fuentes pluviométricas. Esta evaluación no resuelve esas incertidumbres.
+
+---
+
+## ENTRADA #10: ROL B — AUDITORÍA DE MÁXIMOS PREDICHOS
+- **Fecha:** 2026-09-30
+- **Integrante Responsable:** Santiago Ortega — Rol B
+- **Agente de IA utilizado:** GitHub Copilot
+- **Estado de la Fase:** Auditoría empírica de máximos completada; no equivale a certificación física independiente
+
+### 1. Verificación reproducible
+- Se amplió `scripts/06_modelos_validacion_temporal.py` para generar `figuras/tabla_2_3_maximos_predichos.csv`, con bloque/fecha del máximo, observado simultáneo, error, máximo observado en el test, P99 y máximo observados en el ajuste y conteo de predicciones negativas.
+- El script se ejecutó sin errores. Se cotejaron los extremos contra el CSV maestro y se comprobaron las fechas de test, la selección interna anterior al test y la reproducción de sesgo, MAE y RMSE para las 936 predicciones y 24 grupos modelo-bloque. Las aserciones de los tres casos seleccionados pasaron.
+
+### 2. Casos auditados
+- **Lluvia local desde IMERG, bloque 2:** 398.422 mm/mes predichos en 2015-08 frente a 240.486 observados; error +157.936 mm/mes (+65.7%). El máximo observado del bloque fue 240.486 mm/mes. P99 del ajuste: 509.645 mm/mes; máximo del ajuste: 705.037 mm/mes. Sin predicciones negativas.
+- **Caudal desde precipitación local, bloque 3:** 276.618 m3/s predichos en 2016-11 frente a 137.233 observados; error +139.385 m3/s (+101.6%). El máximo observado del bloque fue 186.000 m3/s. P99 del ajuste: 410.385 m3/s; máximo del ajuste: 592.839 m3/s. Sin predicciones negativas.
+- **Caudal desde IMERG, bloque 3:** 263.624 m3/s predichos en 2016-11 frente a 137.233 observados; error +126.391 m3/s (+92.1%). El máximo observado del bloque fue 186.000 m3/s. P99 y máximo del ajuste: 410.385 y 592.839 m3/s. Sin predicciones negativas.
+
+### 3. Conclusión y límite
+- Los máximos están dentro del rango observado antes del test y bajo el P99 del ajuste: no hay evidencia de extrapolación extrema ni de imposibilidad física según el soporte empírico disponible. Sin embargo, superan el máximo observado de su bloque y son el mayor error absoluto de sus respectivas pruebas. Son magnitudes empíricamente posibles, pero sobreestimaciones severas que no representan fielmente esos meses; no afirmar que los modelos reproducen bien eventos máximos.
+- Esta revisión empírica no reemplaza límites físicos independientes. Permanecen pendientes la versión/corrida que originó `P_IMERG_mm` y la trazabilidad de las fuentes pluviométricas.
+
+---
+
+## ENTRADA #11: ROL B — AUDITORÍA DE PROCEDENCIA DE IMERG
+- **Fecha:** 2026-09-30
+- **Integrante Responsable:** Santiago Ortega — Rol B
+- **Agente de IA utilizado:** GitHub Copilot
+- **Estado de la Fase:** Investigación documental completada; versión/corrida exacta del CSV no confirmada
+
+### 1. Evidencia encontrada
+- `scripts/02_descargar_satelite.py`, tanto en el historial del repositorio como en el archivo actual, selecciona `NASA/GPM_L3/IMERG_MONTHLY_V06`, banda `precipitation`, y anota la unidad original mm/hr. Promedia sobre `camels_cl_5710001/polygon/polygon.shp` a escala 10000 m; filtra desde 2000-06-01 hasta 2020-04-01 (fin exclusivo) y multiplica la tasa por las horas de cada mes para obtener mm/mes.
+- `scripts/03_integrar_datos.py` lee `datos_satelitales_imerg_era5.csv`, alinea las fechas mensuales y renombra `PI_mm` a `P_IMERG_mm`; no documenta ni transforma la versión del producto.
+- El commit inicial `1a59662` incorporó a la vez el CSV maestro y un script de descarga V06. La entrada #1 de esta bitácora, sin embargo, afirma que se extrajo IMERG V07. El historial del descargador no contiene una implementación V07.
+- El CSV de la carga inicial y el de la reorganización tienen 238 valores `P_IMERG_mm` en las mismas fechas y los valores coinciden numéricamente. La reorganización no cambió la serie IMERG.
+
+### 2. Evidencia ausente y conclusión
+- No están versionados `datos_satelitales_imerg_era5.csv`, el polígono CAMELS-CL usado, identificadores de imágenes/tarea de Earth Engine, manifiesto, registro de ejecución ni metadatos de producto dentro del CSV maestro. Por ello, el código V06 es evidencia de la configuración disponible, no prueba de que esa corrida generó el CSV.
+- **Conclusión:** procedencia exacta no confirmada. La mejor evidencia técnica del repositorio apunta a V06, pero la declaración histórica V07 impide asignar esa versión con certeza. No etiquetar actualmente los valores como V06 ni V07.
+- Para cerrar el caso, localizar con quien ejecutó la descarga el CSV intermedio original o el historial/exportación de Earth Engine. Si no existe, acordar una versión canónica y regenerar `P_IMERG_mm`; esa serie sería una nueva generación reproducible, no una confirmación retroactiva de la anterior. Registrar colección/versión, banda, fechas, geometría, reductor/escala, unidades/conversión, fecha de ejecución e identificador/hash del resultado.
+
+---
+
+## ENTRADA #12: ROL B — PLAUSIBILIDAD DEL PICO HISTÓRICO Q DESDE IMERG
+- **Fecha:** 2026-09-30
+- **Integrante Responsable:** Santiago Ortega — Rol B
+- **Agente de IA utilizado:** GitHub Copilot
+- **Estado de la Fase:** Pico reconstruido y comparado con observaciones; plausibilidad empírica documentada
+
+### 1. Reconstrucción del valor
+- Se reconstruyó la evaluación anterior de un solo holdout desde el CSV maestro y el procedimiento documentado en la entrada #7: ajuste hasta 2015-12, test 2016-01–2020-03 (`n=51`), rezago seleccionado `k=8`, climatologías y coeficientes estimados antes del test.
+- La fórmula es `Qhat(t) = climatología_Q(mes(t)) - 10.076085 + 0.538856 * anomalía_IMERG(t-8)`. El máximo se reproduce en 2016-12: `302.766 m3/s`.
+- La climatología de diciembre del ajuste es `220.970 m3/s`. Para 2016-12, IMERG de 2016-04 fue `197.997 mm/mes`, frente a su media de abril en ajuste de `27.502 mm/mes`; la anomalía aporta `+81.796 m3/s` al sumar intercepto y pendiente. La ecuación reproduce `302.766 m3/s`.
+
+### 2. Comparación con observaciones
+- El caudal observado en 2016-12 fue `170.677 m3/s`: el modelo sobreestimó `132.089 m3/s`, equivalente a `77.4%` del observado (predicción `1.77` veces el valor medido).
+- El máximo observado de todo el test fue `186.000 m3/s` en 2017-01; el percentil 99 del test fue `178.339 m3/s`. El máximo predicho equivale a `1.63` veces el máximo observado del test y lo supera en `116.766 m3/s`.
+- En los 35 diciembres válidos del ajuste, la mediana observada fue `200.903 m3/s`, P90 `350.039 m3/s`, P95 `369.110 m3/s` y máximo `539.452 m3/s` (1982-12). `302.766 m3/s` está aproximadamente en el percentil empírico 74 de esos diciembres. En todo el ajuste, el P99 de Q fue `410.385 m3/s` y el máximo `592.839 m3/s`.
+
+### 3. Conclusión y límite
+- El pico no está fuera del soporte histórico y es estadísticamente plausible para diciembre; con los datos disponibles no debe llamarse físicamente imposible. Sin embargo, es una sobreestimación grave para diciembre de 2016 y supera todo el rango observado del bloque externo, que fue seco. Plausibilidad frente al historial no equivale a representar correctamente ese test ni demuestra habilidad para predecir crecidas.
+- La predicción combina la climatología histórica de diciembre y una respuesta positiva a la anomalía de precipitación con rezago 8. Esto no demuestra que la lluvia de abril causara el caudal de diciembre; el rezago es empírico y el modelo no impone un límite superior de caudal.
+- La evaluación multibloque actual selecciona otros rezagos y tiene un máximo Q desde IMERG de `263.624 m3/s` en 2016-11. Ese resultado actualizado no reemplaza ni invalida la auditoría del valor histórico `302.766`; corresponden a especificaciones de ajuste distintas.
+
+---
+
+## ENTRADA #13: ROL B — COORDINACIÓN DE CLIMATOLOGÍA CON EL PUNTO 1.5
+- **Fecha:** 2026-09-30
+- **Integrante Responsable:** Santiago Ortega — Rol B
+- **Agente de IA utilizado:** GitHub Copilot
+- **Estado de la Fase:** Ventana de Rol B verificada; acuerdo con Rol A pendiente
+
+### 1. Requisito y evidencia
+- El apartado 1.5.a de `documentos/tarea_1_202602.pdf` pide climatologías mensuales en un periodo común y los mismos pares válidos al comparar fuentes. El apartado 3.2 pide un periodo de referencia fijo, explícito y justificado para anomalías.
+- `scripts/05_anomalias_rezagos.py` y `figuras/tabla_2_2_climatologia_referencia.csv` usan 2000-06 a 2020-03 como ventana fija para `P_local_mm`, `P_IMERG_mm`, `Caudal_m3s`, `Q_lamina_mm` y `Temp_C`.
+- Verificación sobre `datos/datos_mensuales_maipo.csv`: la ventana contiene 238 filas. PL e IMERG tienen las mismas fechas válidas en los 12 meses; total 238 pares, con 19 o 20 años válidos por mes. Por tanto, la climatología de precipitación usada por Rol B coincide en muestra con la comparación local–IMERG durante esa ventana.
+- `documentos/bitacora_datos_temporal/rol_a_explorador.md` continúa sin resultados, periodo de referencia, tablas ni figuras del apartado 1.5. No se puede afirmar que Rol A ya adoptó la misma ventana.
+
+### 2. Propuesta de coordinación
+- Proponer 2000-06 a 2020-03 como referencia común integrada para comparar PL, PI, Q, R y temperatura y para apoyar las anomalías de Rol B. Preserva los 20 años disponibles en la cobertura satelital y evita comparar climatologías calculadas en ventanas distintas.
+- Si Rol A presenta además climatologías del registro local largo 1980–2020, separarlas como caracterización de cobertura extendida; no compararlas como si fueran la misma referencia que PI. La serie local completa debe conservarse para los demás análisis.
+- La tabla de referencia de Rol B contiene n válido, años válidos, media, mediana y desviación estándar, pero no cuartiles ni percentiles 10/90 que pide el apartado 1.5.a. No sustituye los productos completos que debe entregar Rol A.
+
+### 3. Estado y siguiente paso
+- La ventana de Rol B está verificada y satisface la comparación PL–PI sobre pares idénticos. La coordinación con el punto 1.5 queda pendiente hasta que Rol A o el equipo confirme que adopta esa ventana para la climatología integrada.
+- Compartir con Rol A la propuesta anterior; al recibir confirmación, registrar el periodo adoptado y verificar que sus tablas/figuras de 1.5 usen esa referencia. No editar el registro de Rol A en nombre de su responsable.
 
 ---
 
