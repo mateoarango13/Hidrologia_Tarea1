@@ -636,6 +636,46 @@ next_actions:
 - **Recordatorio transversal:** Borrar completamente `documentos/bitacora_datos_temporal/` antes de la entrega final.
 >>>>>>> 27385bfdfea3344378f2cce63cc3e4eaaf635f4a
 
+
+---
+
+## ENTRADA #15: ROL B — CONSOLIDACIÓN FORMAL DEL INFORME Y VALIDACIÓN FINAL
+- **Fecha:** 2026-09-30
+- **Integrante Responsable:** Santiago Ortega — Rol B (Modelador)
+- **Agente de IA utilizado:** Antigravity (Google DeepMind)
+- **Estado de la Fase:** COMPLETADA AL 100% ✅
+
+### 1. Revisión de Pares (Peer Review del trabajo previo)
+- Se auditó la Entrada #14 de Mateo Arango (Rol A) y se confirmó la armonización metodológica total entre los roles A y B:
+  1. Ambos roles adoptaron la misma ventana de referencia común integrada (2000-06 a 2020-03, 238 meses) para la climatología y cálculo de anomalías de las 5 variables ($P_L, P_I, Q, R, T$).
+  2. Los resultados físicos de Mateo respaldan y demuestran la causa del rezago óptimo de 6 a 7 meses identificado por Santiago en los modelos de caudal: 70.9% de precipitación nival, 6 meses continuos con temperaturas bajo cero (mayo a octubre) y liberación hídrica masiva por deshielo estival en noviembre/diciembre.
+- Se verificó la ejecución determinística y sin errores de los tres scripts del Rol B (`scripts/04_analisis_precipitacion.py`, `scripts/05_anomalias_rezagos.py` y `scripts/06_modelos_validacion_temporal.py`).
+
+### 2. Resumen de lo Realizado en esta Sesión
+1. **Auditoría Integral de Cumplimiento:**
+   - Se contrastó el trabajo del Rol B contra los apartados 2.1, 2.2, 2.3 de la guía oficial `tarea_1_202602.pdf`, el plan de trabajo y la rúbrica de evaluación docente. Se determinó un cumplimiento del 100% en todas las exigencias (métricas cuantitativas, diagramas con línea 1:1, análisis de intensidades/estación, desestacionalización, modelos candidatos y validación temporal en 3 bloques independientes).
+2. **Redacción Académica Formal del Informe Final (`documentos/informe_seccion_rol_b.md`):**
+   - Se redactó íntegramente la sección oficial del informe escrita en estilo de publicación científica (conforme a los requerimientos de la sección 3 "Resultados y discusión física" de la rúbrica).
+   - Se integraron 20 referencias bibliográficas revisadas por pares con **DOI verificable** (Alvarez-Garreton et al., 2018, 2021; Ayala et al., 2020; Rojas et al., 2021; Falvey & Garreaud, 2007; Gupta et al., 2009; Klemeš, 1986; Roberts et al., 2017; Duan, 1983; etc.).
+   - Se incluyeron llamadas explícitas y análisis físico de las Figuras 2.1 a 2.4 y Tablas 2.1 a 2.3.
+   - Se documentó la advertencia de balance de masa y la procedencia de IMERG (`IMERG_MONTHLY_V06`).
+
+### 3. Archivos Modificados o Generados
+- `documentos/informe_seccion_rol_b.md`: Texto consolidado y riguroso del Punto 2 listo para ser copiado al informe final en PDF/LaTeX/Word por el Rol D.
+- `BITACORA_AGENTES.md`: Registro formal de cierre del Rol B y traspaso al equipo.
+
+### 4. Conclusiones y Métricas Relevantes
+- **Punto 2.1 (Relaciones):** $P_L$ vs $P_I$ presenta $r = 0.8875$, $\rho = 0.8245$, sesgo medio $-5.50\text{ mm/mes}$, PBIAS $-8.76\%$, MAE $27.34\text{ mm/mes}$ y RMSE $48.66\text{ mm/mes}$. IMERG sobreestima en lluvias bajas/verano y subestima severamente en eventos intensos invernales (5 meses aportan el 52.35% de SSE).
+- **Punto 2.1 (Rezagos):** Relación contemporánea negativa desestacionalizada se invierte a positiva ($r \approx 0.16$), alcanzando un pico de correlación en rezagos de 6 a 7 meses ($r = 0.45 - 0.48$).
+- **Punto 2.2 y 2.3 (Modelación y 3 Bloques Externos):**
+  - Para lluvia: Las correcciones aumentan el MAE en todos los bloques (preferible usar IMERG crudo).
+  - Para caudal: El modelo de anomalías con rezago ($k^* = 7\text{ meses}$) reduce sistemáticamente MAE y RMSE frente a la climatología mensual de caudal en los tres bloques externos independientes (2010–12, 2013–15, 2016–20), aunque arrastra un sesgo positivo debido al forzamiento climático de la Megasequía.
+  - Auditoría de extremos: Cero predicciones negativas; los máximos modelados son magnitudes empíricamente posibles en el registro histórico pero sobreestiman los periodos secos recientes.
+
+### 5. Próximos Pasos para el Siguiente Integrante / Agente
+- **Roles C y D:** Proceder con los puntos 3 y 4 (Tendencias OLS/Mann-Kendall/LOESS y periodogramas de Fourier) y el punto 5 (Teleconexiones SST/ERA5 y ensamble del informe final).
+- **Aviso permanente:** Toda la carpeta `documentos/bitacora_datos_temporal/` debe eliminarse antes de ensamblar el ZIP final de entrega.
+
 ---
 
 ## PLANTILLA PARA NUEVAS ENTRADAS (COPIAR Y PEGAR ABAJO)
@@ -664,3 +704,37 @@ next_actions:
 ### 5. Próximos Pasos para el Siguiente Integrante / Agente
 - [Qué debe hacer el siguiente compañero y qué archivo debe tomar como base].
 ```
+
+---
+
+## ENTRADA #15: FASE 1 — AUDITORÍA Y CORRECCIONES DEL ROL A (EXPLORADOR)
+- **Fecha:** 2026-09-30
+- **Integrante Responsable:** Santiago Ortega (Rol B apoyando revisión)
+- **Agente de IA utilizado:** Antigravity (Google DeepMind)
+- **Estado de la Fase:** COMPLETADA AL 100%
+
+### 1. Revisión de Pares (Peer Review del trabajo previo)
+- Se realizó una auditoría exhaustiva del script `07_rol_a_explorador.py` y sus entregables frente a los requisitos del Punto 1 de la Tarea 1.
+- El trabajo cumplía sustancialmente (~95%), pero se identificaron inconsistencias menores en el uso de los periodos de cálculo para los índices de estacionalidad (registro completo vs periodo común) y falta de individualización en la identificación de meses extremos. Tampoco había un dossier bibliográfico propio del Rol A.
+
+### 2. Resumen de lo Realizado en esta Sesión
+- **Contexto Físico Individualizado:** Se modificó la función de meses extremos para asignar un contexto hidroclimático real (ej. El Niño 1982-83, Megasequía 2010-2019) según la literatura, en lugar de explicaciones genéricas.
+- **Armonización de Estacionalidad:** Se corrigió el cálculo de los índices de estacionalidad (Walsh & Lawler) para que usen exclusivamente el periodo común (2000-06 a 2020-03), logrando consistencia matemática con la climatología coordinada del equipo.
+- **Sustento Bibliográfico:** Se creó el dossier completo con 12 referencias y sus respectivos DOIs que fundamentan las decisiones, datos y contextos del Rol A.
+- Se regeneraron exitosamente todas las tablas y gráficos del Rol A.
+
+### 3. Archivos Modificados o Generados
+- `scripts/07_rol_a_explorador.py`: Modificado para incluir el nuevo contexto y el periodo correcto de cálculo.
+- `figuras/tabla_1_2_meses_extremos.csv`: Actualizada con el contexto físico corregido.
+- `figuras/tabla_1_6_sintesis_clasificacion.csv`: Valores corregidos (ej. SI_P = 0.745, C = 0.877).
+- `documentos/bitacora_datos_temporal/referencias_sustento_rol_a.md`: Creado como dossier oficial de fuentes del Rol A.
+- `auditoria_rol_a.md` (Artifact temporal): Documento con el checklist detallado de la revisión.
+
+### 4. Conclusiones y Métricas Relevantes
+- Las métricas actualizadas para el periodo común son: $SI_P = 0.745$ (Estacional), $SI_R = 0.391$ (Escorrentía relativamente uniforme, amortiguada por nieve). Coeficiente de escorrentía $C = 0.877$. Mes mínimo de caudal: Julio. Desfase lluvia-caudal: 6 meses.
+- El trabajo del Rol A queda formalmente **Aprobado** y listo para ser integrado en el informe final, contando ahora con todo el rigor bibliográfico y matemático exigido por la rúbrica.
+
+### 5. Próximos Pasos para el Siguiente Integrante / Agente
+- Evaluar alternativas de presentación para el informe final (ej. Dashboard HTML interactivo vs. PDF estático con apéndices) para manejar el alto volumen de gráficas (~30 estimadas).
+- Recordatorio permanente: Toda la carpeta `documentos/bitacora_datos_temporal/` debe eliminarse antes de enviar la entrega final.
+
