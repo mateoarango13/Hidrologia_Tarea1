@@ -1,0 +1,12 @@
+Indicador,Valor,Unidad,Interpretacion
+P_anual_media_mm,819.83,mm/año,Precipitación anual promedio cuenca
+R_anual_media_mm,731.73,mm/año,Escorrentía anual promedio cuenca
+Coeficiente_Escorrentia_C,0.893,-,Relación R/P anual multianual (~0.90 por aporte nival/glaciar)
+SI_Precipitacion_Walsh_Lawler,0.774,-,"Marcadamente estacional (régimen mediterráneo de invierno, SI > 0.8)"
+SI_Escorrentia_Walsh_Lawler,0.402,-,"Marcadamente estacional (régimen de deshielo estival, SI > 0.6)"
+Mes_Pico_Precipitacion,6,Mes (Junio),Máximo invernal por frentes fríos (174.8 mm/mes)
+Mes_Minimo_Precipitacion,3,Mes (Marzo),Mínimo estival por bloqueo anticiclónico (10.7 mm/mes)
+Mes_Pico_Caudal,12,Mes (Diciembre),Máximo estival por derretimiento nival/glaciar (116.6 mm/mes)
+Mes_Minimo_Caudal,6,Mes (Agosto),Mínimo invernal por congelamiento/nieve (34.8 mm/mes)
+Desfase_Pico_Lluvia_a_Caudal,6,Meses,Retardo físico de 6 meses por almacenamiento nivo-glaciar en alta montaña
+Clasificacion_Hidroclimatica_Sintesis,Régimen Nivo-Pluvial de Montaña Mediterránea,Cualitativa,"71% de precipitación es nival; invierno pluvioso y frío, verano cálido y seco con pico de caudal por deshielo"

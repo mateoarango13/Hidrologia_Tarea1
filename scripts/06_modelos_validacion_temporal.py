@@ -10,6 +10,26 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 DATA_PATH = ROOT_DIR / "datos" / "datos_mensuales_maipo.csv"
 FIGURES_DIR = ROOT_DIR / "figuras"
 MAX_LAG_MONTHS = 12
+VALIDATION_FOLDS = [
+    {
+        "name": "bloque_1",
+        "tuning_start": pd.Timestamp("2007-01-01"),
+        "test_start": pd.Timestamp("2010-01-01"),
+        "test_end": pd.Timestamp("2012-12-01"),
+    },
+    {
+        "name": "bloque_2",
+        "tuning_start": pd.Timestamp("2010-01-01"),
+        "test_start": pd.Timestamp("2013-01-01"),
+        "test_end": pd.Timestamp("2015-12-01"),
+    },
+    {
+        "name": "bloque_3",
+        "tuning_start": pd.Timestamp("2013-01-01"),
+        "test_start": pd.Timestamp("2016-01-01"),
+        "test_end": pd.Timestamp("2020-03-01"),
+    },
+]
 
 RAIN_LOCAL = "P_local_mm"
 RAIN_SATELLITE = "P_IMERG_mm"
@@ -33,6 +53,7 @@ PREDICTION_COLORS = {
     "IMERG sin corrección": "#75808C",
     "Lineal corregido": "#237A68",
     "Log-lineal corregido": "#C45D35",
+    "Corrección seleccionada en ajuste": "#237A68",
     "Climatología mensual Q": "#75808C",
     "Regresión lineal Q~P(t)": "#C45D35",
     "Regresión de anomalías con rezago": "#237A68",
@@ -124,7 +145,10 @@ def append_predictions(
     model: str,
     observed: pd.Series,
     predicted: pd.Series,
+    model_variant: str | None = None,
+    outer_fold: str,
     outer_start: pd.Timestamp,
+    outer_end: pd.Timestamp,
     training_end: pd.Timestamp,
     tuning_start: pd.Timestamp,
     lag_months: int | None = None,
@@ -137,6 +161,7 @@ def append_predictions(
                 "predictor": predictor,
                 "target": target,
                 "model": model,
+                "model_variant": model_variant or model,
                 "split": "outer_temporal_test",
                 "date": date,
                 "year": date.year,
@@ -145,7 +170,9 @@ def append_predictions(
                 "observed": row["observed"],
                 "predicted": row["predicted"],
                 "residual_pred_minus_obs": row["predicted"] - row["observed"],
+                "outer_fold": outer_fold,
                 "outer_test_start": outer_start.strftime("%Y-%m"),
+                "outer_test_end": outer_end.strftime("%Y-%m"),
                 "training_end": training_end.strftime("%Y-%m"),
                 "inner_tuning_start": tuning_start.strftime("%Y-%m"),
                 "selected_lag_months": lag_months,
@@ -153,8 +180,11 @@ def append_predictions(
         )
 
 
-def summarize_predictions(predictions: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+def summarize_predictions(
+    predictions: pd.DataFrame,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     metric_rows = []
+    fold_metric_rows = []
     annual_rows = []
     monthly_rows = []
     seasonal_rows = []
@@ -169,65 +199,138 @@ def summarize_predictions(predictions: pd.DataFrame) -> tuple[pd.DataFrame, pd.D
                 "predictor": predictor,
                 "target": target,
                 "model": model,
+                "model_variants_by_fold": "; ".join(
+                    f"{fold_name}: {', '.join(sorted(fold_group['model_variant'].unique()))}"
+                    for fold_name, fold_group in group.groupby("outer_fold", sort=False)
+                ),
                 "test_start": group["date"].min().strftime("%Y-%m"),
                 "test_end": group["date"].max().strftime("%Y-%m"),
                 **metrics,
             }
         )
 
-        for year, year_group in group.groupby("year"):
-            annual_rows.append(
+        for outer_fold, fold_group in group.groupby("outer_fold", sort=False):
+            fold_metric_rows.append(
                 {
                     "task": task,
                     "predictor": predictor,
                     "target": target,
                     "model": model,
-                    "year": year,
-                    **calculate_metrics(year_group["observed"], year_group["predicted"]),
+                    "model_variant": ", ".join(sorted(fold_group["model_variant"].unique())),
+                    "outer_fold": outer_fold,
+                    "test_start": fold_group["date"].min().strftime("%Y-%m"),
+                    "test_end": fold_group["date"].max().strftime("%Y-%m"),
+                    **calculate_metrics(fold_group["observed"], fold_group["predicted"]),
                 }
             )
 
-        for month, month_group in group.groupby("calendar_month"):
-            monthly_rows.append(
-                {
-                    "task": task,
-                    "predictor": predictor,
-                    "target": target,
-                    "model": model,
-                    "calendar_month": month,
-                    "season": SEASONS[month],
-                    **calculate_metrics(month_group["observed"], month_group["predicted"]),
-                }
-            )
+            for year, year_group in fold_group.groupby("year"):
+                annual_rows.append(
+                    {
+                        "task": task,
+                        "predictor": predictor,
+                        "target": target,
+                        "model": model,
+                        "model_variant": ", ".join(sorted(year_group["model_variant"].unique())),
+                        "outer_fold": outer_fold,
+                        "year": year,
+                        **calculate_metrics(year_group["observed"], year_group["predicted"]),
+                    }
+                )
 
-        for season, season_group in group.groupby("season"):
-            seasonal_rows.append(
-                {
-                    "task": task,
-                    "predictor": predictor,
-                    "target": target,
-                    "model": model,
-                    "season": season,
-                    **calculate_metrics(season_group["observed"], season_group["predicted"]),
-                }
-            )
+            for month, month_group in fold_group.groupby("calendar_month"):
+                monthly_rows.append(
+                    {
+                        "task": task,
+                        "predictor": predictor,
+                        "target": target,
+                        "model": model,
+                        "model_variant": ", ".join(sorted(month_group["model_variant"].unique())),
+                        "outer_fold": outer_fold,
+                        "calendar_month": month,
+                        "season": SEASONS[month],
+                        **calculate_metrics(month_group["observed"], month_group["predicted"]),
+                    }
+                )
+
+            for season, season_group in fold_group.groupby("season"):
+                seasonal_rows.append(
+                    {
+                        "task": task,
+                        "predictor": predictor,
+                        "target": target,
+                        "model": model,
+                        "model_variant": ", ".join(sorted(season_group["model_variant"].unique())),
+                        "outer_fold": outer_fold,
+                        "season": season,
+                        **calculate_metrics(season_group["observed"], season_group["predicted"]),
+                    }
+                )
 
     return (
         pd.DataFrame(metric_rows),
+        pd.DataFrame(fold_metric_rows),
         pd.DataFrame(annual_rows),
         pd.DataFrame(monthly_rows),
         pd.DataFrame(seasonal_rows),
     )
 
 
-def evaluate_precipitation_estimation(data: pd.DataFrame) -> tuple[list[dict[str, object]], list[dict[str, object]]]:
-    outer_start = pd.Timestamp("2016-01-01")
-    tuning_start = pd.Timestamp("2013-01-01")
+def summarize_prediction_extremes(data: pd.DataFrame, predictions: pd.DataFrame) -> pd.DataFrame:
+    rows = []
+    group_columns = ["task", "predictor", "target", "model"]
+    for keys, model_predictions in predictions.groupby(group_columns, sort=False):
+        task, predictor, target, model = keys
+        peak = model_predictions.loc[model_predictions["predicted"].idxmax()]
+        fold_predictions = model_predictions.loc[model_predictions["outer_fold"] == peak["outer_fold"]]
+        outer_start = pd.Timestamp(peak["outer_test_start"])
+        training = data.loc[data.index < outer_start, target].dropna()
+        observed_peak = fold_predictions.loc[fold_predictions["observed"].idxmax()]
+        largest_error = fold_predictions.loc[fold_predictions["residual_pred_minus_obs"].abs().idxmax()]
+
+        rows.append(
+            {
+                "task": task,
+                "predictor": predictor,
+                "target": target,
+                "model": model,
+                "model_variant": peak["model_variant"],
+                "outer_fold": peak["outer_fold"],
+                "test_start": peak["outer_test_start"],
+                "test_end": peak["outer_test_end"],
+                "n_test_fold": len(fold_predictions),
+                "max_prediction_date": peak["date"].strftime("%Y-%m"),
+                "max_prediction": peak["predicted"],
+                "observed_same_date": peak["observed"],
+                "error_pred_minus_obs": peak["residual_pred_minus_obs"],
+                "training_p99_observed": training.quantile(0.99),
+                "training_max_observed": training.max(),
+                "max_observed_in_test_fold": observed_peak["observed"],
+                "date_max_observed_in_test_fold": observed_peak["date"].strftime("%Y-%m"),
+                "prediction_within_training_range": bool(training.min() <= peak["predicted"] <= training.max()),
+                "prediction_at_or_below_training_p99": bool(peak["predicted"] <= training.quantile(0.99)),
+                "negative_predictions_in_test_fold": int((fold_predictions["predicted"] < 0).sum()),
+                "largest_absolute_error_in_test_fold": largest_error["residual_pred_minus_obs"],
+                "date_largest_absolute_error_in_test_fold": largest_error["date"].strftime("%Y-%m"),
+            }
+        )
+
+    return pd.DataFrame(rows)
+
+
+def evaluate_precipitation_estimation(
+    data: pd.DataFrame,
+    *,
+    outer_fold: str,
+    outer_start: pd.Timestamp,
+    outer_end: pd.Timestamp,
+    tuning_start: pd.Timestamp,
+) -> tuple[list[dict[str, object]], list[dict[str, object]]]:
     paired = data[[RAIN_SATELLITE, RAIN_LOCAL]].dropna()
     tuning_training = paired.loc[paired.index < tuning_start]
     tuning_validation = paired.loc[(paired.index >= tuning_start) & (paired.index < outer_start)]
     final_training = paired.loc[paired.index < outer_start]
-    test = paired.loc[paired.index >= outer_start]
+    test = paired.loc[(paired.index >= outer_start) & (paired.index <= outer_end)]
     if min(len(tuning_training), len(tuning_validation), len(final_training), len(test)) < 12:
         raise ValueError("La partición temporal de precipitación deja muy pocos pares para ajustar, seleccionar o evaluar.")
 
@@ -241,6 +344,7 @@ def evaluate_precipitation_estimation(data: pd.DataFrame) -> tuple[list[dict[str
             {
                 "task": "estimar_precipitacion_local",
                 "predictor": RAIN_SATELLITE,
+                "outer_fold": outer_fold,
                 "candidate_model": model,
                 "fit_period_start": tuning_training.index.min().strftime("%Y-%m"),
                 "fit_period_end": tuning_training.index.max().strftime("%Y-%m"),
@@ -270,7 +374,9 @@ def evaluate_precipitation_estimation(data: pd.DataFrame) -> tuple[list[dict[str
         model="IMERG sin corrección",
         observed=test[RAIN_LOCAL],
         predicted=baseline,
+        outer_fold=outer_fold,
         outer_start=outer_start,
+        outer_end=outer_end,
         training_end=final_training.index.max(),
         tuning_start=tuning_start,
     )
@@ -281,10 +387,13 @@ def evaluate_precipitation_estimation(data: pd.DataFrame) -> tuple[list[dict[str
         task="estimar_precipitacion_local",
         predictor=RAIN_SATELLITE,
         target=RAIN_LOCAL,
-        model=selected_model,
+        model="Corrección seleccionada en ajuste",
+        model_variant=selected_model,
         observed=test[RAIN_LOCAL],
         predicted=final_predictions,
+        outer_fold=outer_fold,
         outer_start=outer_start,
+        outer_end=outer_end,
         training_end=final_training.index.max(),
         tuning_start=tuning_start,
     )
@@ -292,6 +401,7 @@ def evaluate_precipitation_estimation(data: pd.DataFrame) -> tuple[list[dict[str
         {
             "task": "estimar_precipitacion_local",
             "predictor": RAIN_SATELLITE,
+            "outer_fold": outer_fold,
             "candidate_model": "seleccion_final_reajustada",
             "fit_period_start": final_training.index.min().strftime("%Y-%m"),
             "fit_period_end": final_training.index.max().strftime("%Y-%m"),
@@ -367,7 +477,9 @@ def evaluate_flow_estimation(
     data: pd.DataFrame,
     *,
     rain_column: str,
+    outer_fold: str,
     outer_start: pd.Timestamp,
+    outer_end: pd.Timestamp,
     tuning_start: pd.Timestamp,
 ) -> tuple[list[dict[str, object]], list[dict[str, object]]]:
     lag_months, lag_selection_rows = select_anomaly_lag(
@@ -378,7 +490,7 @@ def evaluate_flow_estimation(
     )
     training_mask = data.index < outer_start
     training = data.loc[training_mask]
-    test_mask = data.index >= outer_start
+    test_mask = (data.index >= outer_start) & (data.index <= outer_end)
 
     flow_climatology = monthly_climatology(training[FLOW].dropna())
     rain_climatology = monthly_climatology(training[rain_column].dropna())
@@ -422,7 +534,9 @@ def evaluate_flow_estimation(
             model=model_name,
             observed=observed,
             predicted=predicted,
+            outer_fold=outer_fold,
             outer_start=outer_start,
+            outer_end=outer_end,
             training_end=training.index.max(),
             tuning_start=tuning_start,
             lag_months=selected_lag,
@@ -432,6 +546,7 @@ def evaluate_flow_estimation(
         {
             "task": "estimar_caudal",
             "predictor": rain_column,
+            "outer_fold": outer_fold,
             "candidate_model": "Regresión de anomalías con rezago",
             "candidate_lag_months": row["candidate_lag_months"],
             "fit_n": row["fit_n"],
@@ -474,6 +589,9 @@ def plot_validation(predictions: pd.DataFrame, path: Path) -> None:
         axes[0, column].plot(observed["date"], observed["observed"], color="#202A35", linewidth=1.7, label="Observado")
         axes[0, column].set_title(task_label)
         axes[0, column].set_ylabel("mm/mes" if task == "estimar_precipitacion_local" else "m3/s")
+        for fold in VALIDATION_FOLDS[:-1]:
+            boundary = fold["test_end"] + pd.offsets.MonthBegin(1)
+            axes[0, column].axvline(boundary, color="#59636E", linestyle=":", linewidth=1)
         axes[0, column].grid(True, color="#D9DEE5", linewidth=0.7, alpha=0.8)
         axes[0, column].legend(frameon=False, fontsize=8)
 
@@ -514,6 +632,9 @@ def plot_residuals_over_time(predictions: pd.DataFrame, path: Path) -> None:
                 label=model,
             )
         axis.axhline(0, color="#202A35", linewidth=0.9)
+        for fold in VALIDATION_FOLDS[:-1]:
+            boundary = fold["test_end"] + pd.offsets.MonthBegin(1)
+            axis.axvline(boundary, color="#59636E", linestyle=":", linewidth=1)
         axis.set_title(task_label)
         axis.set_ylabel("Residuo (mm/mes)" if task == "estimar_precipitacion_local" else "Residuo (m3/s)")
         axis.grid(True, color="#D9DEE5", linewidth=0.7, alpha=0.8)
@@ -532,34 +653,53 @@ def main() -> None:
     prediction_records: list[dict[str, object]] = []
     selection_rows: list[dict[str, object]] = []
 
-    rain_predictions, rain_selections = evaluate_precipitation_estimation(data)
-    prediction_records.extend(rain_predictions)
-    selection_rows.extend(rain_selections)
+    for fold in VALIDATION_FOLDS:
+        fold_name = fold["name"]
+        tuning_start = fold["tuning_start"]
+        outer_start = fold["test_start"]
+        outer_end = fold["test_end"]
 
-    local_flow_predictions, local_flow_selections = evaluate_flow_estimation(
-        data,
-        rain_column=RAIN_LOCAL,
-        outer_start=pd.Timestamp("2012-01-01"),
-        tuning_start=pd.Timestamp("2008-01-01"),
-    )
-    prediction_records.extend(local_flow_predictions)
-    selection_rows.extend(local_flow_selections)
+        rain_predictions, rain_selections = evaluate_precipitation_estimation(
+            data,
+            outer_fold=fold_name,
+            outer_start=outer_start,
+            outer_end=outer_end,
+            tuning_start=tuning_start,
+        )
+        prediction_records.extend(rain_predictions)
+        selection_rows.extend(rain_selections)
 
-    satellite_flow_predictions, satellite_flow_selections = evaluate_flow_estimation(
-        data,
-        rain_column=RAIN_SATELLITE,
-        outer_start=pd.Timestamp("2016-01-01"),
-        tuning_start=pd.Timestamp("2012-01-01"),
-    )
-    prediction_records.extend(satellite_flow_predictions)
-    selection_rows.extend(satellite_flow_selections)
+        local_flow_predictions, local_flow_selections = evaluate_flow_estimation(
+            data,
+            rain_column=RAIN_LOCAL,
+            outer_fold=fold_name,
+            outer_start=outer_start,
+            outer_end=outer_end,
+            tuning_start=tuning_start,
+        )
+        prediction_records.extend(local_flow_predictions)
+        selection_rows.extend(local_flow_selections)
+
+        satellite_flow_predictions, satellite_flow_selections = evaluate_flow_estimation(
+            data,
+            rain_column=RAIN_SATELLITE,
+            outer_fold=fold_name,
+            outer_start=outer_start,
+            outer_end=outer_end,
+            tuning_start=tuning_start,
+        )
+        prediction_records.extend(satellite_flow_predictions)
+        selection_rows.extend(satellite_flow_selections)
 
     predictions = pd.DataFrame(prediction_records)
     selections = pd.DataFrame(selection_rows)
-    metrics, annual_metrics, monthly_metrics, seasonal_metrics = summarize_predictions(predictions)
+    metrics, fold_metrics, annual_metrics, monthly_metrics, seasonal_metrics = summarize_predictions(predictions)
+    extreme_predictions = summarize_prediction_extremes(data, predictions)
 
     predictions_path = FIGURES_DIR / "tabla_2_3_predicciones_fuera_ajuste.csv"
     metrics_path = FIGURES_DIR / "tabla_2_3_metricas_fuera_ajuste.csv"
+    fold_metrics_path = FIGURES_DIR / "tabla_2_3_metricas_por_bloque.csv"
+    extreme_predictions_path = FIGURES_DIR / "tabla_2_3_maximos_predichos.csv"
     annual_path = FIGURES_DIR / "tabla_2_3_metricas_por_anio.csv"
     monthly_path = FIGURES_DIR / "tabla_2_3_residuos_por_mes.csv"
     seasonal_path = FIGURES_DIR / "tabla_2_3_metricas_por_estacion.csv"
@@ -569,6 +709,8 @@ def main() -> None:
 
     predictions.to_csv(predictions_path, index=False, date_format="%Y-%m-%d", float_format="%.6f")
     metrics.to_csv(metrics_path, index=False, float_format="%.6f")
+    fold_metrics.to_csv(fold_metrics_path, index=False, float_format="%.6f")
+    extreme_predictions.to_csv(extreme_predictions_path, index=False, float_format="%.6f")
     annual_metrics.to_csv(annual_path, index=False, float_format="%.6f")
     monthly_metrics.to_csv(monthly_path, index=False, float_format="%.6f")
     seasonal_metrics.to_csv(seasonal_path, index=False, float_format="%.6f")
@@ -576,50 +718,24 @@ def main() -> None:
     plot_validation(predictions, figure_path)
     plot_residuals_over_time(predictions, residual_time_figure_path)
 
-    test_window_specs = [
-        (
-            "PL desde IMERG",
-            "estimar_precipitacion_local",
-            RAIN_SATELLITE,
-            "IMERG sin corrección",
-            "ajuste 2000-06..2015-12; selección interna 2013-01..2015-12",
-        ),
-        (
-            "Q desde P local",
-            "estimar_caudal",
-            f"{RAIN_LOCAL} (mm/mes)",
-            "Climatología mensual Q",
-            "ajuste 1980-01..2011-12; selección interna 2008-01..2011-12",
-        ),
-        (
-            "Q desde IMERG",
-            "estimar_caudal",
-            f"{RAIN_SATELLITE} (mm/mes)",
-            "Climatología mensual Q",
-            "ajuste 2000-06..2015-12; selección interna 2012-01..2015-12",
-        ),
-    ]
-    print("Particiones temporales; cortes definidos en años completos:")
-    for label, task, predictor, model, training_description in test_window_specs:
-        test_summary = metrics.loc[
-            (metrics["task"] == task)
-            & (metrics["predictor"] == predictor)
-            & (metrics["model"] == model)
-        ].iloc[0]
+    print("Bloques externos cronológicos, no solapados; ajuste expansivo y selección interna anterior a cada test:")
+    for fold in VALIDATION_FOLDS:
         print(
-            f"{label}: {training_description}; test válido "
-            f"{test_summary['test_start']}..{test_summary['test_end']} "
-            f"(n={int(test_summary['n'])})."
+            f"{fold['name']}: ajuste hasta {(fold['tuning_start'] - pd.offsets.MonthBegin(1)):%Y-%m}; "
+            f"selección {fold['tuning_start']:%Y-%m}..{(fold['test_start'] - pd.offsets.MonthBegin(1)):%Y-%m}; "
+            f"test nominal {fold['test_start']:%Y-%m}..{fold['test_end']:%Y-%m}."
         )
-    print("La climatología de las anomalías y del benchmark de caudal se calcula solo con el ajuste correspondiente.")
+    print("La climatología de las anomalías y del benchmark de caudal se calcula solo con los datos anteriores al test de cada bloque.")
+    print("\nMétricas por bloque externo:")
+    print(fold_metrics.to_string(index=False, float_format=lambda value: f"{value:.3f}"))
     print("\nMétricas fuera de ajuste:")
     print(metrics.to_string(index=False, float_format=lambda value: f"{value:.3f}"))
     print("\nSelección interna de transformaciones/rezagos (no usa el bloque externo de test):")
     print(selections.loc[selections["selected_on_inner_tuning"]].to_string(index=False, float_format=lambda value: f"{value:.3f}"))
     print("\nSalidas generadas:")
-    for output_path in [predictions_path, metrics_path, annual_path, monthly_path, seasonal_path, selections_path, figure_path, residual_time_figure_path]:
+    for output_path in [predictions_path, metrics_path, fold_metrics_path, extreme_predictions_path, annual_path, monthly_path, seasonal_path, selections_path, figure_path, residual_time_figure_path]:
         print(f"- {output_path.relative_to(ROOT_DIR)}")
-    print("\nNota: la prueba externa es cronológica y no aleatoria; sus resultados son una evaluación retrospectiva en una única partición temporal.")
+    print("\nNota: las ventanas externas no se solapan, pero el ajuste es expansivo; observaciones de una ventana pasan a ser históricas en ventanas posteriores. La comparación describe estabilidad temporal, no independencia estadística entre bloques.")
 
 
 if __name__ == "__main__":
