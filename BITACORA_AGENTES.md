@@ -15,10 +15,10 @@
 ---
 
 ## ÍNDICE DE SESIONES Y AVANCE DEL PROYECTO
-- **Fase 1:** Preparación de Datos, Descargas Satelitales y Consolidación del Dataset Maestro $\rightarrow$ `[COMPLETADA ✅]`
-- **Fase 2:** Análisis Comparativo de Precipitación (Local vs Satélite IMERG) $\rightarrow$ `[PENDIENTE / EN CURSO ⏳]`
-- **Fase 3:** Estimación de Evapotranspiración Potencial y Real (Hargreaves / Thornthwaite / Balance) $\rightarrow$ `[PENDIENTE ⏳]`
-- **Fase 4:** Balance Hídrico de Cuenca, Análisis de Almacenamiento e Informe Final $\rightarrow$ `[PENDIENTE ⏳]`
+- **Punto 1 (Rol A - Explorador):** QA/QC, Distribuciones, Climatología y Régimen $\rightarrow$ `[COMPLETADA AL 100% ✅]` (Entrada #14)
+- **Punto 2 (Rol B - Modelador):** Relaciones de Precipitación, Lluvia–Caudal, Rezagos y Modelos $\rightarrow$ `[COMPLETADA AL 100% ✅]` (Entradas #3 a #13)
+- **Puntos 3 y 4 (Rol C - Tendencias y Fourier):** Tendencias Multidecadales (OLS, Theil-Sen, LOESS) y Fourier $\rightarrow$ `[PENDIENTE ⏳]`
+- **Punto 5 (Rol D - Climatología Global y SST):** Teleconexiones (ENSO/SST) y Ensamble del Informe $\rightarrow$ `[PENDIENTE ⏳]`
 
 ---
 
@@ -540,6 +540,68 @@ next_actions:
 ### 3. Estado y siguiente paso
 - La ventana de Rol B está verificada y satisface la comparación PL–PI sobre pares idénticos. La coordinación con el punto 1.5 queda pendiente hasta que Rol A o el equipo confirme que adopta esa ventana para la climatología integrada.
 - Compartir con Rol A la propuesta anterior; al recibir confirmación, registrar el periodo adoptado y verificar que sus tablas/figuras de 1.5 usen esa referencia. No editar el registro de Rol A en nombre de su responsable.
+
+## ENTRADA #14: ROL A — EXPLORACIÓN, CONTROL DE CALIDAD Y CARACTERIZACIÓN CLIMATOLÓGICA (PUNTO 1)
+- **Fecha:** 2026-09-30
+- **Integrante Responsable:** Mateo Arango — Rol A (Explorador)
+- **Agente de IA utilizado:** Antigravity (Google DeepMind)
+- **Estado de la Fase:** COMPLETADA AL 100% ✅
+
+### 1. Revisión de Pares (Peer Review de las Entradas #8 a #13 de Santiago)
+- Se auditaron las actualizaciones subidas por Santiago (Rol B) en las entradas #8 a #13:
+  1. La evaluación de estabilidad en 3 bloques externos temporales (2010–2012, 2013–2015, 2016–2020) en `scripts/06_modelos_validacion_temporal.py` refuerza la consistencia metodológica exigida por la rúbrica docente.
+  2. La auditoría de procedencia de IMERG (Entrada #11) aclara pertinentemente la discrepancia entre V06 y V07.
+  3. En respuesta a la **Entrada #13 de Santiago sobre coordinación de climatología**, confirmamos la adopción plena de la propuesta: Rol A adoptó **2000-06 a 2020-03 (238 meses)** como ventana de referencia común integrada para comparar las 5 variables ($P_L, P_I, Q, R, T$) sobre pares válidos idénticos. Adicionalmente, se preservó la serie histórica local (1980–2020) para caracterización de largo plazo y contraste de subperiodos.
+  4. Los hallazgos físicos del Rol A respaldan los rezagos de 6–7 meses encontrados por el Rol B: la cuenca presenta temperaturas medias bajo cero durante 6 meses al año (mayo a octubre) y el 70.9% de su precipitación cae como nieve, lo que genera retención nival hasta el deshielo estival en diciembre-enero.
+
+### 2. Resumen de lo Realizado en esta Sesión
+1. **Script Reproducible Integral del Rol A (`scripts/07_rol_a_explorador.py`):**
+   - Se implementó y ejecutó de punta a punta un script modular que cubre la totalidad de los subpuntos 1.1, 1.2, 1.3, 1.4 y 1.5 de la guía oficial de la tarea.
+2. **Punto 1.1 y 1.2 — Gráficas Cronológicas Alineadas:**
+   - Se generó `figuras/figura_1_1_series_cronologicas.png` en 300 DPI con 4 paneles sincronizados en el eje de tiempo x: Precipitación (Local vs IMERG con periodo común sombreado), Caudal medio mensual $Q$ [m³/s], Escorrentía en lámina equivalente $R$ [mm/mes] y Temperatura ERA5-Land [°C].
+3. **Punto 1.3 — Distribución Estadística Mensual y Extremos:**
+   - Se calcularon estadísticas completas para las 5 variables tanto en el registro completo disponible como en el periodo común coordinado (2000-06 a 2020-03).
+   - Se produjeron histogramas con idénticos bins y límites para comparar $P_L$ e IMERG (`figuras/figura_1_2_histogramas_distribucion.png`), diagramas de caja (`figuras/figura_1_3_diagramas_caja.png`), tabla estadística general (`figuras/tabla_1_1_distribucion_estadistica.csv`) y tabla de meses extremos (`figuras/tabla_1_2_meses_extremos.csv`).
+4. **Punto 1.4 — Control de Calidad (QA/QC) y Disponibilidad:**
+   - Se generó la matriz/mapa de disponibilidad temporal (`figuras/figura_1_4_disponibilidad_temporal_heatmap.png`) y la tabla de auditoría (`figuras/tabla_1_3_control_calidad.csv`).
+   - Se verificó analíticamente la conversión de unidades de caudal a lámina para el mes de mayo 1980, con discrepancia $< 10^{-6}\text{ mm/mes}$.
+5. **Punto 1.5 — Climatología de 12 Meses, Variabilidad y Clasificación Hidroclimática:**
+   - Se construyó la climatología de 12 meses con bandas IQR y P10-P90 (`figuras/figura_1_5_ciclo_anual_climatologia.png` y `figuras/tabla_1_4_climatologia_mensual.csv`) en el periodo común 2000-06 a 2020-03.
+   - Se graficaron curvas anuales individuales por década (`figuras/figura_1_6_curvas_anuales_individuales.png`).
+   - Se evaluó la estabilidad del régimen comparando subperiodos (1980–1999 vs 2000–2020) cuantificando el impacto de la Megasequía chilena (`figuras/figura_1_7_estabilidad_subperiodos.png` y `figuras/tabla_1_5_subperiodos_estabilidad.csv`).
+   - Se calcularon índices cuantitativos de estacionalidad (Walsh & Lawler) y se sintetizó la clasificación hidroclimática (`figuras/tabla_1_6_sintesis_clasificacion.csv`).
+6. **Actualización de la Bitácora Temporal de Datos:**
+   - Se llenó íntegramente `documentos/bitacora_datos_temporal/rol_a_explorador.md` con los cuatro registros estructurados (A.1 a A.4), siguiendo el protocolo formal de `00_INSTRUCCIONES.md`.
+
+### 3. Archivos Modificados o Generados
+- `scripts/07_rol_a_explorador.py`: script de automatización completo y reproducible del Rol A.
+- `figuras/figura_1_1_series_cronologicas.png`: series cronológicas alineadas multivariables (300 DPI).
+- `figuras/figura_1_2_histogramas_distribucion.png`: histogramas comparativos y funciones de densidad.
+- `figuras/figura_1_3_diagramas_caja.png`: diagramas de caja de las variables hidroclimáticas.
+- `figuras/figura_1_4_disponibilidad_temporal_heatmap.png`: mapa de disponibilidad temporal y faltantes.
+- `figuras/figura_1_5_ciclo_anual_climatologia.png`: ciclo anual con bandas de dispersión IQR y P10–P90.
+- `figuras/figura_1_6_curvas_anuales_individuales.png`: curvas espagueti anuales por década (1980–2019).
+- `figuras/figura_1_7_estabilidad_subperiodos.png`: impacto de la Megasequía entre subperiodos.
+- `figuras/tabla_1_1_distribucion_estadistica.csv`: métricas completas (media, mediana, std, min, max, cuartiles, IQR, percentiles 5, 10, 90, 95, asimetría, curtosis, ceros y faltantes).
+- `figuras/tabla_1_2_meses_extremos.csv`: top máximos y mínimos históricos con contexto físico.
+- `figuras/tabla_1_3_control_calidad.csv`: auditoría detallada de consistencia física y QA/QC.
+- `figuras/tabla_1_4_climatologia_mensual.csv`: climatología de 12 meses por variable.
+- `figuras/tabla_1_5_subperiodos_estabilidad.csv`: comparación mensual entre 1980–1999 y 2000–2020.
+- `figuras/tabla_1_6_sintesis_clasificacion.csv`: indicadores de estacionalidad y clasificación final.
+- `documentos/bitacora_datos_temporal/rol_a_explorador.md`: registro temporal exhaustivo del Rol A.
+
+### 4. Conclusiones y Métricas Relevantes
+- **Completitud y QA/QC:** 0 duplicados, 0 valores negativos de lluvia o caudal. Faltantes en $P_L$: 1 mes (0.21%); faltantes en $Q$: 14 meses (2.89%), ambos $< 10\%$.
+- **Asimetría de la Lluvia:** Media local $67.96\text{ mm}$ vs Mediana $25.85\text{ mm}$ (Asimetría $= +2.80$), demostrando la influencia dominante de eventos extremos frontales/ríos atmosféricos.
+- **Diferencia Local vs IMERG:** IMERG subestima eventos extremos (máximo $318.1\text{ mm}$ frente a $612.7\text{ mm}$ de $P_L$) y sobreestima en meses secos (mínimo $2.83\text{ mm}$ vs $0.0\text{ mm}$ de $P_L$, 0% ceros en IMERG).
+- **Régimen Hidrológico:** Régimen Nivo-Pluvial de Alta Montaña Mediterránea. Pico de lluvia en Junio ($168.08\text{ mm/mes}$) y pico de caudal en Diciembre ($192.03\text{ m}^3/\text{s}$ / $106.29\text{ mm/mes}$).
+- **Desfase Físico:** Desfase exacto de 6 meses explicado por temperaturas bajo cero durante 6 meses (mayo a octubre con mínimas en julio de $-8.44^{\circ}\text{C}$), acumulación nival ($70.9\%$ de precipitación nival) y posterior deshielo en primavera-verano al superar la isoterma de $0^{\circ}\text{C}$ en noviembre ($+0.26^{\circ}\text{C}$).
+- **Impacto de la Megasequía (2000–2020 vs 1980–1999):** Reducción de escorrentía en los 12 meses del año (entre $-10.3\%$ y $-28.2\%$; caudales de enero cayeron $-25.2\%$ y mayo $-28.2\%$). Caídas de lluvia invernal de hasta $-34.9\%$ en abril y $-27.3\%$ en julio.
+
+### 5. Próximos Pasos para el Siguiente Integrante / Agente
+- Rol C (Tendencias y Fourier - Puntos 3 y 4): Tomar `datos/datos_mensuales_maipo.csv` y analizar tendencias formales (OLS, Theil-Sen/Mann-Kendall, LOESS) y periodogramas de Fourier sobre el registro de 40 años.
+- Rol D (Climatología Global y SST - Punto 5): Relacionar el caudal con índices y mapas de SST del Pacífico (ENSO/PDO).
+- **Recordatorio transversal:** Borrar completamente `documentos/bitacora_datos_temporal/` antes de la entrega final.
 
 ---
 
