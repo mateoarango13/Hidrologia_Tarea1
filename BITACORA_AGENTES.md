@@ -405,6 +405,39 @@ next_actions:
 
 ---
 
+## ENTRADA #8: CONTEXTUALIZACIÓN DEL ROL D — CLIMATOLOGÍA GLOBAL
+- **Fecha:** 2026-09-30
+- **Integrante Responsable:** Usuario — Rol D (Climatólogo Global)
+- **Agente de IA utilizado:** GitHub Copilot
+- **Estado de la Fase:** Contextualización completada; análisis científico del punto 5 pendiente
+
+### 1. Revisión de Pares (Peer Review del trabajo previo)
+- Se contrastaron la guía oficial, el plan del equipo, el README y el estado de la bitácora. La guía exige grupos de tres personas, mientras el plan distribuye el trabajo entre cuatro roles y condiciona ese esquema a un permiso especial del profesor; confirmar que el equipo cuenta con esa autorización.
+- El dataset maestro sigue siendo la fuente de las series de cuenca. La cobertura y la discrepancia de procedencia IMERG V06/V07 registradas en la entrada #7 siguen pendientes de reconciliación; no se interpretan aquí como resultados del rol D.
+
+### 2. Resumen de lo Realizado en esta Sesión
+- Se leyó `documentos/tarea_1_202602.pdf`: la tarea construye una clasificación hidroclimática mensual que debe enlazar resultados cuantificados, mecanismos físicos, bibliografía, explicaciones alternativas e incertidumbre.
+- Se leyó `documentos/plan_trabajo_equipo.pdf`: el rol D cubre el punto 5 (mapas de correlación con el clima global) y la edición principal del informe final.
+- Se precisó que el punto 5 requiere campos mensuales de SST y dos variables atmosféricas espaciales justificadas; los índices escalares solo complementan los mapas. La base compara lluvia de referencia y caudal con esos tres campos, con doce mapas por combinación, y usa IMERG para contrastar patrones relevantes.
+- Se identificaron requisitos centrales: correlación entre años para cada mes calendario usando anomalías compatibles; documentar fuentes, versiones, resolución, periodos, máscaras, rezagos y pares válidos; evaluar autocorrelación, comparaciones múltiples (p. ej., FDR), tendencias, subperiodos y años extremos; interpretar patrones sin afirmar causalidad o capacidad predictiva por correlación simultánea.
+- No se descargaron campos climáticos ni se calcularon mapas, correlaciones o resultados científicos.
+
+### 3. Archivos Modificados o Generados
+- `BITACORA_AGENTES.md`: registro de contextualización y próximos pasos del rol D.
+- `documentos/tarea_1_202602.pdf`, `documentos/plan_trabajo_equipo.pdf`, `README.md` y `documentos/bitacora_datos_temporal/rol_d_climatologia_global.md`: consultados; sin cambios.
+
+### 4. Conclusiones y Métricas Relevantes
+- Sin métricas nuevas. El trabajo científico asignado al rol D permanece pendiente.
+- La entrega del curso es un único ZIP con informe, códigos, dependencias, datos efectivamente usados y productos reproducibles; la fecha indicada en la guía es el 5 de octubre de 2026. La guía asigna 50% de la nota al informe/material reproducible y 50% a la presentación oral, con fuerte peso de interpretación física y dominio del análisis.
+
+### 5. Próximos Pasos para el Siguiente Integrante / Agente
+- Confirmar el permiso para el esquema de cuatro integrantes indicado por el plan.
+- Elegir y justificar dos campos atmosféricos junto con SST; definir fuentes/versiones, dominio, resolución, periodo común, referencia de anomalías, rezagos y tratamiento de faltantes.
+- Crear un flujo reproducible para los datos NetCDF y los mapas mensuales del punto 5; registrar incertidumbre, autocorrelación, control de pruebas múltiples y límites de interpretación.
+- Mantener trazabilidad editorial de aportes y figuras. Antes de la entrega final, borrar completa `documentos/bitacora_datos_temporal/` y excluirla del ZIP.
+
+---
+
 ## PLANTILLA PARA NUEVAS ENTRADAS (COPIAR Y PEGAR ABAJO)
 
 ```markdown
