@@ -750,6 +750,190 @@ next_actions:
 
 ---
 
+## ENTRADA #19: REDISEÑO ANALÍTICO DE LA VISTA ROL B EN EL DASHBOARD
+- **Fecha:** 2026-09-30
+- **Integrante Responsable:** Equipo de trabajo — visualización del Rol B
+- **Agente de IA utilizado:** GitHub Copilot
+- **Estado de la Fase:** Vista Rol B rediseñada y validada; rediseño de Home pendiente
+
+### 1. Revisión de Pares (Peer Review del trabajo previo)
+- Se revisaron el alcance Rol B del plan de trabajo, los puntos 2.1–2.3 de la guía, la checklist y las salidas reproducibles del CSV maestro.
+- La presentación diferencia asociación concurrente, correlaciones exploratorias de anomalías y evaluación fuera de ajuste. Los tres tests son cronológicos y no se solapan, pero usan entrenamiento expansivo; no se describen como réplicas independientes.
+- Se conserva la advertencia de que la versión/corrida IMERG que generó `P_IMERG_mm` no está confirmada. No se atribuyen los rezagos a causalidad nival ni se extrapola el desempeño fuera de los bloques evaluados.
+
+### 2. Resumen de lo Realizado en esta Sesión
+- Se reorganizó la vista Rol B en cuatro apartados: concordancia de precipitación; relaciones y lámina equivalente; rezagos de anomalías; modelos fuera de muestra y diagnósticos.
+- Se añadieron cinco dispersiones coloreadas por estación: IMERG frente a precipitación local con identidad 1:1 y ejes comparables; precipitación local/IMERG frente a Q; y ambos predictores frente a R. Cada relación informa unidades, periodo, tamaño de muestra, Pearson y Spearman.
+- Se incorporaron sesgo firmado, PBIAS con fórmula, MAE, RMSE, desglose de errores por intensidad y contribución de los cinco errores mayores, conservando los extremos.
+- Se muestran las correlaciones Pearson/Spearman de anomalías para rezagos de 0 a 12 y una nota que limita su interpretación exploratoria.
+- Se comparan IMERG crudo y corrección seleccionada por bloque para estimar lluvia local. Para Q se pueden alternar predictor (P local/IMERG) y métrica (MAE/RMSE/sesgo), viendo climatología, regresión contemporánea y anomalías rezagadas con el rezago seleccionado.
+- Se muestran las ecuaciones de corrección lineal y log-lineal, la variante y parámetros seleccionados para lluvia local, además de la ecuación de Q con k* y β₀/β₁ por bloque. Duan (1983) se enlaza como referencia de retransformation.
+- Se añadieron series de predicción externa y diagnósticos de residuo frente al tiempo, valor estimado y mes calendario.
+- Los resultados se alimentan de las tablas reproducibles del Rol B; no se modificó el dataset maestro ni se recalcularon los análisis científicos.
+
+### 3. Archivos Modificados o Generados
+- `dashboard/index.html`: nueva estructura y contenido de la vista Rol B.
+- `dashboard/css/styles.css`: jerarquía visual, tablas, controles y adaptación responsive de la vista.
+- `dashboard/js/app.js`: renderizado de relaciones, métricas por bloque, predicciones, residuos y controles interactivos; redimensionado de gráficos visibles.
+- `scripts/08_build_dashboard_data.py`: exportación de relaciones y métricas del Rol B a la carga del dashboard.
+- `dashboard/js/data.js`: datos de dashboard regenerados desde las tablas del proyecto.
+- `dashboard/dashboard_autocontenido.html`: versión portable regenerada con los cambios.
+- `BITACORA_AGENTES.md`: registro de este handoff.
+
+### 4. Conclusiones y Métricas Relevantes
+- Concordancia local–IMERG: `n=238`, 2000-06–2020-03; Pearson `r=0.8875`, Spearman `rho=0.8245`, sesgo `PI - PL=-5.503 mm/mes`, MAE `27.344 mm/mes`, RMSE `48.656 mm/mes`, PBIAS `-8.764%`.
+- La vista advierte que los cinco errores absolutos mayores concentran aproximadamente 52.35% de la suma de errores cuadrados, según la tabla de meses influyentes y la RMSE total.
+- La tabla Q muestra los tamaños de muestra reales por bloque (`36`, `28`, `51`) y métricas originales; el modelo de anomalías rezagadas se compara con la climatología y la regresión contemporánea.
+- Verificación: `python scripts/08_build_dashboard_data.py` y `node --check dashboard/js/app.js` finalizaron sin errores. El dashboard web y el HTML autocontenido cargaron Rol B con sus 11 gráficos; los selectores cambiaron predictor y métrica, sin excepciones JS. En viewport de 390 px no hubo desbordamiento horizontal tras el redimensionado de Plotly.
+
+### 5. Próximos Pasos para el Siguiente Integrante / Agente
+- Rediseñar Home, priorizando una presentación más clara de cobertura temporal y resultados principales.
+- Revisar la coherencia editorial del informe completo antes de integrarlo, en particular afirmaciones causales y el uso de “bloques independientes”.
+- Antes de la entrega, borrar por completo `documentos/bitacora_datos_temporal/` y excluirla del ZIP final.
+
+---
+
+## ENTRADA #20: MODO DE EXPOSICIÓN DE TRES MINUTOS PARA ROL B
+- **Fecha:** 2026-09-30
+- **Integrante Responsable:** Santiago Ortega — Rol B (exposición)
+- **Agente de IA utilizado:** GitHub Copilot
+- **Estado de la Fase:** Vista breve de exposición implementada; análisis completo conservado
+
+### 1. Revisión de Pares (Peer Review del trabajo previo)
+- Se mantuvieron como referencia el alcance del Rol B en el plan, los puntos 2.1–2.3 de la guía, la checklist y los resultados reproducibles existentes.
+- La nueva ruta de exposición distingue expresamente el pico exploratorio de correlación (k=7 en ambos predictores) de los rezagos que el ajuste eligió dentro de cada bloque (P local: 6/7/7; IMERG: 10/7/7 meses).
+- La narrativa no describe los tests no solapados como réplicas independientes: el entrenamiento es expansivo. Se mantienen las advertencias de causalidad, sesgo positivo y procedencia IMERG no confirmada.
+
+### 2. Resumen de lo Realizado en esta Sesión
+- Se añadieron dos modos dentro de Rol B: **Exposición** y **Análisis completo**. El segundo preserva la vista detallada previa para documentación, evaluación y preguntas.
+- La exposición contiene cuatro etapas con duración objetivo de 40, 40, 65 y 35 segundos (180 s total): concordancia IMERG–referencia; rezagos exploratorios; comparación fuera de muestra; síntesis y límites.
+- Los tres gráficos resumidos muestran concordancia con métricas, Pearson por rezago y MAE de climatología/modelos rezagados por bloque. Las cifras y muestras se obtienen de las salidas reproducibles; las flechas y los controles anterior/siguiente permiten recorrer la ruta.
+- Se añadieron tamaños válidos por lag al dataset del dashboard y se corrigió la búsqueda de métricas de precipitación para admitir el orden inverso de variables entre tabla y ejes del scatter.
+- Al volver desde Análisis completo, la ruta de exposición se reinicia en la primera diapositiva.
+- El mensaje final mantiene las advertencias sobre balance hídrico, versión/corrida IMERG no confirmada y posible intersección de pluviómetros no demostrada.
+
+### 3. Archivos Modificados o Generados
+- `dashboard/index.html`: selector de modos y secuencia expositiva de cuatro diapositivas.
+- `dashboard/js/app.js`: navegación por etapas, teclado, KPIs y gráficos de exposición.
+- `dashboard/css/styles.css`: diseño de la vista expositiva y adaptación responsive.
+- `scripts/08_build_dashboard_data.py`: exportación de n por rezago y corrección del lookup de métricas en orientación inversa.
+- `dashboard/js/data.js`: datos regenerados.
+- `dashboard/dashboard_autocontenido.html`: versión portable regenerada.
+- `BITACORA_AGENTES.md`: registro del handoff.
+
+### 4. Conclusiones y Métricas Relevantes
+- Concordancia para la primera diapositiva: 238 pares válidos (2000-06–2020-03), Pearson `r=0.8875`, Spearman `rho=0.8245`, sesgo `PI - PL=-5.503 mm/mes`, MAE `27.344 mm/mes`, RMSE `48.656 mm/mes`; cinco errores absolutos mayores concentran 52.35% de SSE.
+- En la asociación exploratoria a k=7: local `r=0.4773`, `n=463`; IMERG `r=0.4222`, `n=224`. No se presentan como causalidad.
+- En el gráfico de evaluación, los MAE reales de climatología Q frente a anomalías rezagadas desde P local son B1 `50.76→43.21`, B2 `48.02→38.44`, B3 `42.41→38.04 m³/s`; desde IMERG son `50.76→49.25`, `48.02→33.67`, `42.41→36.05 m³/s`. Muestras Q por bloque: `36`, `28`, `51`.
+- Validación: `node --check dashboard/js/app.js` y `python scripts/08_build_dashboard_data.py` sin errores; pruebas browser en HTML autocontenido confirmaron los cuatro pasos, cifras, k* por bloque, navegación por flechas, cambio y retorno entre modos, 11 gráficos en Análisis completo y ausencia de excepciones JS.
+
+### 5. Próximos Pasos para el Siguiente Integrante / Agente
+- Usar la exposición con cronómetro y ajustar el ritmo oral sin añadir gráficas secundarias al recorrido principal.
+- Continuar, si corresponde, con el rediseño de Home; la vista Home no se modificó en esta sesión.
+- Antes de entregar, borrar íntegramente `documentos/bitacora_datos_temporal/` y excluirla del ZIP final.
+
+---
+
+## ENTRADA #21: LIMPIEZA EDITORIAL DEL MODO EXPOSICIÓN DE ROL B
+- **Fecha:** 2026-09-30
+- **Integrante Responsable:** Santiago Ortega — Rol B (interfaz de exposición)
+- **Agente de IA utilizado:** GitHub Copilot
+- **Estado de la Fase:** Ajuste visual aplicado y validado
+
+### 1. Revisión de Pares (Peer Review del trabajo previo)
+- Se verificó que la petición era retirar instrucciones de tiempo y tono de ensayo sin borrar contenido explicativo, resultados ni la vista Análisis completo.
+
+### 2. Resumen de lo Realizado en esta Sesión
+- Se retiraron del modo de exposición la duración del botón, el reloj, la etiqueta de tiempo sugerido, los segundos por paso y el texto que explicaba el recorrido.
+- Se limpiaron los nombres de navegación a Concordancia, Rezagos, Evaluación y Síntesis. Se conservaron los cuatro pasos, las gráficas, unidades, periodos, métricas y advertencias de interpretación.
+- Se regeneró la versión autocontenida; la vista Análisis completo permanece disponible y conserva sus 11 gráficos.
+
+### 3. Archivos Modificados o Generados
+- `dashboard/index.html`: eliminación de etiquetas de duración y sugerencias; nombres limpios de secciones.
+- `dashboard/css/styles.css`: retiro de estilos del reloj y de etiquetas temporales.
+- `dashboard/dashboard_autocontenido.html`: versión autocontenida sincronizada.
+- `BITACORA_AGENTES.md`: registro de cierre.
+
+### 4. Conclusiones y Métricas Relevantes
+- Verificación: no quedan etiquetas de tiempo o guía en el HTML; `node --check dashboard/js/app.js` y diagnósticos de HTML/CSS sin errores.
+- Prueba del HTML autocontenido: selector limpio, cuatro etapas funcionales, KPIs `r=0.888 / rho=0.824`, vista completa conservada y sin excepciones JavaScript.
+
+### 5. Próximos Pasos para el Siguiente Integrante / Agente
+- Usar el modo Exposición con el discurso del responsable; el dashboard ya no pauta la duración ni el comportamiento oral.
+- Antes de la entrega, eliminar completa `documentos/bitacora_datos_temporal/` y excluirla del ZIP final.
+
+---
+
+## ENTRADA #22: REDISEÑO DE HOME Y RESUMEN DE CALIDAD DEL DATASET
+- **Fecha:** 2026-09-30
+- **Integrante Responsable:** Equipo de trabajo — portada del dashboard
+- **Agente de IA utilizado:** GitHub Copilot
+- **Estado de la Fase:** Portada y resumen QA/QC implementados y validados
+
+### 1. Revisión de Pares (Peer Review del trabajo previo)
+- Se verificó la causa visual del heatmap anterior: representaba la presencia binaria de `P_local_mm` casi exclusivamente, por lo que el resultado era prácticamente un rectángulo uniforme y no resumía el estado del resto de variables.
+- Se contrastaron las cifras con `figuras/tabla_1_3_control_calidad.csv` y el CSV maestro. Para IMERG y ERA5-Land se separa explícitamente la cobertura disponible de los meses fuera de cobertura.
+
+### 2. Resumen de lo Realizado en esta Sesión
+- Se reemplazó el texto conversacional de Home por una descripción institucional y concisa de la cuenca, variables y periodo.
+- Se conservaron las tarjetas de contexto de cuenca y se precisó el registro mensual como enero de 1980–abril de 2020 (484 meses).
+- Se retiró el heatmap y se añadió un resumen gráfico horizontal con cuatro series; cada una informa cobertura, unidad, porcentaje, cantidad válida y faltantes.
+- La ficha de integridad reporta meses duplicados, meses ausentes del calendario y valores hidrológicos negativos a partir del dataset maestro.
+- Se explicita que los 246 meses fuera de la cobertura de IMERG/ERA5-Land no se consideran faltantes y que no se imputaron datos.
+
+### 3. Archivos Modificados o Generados
+- `dashboard/index.html`: descripción de Home, registro mensual y nuevo panel de integridad/cobertura.
+- `dashboard/css/styles.css`: estilos formales y responsive para encabezado, filas de cobertura y tarjetas de integridad.
+- `dashboard/js/app.js`: renderizado del resumen de calidad independiente de Plotly; eliminado el render del heatmap.
+- `scripts/08_build_dashboard_data.py`: cálculo desde CSV maestro de duplicados, continuidad, negativos y completitud por serie.
+- `dashboard/js/data.js`: resumen de calidad regenerado.
+- `dashboard/dashboard_autocontenido.html`: versión portable regenerada.
+- `BITACORA_AGENTES.md`: registro del handoff.
+
+### 4. Conclusiones y Métricas Relevantes
+- Dataset maestro: 484 registros mensuales, 1980-01 a 2020-04; cero fechas duplicadas, cero huecos en el calendario y cero valores negativos en lluvia/caudal.
+- Precipitación local: 483/484 meses válidos (99.79%); faltante en 2020-04.
+- Caudal Q y lámina R: 470/484 válidos (97.11%); 14 meses faltantes.
+- IMERG: 238/238 meses de cobertura 2000-06–2020-03 válidos; 246 registros del periodo maestro están fuera de cobertura satelital.
+- Temperatura ERA5-Land: 238/238 meses de cobertura 2000-06–2020-03 válidos; 246 registros están fuera de cobertura.
+- Verificación: `python scripts/08_build_dashboard_data.py` y `node --check dashboard/js/app.js` sin errores; Home mostró los cuatro resúmenes en la versión de carpeta y en el HTML autocontenido, sin excepciones JavaScript.
+
+### 5. Próximos Pasos para el Siguiente Integrante / Agente
+- Continuar con cualquier ajuste editorial de Home respetando los periodos de cobertura y la distinción entre faltantes y no disponible.
+- Antes de la entrega, borrar íntegramente `documentos/bitacora_datos_temporal/` y excluirla del ZIP final.
+
+---
+
+## ENTRADA #23: AJUSTE RESPONSIVE DEL RESUMEN DE COBERTURA EN HOME
+- **Fecha:** 2026-09-30
+- **Integrante Responsable:** Equipo de trabajo — visualización del dashboard
+- **Agente de IA utilizado:** GitHub Copilot
+- **Estado de la Fase:** Ajuste responsive validado
+
+### 1. Revisión de Pares (Peer Review del trabajo previo)
+- Se reprodujo el texto apretado en las filas IMERG y ERA5-Land. El ancho total no desbordaba, pero el detalle estaba confinado a una columna angosta junto al borde de la tarjeta.
+
+### 2. Resumen de lo Realizado en esta Sesión
+- En anchos intermedios, los detalles se reorganizan en una fila inferior de ancho completo; en móvil las filas se apilan en una columna.
+- Se retiró de cada fila satelital la repetición de “246 meses fuera de cobertura”; la aclaración se mantiene una sola vez al pie del panel.
+- No cambiaron conteos, periodos ni resultados; la vista sigue distinguiendo falta de cobertura de faltantes.
+
+### 3. Archivos Modificados o Generados
+- `dashboard/css/styles.css`: distribución responsive de filas y metadatos de calidad.
+- `dashboard/js/app.js`: reducción del detalle repetido por serie.
+- `dashboard/index.html`: nota global única de cobertura.
+- `dashboard/dashboard_autocontenido.html`: versión portable sincronizada.
+- `BITACORA_AGENTES.md`: registro del ajuste.
+
+### 4. Conclusiones y Métricas Relevantes
+- Prueba en navegador: 4 series sin desbordamiento de detalle; móvil con viewport de 390 px y documento de 382 px; ambas versiones cargan sin errores JavaScript.
+
+### 5. Próximos Pasos para el Siguiente Integrante / Agente
+- Mantener la explicación de periodos fuera de cobertura en la nota común, no repetirla en cada serie.
+- Antes de la entrega, borrar completa `documentos/bitacora_datos_temporal/` y excluirla del ZIP final.
+
+---
+
 ## PLANTILLA PARA NUEVAS ENTRADAS (COPIAR Y PEGAR ABAJO)
 
 ```markdown

@@ -93,9 +93,9 @@
                 
                 <!-- VISTA: HOME -->
                 <section id="dashboard-home" class="view active">
-                    <div class="welcome-card glass-panel">
+                    <div class="home-intro glass-panel">
                         <h2>Análisis Hidroclimático del Río Maipo en El Manzano</h2>
-                        <p>Este dashboard interactivo presenta los resultados del análisis hidrológico y climático para la cuenca CAMELS-CL 5710001. Selecciona un rol en el panel lateral para explorar los datos dinámicamente.</p>
+                        <p>Cuenca CAMELS-CL 5710001, con un área de drenaje de 4,837.4 km². Serie hidroclimática mensual de precipitación, caudal, estimación satelital y reanálisis, con registro local entre enero de 1980 y abril de 2020.</p>
                     </div>
 
                     <div class="stats-grid">
@@ -123,21 +123,24 @@
                         <div class="stat-card glass-panel">
                             <div class="stat-icon"><i class="fa-solid fa-calendar-days"></i></div>
                             <div class="stat-content">
-                                <h3>Periodo de Análisis</h3>
-                                <p class="stat-value">1980 - 2020</p>
+                                <h3>Registro mensual</h3>
+                                <p class="stat-value">1980–2020 <span class="unit">484 meses</span></p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="dashboard-grid">
-                        <div class="chart-container glass-panel full-width">
-                            <div class="chart-header">
-                                <h3>Disponibilidad Temporal de Datos (Heatmap)</h3>
-                                <p class="subtitle">Validación QA/QC del registro maestro mensual</p>
+                    <section class="home-quality glass-panel" aria-labelledby="home-quality-title">
+                        <header class="home-quality-header">
+                            <div>
+                                <p class="rb-kicker">CONTROL DE CALIDAD</p>
+                                <h3 id="home-quality-title">Integridad y cobertura de las series</h3>
+                                <p>Completitud calculada dentro del periodo disponible para cada fuente.</p>
                             </div>
-                            <div id="chart-disponibilidad" class="plotly-chart"></div>
-                        </div>
-                    </div>
+                            <div class="quality-integrity" id="home-quality-integrity" aria-label="Resumen de integridad"></div>
+                        </header>
+                        <div class="home-quality-series" id="home-quality-series"></div>
+                        <p class="home-quality-note">Los 246 meses fuera de la cobertura de IMERG y ERA5-Land no se consideran faltantes. No se imputaron valores.</p>
+                    </section>
                 </section>
 
                 <!-- VISTA: ROL A -->
@@ -186,35 +189,257 @@
 
                 <!-- VISTA: ROL B -->
                 <section id="rol-b" class="view">
-                    <div class="header-section">
-                        <h2>Rol B: Modelador (Relaciones y Validación)</h2>
-                        <p>Evaluación de productos satelitales (IMERG), análisis de rezagos por almacenamiento nival y validación de modelos temporales.</p>
+                    <div class="rb-mode-switch" role="tablist" aria-label="Vista del Rol B">
+                        <button class="rb-mode-btn active" id="rb-mode-expo" data-rb-mode="exposition" role="tab" aria-selected="true" aria-controls="rb-exposition">Exposición</button>
+                        <button class="rb-mode-btn" id="rb-mode-analysis" data-rb-mode="analysis" role="tab" aria-selected="false" aria-controls="rb-analysis">Análisis completo</button>
                     </div>
 
-                    <div class="dashboard-grid">
-                        <div class="chart-container glass-panel">
-                            <div class="chart-header">
-                                <h3>Comparación IMERG vs Pluviómetro (CR2MET)</h3>
-                                <p class="subtitle">Relación 1:1 coloreada por estación climática</p>
+                    <section id="rb-exposition" class="rb-mode-panel" role="tabpanel" aria-labelledby="rb-mode-expo">
+                        <header class="rb-presentation-head">
+                            <div>
+                                <p class="rb-kicker">ROL B · SANTIAGO ORTEGA · PUNTO 2</p>
+                                <h2>Qué tan útil es la lluvia para entender y estimar el caudal</h2>
+                                <p>Relaciones de precipitación, respuesta de caudal y evaluación de modelos a partir de resultados reproducibles.</p>
                             </div>
-                            <div id="chart-scatter-imerg" class="plotly-chart"></div>
+                        </header>
+
+                        <nav class="rb-slide-nav" aria-label="Pasos de la exposición">
+                            <button class="rb-slide-step active" data-slide-to="0" aria-current="step"><span>01</span><b>Concordancia</b></button>
+                            <button class="rb-slide-step" data-slide-to="1"><span>02</span><b>Rezagos</b></button>
+                            <button class="rb-slide-step" data-slide-to="2"><span>03</span><b>Evaluación</b></button>
+                            <button class="rb-slide-step" data-slide-to="3"><span>04</span><b>Síntesis</b></button>
+                        </nav>
+
+                        <div class="rb-presentation-stage" aria-live="polite">
+                            <section class="rb-slide active" data-slide="0" aria-labelledby="rb-slide-title-0">
+                                <header class="rb-slide-heading"><div><p class="rb-kicker">01 · CONCORDANCIA</p><h3 id="rb-slide-title-0">¿IMERG reproduce la precipitación de referencia?</h3></div></header>
+                                <div class="rb-slide-grid">
+                                    <article class="rb-panel rb-slide-chart-panel"><div class="rb-panel-heading"><div><h4>Precipitación local vs IMERG</h4><p>mm/mes · línea discontinua: acuerdo 1:1</p></div><span class="rb-sample" id="rb-expo-sample-p"></span></div><div id="chart-expo-precip" class="rb-chart rb-expo-chart-square"></div></article>
+                                    <aside class="rb-slide-aside"><p class="rb-kicker">238 MESES COINCIDENTES</p><div class="rb-slide-metrics"><div><span>Pearson / Spearman</span><b id="rb-expo-correlation"></b></div><div><span>Sesgo PI − PL</span><b id="rb-expo-bias"></b></div><div><span>MAE / RMSE</span><b id="rb-expo-errors"></b></div></div><p class="rb-slide-takeaway">La correlación es alta, pero no implica acuerdo en cada mes: el error es muy variable y los meses más lluviosos concentran gran parte del RMSE.</p><small id="rb-expo-extremes"></small></aside>
+                                </div>
+                            </section>
+
+                            <section class="rb-slide" data-slide="1" aria-labelledby="rb-slide-title-1" hidden>
+                                <header class="rb-slide-heading"><div><p class="rb-kicker">02 · REZAGOS</p><h3 id="rb-slide-title-1">La lluvia antecedente se asocia con el caudal, pero no prueba causalidad</h3></div></header>
+                                <div class="rb-slide-grid">
+                                    <article class="rb-panel rb-slide-chart-panel"><div class="rb-panel-heading"><div><h4>Anomalías de lluvia en t−k vs anomalía de Q en t</h4><p>Referencia fija: junio de 2000–marzo de 2020 · lags exploratorios 0–12 meses</p></div><span class="rb-tag">Exploratorio</span></div><div id="chart-expo-lag" class="rb-chart rb-expo-chart-lag"></div></article>
+                                    <aside class="rb-slide-aside"><p class="rb-kicker">SEÑAL EXPLORATORIA</p><div class="rb-lag-stat"><span>P local · pico r a 7 meses</span><b id="rb-expo-lag-local"></b></div><div class="rb-lag-stat"><span>IMERG · r a 7 meses</span><b id="rb-expo-lag-imerg"></b></div><p class="rb-slide-takeaway">Se probaron varios rezagos en series autocorrelacionadas. El resultado orienta la modelación; no identifica un tiempo físico de deshielo ni demuestra un mecanismo.</p></aside>
+                                </div>
+                            </section>
+
+                            <section class="rb-slide" data-slide="2" aria-labelledby="rb-slide-title-2" hidden>
+                                <header class="rb-slide-heading"><div><p class="rb-kicker">03 · EVALUACIÓN</p><h3 id="rb-slide-title-2">¿La relación mejora frente a una referencia sencilla?</h3></div></header>
+                                <div class="rb-slide-grid rb-slide-grid-wide">
+                                    <article class="rb-panel rb-slide-chart-panel"><div class="rb-panel-heading"><div><h4>MAE de caudal fuera del ajuste</h4><p>Menor es mejor · climatología mensual vs modelos con anomalías rezagadas</p></div><span>m³/s</span></div><div id="chart-expo-model-q" class="rb-chart rb-expo-chart-model"></div><div class="rb-fold-strip rb-expo-fold-strip"><span>B1 · 2010–12 · n=<b id="rb-expo-n1"></b></span><span>B2 · 2013–15 · n=<b id="rb-expo-n2"></b></span><span>B3 · 2016–20 · n=<b id="rb-expo-n3"></b></span></div></article>
+                                    <aside class="rb-slide-aside"><p class="rb-kicker">RESULTADO DEL TEST</p><p class="rb-slide-takeaway">Para P local e IMERG, el modelo rezagado reduce MAE y RMSE frente a la climatología en los tres bloques; mantiene sesgo positivo.</p><div class="rb-slide-small-result"><b>k* elegido en cada ajuste (B1 / B2 / B3)</b><span id="rb-expo-lags-selected"></span></div><div class="rb-slide-small-result"><b>Corrección IMERG → P local</b><span>Empeora MAE en los tres bloques; no mejora uniformemente al producto sin corregir.</span></div><small>Los tests no se solapan, pero el entrenamiento es expansivo: no son réplicas independientes ni garantizan desempeño futuro.</small></aside>
+                                </div>
+                            </section>
+
+                            <section class="rb-slide" data-slide="3" aria-labelledby="rb-slide-title-3" hidden>
+                                <header class="rb-slide-heading"><div><p class="rb-kicker">04 · SÍNTESIS</p><h3 id="rb-slide-title-3">Útil como relación empírica; insuficiente como pronóstico autónomo</h3></div></header>
+                                <div class="rb-conclusion-grid">
+                                    <article><span>01</span><h4>IMERG</h4><p>Capta covariación mensual con la referencia, pero sus errores crecen en lluvias intensas.</p></article>
+                                    <article><span>02</span><h4>Caudal</h4><p>Las anomalías rezagadas mejoran métricas frente a la climatología en los bloques evaluados.</p></article>
+                                    <article><span>03</span><h4>Límite</h4><p>Hay sesgo positivo, errores puntuales grandes y ninguna prueba de causalidad o garantía futura.</p></article>
+                                </div>
+                                <p class="rb-final-line">La relación lluvia–caudal complementa el análisis, pero no sustituye el balance hídrico.</p>
+                                <p class="rb-final-caveat">La versión/corrida IMERG del CSV no está confirmada; tampoco se ha demostrado solapamiento de pluviómetros entre productos.</p>
+                            </section>
                         </div>
 
-                        <div class="chart-container glass-panel">
-                            <div class="chart-header">
-                                <h3>Rezagos Lluvia-Caudal (Efecto Memoria Nival)</h3>
-                                <p class="subtitle">Correlación de anomalías estandarizadas vs tiempo de rezago</p>
+                        <footer class="rb-presentation-controls">
+                            <button class="rb-present-prev" type="button" disabled><i class="fa-solid fa-arrow-left"></i> Anterior</button>
+                            <span id="rb-slide-count">1 / 4</span>
+                            <button class="rb-present-next" type="button">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+                        </footer>
+                    </section>
+
+                    <div id="rb-analysis" class="rb-mode-panel" role="tabpanel" aria-labelledby="rb-mode-analysis" hidden>
+                    <div class="role-b-shell">
+                        <header class="rb-intro">
+                            <div>
+                                <p class="rb-kicker">PUNTO 2 · RELACIONES Y MODELOS</p>
+                                <h2>Del satélite a la respuesta de la cuenca</h2>
+                                <p>Concordancia de precipitación, asociaciones lluvia–caudal y evaluación cronológica fuera del ajuste. Cada resultado conserva su periodo y muestra válida.</p>
                             </div>
-                            <div id="chart-rezagos" class="plotly-chart"></div>
+                            <div class="rb-period-mark">
+                                <span>REGISTRO MAESTRO</span>
+                                <strong>1980–2020</strong>
+                                <small>484 meses · datos mensuales</small>
+                            </div>
+                        </header>
+
+                        <div class="rb-section-index" aria-label="Secciones del Rol B">
+                            <a href="#rb-relaciones"><span>01</span> Relaciones</a>
+                            <a href="#rb-rezagos"><span>02</span> Rezagos</a>
+                            <a href="#rb-modelos"><span>03</span> Modelos</a>
+                            <a href="#rb-diagnosticos"><span>04</span> Diagnósticos</a>
                         </div>
 
-                        <div class="chart-container glass-panel full-width">
-                            <div class="chart-header">
-                                <h3>Validación Temporal Fuera de Muestra (Holdout)</h3>
-                                <p class="subtitle">Comparación de Caudal Observado vs Modelado por Bloques Externos</p>
+                        <section class="rb-section" id="rb-relaciones">
+                            <div class="rb-section-heading">
+                                <span class="rb-section-number">01</span>
+                                <div>
+                                    <h3>Concordancia entre productos</h3>
+                                    <p>Precipitación local e IMERG en los 238 meses coincidentes, junio de 2000–marzo de 2020.</p>
+                                </div>
                             </div>
-                            <div id="chart-validacion-temporal" class="plotly-chart"></div>
-                        </div>
+
+                            <div class="rb-agreement-layout">
+                                <article class="rb-panel rb-main-figure">
+                                    <div class="rb-panel-heading">
+                                        <div>
+                                            <h4>Precipitación local frente a IMERG</h4>
+                                            <p>Ambos ejes en mm/mes · línea discontinua: identidad 1:1</p>
+                                        </div>
+                                        <span class="rb-sample" id="rb-sample-precip">n = 238</span>
+                                    </div>
+                                    <div id="chart-scatter-imerg" class="rb-chart rb-chart-large"></div>
+                                </article>
+                                <aside class="rb-reading-panel">
+                                    <p class="rb-kicker">LECTURA DEL ERROR</p>
+                                    <div class="rb-compare-metrics">
+                                        <div><span>Pearson / Spearman</span><strong id="rb-correlation">0.888 / 0.824</strong></div>
+                                        <div><span>Sesgo medio PI − PL</span><strong id="rb-bias">−5.50 mm/mes</strong></div>
+                                        <div><span>MAE / RMSE</span><strong id="rb-mae-rmse">27.34 / 48.66 mm/mes</strong></div>
+                                        <div><span>PBIAS</span><strong id="rb-pbias">−8.76 %</strong></div>
+                                    </div>
+                                    <p class="rb-reading-copy">El sesgo negativo indica menor acumulado medio de IMERG con la convención PI − PL; no significa que IMERG sea menor cada mes. PBIAS = 100 × Σ(PI − PL) / ΣPL.</p>
+                                    <div class="rb-signal" id="rb-intensity-note"></div>
+                                    <p class="rb-small-note" id="rb-influential-note"></p>
+                                </aside>
+                            </div>
+
+                            <div class="rb-chart-grid">
+                                <article class="rb-panel">
+                                    <div class="rb-panel-heading"><div><h4>Precipitación local → caudal</h4><p>Q en m³/s · pares concurrentes</p></div><span class="rb-sample" id="rb-sample-local-q"></span></div>
+                                    <div id="chart-scatter-local-flow" class="rb-chart"></div>
+                                    <p class="rb-chart-stat" id="rb-stat-local-q"></p>
+                                </article>
+                                <article class="rb-panel">
+                                    <div class="rb-panel-heading"><div><h4>IMERG → caudal</h4><p>Q en m³/s · pares concurrentes</p></div><span class="rb-sample" id="rb-sample-imerg-q"></span></div>
+                                    <div id="chart-scatter-imerg-flow" class="rb-chart"></div>
+                                    <p class="rb-chart-stat" id="rb-stat-imerg-q"></p>
+                                </article>
+                                <article class="rb-panel">
+                                    <div class="rb-panel-heading"><div><h4>Precipitación local → lámina R</h4><p>R en mm/mes · comparación en lámina</p></div><span class="rb-sample" id="rb-sample-local-r"></span></div>
+                                    <div id="chart-scatter-local-runoff" class="rb-chart"></div>
+                                    <p class="rb-chart-stat" id="rb-stat-local-r"></p>
+                                </article>
+                                <article class="rb-panel">
+                                    <div class="rb-panel-heading"><div><h4>IMERG → lámina R</h4><p>R en mm/mes · comparación en lámina</p></div><span class="rb-sample" id="rb-sample-imerg-r"></span></div>
+                                    <div id="chart-scatter-imerg-runoff" class="rb-chart"></div>
+                                    <p class="rb-chart-stat" id="rb-stat-imerg-r"></p>
+                                </article>
+                            </div>
+                            <p class="rb-footnote">Pares completos por análisis, sin imputación. Las relaciones concurrentes describen asociación, no causalidad ni capacidad predictiva. La escala de cada par se interpreta con sus unidades y muestra indicadas.</p>
+                        </section>
+
+                        <section class="rb-section" id="rb-rezagos">
+                            <div class="rb-section-heading">
+                                <span class="rb-section-number">02</span>
+                                <div>
+                                    <h3>Asociación de anomalías con rezago</h3>
+                                    <p>Lluvia en t−k frente a caudal en t; se evaluaron rezagos mensuales de 0 a 12.</p>
+                                </div>
+                            </div>
+                            <div class="rb-lag-layout">
+                                <article class="rb-panel">
+                                    <div class="rb-panel-heading"><div><h4>Pearson y Spearman por rezago</h4><p>Anomalías respecto de la climatología mensual de referencia</p></div><span class="rb-tag">Exploratorio</span></div>
+                                    <div id="chart-rezagos" class="rb-chart rb-chart-lag"></div>
+                                </article>
+                                <aside class="rb-reading-panel rb-lag-note">
+                                    <p class="rb-kicker">REFERENCIA DE ANOMALÍAS</p>
+                                    <strong>Jun. 2000–mar. 2020</strong>
+                                    <p>La asociación más alta de Pearson aparece cerca de 7 meses en ambas fuentes, pero el rezago elegido por los modelos cambia entre bloques.</p>
+                                    <p class="rb-warning">Es una exploración con autocorrelación y varios rezagos; no identifica un tiempo físico ni demuestra que nieve o deshielo causen la asociación.</p>
+                                    <p class="rb-small-note">En la validación, climatología, rezago y parámetros se estiman usando únicamente datos anteriores al bloque evaluado.</p>
+                                </aside>
+                            </div>
+                        </section>
+
+                        <section class="rb-section" id="rb-modelos">
+                            <div class="rb-section-heading">
+                                <span class="rb-section-number">03</span>
+                                <div>
+                                    <h3>Evaluación fuera del ajuste</h3>
+                                    <p>Tres bloques cronológicos no solapados; cada selección interna precede a su bloque de prueba.</p>
+                                </div>
+                            </div>
+                            <div class="rb-fold-strip">
+                                <span><b>B1</b> 2010–2012</span>
+                                <span><b>B2</b> 2013–2015</span>
+                                <span><b>B3</b> 2016–mar. 2020</span>
+                                <small>Entrenamiento expansivo: los bloques no son réplicas independientes.</small>
+                            </div>
+                            <div class="rb-model-grid">
+                                <article class="rb-panel">
+                                    <div class="rb-panel-heading"><div><h4>Estimar lluvia local desde IMERG</h4><p>IMERG crudo frente a corrección seleccionada en ajuste</p></div></div>
+                                    <div class="rb-table-wrap" id="tabla-metricas-precip"></div>
+                                    <p class="rb-footnote">Lineal: P̂<sub>L</sub> = max(0, β₀ + β₁P<sub>I</sub>). Log-lineal: P̂<sub>L</sub> = B·exp[β₀ + β₁ln(P<sub>I</sub> + 1)] − 1. Variante y parámetros se seleccionan solo con ajuste. La corrección empeora MAE en los tres bloques y solo reduce RMSE en el tercero; no hay mejora uniforme.</p>
+                                </article>
+                                <article class="rb-panel">
+                                    <div class="rb-panel-heading"><div><h4>Estimar caudal desde precipitación</h4><p>Comparación por predictor y bloque · error en m³/s</p></div></div>
+                                    <div class="rb-predictor-switch" role="tablist" aria-label="Predictor de caudal">
+                                        <button class="rb-predictor-btn active" data-predictor="local" role="tab" aria-selected="true">P local</button>
+                                        <button class="rb-predictor-btn" data-predictor="imerg" role="tab" aria-selected="false">IMERG</button>
+                                    </div>
+                                    <div class="rb-metric-switch" role="group" aria-label="Métrica de error">
+                                        <button class="rb-metric-btn active" data-metric="mae">MAE</button>
+                                        <button class="rb-metric-btn" data-metric="rmse">RMSE</button>
+                                        <button class="rb-metric-btn" data-metric="bias">Sesgo</button>
+                                    </div>
+                                    <p class="rb-model-equation">Q̂(t) = Q̄<sub>mes(t)</sub> + β₀ + β₁ · a<sub>P</sub>(t − k*) <span>Q en m³/s; a<sub>P</sub> es anomalía mensual de precipitación en mm/mes. Climatología, k* y coeficientes se estiman solo con datos previos a cada test.</span></p>
+                                    <div id="chart-model-q" class="rb-chart rb-chart-model"></div>
+                                    <div class="rb-table-wrap" id="tabla-metricas-q"></div>
+                                    <p class="rb-footnote">La tabla informa k* y β₀/β₁ por bloque. Se comparan climatología de Q, regresión contemporánea y anomalías rezagadas; las métricas usan pares válidos de cada test.</p>
+                                </article>
+                            </div>
+                            <div class="rb-model-conclusion">
+                                <strong>Lectura conjunta</strong>
+                                <p>El modelo de anomalías con rezago reduce MAE y RMSE frente a la climatología y la regresión contemporánea en los bloques evaluados, para ambos predictores; mantiene sesgo positivo. Es evidencia retrospectiva acotada a estas ventanas, no garantía de pronóstico futuro.</p>
+                            </div>
+                        </section>
+
+                        <section class="rb-section" id="rb-diagnosticos">
+                            <div class="rb-section-heading">
+                                <span class="rb-section-number">04</span>
+                                <div>
+                                    <h3>Predicciones y diagnóstico de residuos</h3>
+                                    <p>Caudal observado y modelos seleccionados en el entrenamiento de cada bloque.</p>
+                                </div>
+                            </div>
+                            <article class="rb-panel">
+                                <div class="rb-panel-heading"><div><h4>Caudal fuera de muestra</h4><p>Predicción de anomalías con rezago · los cortes verticales separan bloques</p></div><span class="rb-sample">Q · m³/s</span></div>
+                                <div id="chart-validacion-temporal" class="rb-chart rb-chart-validation"></div>
+                            </article>
+                            <div class="rb-chart-grid rb-diagnostic-grid">
+                                <article class="rb-panel">
+                                    <div class="rb-panel-heading"><div><h4>Residuo en el tiempo</h4><p>Seguimiento de sesgo y cambios entre bloques</p></div></div>
+                                    <div id="chart-residuo-tiempo" class="rb-chart"></div>
+                                </article>
+                                <article class="rb-panel">
+                                    <div class="rb-panel-heading"><div><h4>Residuo frente a valor estimado</h4><p>Residuo = predicción − observado</p></div></div>
+                                    <div id="chart-residuo-prediccion" class="rb-chart"></div>
+                                </article>
+                                <article class="rb-panel">
+                                    <div class="rb-panel-heading"><div><h4>Residuo por mes calendario</h4><p>Distribución de errores en los bloques externos</p></div></div>
+                                    <div id="chart-residuo-mes" class="rb-chart"></div>
+                                </article>
+                            </div>
+                            <div class="rb-caveat-grid">
+                                <p><strong>Máximos:</strong> los modelos no produjeron valores negativos, pero se observaron sobreestimaciones puntuales severas; no se interpretan como habilidad para predecir crecidas.</p>
+                                <p><strong>Alcance:</strong> P–Q es una relación estadística y no sustituye el balance hídrico ni impone conservación de masa.</p>
+                                <p><strong>Procedencia:</strong> el script apunta a IMERG MONTHLY V06, pero no está confirmada la corrida del CSV ni la versión exacta. La corrección de lluvia no genera valores negativos; el modelo Q no impone un límite superior.</p>
+                                <p><strong>Fuentes:</strong> IMERG Final incorpora pluviómetros; una posible intersección con la referencia local es un riesgo metodológico, no una dependencia confirmada.</p>
+                            </div>
+                        </section>
+
+                        <footer class="rb-sources">
+                            <div><span class="rb-kicker">TRAZABILIDAD Y MÉTODO</span><p>Resultados del CSV maestro y tablas del Rol B. Referencias: <a href="https://doi.org/10.1175/2007JHM925.1" target="_blank" rel="noopener">Hossain y Huffman (2008)</a> para evaluación satelital; <a href="https://doi.org/10.1080/01621459.1983.10478017" target="_blank" rel="noopener">Duan (1983)</a> para retransformation; <a href="https://doi.org/10.1139/f98-104" target="_blank" rel="noopener">Pyper y Peterman (1998)</a> para autocorrelación; <a href="https://doi.org/10.1080/02626668609491024" target="_blank" rel="noopener">Klemeš (1986)</a> para evaluación hidrológica; <a href="https://doi.org/10.5194/hess-25-429-2021" target="_blank" rel="noopener">Alvarez-Garreton et al. (2021)</a> como contexto regional de memoria hidrológica, no prueba causal de estos rezagos.</p></div>
+                            <a href="../documentos/informe_seccion_rol_b.md" target="_blank" rel="noopener">Abrir informe completo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </footer>
+                    </div>
                     </div>
                 </section>
 
