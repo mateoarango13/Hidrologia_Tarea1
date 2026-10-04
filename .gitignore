@@ -19,3 +19,12 @@ datos_pesados_ignorados/
 # Archivos del sistema operativo
 .DS_Store
 Thumbs.db
+
+# Archivos auxiliares de compilación LaTeX (se conservan .tex y .pdf)
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.out
+*.toc
