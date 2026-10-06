@@ -1,0 +1,68 @@
+% =============================================================================
+% Punto 1 — Exploración y validación de las series mensuales (Rol A)
+% Cuenca Río Maipo en El Manzano (CAMELS-CL 5710001)
+% Compilar desde la carpeta documentos/:  pdflatex punto1_exploracion_validacion.tex
+% =============================================================================
+\documentclass[11pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot,es-noshorthands]{babel}
+\usepackage{lmodern}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\graphicspath{{../figuras/}}
+\captionsetup{font=small,labelfont=bf}
+
+\title{Punto 1. Exploración y validación de las series hidroclimáticas mensuales\\
+\large Río Maipo en El Manzano (CAMELS-CL 5710001) --- Rol A}
+\author{Tarea 1 de Hidrología, UNAL}
+\date{}
+
+\begin{document}
+\sloppy
+\maketitle
+
+\section{Contexto y Transformación de Series (1.1 y 1.2)}
+
+El análisis hidroclimático se enmarca en la cuenca del Río Maipo en El Manzano (código CAMELS-CL 5710001), la cual posee un área de drenaje de $4837.4\text{ km}^2$. Se utilizaron series de precipitación ($P_L$) y caudal ($Q$) provenientes del archivo CAMELS-CL entre enero de 1980 y abril de 2020. Adicionalmente, se integraron datos de precipitación satelital GPM IMERG Final Mensual V06 ($P_I$) y temperatura media ERA5-Land ($T$) desde junio de 2000 en adelante.
+
+Para permitir una comparación física directa del balance hídrico, el caudal volumétrico ($Q$ en $\text{m}^3/\text{s}$) fue transformado a lámina de escorrentía equivalente ($R$ en mm/mes) aplicando la fórmula exacta que considera los días de cada mes calendario ($D$):
+\begin{equation}
+R = \frac{Q \times (D \times 86400)}{A} \times 1000
+\end{equation}
+Donde $A = 4.8374 \times 10^9\text{ m}^2$ es el área de la cuenca. Esta transformación asegura la coherencia dimensional al momento de contrastar el volumen precipitado con la escorrentía mensual.
+
+\section{Control de Calidad e Integridad del Registro (1.4)}
+
+Se efectuó una auditoría exhaustiva sobre los 484 meses del periodo de estudio. El dataset local presentó una calidad excepcional:
+\begin{itemize}
+    \item \textbf{Caudal ($Q$):} Solamente 14 meses faltantes ($2.89\%$), concentrados principalmente entre agosto de 1986 y febrero de 1987, y un vacío de ocho meses en 2015.
+    \item \textbf{Precipitación Local ($P_L$):} Un único mes faltante (abril de 2020), lo que representa una completitud de $99.79\%$.
+    \item \textbf{Datos satelitales ($P_I$ y $T$):} Estrictamente completos dentro de su periodo nominal de cobertura (junio de 2000 a abril de 2020).
+\end{itemize}
+
+Los periodos carentes de registro se mantuvieron como datos ausentes (\texttt{NaN}) y en ningún caso se imputaron mediante interpolación, preservando la honestidad estadística del análisis y cumpliendo la restricción metodológica impuesta para el proyecto. El análisis visual confirmó que las lagunas de información no ocurren en bloques multianuales sistemáticos (salvo el evento del 2015), lo que asegura que las métricas globales y la climatología mensual no sufran sesgos significativos por la pérdida de datos estacionales.
+
+\section{Distribución y Variabilidad Estadística (1.3)}
+
+El análisis de la variabilidad temporal y la dispersión (Figuras de boxplots e histogramas en el proyecto) demostró la alta asimetría de la precipitación mensual. Durante el invierno, las precipitaciones locales pueden alcanzar picos superiores a los $500\text{ mm/mes}$, pero muestran medianas interanuales significativamente más bajas debido a la ocurrencia de meses hiper-húmedos atípicos (fenómenos de El Niño). El caudal también presenta asimetría, exacerbada por la estacionalidad nival, alcanzando extremos máximos documentados como el de la tormenta cálida de mayo de 1993, donde precipitó líquido a gran elevación originando un caudal excepcional de $306.6\text{ m}^3/\text{s}$.
+
+\section{Climatología, Régimen Físico y Estabilidad Temporal (1.5)}
+
+El cálculo del ciclo anual evidenció de forma indiscutible el comportamiento físico de la cuenca del Río Maipo. El pico pluviométrico se enmarca en la estación invernal (junio, julio y agosto), sin embargo, el pico de caudal no es simultáneo: este alcanza su cénit durante el verano (diciembre y enero).
+
+Este desfase temporal de aproximadamente 6 meses certifica que el Maipo superior se rige por un \textbf{régimen nivo-pluvial}. La cordillera de los Andes opera como un inmenso embalse en estado sólido; la precipitación invernal se acumula en forma de nieve y glaciares, la cual es liberada progresivamente cuando aumenta la radiación solar y la temperatura durante los meses estivales, recargando los caudales base y sosteniendo el suministro hídrico de la región de Santiago.
+
+\subsection{Estabilidad a largo plazo y la Megasequía}
+Al subdividir el registro en dos periodos decenales (1980-1999 vs 2000-2020), se hace patente la pérdida de estabilidad del sistema. En el primer periodo, las escorrentías reflejaban inviernos húmedos y deshielos prominentes. En contraste, el periodo del siglo XXI (particularmente agravado por la \textit{Megasequía} a partir de 2010 y quiebres estructurales en 2007) muestra un abatimiento transversal: la precipitación invernal se redujo sustancialmente, y a su vez, la curva del ciclo de escorrentía se aplanó durante todo el año calendario, revelando una merma considerable en las reservas criosféricas.
+
+Esta exploración inicial fundamenta las bases para el Rol B (relación de la precipitación con las anomalías de caudal) y el Rol C (análisis estadístico riguroso de estas tendencias de decrecimiento).
+
+\end{document}
