@@ -138,6 +138,7 @@ $-5.503$ & 27.344 & 48.656 & $-8.764$ & $+3.856$ \\
 \apafigureheading{fig:scatter}{Relaciones mensuales entre precipitación de referencia, IMERG y respuesta de la cuenca}
 \includegraphics[width=\textwidth]{figura_2_1_relaciones_scatter.png}
 \apanote{El panel $P_I$--$P_L$ incluye línea 1:1 y ejes comparables. Los puntos se colorean por mes calendario. Las ventanas y tamaños de muestra se indican en cada panel; $R$ acompaña la relación lluvia--caudal para comparar láminas.}
+\label{fig:scatter}
 \end{figure}
 
 La dispersión de $P_I$--$P_L$ se amplía en meses lluviosos. Por estación austral, el sesgo medio fue $+6.85$ mm/mes en verano, $-9.38$ en otoño, $-11.33$ en invierno y $-8.28$ en primavera. Por cuartil de precipitación local, los tres cuartiles inferiores mostraron sesgos positivos (+14.00, +9.97 y +6.43 mm/mes), mientras el cuartil superior mostró $-51.94$ mm/mes y RMSE de 88.52 mm/mes. La literatura demuestra que el error de IMERG puede depender de intensidad y densidad de pluviómetros en otros dominios; esos mecanismos motivan el desglose, pero no transfieren sus magnitudes a Maipo \parencite{Tian2018,HosseiniMoghari2020}.
@@ -219,6 +220,7 @@ El máximo de Pearson local ocurrió en $k=7$ meses ($r=0.4773$, $n=463$); para 
 \apafigureheading{fig:lags}{Correlación entre precipitación antecedente y caudal actual en anomalías mensuales}
 \includegraphics[width=\textwidth]{figura_2_2_correlaciones_rezagos.png}
 \apanote{Rezago $k$: precipitación en $t-k$ frente a caudal en $t$. Curvas muestran Pearson y Spearman para lluvia local e IMERG. Análisis exploratorio sin intervalos de incertidumbre ajustados por dependencia/múltiples lags.}
+\label{fig:lags}
 \end{figure}
 
 \begin{table}[H]
@@ -343,6 +345,7 @@ $Q$ desde $P_I$ & 3 & 51 & 7 & 42.41/55.10 & 47.05/51.99 & 36.05/47.32 & 26.37 \
 \apafigureheading{fig:validation}{Predicciones y residuos en los bloques externos}
 \includegraphics[width=\textwidth]{figura_2_3_validacion_modelos.png}
 \apanote{La figura muestra los tres objetivos/modelos sobre sus ventanas de test y los residuos frente al valor predicho. Las líneas verticales marcan cambios de bloque; el diagnóstico visual se complementa con métricas tabuladas, no las sustituye.}
+\label{fig:validation}
 \end{figure}
 
 \begin{figure}[H]
@@ -350,6 +353,7 @@ $Q$ desde $P_I$ & 3 & 51 & 7 & 42.41/55.10 & 47.05/51.99 & 36.05/47.32 & 26.37 \
 \apafigureheading{fig:residuals}{Residuos temporales en el test cronológico}
 \includegraphics[width=\textwidth]{figura_2_4_residuos_en_tiempo.png}
 \apanote{Residuo = predicción $-$ observado. Los picos de residuo motivaron auditorías de máximos; los datos de los bloques externos no se excluyeron.}
+\label{fi:residuals}
 \end{figure}
 
 \section{2.3. Errores, máximos y robustez temporal}
@@ -485,8 +489,10 @@ $T$ & Dic & 20 & 4.41 & 4.25 & 1.76 \\
 \begin{itemize}
 \item Relaciones: \texttt{scripts/04\_analisis\_precipitacion.py}; tablas \texttt{tabla\_2\_1\_*}; Figura~\ref{fig:scatter}.
 \item Anomalías/rezagos: \texttt{scripts/05\_anomalias\_rezagos.py}; tablas \texttt{tabla\_2\_2\_*}; Figura~\ref{fig:lags}.
-\item Modelos multibloque: \texttt{scripts/06\_modelos\_validacion\_temporal.py}; archivos \texttt{tabla\_2\_3\_metricas\_fuera\_ajuste.csv}, \texttt{tabla\_2\_3\_metricas\_por\_bloque.csv}, \texttt{tabla\_2\_3\_seleccion\_modelos\_ajuste.csv}, \texttt{tabla\_2\_3\_maximos\_predichos.csv}, predicciones y desgloses anuales/mensuales/estacionales; Figuras~\ref{fig:validation} y \ref{fig:residuals}.
+\item Modelos multibloque: \texttt{scripts/06\_modelos\_validacion\_temporal.py}; archivos \texttt{tabla\_2\_3\_metricas\_fuera\_ajuste.csv}, \texttt{tabla\_2\_3\_metricas\_por\_bloque.csv}, \texttt{tabla\_2\_3\_seleccion\_modelos\_ajuste.csv}, \texttt{tabla\_2\_3\_maximos\_predichos.csv}, predicciones y desgloses anuales/mensuales/estacionales; Figuras~\ref{fig:validation} y \ref{fig:residuals}
 \item Entrada única para cálculos: \texttt{datos/datos\_mensuales\_maipo.csv}.
 \end{itemize}
+
+
 
 \end{document}
