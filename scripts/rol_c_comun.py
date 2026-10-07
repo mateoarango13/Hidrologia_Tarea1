@@ -64,8 +64,8 @@ VARIABLES = {
                     "unit": "mm/mes", "source": "GPM IMERG Final mensual (V06 según script 02)"},
     "Caudal_m3s": {"label": r"Caudal medio $\overline{Q}$", "short": "Q",
                     "unit": "m³/s", "source": "CAMELS-CL (DGA), estación 5710001"},
-    "Temp_C": {"label": "Temperatura media ERA5-Land $T$", "short": "T",
-               "unit": "°C", "source": "ERA5-Land mensual (reanálisis)"},
+    "Temp_C": {"label": "Temperatura media CR2MET $T$", "short": "T",
+               "unit": "°C", "source": "CAMELS-CL (CR2MET), media de (Tmax+Tmin)/2 diaria"},
 }
 REPRESENTATIONS = {
     "X": "Serie original",

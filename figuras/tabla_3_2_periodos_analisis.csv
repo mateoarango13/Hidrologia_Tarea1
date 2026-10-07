@@ -1,5 +1,5 @@
 variable,fuente,unidad,inicio_registro,fin_registro,meses_en_registro,meses_validos_registro,faltantes_internos,lista_faltantes,meses_validos_periodo_comun,meses_periodo_comun
-P_local_mm,CAMELS-CL (CR2MET),mm/mes,1980-01,2020-03,483,483,0,,238,238
+P_local_mm,CAMELS-CL (CR2MET),mm/mes,1980-01,2020-04,484,484,0,,238,238
 P_IMERG_mm,GPM IMERG Final mensual (V06 según script 02),mm/mes,2000-06,2020-03,238,238,0,,238,238
-Caudal_m3s,"CAMELS-CL (DGA), estación 5710001",m³/s,1980-01,2020-04,484,470,14,1987-12;1988-01;1988-02;1988-03;1988-04;1990-11;2015-04;2015-05;2015-06;2015-07;2015-08;2015-09;2015-10;2015-11,230,238
-Temp_C,ERA5-Land mensual (reanálisis),°C,2000-06,2020-03,238,238,0,,238,238
+Caudal_m3s,"CAMELS-CL (DGA), estación 5710001",m³/s,1980-01,2020-04,484,463,21,1986-06;1987-11;1987-12;1988-01;1988-02;1988-03;1988-04;1988-05;1990-11;1993-05;2007-10;2015-03;2015-04;2015-05;2015-06;2015-07;2015-08;2015-09;2015-10;2015-11;2015-12,227,238
+Temp_C,"CAMELS-CL (CR2MET), media de (Tmax+Tmin)/2 diaria",°C,1980-01,2020-04,484,484,0,,238,238

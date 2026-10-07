@@ -76,7 +76,7 @@ mes,dias_mes,dias_validos_Q,dias_validos_P,Q_media_dias_validos,fraccion_Q,Q_csv
 1986-03,31,31,31,141.2258,1.0,141.2258,True,True,
 1986-04,30,30,30,111.4,1.0,111.4,True,True,
 1986-05,31,31,31,97.2355,1.0,97.2355,True,True,
-1986-06,30,3,30,115.0,0.1,115.0,True,False,media parcial en el CSV
+1986-06,30,3,30,115.0,0.1,,False,False,excluido: datos parciales (< 80 % de días)
 1986-07,31,28,31,88.6357,0.9032,88.6357,True,True,
 1986-08,31,31,31,66.729,1.0,66.729,True,True,
 1986-09,30,30,30,83.6667,1.0,83.6667,True,True,
@@ -93,13 +93,13 @@ mes,dias_mes,dias_validos_Q,dias_validos_P,Q_media_dias_validos,fraccion_Q,Q_csv
 1987-08,31,31,31,130.3387,1.0,130.3387,True,True,
 1987-09,30,30,30,122.3633,1.0,122.3633,True,True,
 1987-10,31,31,31,155.4194,1.0,155.4194,True,True,
-1987-11,30,3,30,226.3333,0.1,226.3333,True,False,media parcial en el CSV
-1987-12,31,0,31,,0.0,,False,False,
-1988-01,31,0,31,,0.0,,False,False,
-1988-02,29,0,29,,0.0,,False,False,
-1988-03,31,0,31,,0.0,,False,False,
-1988-04,30,0,30,,0.0,,False,False,
-1988-05,31,5,31,63.16,0.1613,63.16,True,False,media parcial en el CSV
+1987-11,30,3,30,226.3333,0.1,,False,False,excluido: datos parciales (< 80 % de días)
+1987-12,31,0,31,,0.0,,False,False,excluido: sin datos
+1988-01,31,0,31,,0.0,,False,False,excluido: sin datos
+1988-02,29,0,29,,0.0,,False,False,excluido: sin datos
+1988-03,31,0,31,,0.0,,False,False,excluido: sin datos
+1988-04,30,0,30,,0.0,,False,False,excluido: sin datos
+1988-05,31,5,31,63.16,0.1613,,False,False,excluido: datos parciales (< 80 % de días)
 1988-06,30,30,30,59.5567,1.0,59.5567,True,True,
 1988-07,31,31,31,48.0548,1.0,48.0548,True,True,
 1988-08,31,31,31,52.7484,1.0,52.7484,True,True,
@@ -129,7 +129,7 @@ mes,dias_mes,dias_validos_Q,dias_validos_P,Q_media_dias_validos,fraccion_Q,Q_csv
 1990-08,31,31,31,52.2903,1.0,52.2903,True,True,
 1990-09,30,30,30,56.7567,1.0,56.7567,True,True,
 1990-10,31,31,31,78.4774,1.0,78.4774,True,True,
-1990-11,30,0,30,,0.0,,False,False,
+1990-11,30,0,30,,0.0,,False,False,excluido: sin datos
 1990-12,31,31,31,135.3677,1.0,135.3677,True,True,
 1991-01,31,31,31,129.3903,1.0,129.3903,True,True,
 1991-02,28,28,28,109.7464,1.0,109.7464,True,True,
@@ -159,7 +159,7 @@ mes,dias_mes,dias_validos_Q,dias_validos_P,Q_media_dias_validos,fraccion_Q,Q_csv
 1993-02,28,25,28,192.48,0.8929,192.48,True,True,
 1993-03,31,31,31,117.129,1.0,117.129,True,True,
 1993-04,30,26,30,103.3654,0.8667,103.3654,True,True,
-1993-05,31,3,31,306.6333,0.0968,306.6333,True,False,media parcial en el CSV
+1993-05,31,3,31,306.6333,0.0968,,False,False,excluido: datos parciales (< 80 % de días)
 1993-06,30,27,30,97.7407,0.9,97.7407,True,True,
 1993-07,31,31,31,85.1161,1.0,85.1161,True,True,
 1993-08,31,31,31,76.4,1.0,76.4,True,True,
@@ -332,7 +332,7 @@ mes,dias_mes,dias_validos_Q,dias_validos_P,Q_media_dias_validos,fraccion_Q,Q_csv
 2007-07,31,31,31,58.2645,1.0,58.2645,True,True,
 2007-08,31,31,31,54.0258,1.0,54.0258,True,True,
 2007-09,30,27,30,61.2444,0.9,61.2444,True,True,
-2007-10,31,20,31,95.895,0.6452,95.895,True,False,media parcial en el CSV
+2007-10,31,20,31,95.895,0.6452,,False,False,excluido: datos parciales (< 80 % de días)
 2007-11,30,30,30,121.91,1.0,121.91,True,True,
 2007-12,31,29,31,126.7586,0.9355,126.7586,True,True,
 2008-01,31,31,31,125.1613,1.0,125.1613,True,True,
@@ -421,16 +421,16 @@ mes,dias_mes,dias_validos_Q,dias_validos_P,Q_media_dias_validos,fraccion_Q,Q_csv
 2014-12,31,31,31,96.1677,1.0,96.1677,True,True,
 2015-01,31,31,31,94.9871,1.0,94.9871,True,True,
 2015-02,28,28,28,77.2714,1.0,77.2714,True,True,
-2015-03,31,22,31,62.4091,0.7097,62.4091,True,False,media parcial en el CSV
-2015-04,30,0,30,,0.0,,False,False,
-2015-05,31,0,31,,0.0,,False,False,
-2015-06,30,0,30,,0.0,,False,False,
-2015-07,31,0,31,,0.0,,False,False,
-2015-08,31,0,31,,0.0,,False,False,
-2015-09,30,0,30,,0.0,,False,False,
-2015-10,31,0,31,,0.0,,False,False,
-2015-11,30,0,30,,0.0,,False,False,
-2015-12,31,19,31,203.6842,0.6129,203.6842,True,False,media parcial en el CSV
+2015-03,31,22,31,62.4091,0.7097,,False,False,excluido: datos parciales (< 80 % de días)
+2015-04,30,0,30,,0.0,,False,False,excluido: sin datos
+2015-05,31,0,31,,0.0,,False,False,excluido: sin datos
+2015-06,30,0,30,,0.0,,False,False,excluido: sin datos
+2015-07,31,0,31,,0.0,,False,False,excluido: sin datos
+2015-08,31,0,31,,0.0,,False,False,excluido: sin datos
+2015-09,30,0,30,,0.0,,False,False,excluido: sin datos
+2015-10,31,0,31,,0.0,,False,False,excluido: sin datos
+2015-11,30,0,30,,0.0,,False,False,excluido: sin datos
+2015-12,31,19,31,203.6842,0.6129,,False,False,excluido: datos parciales (< 80 % de días)
 2016-01,31,31,31,169.2258,1.0,169.2258,True,True,
 2016-02,29,29,29,129.5172,1.0,129.5172,True,True,
 2016-03,31,31,31,99.7194,1.0,99.7194,True,True,
@@ -482,4 +482,4 @@ mes,dias_mes,dias_validos_Q,dias_validos_P,Q_media_dias_validos,fraccion_Q,Q_csv
 2020-01,31,31,31,85.4605,1.0,85.4605,True,True,
 2020-02,29,29,29,63.966,1.0,63.966,True,True,
 2020-03,31,31,31,54.0025,1.0,54.0025,True,True,
-2020-04,30,29,30,28.9678,0.9667,41.385,True,True,CSV usa solo el 1 de abril (corte del script 01)
+2020-04,30,29,30,28.9678,0.9667,28.9678,True,True,

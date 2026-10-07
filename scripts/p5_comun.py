@@ -42,8 +42,9 @@ REF_START, REF_END = pd.Timestamp("2000-06-01"), pd.Timestamp("2020-03-01")
 ALPHA_FDR = 0.10          # Wilks (2016): α_FDR = 2 α_global para campos espacialmente correlacionados
 MIN_YEARS = 15            # mínimo de pares (años) por celda para reportar una correlación
 DPI = 300
-# Ubicación aproximada de la cuenca (centroide ~; estación El Manzano ~33.6°S, 70.4°W). VERIFICAR con CAMELS-CL.
-BASIN_LAT, BASIN_LON = -33.8, 360 - 70.1
+# Marcador de la cuenca en los mapas: centroide del polígono CAMELS-CL (33.69°S, 70.07°W;
+# figuras/tabla_1_10_ficha_cuenca.csv). La estación El Manzano está en 33.59°S, 70.38°W.
+BASIN_LAT, BASIN_LON = -33.69, 360 - 70.07
 
 FIELDS = {
     "sst": {"label": "SST", "long": "Temperatura superficial del mar", "unit": "°C"},
@@ -54,7 +55,7 @@ BASIN_VARS = {
     "P_local_mm": {"label": "P$_L$", "plain": "P_L", "long": "Precipitación de referencia", "unit": "mm/mes"},
     "Caudal_m3s": {"label": "Q", "plain": "Q", "long": "Caudal medio", "unit": "m³/s"},
     "P_IMERG_mm": {"label": "P$_I$", "plain": "P_I", "long": "Precipitación IMERG", "unit": "mm/mes"},
-    "Temp_C": {"label": "T", "plain": "T", "long": "Temperatura ERA5-Land", "unit": "°C"},
+    "Temp_C": {"label": "T", "plain": "T", "long": "Temperatura CR2MET", "unit": "°C"},
 }
 MONTHS = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
 

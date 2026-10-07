@@ -1,11 +1,11 @@
 metrica,valor
 meses comunes,238.0
-media T CR2MET [°C],5.035186593867813
-media T ERA5-Land [°C],-0.5182962810166536
-sesgo medio ERA5-Land - CR2MET [°C],-5.553482874884468
-correlación de las series,0.9891414552556409
-correlación de las anomalías mensuales,0.9592883448596341
-amplitud ciclo anual CR2MET [°C],13.808286652158468
-amplitud ciclo anual ERA5-Land [°C],16.91064346872674
+media T CR2MET [°C],5.0351865924369745
+media T ERA5-Land [°C],-0.5182962773109243
+sesgo medio ERA5-Land - CR2MET [°C],-5.553482869747899
+correlación de las series,0.9891414546849702
+correlación de las anomalías mensuales,0.9592883388554639
+amplitud ciclo anual CR2MET [°C],13.8082867
+amplitud ciclo anual ERA5-Land [°C],16.9106434
 meses con T CR2MET < 0 °C en la climatología,3.0
 meses con T ERA5-Land < 0 °C en la climatología,6.0

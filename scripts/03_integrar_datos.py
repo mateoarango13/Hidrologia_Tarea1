@@ -1,58 +1,51 @@
+"""
+03_integrar_datos.py — Construye el CSV maestro datos/datos_mensuales_maipo.csv.
+
+Une con un OUTER JOIN (la menor duración de IMERG no recorta los registros locales):
+  datos/datos_mensuales_procesados.csv   (script 01: P_local_mm, Caudal_m3s, Q_lamina_mm, Temp_C)
+  datos/datos_satelitales_imerg_era5.csv (script 02: P_IMERG_mm, Temp_ERA5L_C)
+
+Columnas del maestro:
+  P_local_mm    precipitación de referencia CR2MET [mm/mes]
+  P_IMERG_mm    precipitación GPM IMERG Final mensual V06 [mm/mes]
+  Caudal_m3s    caudal medio mensual observado [m³/s]
+  Q_lamina_mm   escorrentía en lámina [mm/mes]
+  Temp_C        temperatura media mensual CR2MET de la base CAMELS-CL [°C] (principal)
+  Temp_ERA5L_C  temperatura a 2 m ERA5-Land [°C] (contraste, 2000-06 a 2020-03)
+"""
+from pathlib import Path
+
 import pandas as pd
 
-print("Iniciando la integración de datos (Fase 1)...")
+ROOT = Path(__file__).resolve().parents[1]
+LOCAL = ROOT / "datos" / "datos_mensuales_procesados.csv"
+SATELITE = ROOT / "datos" / "datos_satelitales_imerg_era5.csv"
+SALIDA = ROOT / "datos" / "datos_mensuales_maipo.csv"
+COLUMNAS = ["P_local_mm", "P_IMERG_mm", "Caudal_m3s", "Q_lamina_mm", "Temp_C", "Temp_ERA5L_C"]
 
-try:
-    # 1. Cargar datos locales (procesados por Integrante 3 en 01_preparar_datos.py)
-    df_local = pd.read_csv('datos_mensuales_procesados.csv', index_col=0, parse_dates=True)
-    print("Datos locales cargados correctamente.")
-except FileNotFoundError:
-    print("ERROR: No se encontró 'datos_mensuales_procesados.csv'. Asegúrate de ejecutar 01_preparar_datos.py primero.")
-    exit()
 
-try:
-    # 2. Cargar datos satelitales (procesados por Integrante 1 y 2 en 02_descargar_satelite.py)
-    df_satelite = pd.read_csv('datos_satelitales_imerg_era5.csv', index_col=0, parse_dates=True)
-    print("Datos satelitales cargados correctamente.")
-except FileNotFoundError:
-    print("ERROR: No se encontró 'datos_satelitales_imerg_era5.csv'. Asegúrate de ejecutar 02_descargar_satelite.py primero.")
-    exit()
+def main():
+    for f, script in [(LOCAL, "01_preparar_datos.py"), (SATELITE, "02_descargar_satelite.py")]:
+        if not f.exists():
+            raise SystemExit(f"ERROR: falta {f.relative_to(ROOT)}; ejecutar antes scripts/{script}")
 
-# Alinear las fechas al primer día del mes para que el inner join coincida exactamente
-df_local.index = df_local.index.to_period('M').to_timestamp()
-df_satelite.index = df_satelite.index.to_period('M').to_timestamp()
+    local = pd.read_csv(LOCAL, index_col="date", parse_dates=True)
+    sat = pd.read_csv(SATELITE, index_col="date", parse_dates=True)
+    for df in (local, sat):
+        df.index = df.index.to_period("M").to_timestamp()
 
-# 3. Unir (Merge) ambos dataframes usando la fecha como índice
-print("\nIntegrando bases de datos...")
-# Usamos un OUTER JOIN. La tarea prohíbe explícitamente que la menor duración de IMERG (20 años)
-# recorte los registros locales largos (40 años). Por lo tanto, mantendremos todas las fechas.
-df_maestro = pd.merge(df_local, df_satelite, left_index=True, right_index=True, how='outer')
+    maestro = local.join(sat, how="outer")[COLUMNAS]
+    esperado = pd.date_range(maestro.index.min(), maestro.index.max(), freq="MS")
+    if not maestro.index.equals(esperado):
+        raise ValueError("La malla mensual del maestro no es regular")
 
-# Renombrar columnas para estandarizar la nomenclatura final
-# Pm_mm: Precipitación local (CR2MET)
-# Qm_m3s: Caudal en m3/s
-# Rm_mm: Caudal en lámina (mm/mes)
-# PI_mm: Precipitación IMERG
-# Temp_C: Temperatura ERA5-Land
-df_maestro = df_maestro.rename(columns={
-    'Pm_mm': 'P_local_mm',
-    'Rm_mm': 'Q_lamina_mm',
-    'PI_mm': 'P_IMERG_mm'
-})
+    maestro.index.name = "date"
+    maestro.to_csv(SALIDA, float_format="%.6f")
+    print(f"Maestro: {SALIDA.relative_to(ROOT)} | {maestro.index.min():%Y-%m} a "
+          f"{maestro.index.max():%Y-%m} | {len(maestro)} meses")
+    print("Meses válidos por columna:")
+    print(maestro.notna().sum().to_string())
 
-# Reordenar las columnas para mayor legibilidad
-columnas_ordenadas = ['P_local_mm', 'P_IMERG_mm', 'Caudal_m3s', 'Q_lamina_mm', 'Temp_C']
-# Manejar si Caudal_m3s no existe por el script 1, usar Qm_m3s
-if 'Qm_m3s' in df_maestro.columns:
-    df_maestro = df_maestro.rename(columns={'Qm_m3s': 'Caudal_m3s'})
 
-df_maestro = df_maestro[columnas_ordenadas]
-
-# 4. Exportar el CSV maestro
-nombre_archivo_final = 'datos_mensuales_maipo.csv'
-df_maestro.to_csv(nombre_archivo_final)
-
-print(f"\n¡ÉXITO TOTAL! El archivo maestro '{nombre_archivo_final}' ha sido creado.")
-print(f"Periodo de datos integrados: desde {df_maestro.index.min().strftime('%Y-%m')} hasta {df_maestro.index.max().strftime('%Y-%m')}.")
-print(f"Número de meses comunes: {len(df_maestro)} meses.")
-print("\n¡LA FASE 1 ESTÁ LISTA! Suban este archivo al repositorio de GitHub y comiencen la Fase 2 de forma paralela.")
+if __name__ == "__main__":
+    main()

@@ -5,12 +5,12 @@ Decisiones (justificadas en el informe):
 * Secuencia mensual cronológica (no las 12 medias climatológicas), Delta t = 1 mes.
 * Tramos de AÑOS HIDROLÓGICOS COMPLETOS (abril-marzo) para que el ciclo anual
   quepa un número entero de veces en el registro (reduce la fuga del pico anual):
-    - "completo": 1980-04 a 2020-03, N = 480 (40 ciclos anuales) -> P_L y Q.
+    - "completo": 1980-04 a 2020-03, N = 480 (40 ciclos anuales) -> P_L, Q y T (CR2MET).
     - "comun":    2001-04 a 2020-03, N = 228 (19 ciclos anuales) -> P_L, P_I, Q, T.
-  Sensibilidad (en 14_p4_2): Q continuo sin vacíos 1990-12 a 2014-11 (N = 288),
+  Sensibilidad (en 14_p4_2): Q en el tramo continuo más largo sin vacíos (detectado automáticamente),
   mitades 1980-04/2000-03 y 2000-04/2020-03, y Lomb-Scargle sin rellenar.
-* Vacíos de caudal (14 meses en el tramo completo; 8 en el común, 2015-04 a
-  2015-11): NO se eliminan ni se rellenan con ceros. Se rellenan interpolando
+* Vacíos de caudal (21 meses en el tramo completo tras el criterio de >= 80 % de días; 10 en el común):
+  NO se eliminan ni se rellenan con ceros. Se rellenan interpolando
   linealmente la ANOMALÍA entre los meses válidos vecinos y sumando la
   climatología del mes (X = mu_j + a_interp). Cada valor rellenado queda marcado.
   Su efecto se evalúa en 14_p4_2 (tramo continuo y Lomb-Scargle).
@@ -35,7 +35,7 @@ import pandas as pd
 import rol_c_comun as rc
 
 SEGMENTS = {
-    "completo": (pd.Timestamp("1980-04-01"), pd.Timestamp("2020-03-01"), ["P_local_mm", "Caudal_m3s"]),
+    "completo": (pd.Timestamp("1980-04-01"), pd.Timestamp("2020-03-01"), ["P_local_mm", "Caudal_m3s", "Temp_C"]),
     "comun": (pd.Timestamp("2001-04-01"), pd.Timestamp("2020-03-01"), list(rc.VARIABLES)),
 }
 TRANSFORMS = {"C": "Original centrada", "A": "Anomalía (centrada)", "AD": "Anomalía sin tendencia lineal"}
@@ -93,7 +93,7 @@ def prepare(data: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
 def plot_series(series: pd.DataFrame) -> None:
     rc.apply_style()
     combos = [("completo", "P_local_mm"), ("completo", "Caudal_m3s"),
-              ("comun", "P_IMERG_mm"), ("comun", "Temp_C")]
+              ("comun", "P_IMERG_mm"), ("completo", "Temp_C")]
     fig, axes = plt.subplots(4, 3, figsize=(13, 10), sharex="row")
     for i, (seg, col) in enumerate(combos):
         meta = rc.VARIABLES[col]

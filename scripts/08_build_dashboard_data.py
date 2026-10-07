@@ -348,7 +348,7 @@ def build_data():
         ('P_local_mm', 'Precipitación local', 'mm/mes', True),
         ('Caudal_m3s', 'Caudal medio Q / lámina R', 'm³/s · mm/mes', True),
         ('P_IMERG_mm', 'Precipitación satelital IMERG', 'mm/mes', False),
-        ('Temp_C', 'Temperatura ERA5-Land', '°C', False)
+        ('Temp_C', 'Temperatura CR2MET', '°C', True)
     ]
     quality_series = []
     for column, label, unit, uses_full_record in quality_specs:
@@ -656,7 +656,8 @@ def build_data():
     # 1. Reemplazar estilos externos por inline
     css_tag = f"<style>\n{css_content}\n</style>"
     standalone_html = standalone_html.replace('<link rel="stylesheet" href="css/styles.css">', css_tag)
-    
+    standalone_html = incrustar_vendor(standalone_html, os.path.join(base_dir, 'dashboard'))
+
     # 2. Reemplazar Plotly script
     if plotly_code:
         plotly_tag = f"<script>\n{plotly_code}\n</script>"
@@ -679,6 +680,30 @@ def build_data():
     with open(standalone_out, 'w', encoding='utf-8') as f:
         f.write(standalone_html)
     print(f"Dashboard 100% Autocontenido generado en {standalone_out}")
+
+def incrustar_vendor(html, dashboard_dir):
+    """Incrusta en el HTML las hojas de estilo de dashboard/vendor/ (fuentes e iconos),
+    con cada .woff2 convertido a data URI, para que el dashboard funcione sin internet."""
+    import base64
+    import re
+    hojas = ['vendor/fuentes/fuentes.css', 'vendor/fontawesome/css/all.min.css']
+    for rel in hojas:
+        css_file = os.path.join(dashboard_dir, *rel.split('/'))
+        with open(css_file, 'r', encoding='utf-8') as f:
+            css = f.read()
+
+        def a_data_uri(m):
+            ruta = os.path.normpath(os.path.join(os.path.dirname(css_file), m.group(1)))
+            with open(ruta, 'rb') as fuente:
+                datos = base64.b64encode(fuente.read()).decode('ascii')
+            return f'url(data:font/woff2;base64,{datos})'
+
+        css = re.sub(r'url\(([^)]+\.woff2)\)', a_data_uri, css)
+        etiqueta = f'<link rel="stylesheet" href="{rel}">'
+        if etiqueta not in html:
+            raise ValueError(f'No se encontró {etiqueta} en index.html')
+        html = html.replace(etiqueta, f'<style>\n{css}\n</style>')
+    return html
 
 if __name__ == '__main__':
     build_data()

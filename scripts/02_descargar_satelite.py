@@ -4,6 +4,10 @@ import pandas as pd
 import geopandas as gpd
 import json
 import os
+from pathlib import Path
+
+# Rutas relativas a la raíz del paquete (el script puede ejecutarse desde cualquier carpeta)
+ROOT = Path(__file__).resolve().parents[1]
 
 # --- INSTRUCCIONES ---
 # 1. Abre tu terminal e instala las librerías necesarias ejecutando:
@@ -23,7 +27,7 @@ except Exception as e:
     exit()
 
 # 1. Cargar el polígono de la cuenca desde el shapefile descargado
-ruta_shp = 'camels_cl_5710001/polygon/polygon.shp'
+ruta_shp = ROOT / 'datos' / 'camels_cl_5710001' / 'polygon' / 'polygon.shp'
 print(f"Cargando polígono de la cuenca desde {ruta_shp}...")
 cuenca_gdf = gpd.read_file(ruta_shp)
 
@@ -101,14 +105,16 @@ df_satelite.index = pd.to_datetime(df_satelite.index)
 # Conversiones de unidades (Puntos exigidos por la tarea)
 # IMERG: de mm/hr a mm/mes
 horas_por_mes = df_satelite.index.days_in_month * 24
-df_satelite['PI_mm'] = df_satelite['precip_mm_hr'] * horas_por_mes
+df_satelite['P_IMERG_mm'] = df_satelite['precip_mm_hr'] * horas_por_mes
 
 # Temperatura: de Kelvin a Celsius (T[°C] = T[K] - 273.15)
-df_satelite['Temp_C'] = df_satelite['temp_kelvin'] - 273.15
+df_satelite['Temp_ERA5L_C'] = df_satelite['temp_kelvin'] - 273.15
 
 # Filtrar columnas útiles
-df_satelite = df_satelite[['PI_mm', 'Temp_C']]
+df_satelite = df_satelite[['P_IMERG_mm', 'Temp_ERA5L_C']]
+df_satelite.index.name = 'date'
 
-df_satelite.to_csv('datos_satelitales_imerg_era5.csv')
-print("\n¡ÉXITO! Los datos satelitales han sido descargados y guardados en 'datos_satelitales_imerg_era5.csv'")
-print("El Integrante 4 ahora puede unir este archivo con el de los datos locales.")
+salida = ROOT / 'datos' / 'datos_satelitales_imerg_era5.csv'
+df_satelite.to_csv(salida, float_format='%.6f')
+print(f"\n¡ÉXITO! Datos satelitales guardados en {salida.relative_to(ROOT)}")
+print("Siguiente paso: python scripts/03_integrar_datos.py")

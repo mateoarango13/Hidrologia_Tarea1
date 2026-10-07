@@ -25,13 +25,14 @@ plt.rcParams['grid.linestyle'] = '--'
 plt.rcParams['grid.alpha'] = 0.5
 
 # Constantes de la cuenca
-AREA_KM2 = 4837.4  # Área oficial asignada en la tarea (km2)
+AREA_KM2 = 4839.047  # Área de drenaje de la estación según CAMELS-CL (atributo area_km2)
 CODIGO_CUENCA = "5710001"
 NOMBRE_CUENCA = "Río Maipo en El Manzano"
 
-# Rutas
-DIR_DATOS = "datos"
-DIR_FIGURAS = "figuras"
+# Rutas relativas a la raíz del paquete (independientes de la carpeta de trabajo)
+RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DIR_DATOS = os.path.join(RAIZ, "datos")
+DIR_FIGURAS = os.path.join(RAIZ, "figuras")
 os.makedirs(DIR_FIGURAS, exist_ok=True)
 ARCHIVO_MAESTRO = os.path.join(DIR_DATOS, "datos_mensuales_maipo.csv")
 
@@ -85,14 +86,15 @@ def generar_grafica_cronologica(df):
     ax3.grid(True)
     ax3.set_ylim(bottom=0)
     
-    # Panel 4: Temperatura media mensual ERA5-Land (°C)
+    # Panel 4: Temperatura media mensual de la base (CR2MET) y ERA5-Land como contraste (°C)
     ax4 = axes[3]
-    ax4.plot(df.index, df['Temp_C'], color='#e17055', label=r'Temperatura media $T$ (ERA5-Land)', lw=1.2)
+    ax4.plot(df.index, df['Temp_C'], color='#e17055', label=r'Temperatura media $T$ (CR2MET, base CAMELS-CL)', lw=1.2)
+    ax4.plot(df.index, df['Temp_ERA5L_C'], color='#6c5ce7', label='ERA5-Land (contraste, 2000–2020)', lw=0.9, alpha=0.8)
     ax4.axhline(0, color='black', linestyle=':', lw=0.9, alpha=0.7, label='Isoterma 0 °C')
     ax4.axvspan(inicio_imerg, fin_imerg, color='#ffeaa7', alpha=0.35)
     ax4.set_ylabel('Temperatura\n[°C]', fontsize=10, fontweight='bold')
     ax4.set_xlabel('Año / Fecha', fontsize=11, fontweight='bold')
-    ax4.legend(loc='upper right', frameon=True, facecolor='white', framealpha=0.9, fontsize=9)
+    ax4.legend(loc='lower left', ncol=3, frameon=True, facecolor='white', framealpha=0.9, fontsize=8.5)
     ax4.grid(True)
     
     # Formato del eje temporal
@@ -119,7 +121,8 @@ def calcular_estadisticas_detalladas(df):
         ('P_IMERG_mm', 'Precipitación IMERG (PI)', 'mm/mes'),
         ('Caudal_m3s', 'Caudal medio (Q)', 'm³/s'),
         ('Q_lamina_mm', 'Escorrentía lámina (R)', 'mm/mes'),
-        ('Temp_C', 'Temperatura ERA5-Land (T)', '°C')
+        ('Temp_C', 'Temperatura CR2MET (T)', '°C'),
+        ('Temp_ERA5L_C', 'Temperatura ERA5-Land (contraste)', '°C')
     ]
     
     registros = []
@@ -268,7 +271,7 @@ def generar_histogramas(df):
     ax3.legend(loc='upper right', frameon=True, facecolor='white', framealpha=0.9, fontsize=9)
     ax3.grid(True)
     
-    # 4. Temperatura ERA5-Land (°C)
+    # 4. Temperatura CR2MET (°C)
     ax4 = axes[1, 1]
     s_t = df['Temp_C'].dropna()
     bins_t = np.linspace(s_t.min() - 1, s_t.max() + 1, 20)
@@ -276,7 +279,7 @@ def generar_histogramas(df):
     ax4.axvline(s_t.mean(), color='red', linestyle='--', label=f'Media: {s_t.mean():.1f} °C')
     ax4.axvline(s_t.median(), color='black', linestyle='-', label=f'Mediana: {s_t.median():.1f} °C')
     ax4.axvline(0, color='blue', linestyle=':', label='Isoterma 0 °C')
-    ax4.set_title('D. Temperatura Media Mensual $T$ [°C] (2000–2020)', fontsize=11, fontweight='bold')
+    ax4.set_title('D. Temperatura Media Mensual $T$ CR2MET [°C] (1980–2020)', fontsize=11, fontweight='bold')
     ax4.set_xlabel('Temperatura [°C]', fontsize=10)
     ax4.set_ylabel('Densidad de Probabilidad', fontsize=10)
     ax4.legend(loc='upper right', frameon=True, facecolor='white', framealpha=0.9, fontsize=9)
@@ -330,16 +333,16 @@ def generar_diagramas_caja(df):
     ax3.set_title('Lámina Caudal (1980–2020)', fontsize=10, fontweight='bold')
     ax3.grid(True)
     
-    # Panel 4: Temperatura ERA5-Land (°C)
+    # Panel 4: Temperatura CR2MET (°C)
     ax4 = axes[3]
     s_t = df['Temp_C'].dropna()
-    bp4 = ax4.boxplot([s_t], tick_labels=['Temp ERA5-L'], patch_artist=True,
+    bp4 = ax4.boxplot([s_t], tick_labels=['T CR2MET'], patch_artist=True,
                       showmeans=True, meanprops=dict(marker='D', markeredgecolor='black', markerfacecolor='gold'))
     bp4['boxes'][0].set_facecolor('#e17055')
     bp4['boxes'][0].set_alpha(0.7)
     ax4.axhline(0, color='blue', linestyle=':', alpha=0.7)
     ax4.set_ylabel('Temperatura [°C]', fontsize=10, fontweight='bold')
-    ax4.set_title('Temperatura (2000–2020)', fontsize=10, fontweight='bold')
+    ax4.set_title('Temperatura (1980–2020)', fontsize=10, fontweight='bold')
     ax4.grid(True)
     
     fig.suptitle(f'Diagramas de Caja — Variables Hidroclimáticas ({NOMBRE_CUENCA}) [Diamante dorado = Media]', 
@@ -436,7 +439,7 @@ def _contexto_fisico_extremo(var, fecha_str, val, tipo):
 def identificar_meses_extremos(df):
     """Identifica los 3 meses más altos y más bajos para cada variable con contexto individualizado."""
     print("-> Identificando meses extremos con contexto físico individualizado...")
-    variables = ['P_local_mm', 'P_IMERG_mm', 'Caudal_m3s', 'Q_lamina_mm', 'Temp_C']
+    variables = ['P_local_mm', 'P_IMERG_mm', 'Caudal_m3s', 'Q_lamina_mm', 'Temp_C', 'Temp_ERA5L_C']
     registros = []
     
     for var in variables:
@@ -484,7 +487,7 @@ def generar_mapa_disponibilidad(df):
         ('P_local_mm', 'A. Precipitación Local (CR2MET)', '#1f77b4'),
         ('P_IMERG_mm', 'B. Precipitación Satelital (GPM IMERG)', '#d62728'),
         ('Caudal_m3s', 'C. Caudal Observado (CAMELS-CL / DGA)', '#0984e3'),
-        ('Temp_C', 'D. Temperatura Media (ERA5-Land)', '#e17055')
+        ('Temp_C', 'D. Temperatura Media (CR2MET)', '#e17055')
     ]
     
     for ax, (var, titulo, color) in zip(axes, vars_eval):
@@ -567,7 +570,7 @@ def construir_climatologia(df):
     df_comun = df.loc['2000-06-01':'2020-03-31']
     
     nombres_meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
-    variables = ['P_local_mm', 'P_IMERG_mm', 'Caudal_m3s', 'Q_lamina_mm', 'Temp_C']
+    variables = ['P_local_mm', 'P_IMERG_mm', 'Caudal_m3s', 'Q_lamina_mm', 'Temp_C', 'Temp_ERA5L_C']
     
     registros = []
     for mes_num in range(1, 13):
@@ -585,7 +588,7 @@ def construir_climatologia(df):
             p10 = s.quantile(0.10)
             p90 = s.quantile(0.90)
             
-            if var != 'Temp_C' and media > 0.001:
+            if var not in ('Temp_C', 'Temp_ERA5L_C') and media > 0.001:
                 cv = std / media
             else:
                 cv = np.nan
@@ -650,7 +653,7 @@ def generar_grafica_ciclo_anual(df_clim):
     ax2.grid(True)
     ax2.set_ylim(bottom=0)
     
-    # Panel 3: Temperatura media mensual ERA5-Land (°C)
+    # Panel 3: Temperatura media mensual CR2MET (°C)
     ax3 = axes[2]
     c_t = df_clim[df_clim['Variable'] == 'Temp_C'].sort_values('Mes_Num')
     ax3.plot(meses_x, c_t['Media'], 'o-', color='#e17055', lw=2, label=r'Media Temperatura $T$ [°C]')
@@ -658,7 +661,7 @@ def generar_grafica_ciclo_anual(df_clim):
     ax3.fill_between(meses_x, c_t['Q1_25'], c_t['Q3_75'], color='#e17055', alpha=0.25, label=r'Banda IQR (Q1–Q3)')
     ax3.axhline(0, color='blue', linestyle=':', label='Isoterma 0 °C (Congelación)')
     ax3.set_ylabel('Temperatura\n[°C]', fontsize=10, fontweight='bold')
-    ax3.set_title('C. Ciclo Anual de Temperatura Media de Cuenca (ERA5-Land)', fontsize=11, fontweight='bold')
+    ax3.set_title('C. Ciclo Anual de Temperatura Media de Cuenca (CR2MET)', fontsize=11, fontweight='bold')
     ax3.set_xlabel('Mes Calendario', fontsize=11, fontweight='bold')
     ax3.set_xticks(meses_x)
     ax3.set_xticklabels(nombres_meses, fontsize=10)

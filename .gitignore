@@ -33,3 +33,8 @@ Thumbs.db
 # para que todo el equipo los tenga (cada archivo < 100 MB, límite de GitHub).
 !datos/campos_era5/
 !datos/campos_era5/*.nc
+
+# Carpeta y ZIP de entrega generados por documentos/material_interno/armar_entrega.py
+entrega_final/
+!datos/campos_ersst/
+!datos/campos_ersst/*.nc

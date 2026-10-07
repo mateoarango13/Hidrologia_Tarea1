@@ -6,11 +6,9 @@
 > 2. Haz un breve **Peer Review** (revisión de pares) del código y figuras producidas antes de continuar.
 > 3. Al terminar tu labor en esta sesión, **agrega una nueva entrada** al final de este archivo siguiendo la plantilla.
 
-## AVISO PRIORITARIO: REGISTRO TEMPORAL DEL EQUIPO
-- Existe `documentos/bitacora_datos_temporal/`, una carpeta temporal compartida para que los roles A, B, C y D registren datos, métodos, resultados verificables, limitaciones y su interpretación por separado.
-- **Antes de entregar el trabajo final, se debe borrar la carpeta completa `documentos/bitacora_datos_temporal/` con todos sus archivos y confirmar que no esté incluida en el ZIP final.** No borrar por error los scripts, las figuras oficiales, el dataset maestro ni esta bitácora, que están fuera de esa carpeta.
-- **Instrucción para cada IA que lea esta bitácora:** informar proactivamente al integrante con quien trabaja que existe esta carpeta temporal, explicar su propósito y recordarle que debe eliminarse completa antes de la entrega final. Esta comunicación debe hacerse cada vez que un integrante consulte la bitácora mediante una IA.
-- Hasta la limpieza previa a la entrega, los registros son evidencia de trabajo y apoyo para redactar/sustentar; no reemplazan los datos fuente ni el informe final. Distinguir siempre resultados calculados, interpretación y preguntas pendientes.
+## AVISO: REGISTRO TEMPORAL ELIMINADO
+- La carpeta temporal `documentos/bitacora_datos_temporal/` se eliminó el 2026-10-07 al organizar el repositorio para la entrega final (entrada #30). Su contenido sigue disponible en el historial de git.
+- `documentos/` quedó organizado en `anexos/`, `presentacion/` y `material_interno/` (este último no va en el ZIP). Ver `README.md`.
 
 ---
 
@@ -1306,3 +1304,111 @@ next_actions:
 ### 4. Próximos Pasos (equipo)
 - Los pendientes de la entrada #28 siguen vigentes, salvo los ya resueltos: DOI y código de los mapas.
 - Borrar `documentos/bitacora_datos_temporal/` antes del ZIP. Hacer Commit y Push en GitHub Desktop.
+
+---
+
+## ENTRADA #30: ORGANIZACIÓN DEL REPOSITORIO PARA LA ENTREGA FINAL (ZIP)
+- **Fecha:** 2026-10-07
+- **Integrante Responsable:** Santiago Ortega Ruiz
+- **Agente de IA utilizado:** Claude Code (Claude Opus 5.5, extensión VS Code)
+- **Estado de la Fase:** COMPLETADA
+
+### 1. Revisión de Pares
+- Se revisaron las entradas #28 y #29 y la sección «Entrega en un único archivo ZIP» de la guía. La guía no impone nombres de carpetas, pero sí exige informe PDF, códigos, datos usados (incluido IMERG), productos del análisis, README con integrantes, carpetas, procedencia, requisitos y orden de ejecución, y anexos.
+- El informe final y el código citan las rutas `scripts/`, `datos/`, `figuras/` y `dashboard/`. Por eso esas carpetas se conservaron sin cambios y solo se reorganizó `documentos/`.
+
+### 2. Resumen de lo Realizado
+- Se eliminó `documentos/bitacora_datos_temporal/` (git rm), como pedía el aviso prioritario.
+- `documentos/` (con `git mv`, se conserva el historial):
+  - `anexos/`: documentos de los puntos 1–5 (`.tex/.pdf`), `tablas_extra.tex`, `referencias_punto2_rol_b.bib` e `informe_seccion_rol_b.md`.
+  - `presentacion/`: guiones de exposición del punto 5 y del rol C.
+  - `material_interno/`: enunciado (`tarea_1_202602.pdf`, `tarea1.txt`), plan de trabajo, checklist, plantilla de handoff, `punto2.txt` y el artículo CAMELS-CL. No va en el ZIP.
+  - El informe final sigue en `documentos/informe_final_tarea1.tex/.pdf`.
+- Rutas actualizadas: `\graphicspath` a `../../figuras/` en los `.tex` movidos y comentarios «Compilar desde»; ruta del punto 4 en el uso de IA del informe; enlaces del dashboard (`index.html` y `dashboard_autocontenido.html`). El botón «Ver Guía de Tarea» ahora abre el informe final, porque la guía no se entrega.
+- README reescrito (integrantes, estructura, procedencia, requisitos, orden de ejecución y armado del ZIP). Nuevo `requirements.txt` con versiones. AGENTS.md actualizado.
+
+### 3. Validaciones
+- El informe final se recompiló con pdflatex (2 pasadas): 61 páginas, sin figuras faltantes. `punto4_fourier_analisis.tex` también compila desde `documentos/anexos/`.
+- No se modificó ningún script, dato, figura ni tabla.
+
+### 4. Próximos Pasos (equipo)
+- Los scripts 01–03 usan rutas relativas a la carpeta de trabajo (se lanzan desde `datos/`, como indica el README). Opcional: pasarlos a rutas basadas en `__file__` como los demás.
+- Las versiones de numpy, pandas, xarray, netCDF4 y Pillow en `requirements.txt` son las de este equipo; confirmarlas si otro integrante hace la ejecución final.
+- Armar el ZIP siguiendo la sección «Armado del ZIP» del README. Hacer Commit y Push en GitHub Desktop.
+
+---
+
+## ENTRADA #31: VERIFICACIÓN DE TODAS LAS CITAS DEL INFORME Y DE LOS ANEXOS
+- **Fecha:** 2026-10-07
+- **Integrante Responsable:** Santiago Ortega Ruiz
+- **Agente de IA utilizado:** Claude Code (Claude Opus 5.5, extensión VS Code)
+- **Estado de la Fase:** COMPLETADA (sin cambios en archivos del informe)
+
+### 1. Procedimiento
+- Se extrajeron las 53 referencias de `documentos/informe_final_tarea1.tex`. Cada DOI se resolvió en doi.org (Crossref, DataCite, NASA y Copernicus) y se compararon autor, título, año, volumen y páginas con el texto del informe.
+- Se contaron las citas de cada referencia en el texto y se revisó el contexto de las de pertinencia menos evidente. También se comprobó en `scripts/` que cada método citado (Lomb–Scargle, Welch/Hann, Hamed–Rao, Newey–West, Pettitt, FDR, Kendall estacional, Theil–Sen, LOESS, AR(1), índice de Walsh–Lawler, n_eff de Bretherton, Wilks) esté implementado.
+- Con el mismo método se verificaron los DOI de `documentos/anexos/`, `documentos/presentacion/`, `figuras/*.csv`, `dashboard/index.html` y `scripts/`.
+
+### 2. Resultados
+- 52/52 DOI del informe existen y coinciden con su registro. Kendall (1975), *Rank Correlation Methods* (4.ª ed., Griffin), no tiene DOI. Es la reimpresión de la 4.ª ed. (1970), la forma habitual de citarla en hidrología; Open Library confirma la obra.
+- Diferencias de año aceptables: Garreaud et al. (2020) salió en línea en 2019 (IJC, vol. 40, 2020). En IMERG V06, DataCite muestra 2022, pero GES DISC recomienda citar Huffman et al. (2019).
+- Las 53 referencias se citan en el texto (ninguna sobra) y todas las citas tienen su entrada en la bibliografía.
+- Anexos y tablas: 9 DOI adicionales, todos válidos (Yang 2016, Favier 2009, Duan 1983, Tapiador 2020, Hosseini-Moghari 2020, Kundzewicz 2004, da Silva 2023, IMERG V07 y los DOI AMS escritos completos). Hay 43 DOI repetidos del informe.
+
+### 3. Próximos Pasos
+- Commit y Push en GitHub Desktop.
+
+---
+
+## ENTRADA #32: PAQUETE DE ENTREGA FINAL (CARPETA + ZIP) Y DASHBOARD SIN CONEXIÓN
+- **Fecha:** 2026-10-07
+- **Integrante Responsable:** Santiago Ortega Ruiz
+- **Agente de IA utilizado:** Claude Code (Claude Opus 5.5, extensión VS Code)
+- **Estado de la Fase:** COMPLETADA
+
+### 1. Resumen de lo Realizado
+- Nuevo `documentos/material_interno/armar_entrega.py`. Genera `entrega_final/Tarea1_Hidrologia_RioMaipo_5710001/` y su `.zip` con solo lo que exige la guía: informe PDF y `.tex`, anexos PDF de los puntos 1–5 (más `informe_seccion_rol_b.md`, que enlaza el dashboard), scripts, datos usados, figuras, tablas, series, dashboard, README, `requirements.txt`, AGENTS y bitácora como evidencia de uso de IA. Deja fuera el material interno, la presentación, las fuentes `.tex` de los anexos, los archivos auxiliares de LaTeX, `__pycache__` y los `*_num.tif` de ASTER, que no se usan. `entrega_final/` quedó en `.gitignore`.
+- README del paquete: `documentos/material_interno/README_entrega.md`.
+- Dashboard sin internet: Font Awesome 6.4.0 y las fuentes Inter/Outfit se copiaron a `dashboard/vendor/`. `index.html` las carga localmente, y `08_build_dashboard_data.py` (nueva función `incrustar_vendor`) las incrusta como data URI en `dashboard_autocontenido.html`, que se regeneró.
+- `requirements.txt` corregido: statsmodels 0.14.5 falla con pandas 3.0 (`deprecate_kwarg`), así que se fijó pandas 2.3.3. Las versiones se probaron en un entorno virtual limpio.
+
+### 2. Validaciones
+- ZIP íntegro (`testzip`): 179 archivos, unos 382 MB.
+- Se descomprimió en una carpeta aparte y se abrió `dashboard_autocontenido.html` en Edge headless con DNS bloqueado (sin internet): 28 gráficos Plotly renderizados, con íconos y tipografías visibles.
+- En la copia descomprimida, y con el entorno virtual, se ejecutaron los 18 scripts de análisis (22, 07, 20, 04–06, 09–12, 21, 13, 14, 16–19 y 08): todos con exit 0. De las 61 tablas/series CSV, 34 salieron idénticas byte a byte; en las otras 27 la diferencia máxima es ≤ 2e-10 (redondeo de coma flotante).
+- El informe compila (pdflatex) desde la copia descomprimida sin figuras faltantes.
+
+### 3. Próximos Pasos
+- Subir `entrega_final/Tarea1_Hidrologia_RioMaipo_5710001.zip` a Google Classroom. Si se cambia algo, volver a ejecutar `python documentos/material_interno/armar_entrega.py`.
+- Hacer Commit y Push en GitHub Desktop (el ZIP no se sube a GitHub).
+
+---
+
+## ENTRADA #33: VERSIÓN FINAL — CORRECCIONES DE LA RÚBRICA (COMPLETITUD, TEMPERATURA DE LA BASE, ISOTERMA, ERSST)
+- **Fecha:** 2026-10-07
+- **Integrante Responsable:** Santiago Ortega Ruiz
+- **Agente de IA utilizado:** Claude Code (Claude Opus 5.5, extensión VS Code)
+- **Estado de la Fase:** COMPLETADA
+
+### 1. Motivo
+Una simulación de calificación con la rúbrica señaló incumplimientos literales de la guía: (a) el criterio de completitud no se aplicaba al CSV maestro (7 medias parciales de Q, entre ellas 1993-05 con 3 días, y 2020-04 con un solo día); (b) la temperatura principal era ERA5-Land de 20 años, aunque la base trae CR2MET de 40 años; (c) el área no era la misma en todo el proyecto (4837.4 frente a 4839.047 km²); (d) el balance anual del punto 3.6 no lo generaba ningún script; (e) no se comparaba el producto de SST.
+
+### 2. Cambios
+- **Datos:** `scripts/01_preparar_datos.py` reescrito (rutas del paquete; P solo con el 100 % de los días; Q y T con >= 80 %; área leída de los atributos CAMELS-CL; T = media de (Tmax+Tmin)/2 CR2MET). Nuevo `datos/datos_mensuales_procesados.csv`. IMERG y ERA5-Land quedan en su propio archivo, `datos/datos_satelitales_imerg_era5.csv`, con valores idénticos a los anteriores. `03_integrar_datos.py` reescrito: el maestro tiene `Temp_C` (CR2MET, principal) y `Temp_ERA5L_C` (contraste). `02` usa rutas del paquete.
+- **Resultado del maestro:** P 484/484, T 484/484, Q 463/484 (21 meses excluidos: 14 sin datos y 7 parciales).
+- **Scripts nuevos:** `23_p1_5_isoterma_cero.py` (isoterma de 0 °C con hipsometría y Γ = 5.5–7.5 °C/km; figura 1.9; tablas 1.13–1.14), `24_p5_3_contraste_ersst.py` (descarga NOAA ERSST v5 y contrasta con ERA5; `datos/campos_ersst/`; figura 5.5; tablas 5.5) y `25_p3_6_balance_anual.py` (balance anual, elasticidad y regresión; tablas 3.6).
+- **Scripts ajustados:** 07 (área, T CR2MET y ERA5-Land, rutas), 13 y 14 (T en el tramo de 40 años; el tramo continuo de Q se detecta automáticamente), 19 (la coherencia interpola todos los vacíos, como el punto 4), 20 (verifica que el maestro aplica el criterio), 21 (compara las columnas del maestro y verifica CR2MET), `rol_c_comun.py` y `p5_comun.py` (etiquetas; centroide real de la cuenca en los mapas).
+- **Informe:** cifras actualizadas en todas las secciones; nuevas subsecciones de temperatura de la base e isoterma de 0 °C, de contraste con ERSST y de balance anual reproducible; 14 figuras de diagnóstico pasan al Anexo B (33 figuras en el cuerpo); referencia Huang et al. (2017) verificada en doi.org; uso de IA y Anexo A actualizados. Compila en 64 páginas sin referencias indefinidas.
+- **Dashboard:** área 4839 km², T CR2MET, textos fijos actualizados y regenerado. `requirements.txt`, README y AGENTS.md actualizados.
+
+### 3. Resultados que cambiaron
+- Caudal: 32 años hidrológicos completos; máximo en nov–ene en los 32. Desaparece la anomalía espuria z = 16.5 de 1993-05. La tendencia apenas cambia: OLS-HAC −18.0 [−26.6, −9.3] m³/s por década.
+- Temperatura CR2MET: +0.18 °C por década (1980–2020), significativa con los tres métodos y tras el FDR; concentrada en enero, abril y mayo y casi nula en invierno. ERA5-Land es 5.6 °C más fría.
+- Isoterma de 0 °C: 2900 m en julio y 4900 m en enero. Entre el 46 % (CR2MET) y el 78 % (ERA5-Land) de la precipitación cae sobre área bajo cero. La isoterma invernal sube +18 m/década (p = 0.13).
+- ERSST v5 frente a ERA5: r(Niño 3.4) = 0.983; correlación de patrón de 0.85–0.93 (Q) y 0.65–0.94 (P_L).
+- Q–Niño 3.4: mayo baja de 0.27 a 0.09 (el valor anterior lo inflaba 1993-05); 8 meses significativos tras el FDR.
+- Espectros: el único pico que supera el umbral global AR(1) es de 2.1 meses en T del periodo común; no es robusto y no se interpreta.
+
+### 4. Próximos pasos
+- Regenerar la entrega con `python documentos/material_interno/armar_entrega.py` y subir el ZIP.
+- Preparar la exposición con las cifras nuevas (temperatura CR2MET e isoterma). Hacer Commit y Push en GitHub Desktop.

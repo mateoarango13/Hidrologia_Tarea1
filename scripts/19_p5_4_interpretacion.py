@@ -147,7 +147,10 @@ def main() -> None:
     n34_series = idx["nino34"].loc[span]
     for var in ["P_local_mm", "Caudal_m3s"]:
         s = b_anom[var].loc[span]
-        s = s.interpolate(limit=8) if s.isna().any() else s   # mismos 14 vacíos de Q que en el punto 4
+        # Mismo tratamiento que el punto 4: se interpola la anomalía en los 21 meses de Q excluidos
+        s = s.interpolate(limit_area="inside") if s.isna().any() else s
+        if s.isna().any():
+            raise ValueError(f"{var}: quedan vacíos sin rellenar en la serie de coherencia")
         f, cxy = signal.coherence(s.to_numpy(), n34_series.to_numpy(), fs=1.0, window="hann",
                                   nperseg=120, noverlap=60)
         coh_curves[var] = (f, cxy)

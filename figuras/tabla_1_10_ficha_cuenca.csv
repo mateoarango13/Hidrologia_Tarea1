@@ -37,6 +37,6 @@ dam_index,1,0 if there is no dam within the catchment; 1 if there is at least on
 record_period_start,1946-11-12,start date of streamflow records
 record_period_end,2020-04-07,end date of streamflow records
 area_poligono_calculada_km2,4844.3,"área del polígono CAMELS-CL (proyección equivalente local, este script)"
-area_implicita_en_Q_lamina_mm_km2,4839.047,área con la que el script 01 convirtió Q a lámina (R = 86.4 n Q / A)
+area_implicita_en_Q_lamina_mm_km2,4839.047,área con la que el script 01 convierte Q a lámina (R = 86.4 n Q / A)
 centroide_poligono_lat_lon,"-33.693, -70.074",promedio de los vértices del anillo exterior (aproximado)
 extension_poligono,lat -34.29 a -33.05; lon -70.44 a -69.77,caja envolvente de la delimitación

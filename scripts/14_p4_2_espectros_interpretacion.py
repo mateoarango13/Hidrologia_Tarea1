@@ -201,7 +201,7 @@ def stability(series: pd.DataFrame, data: pd.DataFrame) -> tuple[pd.DataFrame, d
                      **{f"frac_{k}": v for k, v in fr.items()}})
         curves[(var, config)] = (f, p)
 
-    for col in ("P_local_mm", "Caudal_m3s"):
+    for col in ("P_local_mm", "Caudal_m3s", "Temp_C"):
         a = get(series, "completo", col, "A")
         x = a["valor"].to_numpy(float)
         ad = get(series, "completo", col, "AD")["valor"].to_numpy(float)
@@ -218,8 +218,10 @@ def stability(series: pd.DataFrame, data: pd.DataFrame) -> tuple[pd.DataFrame, d
         record(col, "A 2000-04/2020-03", second - second.mean())
     # Efecto del relleno de vacíos en Q
     anom = rc.add_anomalies(data, "Caudal_m3s")
-    cont = anom.loc[anom["date"].between("1990-12-01", "2014-11-01"), "a"].to_numpy(float)
-    record("Caudal_m3s", "A continua sin relleno 1990-12/2014-11", cont - cont.mean())
+    ini, fin = longest_valid_run(anom, "a")
+    cont = anom.loc[anom["date"].between(ini, fin), "a"].to_numpy(float)
+    CONT_LABEL[0] = f"A continua sin relleno {ini:%Y-%m}/{fin:%Y-%m}"
+    record("Caudal_m3s", CONT_LABEL[0], cont - cont.mean())
     raw = anom.loc[anom["date"].between("1980-04-01", "2020-03-01")]
     raw = raw.loc[raw["a"].notna()]
     t = raw["t"].to_numpy(float) * 12  # meses
@@ -229,6 +231,25 @@ def stability(series: pd.DataFrame, data: pd.DataFrame) -> tuple[pd.DataFrame, d
     p_ls = pgram / np.sum(pgram) * np.var(y) / (f_ls[1] - f_ls[0])  # escalada a varianza total
     record("Caudal_m3s", "A Lomb-Scargle sin relleno 1980-2020", None, f_ls, p_ls, n_res=len(y))
     return pd.DataFrame(rows), curves
+
+
+CONT_LABEL = ["A continua sin relleno"]  # se completa con las fechas del tramo detectado
+
+
+def longest_valid_run(df: pd.DataFrame, column: str) -> tuple:
+    """Tramo más largo de meses consecutivos sin faltantes en `column` (sin relleno)."""
+    valid = df[column].notna().to_numpy()
+    best, start, best_span = 0, None, (None, None)
+    for i, ok in enumerate(valid):
+        if ok and start is None:
+            start = i
+        if (not ok or i == len(valid) - 1) and start is not None:
+            end = i if ok else i - 1
+            if end - start + 1 > best:
+                best, best_span = end - start + 1, (start, end)
+            start = None
+    dates = df["date"].reset_index(drop=True)
+    return dates[best_span[0]], dates[best_span[1]]
 
 
 # ---------------------------------------------------------------------------
@@ -262,8 +283,8 @@ def plot_original(series: pd.DataFrame) -> None:
 
 def plot_anomalies(series: pd.DataFrame, thr: dict) -> None:
     rc.apply_style()
-    combos = [("completo", "P_local_mm"), ("completo", "Caudal_m3s"), ("comun", "P_local_mm"),
-              ("comun", "P_IMERG_mm"), ("comun", "Caudal_m3s"), ("comun", "Temp_C")]
+    combos = [("completo", "P_local_mm"), ("completo", "Caudal_m3s"), ("completo", "Temp_C"),
+              ("comun", "P_local_mm"), ("comun", "P_IMERG_mm"), ("comun", "Caudal_m3s")]
     fig, axes = plt.subplots(3, 2, figsize=(12, 12))
     for ax, (seg, col) in zip(axes.ravel(), combos):
         meta = rc.VARIABLES[col]
@@ -324,7 +345,7 @@ def plot_stability(curves: dict) -> None:
     panels = [
         ("P_local_mm", ["A Hann 1980-2020", "A boxcar 1980-2020", "A Welch 120 m 1980-2020"], "P_L: estimador/ventana"),
         ("P_local_mm", ["A Hann 1980-2020", "A 1980-04/2000-03", "A 2000-04/2020-03"], "P_L: periodo de análisis"),
-        ("Caudal_m3s", ["A Hann 1980-2020", "A continua sin relleno 1990-12/2014-11", "A Lomb-Scargle sin relleno 1980-2020"], "Q: tratamiento de vacíos"),
+        ("Caudal_m3s", ["A Hann 1980-2020", CONT_LABEL[0], "A Lomb-Scargle sin relleno 1980-2020"], "Q: tratamiento de vacíos"),
         ("Caudal_m3s", ["A Hann 1980-2020", "AD (sin tendencia) Hann", "A winsorizada p1-p99"], "Q: tendencia y extremos"),
     ]
     colors = [rc.COLOR_OLS, rc.COLOR_SEN, rc.COLOR_LOESS]

@@ -1,0 +1,17 @@
+indicador,valor
+elevación media de la hipsometría (m),3181.7193280671927
+"fracción de P sobre área bajo cero, CR2MET Γ=6.5, 1980-2020",0.4627767325815354
+"fracción de P sobre área bajo cero, CR2MET Γ=5.5, 1980-2020",0.4585477360482536
+"fracción de P sobre área bajo cero, CR2MET Γ=7.5, 1980-2020",0.46691082703636005
+"fracción de P sobre área bajo cero, CR2MET Γ=6.5, 2000-06/2020-03",0.45616891891571737
+"fracción de P sobre área bajo cero, ERA5-Land Γ=6.5, 2000-06/2020-03",0.7802652540528753
+"fracción de P diaria con T media CR2MET de la cuenca < 0 °C, 1980-2020",0.5948216996107087
+frac_snow_cr2met_1979_2010 (atributo CAMELS-CL),0.7091864
+isoterma invernal (may-sep) media 1980-2019 (m),3195.0046796056545
+años con isoterma invernal completa,40.0
+tendencia OLS isoterma invernal (m/década),18.469864020782243
+IC 95 % HAC inferior (m/década),-5.670377685672721
+IC 95 % HAC superior (m/década),42.610105727237205
+p HAC,0.13372275247897128
+Theil-Sen (m/década),19.04319230769289
+p Mann-Kendall Hamed-Rao,0.25841287570987026

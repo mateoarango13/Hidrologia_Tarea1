@@ -5,15 +5,17 @@ común, calculado sobre los días esperados y antes de cualquier relleno; (ii) u
 tabla de disponibilidad por año y mes con días válidos y meses retenidos o
 excluidos, y (iii) no presentar agregados parciales como mensuales completos.
 
-El CSV maestro (scripts 01-03) se construyó con la suma mensual de P exigiendo
->= 20 días y con la media mensual de Q SIN mínimo de días. Este script, que no
-modifica el CSV maestro, cuantifica qué meses de Q son medias parciales y cuánto
-cambian los resultados principales si se aplica un criterio de completitud del
-80 % de los días del mes.
+El CSV maestro (scripts 01-03) aplica el criterio de completitud: acumulado de P solo
+con el 100 % de los días y medias de Q y T con >= 80 % de los días del mes. La primera
+versión del maestro calculaba Q sin mínimo de días. Este script documenta la
+disponibilidad diaria, verifica que el maestro aplica el criterio y cuantifica cuánto
+cambian los resultados principales de Q entre la media sin mínimo (versión anterior)
+y la media con el criterio (versión final).
 
 Entradas (subconjunto CAMELS-CL efectivamente usado; Alvarez-Garreton et al., 2018):
   datos/camels_cl_5710001/q_m3s_day.csv          caudal medio diario DGA [m3/s]
   datos/camels_cl_5710001/precip_cr2met_day.csv  precipitación diaria CR2MET [mm/día]
+  datos/camels_cl_5710001/tmax_cr2met_day.csv, tmin_cr2met_day.csv  temperatura diaria CR2MET [°C]
   datos/camels_cl_5710001/catchment_attributes.csv
   datos/camels_cl_5710001/polygon/polygon.shp     delimitación CAMELS-CL
   datos/datos_mensuales_maipo.csv                 CSV maestro
@@ -44,7 +46,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "datos" / "camels_cl_5710001"
 OUT = ROOT / "figuras"
 START, END = pd.Timestamp("1980-01-01"), pd.Timestamp("2020-04-30")
-MIN_FRACTION = 0.80  # criterio propuesto: >= 80 % de los días del mes con dato
+MIN_FRACTION = 0.80  # criterio aplicado en el script 01: >= 80 % de los días del mes con dato
 
 
 def read_daily(name: str) -> pd.Series:
@@ -116,6 +118,7 @@ def q_results(monthly_q: pd.Series, label: str) -> dict:
 def main() -> None:
     q = read_daily("q_m3s_day.csv")
     p = read_daily("precip_cr2met_day.csv")
+    t = (read_daily("tmax_cr2met_day.csv") + read_daily("tmin_cr2met_day.csv")) / 2
     master = pd.read_csv(ROOT / "datos" / "datos_mensuales_maipo.csv", parse_dates=["date"], index_col="date")
 
     # (1) Disponibilidad por año-mes y decisión de retención.
@@ -129,17 +132,19 @@ def main() -> None:
     table["Q_csv_maestro"] = master["Caudal_m3s"].reindex(table.index)
     table["retenido_en_csv"] = table["Q_csv_maestro"].notna()
     table["retenido_criterio_80"] = table["fraccion_Q"] >= MIN_FRACTION
+    if not table["retenido_en_csv"].equals(table["retenido_criterio_80"]):
+        raise ValueError("El CSV maestro no aplica el criterio de completitud de Q")
     table["nota"] = ""
-    table.loc[table["retenido_en_csv"] & ~table["retenido_criterio_80"], "nota"] = "media parcial en el CSV"
-    diff = (table["Q_csv_maestro"] - table["Q_media_dias_validos"]).abs()
-    table.loc[diff > 1e-6, "nota"] = "CSV usa solo el 1 de abril (corte del script 01)"
+    table.loc[(table["dias_validos_Q"] > 0) & ~table["retenido_criterio_80"], "nota"] = (
+        "excluido: datos parciales (< 80 % de días)")
+    table.loc[table["dias_validos_Q"] == 0, "nota"] = "excluido: sin datos"
     table.index = table.index.strftime("%Y-%m")
     table.index.name = "mes"
     table.round(4).to_csv(OUT / "tabla_1_7_disponibilidad_diaria_mensual.csv")
 
     # (2) Resumen diario por variable.
     rows = []
-    for name, series in [("Caudal_m3s (DGA)", q), ("P_local_mm (CR2MET)", p)]:
+    for name, series in [("Caudal_m3s (DGA)", q), ("P_local_mm (CR2MET)", p), ("Temp_C (CR2MET)", t)]:
         g = gaps(series)
         longest = g.sort_values("dias", ascending=False).head(3)
         rows.append({"variable": name, "periodo": f"{START.date()} a {END.date()}",
@@ -151,9 +156,9 @@ def main() -> None:
     pd.DataFrame(rows).round(3).to_csv(OUT / "tabla_1_8_resumen_faltantes_diarios.csv", index=False)
 
     # (3) Sensibilidad de los resultados de Q al criterio de completitud.
-    q80 = q.resample("MS").mean().where(q.resample("MS").count() / q.resample("MS").size() >= MIN_FRACTION)
-    sens = pd.DataFrame([q_results(master["Caudal_m3s"], "CSV maestro (sin mínimo de días)"),
-                         q_results(q80, f"criterio >= {int(100 * MIN_FRACTION)} % de días")])
+    q_sin_minimo = q.resample("MS").mean()
+    sens = pd.DataFrame([q_results(q_sin_minimo, "media sin mínimo de días (versión anterior)"),
+                         q_results(master["Caudal_m3s"], f"CSV maestro: criterio >= {int(100 * MIN_FRACTION)} % de días")])
     sens.round(4).to_csv(OUT / "tabla_1_9_sensibilidad_completitud_Q.csv", index=False)
 
     # (4) Ficha de la cuenca con atributos CAMELS-CL y verificación del área.
@@ -172,7 +177,7 @@ def main() -> None:
         {"atributo": "area_poligono_calculada_km2", "valor": round(poly["area_poligono_km2"], 1),
          "descripcion": "área del polígono CAMELS-CL (proyección equivalente local, este script)"},
         {"atributo": "area_implicita_en_Q_lamina_mm_km2", "valor": round(float(implied.median()), 3),
-         "descripcion": "área con la que el script 01 convirtió Q a lámina (R = 86.4 n Q / A)"},
+         "descripcion": "área con la que el script 01 convierte Q a lámina (R = 86.4 n Q / A)"},
         {"atributo": "centroide_poligono_lat_lon", "valor": f"{poly['centroide_lat']:.3f}, {poly['centroide_lon']:.3f}",
          "descripcion": "promedio de los vértices del anillo exterior (aproximado)"},
         {"atributo": "extension_poligono", "valor": f"lat {poly['lat_min']:.2f} a {poly['lat_max']:.2f}; lon {poly['lon_min']:.2f} a {poly['lon_max']:.2f}",
@@ -194,7 +199,7 @@ def main() -> None:
             ax.text(j, i, "×", ha="center", va="center", color="white", fontsize=8, fontweight="bold")
     fig.colorbar(im, ax=ax, label="Fracción de días con caudal válido")
     ax.set_title("Figura 1.8. Días válidos de caudal diario por año y mes (1980–2020)\n"
-                 "× = mes con datos pero < 80 % de días (media parcial en el CSV maestro)", fontsize=9)
+                 "× = mes con datos pero < 80 % de días: excluido del CSV maestro", fontsize=9)
     fig.tight_layout()
     fig.savefig(OUT / "figura_1_8_disponibilidad_diaria.png", dpi=rc.DPI)
     plt.close(fig)

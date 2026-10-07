@@ -68,4 +68,4 @@
 
 - Guía de la tarea: punto 2, secciones 2.1–2.3; anomalías estandarizadas, sección 3.2; rúbrica, páginas 16–17.
 - Checklist vigente: `BITACORA_AGENTES.md`, entrada #3, sección 7.
-- Plan del equipo: `documentos/plan_trabajo_equipo.pdf`, rol B.
+- Plan del equipo: `documentos/material_interno/plan_trabajo_equipo.pdf`, rol B.

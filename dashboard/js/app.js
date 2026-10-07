@@ -1108,7 +1108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         el.innerHTML = `<table class="rb-data-table"><thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${
             rows.map(r => `<tr>${r.map((c, i) => (i === 0 ? `<th>${c}</th>` : `<td>${c}</td>`)).join('')}</tr>`).join('')}</tbody></table>`;
     };
-    const varLabel = { P_local_mm: 'P_L', P_IMERG_mm: 'P_I (IMERG)', Caudal_m3s: 'Q', Temp_C: 'T (ERA5-Land)' };
+    const varLabel = { P_local_mm: 'P_L', P_IMERG_mm: 'P_I (IMERG)', Caudal_m3s: 'Q', Temp_C: 'T (CR2MET)' };
     const varUnit = { P_local_mm: 'mm/mes', P_IMERG_mm: 'mm/mes', Caudal_m3s: 'm³/s', Temp_C: '°C' };
     const repLabel = { X: 'X original', a: 'a anomalía', z: 'z estandarizada' };
     const repUnit = (v, rep) => (rep === 'z' ? 'z' : varUnit[v]);
