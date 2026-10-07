@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import json
+import warnings
 import os
 
 def build_role_c(base_dir, df):
@@ -117,6 +118,94 @@ def build_role_c(base_dir, df):
 
     return {'monthlySlopes': slopes, 'headline': headline, 'waterYear': waterYear,
             'balance': balance, 'spectra': spectra, 'bandFractions': fractions}
+
+
+def build_role_d(base_dir):
+    """Resume las salidas del punto 5 (scripts 16-19) para la vista de exposición.
+
+    Los mapas se recalculan con scripts/p5_comun.py y se promedian en bloques de 3°x3°
+    (r redondeado a 2 decimales) para que el HTML autocontenido siga siendo liviano."""
+    import sys
+    fig_dir = os.path.join(base_dir, 'figuras')
+    needed = ['tabla_5_3_robustez.csv', 'tabla_5_4_perfiles_indices.csv', 'tabla_5_4_dependencia_indices.csv',
+              'tabla_5_4_memoria_nival.csv', 'tabla_5_4_coherencia.csv']
+    missing = [n for n in needed if not os.path.exists(os.path.join(fig_dir, n))]
+    if missing:
+        print(f"Aviso: faltan salidas del punto 5 {missing}; ejecutar scripts 16-19.")
+        return None
+    sys.path.insert(0, os.path.join(base_dir, 'scripts'))
+    import p5_comun as c
+    try:
+        fields, f_anom, b_anom, lat, lon = c.load_all()
+    except FileNotFoundError as error:
+        print(f"Aviso: no se encontraron los campos ERA5 ({error}); se omite el Rol D.")
+        return None
+
+    block = 3
+    lat_keep = (lat >= -72) & (lat <= 72)
+    lat_c, lon_c = lat[lat_keep], lon
+    ny, nx = len(lat_c) // block, len(lon_c) // block
+    lat_out = lat_c[: ny * block].reshape(ny, block).mean(axis=1)
+    lon_out = lon_c[: nx * block].reshape(nx, block).mean(axis=1)
+
+    def coarsen(arr, how='mean'):
+        a = arr[lat_keep][: ny * block, : nx * block].reshape(ny, block, nx, block)
+        with np.errstate(invalid='ignore'), warnings.catch_warnings():
+            warnings.simplefilter('ignore', RuntimeWarning)  # bloques 100 % tierra en SST
+            if how == 'mean':
+                return np.nanmean(a, axis=(1, 3))
+            return np.nanmean(a.astype(float), axis=(1, 3)) >= 0.5
+
+    maps = {}
+    for var in ['P_local_mm', 'Caudal_m3s']:
+        for field in ['sst', 'msl', 'z500']:
+            key = f"{var}|{field}"
+            maps[key] = []
+            for res in c.monthly_maps(b_anom[var], f_anom[field]):
+                valid = np.isfinite(res['r'])
+                r = coarsen(res['r'])
+                sig = coarsen(np.where(valid, res['sig'], np.nan), how='sig')
+                maps[key].append({
+                    # r x 100 como entero (se divide en el navegador): reduce el tamaño del HTML.
+                    'r100': [[None if not np.isfinite(v) else int(round(100 * float(v))) for v in row] for row in r],
+                    'sig': np.flatnonzero(sig.ravel()).tolist(),
+                    'n': int(res['n_pairs']),
+                    'areaFdr': round(c.area_fraction(res['sig'], valid, lat), 3)
+                })
+    coast = []
+    for seg in c.coastline_segments():
+        coast.extend([[round(float(x), 1), round(float(y), 1)] for x, y in seg[::2]])
+        coast.append(None)
+
+    prof = pd.read_csv(os.path.join(fig_dir, 'tabla_5_4_perfiles_indices.csv'))
+    profiles = {}
+    for (var, idx, period), g in prof.groupby(['variable_cuenca', 'indice', 'periodo']):
+        g = g.sort_values('mes')
+        profiles[f"{var}|{idx}|{period}"] = {
+            'r': g['r'].round(3).tolist(), 'lo': g['ic_inf'].round(3).tolist(), 'hi': g['ic_sup'].round(3).tolist(),
+            'q': [None if pd.isna(v) else round(float(v), 4) for v in g['q_fdr']]}
+    rob = pd.read_csv(os.path.join(fig_dir, 'tabla_5_3_robustez.csv'))
+    robustness = {}
+    for col in ['patron_anomalia_vs_sin_tendencia', 'patron_completo_vs_sin_3_extremos',
+                'patron_PL_vs_IMERG_2000_2020', 'patron_1980_1999_vs_2000_2019']:
+        vals = rob[col].dropna()
+        robustness[col] = {'min': round(float(rob.groupby(['variable_cuenca', 'campo'])[col].median().min()), 2),
+                           'max': round(float(rob.groupby(['variable_cuenca', 'campo'])[col].median().max()), 2)} if len(vals) else None
+    dep = pd.read_csv(os.path.join(fig_dir, 'tabla_5_4_dependencia_indices.csv')).sort_values('mes')
+    memory = pd.read_csv(os.path.join(fig_dir, 'tabla_5_4_memoria_nival.csv'))
+    coh = pd.read_csv(os.path.join(fig_dir, 'tabla_5_4_coherencia.csv')).set_index('variable_cuenca')
+    return {
+        'lat': [round(float(v), 1) for v in lat_out], 'lon': [round(float(v), 1) for v in lon_out],
+        'basin': [c.BASIN_LON, c.BASIN_LAT], 'coast': coast, 'maps': maps, 'profiles': profiles,
+        'robustness': robustness,
+        'dependence': {k: dep[k].round(3).tolist() for k in dep.columns if k != 'mes'},
+        'memory': {'months': memory['mes_Q'].tolist(), 'rPL': memory['r_Q_vs_PL_may_ago'].round(3).tolist(),
+                   'rNino': memory['r_Q_vs_Nino34_may_ago'].round(3).tolist(), 'n': memory['n'].tolist()},
+        'coherence': {v: {'mean': round(float(coh.loc[v, 'coherencia_media_2_7_anios']), 2),
+                          'max': round(float(coh.loc[v, 'coherencia_max_2_7_anios']), 2),
+                          'periodYears': round(float(coh.loc[v, 'periodo_max_anios']), 1),
+                          'threshold': round(float(coh.loc[v, 'umbral_95_aprox']), 2)} for v in coh.index}
+    }
 
 
 def build_data():
@@ -396,10 +485,13 @@ def build_data():
     
     # 9. Rol C: datos de la exposición de tendencias y Fourier (requiere scripts 09-14).
     rolC = build_role_c(base_dir, df)
+    # 10. Rol D (punto 5): mapas de correlación e índices climáticos (requiere scripts 16-19).
+    rolD = build_role_d(base_dir)
 
     # Combinar todo el dataset
     dashboard_data = {
         'rolC': rolC,
+        'rolD': rolD,
         'qualitySummary': qualitySummary,
         'cicloAnual': cicloAnual,
         'histPrecip': histPrecip,
@@ -418,7 +510,7 @@ def build_data():
     }
     
     # Guardar en js/data.js
-    js_content = f"window.dashboardData = {json.dumps(dashboard_data, indent=2)};\n"
+    js_content = f"window.dashboardData = {json.dumps(dashboard_data, separators=(',', ':'), ensure_ascii=False)};\n"
     out_js = os.path.join(base_dir, 'dashboard', 'js', 'data.js')
     os.makedirs(os.path.dirname(out_js), exist_ok=True)
     with open(out_js, 'w', encoding='utf-8') as f:
@@ -461,7 +553,7 @@ def build_data():
     # 3. Reemplazar data.js y app.js al final
     scripts_bundle = f"""
     <script>
-    window.dashboardData = {json.dumps(dashboard_data, indent=2)};
+    window.dashboardData = {json.dumps(dashboard_data, separators=(',', ':'), ensure_ascii=False)};
     </script>
     <script>
     {app_js_content}

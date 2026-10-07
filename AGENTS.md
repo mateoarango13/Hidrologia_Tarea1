@@ -40,6 +40,7 @@ Antes de responder al usuario o escribir cualquier línea de código, el agente 
 - `figuras/`: Gráficas generadas en alta resolución (mínimo 300 DPI) listas para el informe.
 - `documentos/`: Enunciado de la tarea, rúbricas y borradores del informe.
 - `datos_pesados_ignorados/`: Archivos `.zip`, NetCDF o HDF5 crudos (IGNORADOS por `.gitignore`, no subir a GitHub).
+- **Excepción acordada (2026-10-07):** `datos/campos_era5/` contiene los campos ERA5 mensuales globales a 1° del punto 5 (SST, presión al nivel del mar y geopotencial 500 hPa, 1979–2020). Sí se versionan en GitHub (cada archivo < 100 MB) para que todo el equipo use los mismos datos; se generan con `scripts/15_p5_1_descargar_campos_era5.py`.
 
 ---
 

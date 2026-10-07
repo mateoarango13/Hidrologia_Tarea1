@@ -1395,3 +1395,45 @@ body {
     .rc-chart { height: 300px; }
     .rc-chart-tall { height: 340px; }
 }
+
+/* Rol D: exposición del punto 5 (mapas interactivos de correlación) */
+.rd-slide-nav { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.rd-chart-map { height: 400px; }
+.rd-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+    margin: 0 0 12px;
+}
+.rd-segment { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.rd-segment > span {
+    margin-right: 4px;
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.rd-segment button {
+    min-width: 34px;
+    padding: 4px 9px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--bg-panel);
+    color: var(--text-secondary);
+    font-size: 0.74rem;
+    cursor: pointer;
+}
+.rd-segment button.active { border-color: #d97853; color: var(--text-primary); font-weight: 650; background: rgba(217, 120, 83, 0.12); }
+.rd-segment button:focus-visible { outline: 2px solid #56a9ba; outline-offset: 2px; }
+.rd-toggle { display: flex; align-items: center; gap: 6px; color: var(--text-secondary); font-size: 0.74rem; cursor: pointer; }
+
+@media (max-width: 900px) {
+    .rd-slide-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .rd-chart-map { height: 320px; }
+}
+@media (max-width: 650px) {
+    .rd-chart-map { height: 260px; }
+    .rd-segment button { min-width: 30px; padding: 4px 6px; }
+}

@@ -33,3 +33,11 @@ Anotar decisiones de integración, versiones de figuras/tablas, contribuciones r
 
 - La ejecución requiere cuenta CDS, aceptación manual de los términos y token personal configurado localmente. No compartir el token con agentes ni incorporarlo al repositorio.
 - Instalar `cdsapi`, configurar el token según la documentación oficial de Windows y ejecutar `python scripts/08_descargar_era5_mensual.py`. Después validar cobertura mensual, variables, unidades y coordenadas antes de producir mapas.
+
+## Registro D-20261007-02 — Punto 5 ejecutado (apoyo de Tomás Gómez, Rol C)
+- Estado: REVISADO (pendiente revisión del Rol D y verificación de referencias).
+- Datos: ERA5 mensual global 1°, 1979–2020, SST/PNM/Z500 en `datos/campos_era5/` (script 15).
+- Método: correlación por mes calendario a través de los años (ℓ = 0; Q–SST con ℓ = 6), anomalías con referencia 2000-06/2020-03, n_eff (Bretherton et al. 1999), FDR BH α = 0.10 por mapa; índices a priori Niño 3.4, PNM Pacífico SE y Z500 Chile central.
+- Resultado: control local robusto (PNM/Z500 abr–oct, |r| 0.4–0.7); ENSO ago–oct para P_L y todo el año para Q vía nieve; no estacionario después de 2000.
+- Código: scripts 16–19 y `p5_comun.py`. Informe: `documentos/punto5_teleconexiones_analisis.tex`.
+- Revisó: pendiente (Bryan Salazar).

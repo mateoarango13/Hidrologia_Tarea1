@@ -54,9 +54,9 @@
                     <i class="fa-solid fa-wave-square"></i>
                     <span>Rol C: Tendencias y Fourier</span>
                 </button>
-                <button class="nav-btn disabled" data-target="rol-d">
+                <button class="nav-btn" data-target="rol-d">
                     <i class="fa-solid fa-globe"></i>
-                    <span>Rol D: Teleconexiones (Próximamente)</span>
+                    <span>Rol D: Teleconexiones</span>
                 </button>
             </nav>
 
@@ -540,11 +540,11 @@
                         </header>
 
                         <nav class="rb-slide-nav rc-slide-nav" aria-label="Pasos de la exposición del Rol C">
-                            <button class="rb-slide-step rc-step active" data-slide-to="0" aria-current="step"><span>01 · 40 s</span><b>¿Qué cambia?</b></button>
-                            <button class="rb-slide-step rc-step" data-slide-to="1"><span>02 · 35 s</span><b>¿Tendencia o salto?</b></button>
-                            <button class="rb-slide-step rc-step" data-slide-to="2"><span>03 · 45 s</span><b>¿Por qué?</b></button>
-                            <button class="rb-slide-step rc-step" data-slide-to="3"><span>04 · 40 s</span><b>¿Qué escalas?</b></button>
-                            <button class="rb-slide-step rc-step" data-slide-to="4"><span>05 · 20 s</span><b>Síntesis</b></button>
+                            <button class="rb-slide-step rc-step active" data-slide-to="0" aria-current="step"><span>01</span><b>¿Qué cambia?</b></button>
+                            <button class="rb-slide-step rc-step" data-slide-to="1"><span>02</span><b>¿Tendencia o salto?</b></button>
+                            <button class="rb-slide-step rc-step" data-slide-to="2"><span>03</span><b>¿Por qué?</b></button>
+                            <button class="rb-slide-step rc-step" data-slide-to="3"><span>04</span><b>¿Qué escalas?</b></button>
+                            <button class="rb-slide-step rc-step" data-slide-to="4"><span>05</span><b>Síntesis</b></button>
                         </nav>
 
                         <div class="rb-presentation-stage" aria-live="polite">
@@ -603,6 +603,85 @@
                             <button class="rc-present-prev" type="button" disabled><i class="fa-solid fa-arrow-left"></i> Anterior</button>
                             <span id="rc-slide-count">1 / 5</span>
                             <button class="rc-present-next" type="button">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+                        </footer>
+                    </section>
+                </section>
+
+                <!-- VISTA: ROL D -->
+                <section id="rol-d" class="view">
+                    <section id="rd-exposition" class="rc-shell">
+                        <header class="rb-presentation-head">
+                            <div>
+                                <p class="rb-kicker">ROL D · PUNTO 5 · CORRELACIÓN CON EL CLIMA GLOBAL</p>
+                                <h2>¿Qué océanos y qué circulación atmosférica gobiernan el agua del Maipo?</h2>
+                                <p>Correlación, mes a mes y a través de los años, de la precipitación de referencia y el caudal con la SST, la presión al nivel del mar y la altura de 500 hPa de ERA5 (1980–2020).</p>
+                            </div>
+                        </header>
+
+                        <nav class="rb-slide-nav rd-slide-nav" aria-label="Pasos de la exposición del Rol D">
+                            <button class="rb-slide-step rd-step active" data-slide-to="0" aria-current="step"><span>01</span><b>¿Qué regiones?</b></button>
+                            <button class="rb-slide-step rd-step" data-slide-to="1"><span>02</span><b>¿En qué meses?</b></button>
+                            <button class="rb-slide-step rd-step" data-slide-to="2"><span>03</span><b>¿Es robusto?</b></button>
+                            <button class="rb-slide-step rd-step" data-slide-to="3"><span>04</span><b>¿Qué mecanismo?</b></button>
+                            <button class="rb-slide-step rd-step" data-slide-to="4"><span>05</span><b>Síntesis</b></button>
+                        </nav>
+
+                        <div class="rb-presentation-stage" aria-live="polite">
+                            <section class="rb-slide rd-slide active" data-slide="0" aria-labelledby="rd-slide-title-0">
+                                <header class="rb-slide-heading"><div><p class="rb-kicker">01 · PUNTOS 5.1–5.2 · REGIONES Y SIGNOS</p><h3 id="rd-slide-title-0">La lluvia responde a la presión frente a Chile; el caudal, a ENSO</h3></div></header>
+                                <div class="rd-controls" role="group" aria-label="Selección del mapa">
+                                    <div class="rd-segment" data-rd-control="var"><span>Cuenca</span><button data-value="P_local_mm" class="active">P<sub>L</sub></button><button data-value="Caudal_m3s">Q</button></div>
+                                    <div class="rd-segment" data-rd-control="field"><span>Campo</span><button data-value="sst">SST</button><button data-value="msl" class="active">PNM</button><button data-value="z500">Z500</button></div>
+                                    <div class="rd-segment rd-months" data-rd-control="month"><span>Mes</span></div>
+                                    <label class="rd-toggle"><input type="checkbox" id="rd-show-sig" checked> Significancia FDR</label>
+                                </div>
+                                <div class="rb-slide-grid">
+                                    <article class="rb-panel rb-slide-chart-panel"><div class="rb-panel-heading"><div><h4 id="rd-map-title">Correlación de Pearson</h4><p>Anomalías del mismo mes calendario a través de los años · ℓ = 0 · puntos: significativo tras FDR · estrella: cuenca</p></div><span class="rb-sample" id="rd-map-n"></span></div><div id="chart-rd-mapa" class="rb-chart rd-chart-map"></div></article>
+                                    <aside class="rb-slide-aside"><p class="rb-kicker">LECTURA DEL MAPA</p><div class="rb-slide-metrics"><div><span>Área significativa (FDR)</span><b id="rd-area"></b></div><div><span>Años (pares)</span><b id="rd-npairs"></b></div></div><p class="rb-slide-takeaway">Rojo: el campo alto acompaña a más agua en la cuenca; azul: el campo bajo acompaña a más agua. P<sub>L</sub> en invierno con PNM y Q con SST son los patrones más claros.</p><small>Cada celda es una correlación de unos 40 pares de años, no un mapa de un solo mes. La correlación no implica causalidad ni capacidad de pronóstico. Respaldo: figuras 5.2a–f y 5.3a.</small></aside>
+                                </div>
+                            </section>
+
+                            <section class="rb-slide rd-slide" data-slide="1" aria-labelledby="rd-slide-title-1" hidden>
+                                <header class="rb-slide-heading"><div><p class="rb-kicker">02 · PUNTO 5.4 · CÓMO CAMBIA LA ASOCIACIÓN SEGÚN EL MES</p><h3 id="rd-slide-title-1">La circulación local manda de abril a octubre; ENSO, a fines del invierno</h3></div></header>
+                                <div class="rd-controls" role="group" aria-label="Variable de la cuenca"><div class="rd-segment" data-rd-control="profileVar"><span>Cuenca</span><button data-value="P_local_mm" class="active">P<sub>L</sub></button><button data-value="Caudal_m3s">Q</button></div></div>
+                                <div class="rb-slide-grid">
+                                    <article class="rb-panel rb-slide-chart-panel"><div class="rb-panel-heading"><div><h4>Correlación con tres índices definidos a priori</h4><p>1980–2020 · barras: IC 95 % con n<sub>eff</sub> · relleno: q<sub>FDR</sub> &lt; 0.05 (72 pruebas)</p></div><span class="rb-tag">Cajas fijas</span></div><div id="chart-rd-perfiles" class="rb-chart rc-chart"></div></article>
+                                    <aside class="rb-slide-aside"><p class="rb-kicker">ÍNDICES</p><div class="rb-slide-metrics"><div><span>Niño 3.4 (SST)</span><b>5°S–5°N, 170°–120°W</b></div><div><span>PNM Pacífico SE</span><b>30–40°S, 75–90°W</b></div><div><span>Z500 Chile central</span><b>30–40°S, 70–85°W</b></div></div><p class="rb-slide-takeaway">Para P<sub>L</sub>, la PNM y la Z500 locales son significativas de abril a octubre (r ≈ −0.5 a −0.7); Niño 3.4, solo de agosto a octubre. Q se asocia con Niño 3.4 todo el año.</p><small>Las cajas se definieron por mecanismo antes de ver los mapas, para no elegir la celda de mayor correlación. Respaldo: figura 5.4a.</small></aside>
+                                </div>
+                            </section>
+
+                            <section class="rb-slide rd-slide" data-slide="2" aria-labelledby="rd-slide-title-2" hidden>
+                                <header class="rb-slide-heading"><div><p class="rb-kicker">03 · PUNTO 5.3 · TENDENCIAS, EXTREMOS, FUENTE Y SUBPERIODOS</p><h3 id="rd-slide-title-2">Robusto a la tendencia, a los extremos y a IMERG; no estacionario en el tiempo</h3></div></header>
+                                <div class="rb-slide-grid">
+                                    <article class="rb-panel rb-slide-chart-panel"><div class="rb-panel-heading"><div><h4>Correlación por subperiodo</h4><p>Arriba: Q con Niño 3.4 · abajo: P<sub>L</sub> con PNM del Pacífico SE</p></div><span class="rb-tag">20 años por subperiodo</span></div><div id="chart-rd-subperiodos" class="rb-chart rc-chart-tall"></div></article>
+                                    <aside class="rb-slide-aside"><p class="rb-kicker">CORRELACIÓN ENTRE PATRONES (PACÍFICO)</p><div class="rb-slide-metrics"><div><span>Con y sin tendencia</span><b id="rd-rob-tend"></b></div><div><span>Sin los 3 años extremos</span><b id="rd-rob-ext"></b></div><div><span>P<sub>L</sub> frente a IMERG</span><b id="rd-rob-imerg"></b></div><div><span>1980–1999 frente a 2000–2019</span><b id="rd-rob-sub"></b></div></div><p class="rb-slide-takeaway">La tendencia no produce las correlaciones. Pero la relación Q–ENSO se debilita después de 2000, durante la megasequía; la de la lluvia con la presión local se mantiene en pleno invierno.</p><small>Medianas por combinación de la correlación espacial entre mapas (1 = mismo patrón). Respaldo: figuras 5.3b, 5.3c y 5.4c.</small></aside>
+                                </div>
+                            </section>
+
+                            <section class="rb-slide rd-slide" data-slide="3" aria-labelledby="rd-slide-title-3" hidden>
+                                <header class="rb-slide-heading"><div><p class="rb-kicker">04 · PUNTO 5.4 · MECANISMO Y REZAGO</p><h3 id="rd-slide-title-3">ENSO → lluvia invernal → nieve → caudal de verano</h3></div></header>
+                                <div class="rb-slide-grid">
+                                    <article class="rb-panel rb-slide-chart-panel"><div class="rb-panel-heading"><div><h4>Caudal de deshielo frente al invierno previo (mayo–agosto)</h4><p>r entre Q de cada mes y la lluvia P<sub>L</sub> o Niño 3.4 promedio del invierno anterior</p></div><span class="rb-sample" id="rd-memory-n"></span></div><div id="chart-rd-memoria" class="rb-chart rc-chart"></div></article>
+                                    <aside class="rb-slide-aside"><p class="rb-kicker">DEPENDENCIA ENTRE CAMPOS</p><div class="rb-slide-metrics"><div><span>r(P<sub>L</sub>, Niño 3.4) en agosto</span><b id="rd-dep-n34"></b></div><div><span>Parcial, controlando la PNM</span><b id="rd-dep-n34p"></b></div><div><span>r(P<sub>L</sub>, PNM) en julio</span><b id="rd-dep-pnm"></b></div><div><span>Parcial, controlando Niño 3.4</span><b id="rd-dep-pnmp"></b></div><div><span>Coherencia Q–Niño 3.4 (2–7 años)</span><b id="rd-coh"></b></div></div><p class="rb-slide-takeaway">ENSO actúa en parte a través de la presión local; la nieve traslada la señal invernal al caudal de verano. La banda de 2–7 años es solo marginalmente coherente con ENSO.</p><small>Asociación simultánea: no se evaluó capacidad de pronóstico fuera de muestra. Respaldo: figuras 5.4b–d.</small></aside>
+                                </div>
+                            </section>
+
+                            <section class="rb-slide rd-slide" data-slide="4" aria-labelledby="rd-slide-title-4" hidden>
+                                <header class="rb-slide-heading"><div><p class="rb-kicker">05 · SÍNTESIS DE LOS PUNTOS 4 Y 5</p><h3 id="rd-slide-title-4">Un control local robusto, un control remoto modulado y cambiante</h3></div></header>
+                                <div class="rb-conclusion-grid">
+                                    <article><span>01 · Sólido</span><h4>Circulación local</h4><p>Baja presión y vaguada frente a Chile central acompañan la lluvia de abril a octubre (|r| ≈ 0.5–0.7), estable en pleno invierno.</p></article>
+                                    <article><span>02 · Exploratorio</span><h4>ENSO vía nieve</h4><p>El Niño se asocia con más lluvia a fines del invierno y con más caudal todo el año, transmitido por la nieve.</p></article>
+                                    <article><span>03 · Límite</span><h4>No estacionario</h4><p>La señal de ENSO se debilitó después de 2000 (megasequía); no hay un ciclo interanual robusto ni evidencia de pronóstico.</p></article>
+                                </div>
+                                <p class="rb-final-line">El agua del Maipo depende de que los frentes crucen el anticiclón; ENSO cambia esas probabilidades y la nieve guarda la señal hasta el verano.</p>
+                                <p class="rb-final-caveat">ERA5 a 1°, 1980–2020, cajas definidas a priori. El papel del Modo Anular del Sur se sugiere por el dipolo de presión, pero no se probó.</p>
+                            </section>
+                        </div>
+
+                        <footer class="rb-presentation-controls">
+                            <button class="rd-present-prev" type="button" disabled><i class="fa-solid fa-arrow-left"></i> Anterior</button>
+                            <span id="rd-slide-count">1 / 5</span>
+                            <button class="rd-present-next" type="button">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
                         </footer>
                     </section>
                 </section>

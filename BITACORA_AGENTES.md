@@ -976,6 +976,50 @@ next_actions:
 - Recordatorio: borrar `documentos/bitacora_datos_temporal/` antes del ZIP final.
 
 
+## ENTRADA #26: PUNTO 5 — DESCARGA ERA5, MAPAS DE CORRELACIÓN, ROBUSTEZ E INTERPRETACIÓN
+- **Fecha:** 2026-10-07
+- **Integrante Responsable:** Tomás Gómez (apoyo al Rol D)
+- **Agente de IA utilizado:** Claude Code (Claude Opus 5.5, extensión VS Code)
+- **Estado de la Fase:** COMPLETADA (análisis, LaTeX, dashboard y guía); referencias marcadas `% VERIFICAR` pendientes de lectura
+
+### 1. Revisión de Pares (Peer Review del trabajo previo)
+- Se revisó `scripts/08_descargar_era5_mensual.py` (Rol D, Bryan): pedía 2000–2020 y no incluía SST. Para correlacionar mes a mes con P_L y Q (1980–2020) se necesita 1979–2020 y SST. No se modificó su script; se creó `15_p5_1_descargar_campos_era5.py`. Además, su nombre `08_` coincide con `08_build_dashboard_data.py`.
+- **Excepción a `AGENTS.md` (decidida por el integrante):** los NetCDF del punto 5 se versionan en `datos/campos_era5/` (91 MB y 48 MB, menores que el límite de 100 MB de GitHub). Se añadió una negación en `.gitignore` y una nota en `AGENTS.md` (sección 2.C).
+
+### 2. Resumen de lo Realizado en esta Sesión
+- **Descarga (CDS API):** ERA5 *monthly averaged reanalysis*, global, 1°, 1979-01 a 2020-12 (504 meses): SST + PNM (single levels) y geopotencial de 500 hPa (pressure levels). Verificados tiempos, mallas, unidades y rangos.
+- `scripts/p5_comun.py`: lectura y conversión (K→°C, Pa→hPa, Φ/g0→Z en m), máscara de hielo (SST ≤ −1.6 °C), anomalías con la referencia 2000-06/2020-03, correlación vectorizada por celda y mes con rezago ℓ, n_eff (Bretherton et al. 1999), FDR BH α = 0.10 (Wilks 2016), costas Natural Earth 110 m (`datos/campos_era5/ne_110m_coastline.geojson`, dominio público), sin cartopy.
+- **5.1** `16_p5_1_campos_climaticos.py`: metadatos y climatologías.
+- **5.2** `17_p5_2_mapas_correlacion.py`: 6 combinaciones × 12 mapas (ℓ = 0), Q–SST con ℓ = 6 y Pearson frente a Spearman.
+- **5.3** `18_p5_3_robustez.py`: significancia FDR, con/sin tendencia, subperiodos, sin extremos, P_L frente a IMERG y mapa de todos los meses.
+- **5.4** `19_p5_4_interpretacion.py`: índices a priori (Niño 3.4, PNM Pacífico SE, Z500 Chile central), perfiles mensuales con IC, rezagos, memoria nival, correlación parcial, subperiodos y coherencia espectral.
+- `documentos/punto5_teleconexiones_analisis.tex` y `.pdf`: análisis de 5.1–5.4 y síntesis de los puntos 4–5.
+- Dashboard: vista "Rol D: Teleconexiones" con 5 diapositivas y mapa interactivo (variable/campo/mes/FDR); `08_build_dashboard_data.py` con `build_role_d` y JSON compacto (data.js 1.6 MB; autocontenido 5.3 MB). Se quitaron los tiempos de los botones del Rol C.
+- `documentos/guion_exposicion_punto5.tex` y `.pdf`: guía de 3 minutos.
+
+### 3. Archivos Modificados o Generados
+- `datos/campos_era5/` (2 NetCDF + GeoJSON de costas), `.gitignore`, `AGENTS.md`
+- `scripts/15_p5_1_descargar_campos_era5.py`, `scripts/p5_comun.py`, `scripts/16_p5_1_...` a `scripts/19_p5_4_...`, `scripts/08_build_dashboard_data.py`
+- `figuras/figura_5_1_*`, `figura_5_2a–h_*`, `figura_5_3a–d_*`, `figura_5_4a–d_*`, `tabla_5_*`, `serie_5_4_indices_climaticos.csv`
+- `dashboard/index.html`, `dashboard/js/app.js`, `dashboard/css/styles.css`, `dashboard/js/data.js`, `dashboard/dashboard_autocontenido.html`
+- `documentos/punto5_teleconexiones_analisis.tex/.pdf`, `documentos/guion_exposicion_punto5.tex/.pdf`
+
+### 4. Conclusiones y Métricas Relevantes
+- P_L con PNM del Pacífico SE (abr–oct): r de −0.38 a −0.64; con Z500 de Chile central: r de −0.46 a −0.69 (16 de 30 pruebas significativas tras FDR, de un total de 72). Con Niño 3.4 solo en ago–oct (0.40, 0.50, 0.62).
+- Q con Niño 3.4 todo el año (0.27–0.63; 7 meses tras FDR). Q (oct–mar) frente a P_L de may–ago previa: r = 0.84–0.92 (memoria nival).
+- Correlación parcial P_L–Niño 3.4 en agosto: 0.40 → 0.20 al controlar la PNM (ENSO actúa vía la circulación local).
+- Robustez (correlación entre patrones): con/sin tendencia 0.89–0.99; sin extremos 0.75–0.92; IMERG 0.82–0.86; subperiodos 0.04–0.34 (no estacionario: Q–Niño 3.4 en septiembre 0.81 → 0.31).
+- Coherencia con Niño 3.4 en 2–7 años: marginal (máximo 0.46–0.49, umbral 0.39).
+- Verificación: los scripts 15–19 y 08 se ejecutan sin errores; ambos `.tex` compilan sin errores; el JS del dashboard se probó con DOM simulado (28 gráficas sin excepciones). No se revisó en un navegador real.
+
+### 5. Próximos Pasos para el Siguiente Integrante / Agente
+- Rol D (Bryan): revisar y apropiarse del análisis (es su punto en el plan); decidir si se retira `08_descargar_era5_mensual.py` o se renombra.
+- Verificar las referencias y el DOI del producto de niveles de presión (`% VERIFICAR`).
+- Abrir el dashboard y revisar visualmente la vista del Rol D (claro y oscuro).
+- Recordatorio: borrar `documentos/bitacora_datos_temporal/` antes del ZIP final.
+
+---
+
 ## PLANTILLA PARA NUEVAS ENTRADAS (COPIAR Y PEGAR ABAJO)
 
 ```markdown

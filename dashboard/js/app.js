@@ -712,6 +712,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         renderRoleC(data.rolC);
+        renderRoleD(data.rolD);
 
         // === ROL A: Tabla Síntesis ===
         if (data.tablaSintesisA && document.getElementById('tabla-sintesis-rol-a')) {
@@ -914,6 +915,185 @@ document.addEventListener('DOMContentLoaded', () => {
             legend: { orientation: 'h', y: -0.22, x: 0 },
             margin: { t: 26, r: 12, l: 62, b: 70 }
         }, plotConfig);
+    };
+
+
+    // === ROL D: exposición del punto 5 (teleconexiones) ===
+    const rdSlides = [...document.querySelectorAll('#rd-exposition .rd-slide')];
+    const rdSteps = [...document.querySelectorAll('#rd-exposition .rd-step')];
+    let rdCurrent = 0;
+    const rdState = { var: 'P_local_mm', field: 'msl', month: 7, showSig: true, profileVar: 'P_local_mm' };
+    const setRoleDSlide = index => {
+        if (!rdSlides.length) return;
+        rdCurrent = Math.max(0, Math.min(rdSlides.length - 1, index));
+        rdSlides.forEach((slide, i) => {
+            slide.hidden = i !== rdCurrent;
+            slide.classList.toggle('active', i === rdCurrent);
+        });
+        rdSteps.forEach((step, i) => {
+            step.classList.toggle('active', i === rdCurrent);
+            if (i === rdCurrent) step.setAttribute('aria-current', 'step');
+            else step.removeAttribute('aria-current');
+        });
+        document.getElementById('rd-slide-count').textContent = `${rdCurrent + 1} / ${rdSlides.length}`;
+        document.querySelector('#rd-exposition .rd-present-prev').disabled = rdCurrent === 0;
+        document.querySelector('#rd-exposition .rd-present-next').innerHTML = rdCurrent === rdSlides.length - 1
+            ? 'Volver al inicio <i class="fa-solid fa-rotate-left"></i>'
+            : 'Siguiente <i class="fa-solid fa-arrow-right"></i>';
+        window.dispatchEvent(new Event('resize'));
+    };
+    if (rdSlides.length) {
+        rdSteps.forEach((step, i) => step.addEventListener('click', () => setRoleDSlide(i)));
+        document.querySelector('#rd-exposition .rd-present-prev').addEventListener('click', () => setRoleDSlide(rdCurrent - 1));
+        document.querySelector('#rd-exposition .rd-present-next').addEventListener('click', () => setRoleDSlide(rdCurrent === rdSlides.length - 1 ? 0 : rdCurrent + 1));
+        document.addEventListener('keydown', event => {
+            if (!document.getElementById('rol-d').classList.contains('active')) return;
+            if (event.target instanceof HTMLElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(event.target.tagName)) return;
+            if (event.key === 'ArrowRight') setRoleDSlide(rdCurrent + 1);
+            if (event.key === 'ArrowLeft') setRoleDSlide(rdCurrent - 1);
+        });
+        const monthNames = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+        const monthBox = document.querySelector('#rd-exposition .rd-months');
+        if (monthBox) {
+            monthNames.forEach((name, i) => {
+                const b = document.createElement('button');
+                b.type = 'button';
+                b.dataset.value = String(i + 1);
+                b.textContent = name;
+                if (i + 1 === rdState.month) b.classList.add('active');
+                monthBox.appendChild(b);
+            });
+        }
+        document.querySelectorAll('#rd-exposition .rd-segment').forEach(group => {
+            group.addEventListener('click', event => {
+                const button = event.target.closest('button');
+                if (!button) return;
+                const key = group.dataset.rdControl;
+                rdState[key] = key === 'month' ? Number(button.dataset.value) : button.dataset.value;
+                group.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === button));
+                if (key === 'profileVar') renderRoleDProfiles();
+                else renderRoleDMap();
+            });
+        });
+        const sigToggle = document.getElementById('rd-show-sig');
+        if (sigToggle) sigToggle.addEventListener('change', () => { rdState.showSig = sigToggle.checked; renderRoleDMap(); });
+    }
+
+    const rdFieldNames = { sst: 'SST', msl: 'presión al nivel del mar', z500: 'altura geopotencial de 500 hPa' };
+    const rdVarNames = { P_local_mm: 'Precipitación de referencia P_L', Caudal_m3s: 'Caudal Q' };
+    const rdMonthLong = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+    const renderRoleDMap = () => {
+        const rd = window.dashboardData?.rolD;
+        if (!rd || !document.getElementById('chart-rd-mapa')) return;
+        const m = rd.maps[`${rdState.var}|${rdState.field}`][rdState.month - 1];
+        const z = m.r100.map(row => row.map(v => (v === null ? null : v / 100)));
+        const nx = rd.lon.length;
+        const sigLon = [], sigLat = [];
+        if (rdState.showSig) m.sig.forEach(k => { sigLon.push(rd.lon[k % nx]); sigLat.push(rd.lat[Math.floor(k / nx)]); });
+        const coastX = rd.coast.map(p => (p ? p[0] : null));
+        const coastY = rd.coast.map(p => (p ? p[1] : null));
+        const colors = getThemeColors();
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        const base = baseChartLayout();
+        Plotly.react('chart-rd-mapa', [
+            { type: 'heatmap', x: rd.lon, y: rd.lat, z, zmin: -1, zmax: 1, zmid: 0,
+              colorscale: [[0, '#2166ac'], [0.25, '#92c5de'], [0.5, '#f7f7f7'], [0.75, '#f4a582'], [1, '#b2182b']],
+              colorbar: { title: { text: 'r', side: 'right' }, thickness: 12, len: 0.9 },
+              hovertemplate: 'lon %{x:.0f}° · lat %{y:.0f}°<br>r = %{z:.2f}<extra></extra>' },
+            { type: 'scatter', mode: 'lines', x: coastX, y: coastY, line: { color: isLight ? '#3b3b3b' : '#cbd5e1', width: 0.7 },
+              hoverinfo: 'skip', showlegend: false },
+            { type: 'scatter', mode: 'markers', x: sigLon, y: sigLat, marker: { size: 2.5, color: isLight ? '#111111' : '#e2e8f0' },
+              hoverinfo: 'skip', showlegend: false },
+            { type: 'scatter', mode: 'markers', x: [rd.basin[0]], y: [rd.basin[1]], marker: { symbol: 'star', size: 13, color: '#ffd400', line: { color: '#111', width: 1 } },
+              hovertemplate: 'Cuenca del Maipo<extra></extra>', showlegend: false }
+        ], {
+            ...base,
+            margin: { t: 8, r: 8, l: 36, b: 30 },
+            xaxis: { ...base.xaxis, range: [0, 360], tickvals: [60, 120, 180, 240, 300], ticktext: ['60°E', '120°E', '180°', '120°W', '60°W'], showgrid: false, zeroline: false },
+            yaxis: { ...base.yaxis, range: [-72, 72], scaleanchor: 'x', scaleratio: 1, tickvals: [-60, -30, 0, 30, 60], ticktext: ['60°S', '30°S', '0°', '30°N', '60°N'], showgrid: false, zeroline: false },
+            showlegend: false
+        }, plotConfig);
+        setText('rd-map-title', `${rdVarNames[rdState.var]} de ${rdMonthLong[rdState.month - 1]} frente a ${rdFieldNames[rdState.field]}`);
+        setText('rd-map-n', `n = ${m.n} años`);
+        setText('rd-area', `${(100 * m.areaFdr).toFixed(1)} % del área válida`);
+        setText('rd-npairs', `${m.n}`);
+    };
+
+    const renderRoleDProfiles = () => {
+        const rd = window.dashboardData?.rolD;
+        if (!rd || !document.getElementById('chart-rd-perfiles')) return;
+        const months = ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
+        const specs = [['nino34', 'Niño 3.4 (SST)', '#d97853'], ['pnm_sepac', 'PNM Pacífico SE', '#2a78d6'], ['z500_chile', 'Z500 Chile central', '#1baf7a']];
+        const traces = specs.map(([key, name, color], k) => {
+            const d = rd.profiles[`${rdState.profileVar}|${key}|1980-2020`];
+            const sig = d.q.map(q => q !== null && q < 0.05);
+            return { x: months.map((_, i) => i + 1 + (k - 1) * 0.16), y: d.r, name, type: 'scatter', mode: 'lines+markers',
+                line: { color, width: 2 },
+                marker: { size: 9, color: sig.map(s => (s ? color : 'rgba(0,0,0,0)')), line: { color, width: 2 } },
+                error_y: { type: 'data', symmetric: false, array: d.hi.map((v, i) => v - d.r[i]), arrayminus: d.r.map((v, i) => v - d.lo[i]), color, thickness: 1.2, width: 0 },
+                customdata: d.q, hovertemplate: `${name}<br>mes %{x:.0f}<br>r = %{y:.2f}<br>q FDR = %{customdata:.3f}<extra></extra>` };
+        });
+        const base = baseChartLayout();
+        Plotly.react('chart-rd-perfiles', traces, {
+            ...base,
+            xaxis: { ...base.xaxis, tickvals: months.map((_, i) => i + 1), ticktext: months },
+            yaxis: { ...base.yaxis, title: 'r (mismo mes, ℓ = 0)', range: [-0.9, 0.9], zeroline: true, zerolinewidth: 1.5 },
+            legend: { orientation: 'h', y: 1.12, x: 0 },
+            margin: { t: 26, r: 12, l: 58, b: 36 }
+        }, plotConfig);
+    };
+
+    const renderRoleD = rd => {
+        if (!rd || !document.getElementById('chart-rd-mapa')) return;
+        renderRoleDMap();
+        renderRoleDProfiles();
+        const months = ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
+        const x = months.map((_, i) => i + 1);
+        const sub = (key, axis, showLegend) => [['1980-1999', '#56a9ba', 'solid'], ['2000-2019', '#d97853', 'solid'], ['1980-2020', '#94a3b8', 'dot']].map(([period, color, dash]) => ({
+            x, y: rd.profiles[`${key}|${period}`].r, name: period, type: 'scatter', mode: 'lines+markers', yaxis: axis,
+            line: { color, width: 2, dash }, marker: { size: 6 }, showlegend: showLegend,
+            hovertemplate: `${period}<br>mes %{x}<br>r = %{y:.2f}<extra></extra>` }));
+        const base = baseChartLayout();
+        Plotly.react('chart-rd-subperiodos', [...sub('Caudal_m3s|nino34', 'y', true), ...sub('P_local_mm|pnm_sepac', 'y2', false)], {
+            ...base,
+            grid: { rows: 2, columns: 1, pattern: 'independent', roworder: 'top to bottom' },
+            xaxis: { ...base.xaxis, anchor: 'y2', tickvals: x, ticktext: months },
+            yaxis: { ...base.yaxis, domain: [0.56, 1], title: 'Q–Niño 3.4', range: [-0.4, 1], zeroline: true },
+            yaxis2: { ...base.yaxis, domain: [0, 0.44], title: 'P_L–PNM', range: [-0.9, 0.4], zeroline: true },
+            legend: { orientation: 'h', y: 1.1, x: 0 },
+            margin: { t: 26, r: 12, l: 62, b: 36 }
+        }, plotConfig);
+        const rob = rd.robustness;
+        const range = o => (o ? `${o.min.toFixed(2)} – ${o.max.toFixed(2)}` : '—');
+        setText('rd-rob-tend', range(rob.patron_anomalia_vs_sin_tendencia));
+        setText('rd-rob-ext', range(rob.patron_completo_vs_sin_3_extremos));
+        setText('rd-rob-imerg', range(rob.patron_PL_vs_IMERG_2000_2020));
+        setText('rd-rob-sub', range(rob.patron_1980_1999_vs_2000_2019));
+
+        const mem = rd.memory;
+        const mNames = mem.months.map(m => ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'][m - 1]);
+        Plotly.react('chart-rd-memoria', [
+            { x: mNames, y: mem.rPL, name: 'Lluvia P_L may–ago previa', type: 'bar', marker: { color: '#56a9ba' },
+              hovertemplate: 'Q de %{x} vs P_L invernal<br>r = %{y:.2f}<extra></extra>' },
+            { x: mNames, y: mem.rNino, name: 'Niño 3.4 may–ago previo', type: 'bar', marker: { color: '#d97853' },
+              hovertemplate: 'Q de %{x} vs Niño 3.4 invernal<br>r = %{y:.2f}<extra></extra>' }
+        ], {
+            ...base,
+            barmode: 'group',
+            xaxis: { ...base.xaxis, title: 'Mes del caudal (temporada de deshielo)' },
+            yaxis: { ...base.yaxis, title: 'r', range: [0, 1] },
+            legend: { orientation: 'h', y: 1.12, x: 0 },
+            margin: { t: 26, r: 12, l: 52, b: 44 }
+        }, plotConfig);
+        setText('rd-memory-n', `n ≈ ${Math.min(...mem.n)}–${Math.max(...mem.n)} años`);
+        const dep = rd.dependence;
+        setText('rd-dep-n34', `${dep.r_PL_nino34[7].toFixed(2)}`);
+        setText('rd-dep-n34p', `${dep.r_parcial_PL_nino34_dado_pnm[7].toFixed(2)}`);
+        setText('rd-dep-pnm', `${dep.r_PL_pnm[6].toFixed(2)}`);
+        setText('rd-dep-pnmp', `${dep.r_parcial_PL_pnm_dado_nino34[6].toFixed(2)}`);
+        const coh = rd.coherence.Caudal_m3s;
+        setText('rd-coh', `media ${coh.mean.toFixed(2)} · máx. ${coh.max.toFixed(2)} (umbral ${coh.threshold.toFixed(2)})`);
     };
 
     // Renderizar al cargar
