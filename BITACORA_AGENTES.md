@@ -979,6 +979,37 @@ next_actions:
 
 ---
 
+## ENTRADA #25: ROL C — VISTA DE EXPOSICIÓN EN EL DASHBOARD Y GUÍA DE 3 MINUTOS
+- **Fecha:** 2026-10-07
+- **Integrante Responsable:** Tomás Gómez — Rol C
+- **Agente de IA utilizado:** Claude Code (Claude Opus 5.5, extensión VS Code)
+- **Estado de la Fase:** COMPLETADA (verificación visual en navegador pendiente)
+
+### 1. Revisión de Pares (Peer Review del trabajo previo)
+- Se revisó la vista del Rol B (modo Exposición). Su JS seleccionaba `.rb-slide-step`, `.rb-present-prev` y `.rb-present-next` de forma global; se acotaron a `#rb-exposition` para que convivan con el Rol C sin cambiar el comportamiento del Rol B.
+
+### 2. Resumen de lo Realizado en esta Sesión
+- `dashboard/index.html`: se habilitó "Rol C: Tendencias y Fourier", con 5 diapositivas (una por pregunta) y tiempos sugeridos: 01 ¿Qué cambia? (40 s), 02 ¿Tendencia o salto? (35 s), 03 ¿Por qué? (45 s), 04 ¿Qué escalas? (40 s), 05 Síntesis (20 s).
+- `dashboard/js/app.js`: controlador de diapositivas del Rol C (botones y flechas del teclado) y 4 gráficas Plotly: pendientes mensuales relativas con IC y FDR, anomalía por año hidrológico con tendencia y escalón de Pettitt, balance P–R anual y espectros de anomalías normalizados con fondo AR(1). Las cifras se inyectan desde los datos.
+- `dashboard/css/styles.css`: estilos `rc-*` (navegación de 5 pasos, alturas, niveles de evidencia).
+- `scripts/08_build_dashboard_data.py`: nueva función `build_role_c` que resume las salidas de los scripts 09–14 en `dashboardData.rolC`; se regeneraron `data.js` y `dashboard_autocontenido.html`.
+- `documentos/guion_exposicion_rol_c.tex`: guía personal con mapa de 3 minutos, cómo leer cada gráfica, guion, cifras clave, preguntas probables, qué no decir y decisiones de método.
+
+### 3. Archivos Modificados o Generados
+- `dashboard/index.html`, `dashboard/js/app.js`, `dashboard/css/styles.css`, `dashboard/js/data.js`, `dashboard/dashboard_autocontenido.html`
+- `scripts/08_build_dashboard_data.py`
+- `documentos/guion_exposicion_rol_c.tex`
+
+### 4. Conclusiones y Métricas Relevantes
+- Verificación: sintaxis de `app.js` validada con JavaScriptCore; ejecución con DOM y Plotly simulados: las 21 gráficas (roles A, B y C) se generan sin excepciones y las cifras inyectadas del Rol C coinciden con las tablas (Q −18.2 m³/s/déc; P −39 % y R −42 %; r1 0.15/0.81). No se probó la página en un navegador real.
+
+### 5. Próximos Pasos para el Siguiente Integrante / Agente
+- Abrir `dashboard/index.html` (o el autocontenido) y revisar visualmente la vista del Rol C en modo claro y oscuro.
+- Si cambian las tablas del Rol C, volver a correr `python scripts/08_build_dashboard_data.py`.
+- Recordatorio: borrar `documentos/bitacora_datos_temporal/` antes del ZIP final.
+
+---
+
 ## PLANTILLA PARA NUEVAS ENTRADAS (COPIAR Y PEGAR ABAJO)
 
 ```markdown

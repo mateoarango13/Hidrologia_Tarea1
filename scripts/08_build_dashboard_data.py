@@ -3,6 +3,122 @@ import numpy as np
 import json
 import os
 
+def build_role_c(base_dir, df):
+    """Resume las salidas del Rol C (scripts 09-14) para la vista de exposición."""
+    fig_dir = os.path.join(base_dir, 'figuras')
+    required = ['tabla_3_5_fdr_mensual.csv', 'tabla_3_5_comparacion_metodos.csv',
+                'tabla_3_5_salto_vs_tendencia.csv', 'tabla_3_5_sensibilidad.csv',
+                'serie_3_2_anomalias_rol_c.csv', 'serie_4_1_series_espectrales.csv',
+                'tabla_4_2_fracciones_banda.csv', 'tabla_4_2_persistencia.csv']
+    missing = [name for name in required if not os.path.exists(os.path.join(fig_dir, name))]
+    if missing:
+        print(f"Aviso: faltan salidas del Rol C {missing}; ejecutar scripts 09-14.")
+        return None
+    from scipy import signal
+
+    # 01. Pendientes mensuales relativas a la media mensual del registro (% por década).
+    monthly = pd.read_csv(os.path.join(fig_dir, 'tabla_3_5_fdr_mensual.csv'))
+    slopes = {}
+    for column in ['P_local_mm', 'Caudal_m3s']:
+        sub = monthly[monthly['variable'] == column].sort_values('mes')
+        mean = df.groupby('month')[column].mean().reindex(sub['mes']).to_numpy()
+        slopes[column] = {
+            'pct': (100 * sub['ols_slope_dec'].to_numpy() / mean).round(1).tolist(),
+            'pctLow': (100 * sub['ols_ci_low_hac_dec'].to_numpy() / mean).round(1).tolist(),
+            'pctHigh': (100 * sub['ols_ci_high_hac_dec'].to_numpy() / mean).round(1).tolist(),
+            'abs': sub['ols_slope_dec'].round(2).tolist(),
+            'q': sub['q_ols_hac'].round(4).tolist(),
+            'signifFdr': sub['signif_ols_fdr'].astype(bool).tolist()
+        }
+
+    comp = pd.read_csv(os.path.join(fig_dir, 'tabla_3_5_comparacion_metodos.csv'))
+    def pick(variable, rep, method_prefix):
+        row = comp[(comp['variable'] == variable) & (comp['representacion'] == rep) &
+                   comp['metodo'].str.startswith(method_prefix)].iloc[0]
+        return {k: (None if pd.isna(row[k]) else round(float(row[k]), 3))
+                for k in ['pendiente', 'ic_inf', 'ic_sup', 'p']}
+    headline = {v: {'ols': pick(v, 'a', 'OLS (IC HAC)'), 'sen': pick(v, 'a', 'Mann-Kendall'),
+                    'senEst': pick(v, 'X', 'Kendall estacional')}
+                for v in ['P_local_mm', 'P_IMERG_mm', 'Caudal_m3s', 'Temp_C']}
+
+    # 02. Anomalía media por año hidrológico (abr-mar, >= 10 meses), tendencia y escalón.
+    anom = pd.read_csv(os.path.join(fig_dir, 'serie_3_2_anomalias_rol_c.csv'), parse_dates=['date'])
+    anom['wy'] = np.where(anom['date'].dt.month >= 4, anom['date'].dt.year, anom['date'].dt.year - 1)
+    steps = pd.read_csv(os.path.join(fig_dir, 'tabla_3_5_salto_vs_tendencia.csv')).set_index('variable')
+    sens = pd.read_csv(os.path.join(fig_dir, 'tabla_3_5_sensibilidad.csv'))
+    waterYear = {}
+    for column in ['P_local_mm', 'Caudal_m3s']:
+        g = anom.groupby('wy')[f'{column}__a'].agg(['mean', 'count'])
+        g = g[g['count'] >= 10]
+        years = g.index.to_numpy(dtype=float)
+        coef = np.polyfit(years, g['mean'].to_numpy(), 1)
+        step_year = int(steps.loc[column, 'anio_cambio_pettitt'])
+        early = sens[(sens['variable'] == column) & (sens['prueba'] == 'fecha final')].iloc[0]
+        waterYear[column] = {
+            'years': g.index.astype(int).tolist(),
+            'anomaly': g['mean'].round(2).tolist(),
+            'trend': np.polyval(coef, years).round(2).tolist(),
+            'step': [round(float(steps.loc[column, 'media_antes' if y < step_year else 'media_despues']), 2)
+                     for y in g.index],
+            'stepYear': step_year,
+            'pPettitt': round(float(steps.loc[column, 'p_pettitt']), 3),
+            'deltaAic': round(float(steps.loc[column, 'delta_AIC_tendencia_menos_escalon']), 2),
+            'until2009Slope': round(float(early['ols_dec']), 2),
+            'until2009P': round(float(early['ols_p_hac']), 3)
+        }
+
+    # 03. Balance anual: precipitación y escorrentía (años hidrológicos completos).
+    tmp = df.copy()
+    tmp['wy'] = np.where(tmp['month'] >= 4, tmp['year'], tmp['year'] - 1)
+    wy = tmp.groupby('wy').agg(P=('P_local_mm', 'sum'), nP=('P_local_mm', 'count'),
+                               R=('Q_lamina_mm', 'sum'), nR=('Q_lamina_mm', 'count'))
+    wy = wy[(wy['nP'] == 12) & (wy['nR'] == 12)]
+    pre, post = wy.loc[1980:2009], wy.loc[2010:2019]
+    s = wy.copy()
+    s['Pprev'] = s['P'].shift(1)
+    s = s.dropna(subset=['Pprev'])
+    X = np.column_stack([np.ones(len(s)), s['P'], s['Pprev']])
+    beta, *_ = np.linalg.lstsq(X, s['R'].to_numpy(), rcond=None)
+    resid = s['R'].to_numpy() - X @ beta
+    balance = {
+        'years': wy.index.astype(int).tolist(), 'P': wy['P'].round(1).tolist(), 'R': wy['R'].round(1).tolist(),
+        'preP': round(float(pre['P'].mean()), 1), 'postP': round(float(post['P'].mean()), 1),
+        'preR': round(float(pre['R'].mean()), 1), 'postR': round(float(post['R'].mean()), 1),
+        'nPre': int(len(pre)), 'nPost': int(len(post)),
+        'dPpct': round(100 * (post['P'].mean() / pre['P'].mean() - 1), 1),
+        'dRpct': round(100 * (post['R'].mean() / pre['R'].mean() - 1), 1),
+        'residPre': round(float(resid[s.index < 2010].mean()), 1),
+        'residPost': round(float(resid[s.index >= 2010].mean()), 1)
+    }
+    balance['elasticity'] = round(balance['dRpct'] / balance['dPpct'], 2)
+
+    # 04. Espectros de anomalías normalizados por la varianza (Welch) y fondo AR(1).
+    ser = pd.read_csv(os.path.join(fig_dir, 'serie_4_1_series_espectrales.csv'))
+    persist = pd.read_csv(os.path.join(fig_dir, 'tabla_4_2_persistencia.csv'))
+    bands = pd.read_csv(os.path.join(fig_dir, 'tabla_4_2_fracciones_banda.csv'))
+    bands = bands[bands['estimador'] == 'hann']
+    spectra = {}
+    for column in ['P_local_mm', 'Caudal_m3s']:
+        x = ser[(ser['tramo'] == 'completo') & (ser['variable'] == column) &
+                (ser['transformacion'] == 'A')]['valor'].to_numpy()
+        f, p = signal.welch(x, fs=1.0, window='hann', nperseg=120, noverlap=60,
+                            scaling='density', detrend=False)
+        f, p = f[1:], p[1:]
+        r1 = float(persist[(persist['tramo'] == 'completo') & (persist['variable'] == column) &
+                           (persist['transformacion'] == 'A')]['r1'].iloc[0])
+        ar1 = 2 * (1 - r1 ** 2) / (1 - 2 * r1 * np.cos(2 * np.pi * f) + r1 ** 2)
+        spectra[column] = {'f': f.round(5).tolist(), 'p': (p / x.var()).round(4).tolist(),
+                           'ar1': ar1.round(4).tolist(), 'r1': round(r1, 2)}
+    band_cols = ['interanual (T > 18 meses)', 'anual (10.5-14 meses)', 'semianual (5.25-7 meses)']
+    fractions = {}
+    for _, row in bands.iterrows():
+        key = f"{row['tramo']}|{row['variable']}|{row['transformacion']}"
+        fractions[key] = {c.split(' ')[0]: round(float(row[c]), 3) for c in band_cols}
+
+    return {'monthlySlopes': slopes, 'headline': headline, 'waterYear': waterYear,
+            'balance': balance, 'spectra': spectra, 'bandFractions': fractions}
+
+
 def build_data():
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     datos_path = os.path.join(base_dir, 'datos', 'datos_mensuales_maipo.csv')
@@ -278,8 +394,12 @@ def build_data():
             'rows': df_tabla.values.tolist()
         }
     
+    # 9. Rol C: datos de la exposición de tendencias y Fourier (requiere scripts 09-14).
+    rolC = build_role_c(base_dir, df)
+
     # Combinar todo el dataset
     dashboard_data = {
+        'rolC': rolC,
         'qualitySummary': qualitySummary,
         'cicloAnual': cicloAnual,
         'histPrecip': histPrecip,
