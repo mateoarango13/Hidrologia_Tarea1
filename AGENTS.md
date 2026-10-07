@@ -42,6 +42,7 @@ Antes de responder al usuario o escribir cualquier línea de código, el agente 
 - `datos_pesados_ignorados/`: Archivos `.zip`, NetCDF o HDF5 crudos (IGNORADOS por `.gitignore`, no subir a GitHub).
 - **Excepción acordada (2026-10-07):** `datos/campos_era5/` contiene los campos ERA5 mensuales globales a 1° del punto 5 (SST, presión al nivel del mar y geopotencial 500 hPa, 1979–2020). Sí se versionan en GitHub (cada archivo < 100 MB) para que todo el equipo use los mismos datos; se generan con `scripts/15_p5_1_descargar_campos_era5.py`.
 - **Excepción (2026-10-07):** `datos/camels_cl_5710001/` contiene el subconjunto diario CAMELS-CL efectivamente usado (caudal, precipitación y Tmax/Tmin CR2MET, atributos y polígono, ~1.5 MB). La guía exige entregar los datos de entrada en el ZIP; lo usan `scripts/20_p1_4_auditoria_diaria.py` y `scripts/21_p3_1_temperatura_cr2met.py`.
+- **Excepción (2026-10-07):** `datos/ASTGTM_003-20261004_142607/` contiene las cuatro teselas ASTER GDEM v3 (30 m; S34–S35, W070–W071; ~128 MB, cada archivo < 31 MB) descargadas de NASA Earthdata. Las usa `scripts/22_p1_0_topografia_cuenca.py` para el mapa topográfico y la curva hipsométrica. Solo se leen los `*_dem.tif`; los `*_num.tif` son metadatos de calidad del producto.
 
 ---
 

@@ -1273,3 +1273,36 @@ next_actions:
 - Actualizar README (integrantes, carpetas, orden de ejecución) y crear `requirements.txt` con versiones.
 - Agregar al repositorio el código que generó los mapas de la cuenca y la curva hipsométrica, o documentar su procedencia.
 - Borrar `documentos/bitacora_datos_temporal/` antes del ZIP. Hacer Commit y Push en GitHub Desktop.
+
+
+---
+
+## ENTRADA #29: AUTORES, DASHBOARD SIN ROLES, SCRIPT DE TOPOGRAFÍA Y DOI CORREGIDOS
+- **Fecha:** 2026-10-07
+- **Integrante Responsable:** Tomás Gómez Zuleta
+- **Agente de IA utilizado:** Claude Code (Claude Opus 5.5, extensión VS Code)
+- **Estado de la Fase:** COMPLETADA
+
+### 1. Revisión de Pares
+- Se revisó la entrada #28. Se confirmó que los DOI erróneos del script 07 y del documento del punto 4 los había escrito la propia IA; ahora se declaran así en la sección de uso de IA del informe.
+
+### 2. Resumen de lo Realizado
+- Informe final (`documentos/informe_final_tarea1.tex/.pdf`): los autores aparecen con su nombre completo, sin roles. La cédula y el correo de cada uno van en notas al pie numeradas 1–4. También se quitaron los roles del texto de uso de IA, de las contribuciones y de una leyenda. La Figura 1a se acredita como captura de NASA Earthdata Search. La Figura 1b y la Figura 2 remiten al nuevo script 22, y se añadió la cita de ASTER GDEM v3 (DOI 10.5067/ASTER/ASTGTM.003, verificado en DataCite). El anexo de trazabilidad incluye el script 22 y la carpeta ASTGTM.
+- Dashboard: cada pestaña lleva una sola palabra (Exploración, Modelación, Tendencias, Teleconexiones). Se quitaron los nombres y los «Rol X» de los encabezados y de las etiquetas aria. Se regeneraron `data.js` y `dashboard_autocontenido.html`.
+- Nuevo `scripts/22_p1_0_topografia_cuenca.py`: une las 4 teselas ASTER GDEM v3 de `datos/ASTGTM_003-20261004_142607/`, rasteriza el polígono CAMELS-CL y genera `figuras/mapa_topografico_Maipo.png`, `figuras/curva_hipsometrica_Maipo.png` y `figuras/tabla_1_12_hipsometria.csv`.
+- DOI corregidos en `scripts/07_rol_a_explorador.py`:
+  - Rutllant & Fuenzalida 1991 → 10.1002/joc.3370110105
+  - Garreaud et al. 2017 → 10.5194/hess-21-6307-2017
+  - Viale & Nuñez 2011 → 10.1175/2010JHM1284.1
+  - Garreaud et al. 2009 → 10.1016/j.palaeo.2007.10.032
+  - Con el script se regeneraron `tabla_1_2` y `tabla_1_6`. Los PNG del punto 1 se restauraron a la versión de git porque su contenido no cambia; solo variaban unos píxeles por las fuentes.
+- `documentos/punto4_fourier_analisis.tex/.pdf`: corregido el DOI de Gilman et al. 1963 (OTPSON); recompilado.
+
+### 3. Validaciones numéricas
+- Script 22 frente a las figuras originales: mínimo 869 m, máximo 6559 m, media 3181 m, mediana 3225 m, 60 % del área sobre 3000 m, 17 % sobre 4000 m y franja máxima de 3250–3500 m (598 km²). Son idénticos a los valores de las figuras previas.
+- Área de los píxeles DEM dentro del polígono: 4852 km² (CAMELS-CL: 4839 km²; +0.3 % por la rasterización).
+- Todos los DOI nuevos se comprobaron en Crossref o DataCite.
+
+### 4. Próximos Pasos (equipo)
+- Los pendientes de la entrada #28 siguen vigentes, salvo los ya resueltos: DOI y código de los mapas.
+- Borrar `documentos/bitacora_datos_temporal/` antes del ZIP. Hacer Commit y Push en GitHub Desktop.

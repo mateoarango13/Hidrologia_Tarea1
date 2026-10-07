@@ -176,13 +176,18 @@
 
 \noindent
 \begin{tabular}{@{}l@{\;}p{0.80\textwidth}}
-    \textbf{Autores:} & Mateo Arango (Rol A, punto 1) · Santiago Ortega (Rol B, punto 2) · Tomás Gómez Zuleta (Rol C, puntos 3 y 4) · Bryan Salazar (Rol D, punto 5) \\
+    \textbf{Autores:} & Mateo Arango Cortés\footnotemark[1] · Bryan Alexander Salazar Castañeda\footnotemark[2] \\ & Santiago Ortega Ruiz\footnotemark[3] · Tomás Gómez Zuleta\footnotemark[4] \\
     \textbf{Curso:} & Hidrología --- Tarea 1 \\
     \textbf{Profesor:} & Carlos David Hoyos \\
     \textbf{Cuenca:} & Río Maipo en El Manzano, estación DGA 5710001 (CAMELS-CL), 4839~km$^2$ \\
     \textbf{Repositorio:} & código, datos y productos en la estructura \archivo{scripts/}, \archivo{datos/}, \archivo{figuras/} y \archivo{documentos/} del paquete entregado \\
     \textbf{Fecha:} & Octubre de 2026
 \end{tabular}
+\footnotetext[1]{Mateo Arango Cortés --- c.c. 1018231944 --- \href{mailto:marangoco@unal.edu.co}{marangoco@unal.edu.co}}
+\footnotetext[2]{Bryan Alexander Salazar Castañeda --- c.c. 1038866217 --- \href{mailto:brsalazarc@unal.edu.co}{brsalazarc@unal.edu.co}}
+\footnotetext[3]{Santiago Ortega Ruiz --- c.c. 1120097548 --- \href{mailto:sortegaru@unal.edu.co}{sortegaru@unal.edu.co}}
+\footnotetext[4]{Tomás Gómez Zuleta --- c.c. 1038866012 --- \href{mailto:togomezz@unal.edu.co}{togomezz@unal.edu.co}}
+\setcounter{footnote}{4}
 
 \vspace{0.3cm}
 \begin{quote}
@@ -252,16 +257,16 @@ La cuenca se ubica en la vertiente occidental de los Andes, a barlovento de los 
 \begin{subfigure}[b]{0.46\textwidth}
 \centering
 \includegraphics[width=\textwidth]{mapa_topografico_Maipo.png}
-\caption{Topografía (ASTER GDEM v3, 30~m) y estación de salida.}
+\caption{Topografía (ASTER GDEM v3, 30~m), salida y punto más alto.}
 \end{subfigure}
-\caption{Ubicación y relieve de la cuenca del Río Maipo en El Manzano. La delimitación es el polígono oficial de CAMELS-CL (\archivo{datos/camels_cl_5710001/polygon/polygon.shp}), trazado a partir de la topografía hasta la salida corregida de la estación DGA \citep{AlvarezGarreton2018}. La imagen de fondo del panel (a) proviene de un visor de imágenes satelitales y el panel (b) del modelo digital ASTER GDEM v3.}
+\caption{Ubicación y relieve de la cuenca del Río Maipo en El Manzano. La delimitación es el polígono oficial de CAMELS-CL (\archivo{datos/camels_cl_5710001/polygon/polygon.shp}), trazado a partir de la topografía hasta la salida corregida de la estación DGA \citep{AlvarezGarreton2018}. El panel (a) es una captura del visor de NASA Earthdata Search (\url{https://search.earthdata.nasa.gov}) tomada durante la descarga del modelo de elevación. El panel (b) lo genera \archivo{scripts/22_p1_0_topografia_cuenca.py} a partir de ASTER GDEM v3 \citep{ASTERGDEM}.}
 \label{fig:mapas}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.86\textwidth]{curva_hipsometrica_Maipo.png}
-\caption{Curva hipsométrica y distribución del área por franjas de 250~m (ASTER GDEM v3). El 60\,\% del área está sobre 3000~m y el 17\,\% sobre 4000~m; la máxima superficie se encuentra entre 3250 y 3500~m.}
+\caption{Curva hipsométrica y distribución del área por franjas de 250~m, calculadas con el área real de cada píxel de ASTER GDEM v3 dentro del polígono CAMELS-CL \citep{ASTERGDEM} (\archivo{scripts/22_p1_0_topografia_cuenca.py}; \archivo{figuras/tabla_1_12_hipsometria.csv}). El 60\,\% del área está sobre 3000~m y el 17\,\% sobre 4000~m; la máxima superficie se encuentra entre 3250 y 3500~m.}
 \label{fig:hipso}
 \end{figure}
 
@@ -348,7 +353,7 @@ Ambas variables cumplen el límite del 10\,\%. La Figura~\ref{fig:dispdiaria} mu
 
 \begin{table}[H]
 \centering\small
-\caption{Sensibilidad de los resultados del caudal al criterio de completitud mensual (\archivo{figuras/tabla_1_9_sensibilidad_completitud_Q.csv}). Tendencias sobre anomalías mensuales con la referencia 2000-06/2020-03 y las mismas funciones del Rol C.}
+\caption{Sensibilidad de los resultados del caudal al criterio de completitud mensual (\archivo{figuras/tabla_1_9_sensibilidad_completitud_Q.csv}). Tendencias sobre anomalías mensuales con la referencia 2000-06/2020-03 y las mismas funciones de \archivo{scripts/rol_c_comun.py}.}
 \label{tab:sens_completitud}
 \resizebox{\textwidth}{!}{\begin{tabular}{lrr}
 \toprule
@@ -1307,15 +1312,15 @@ Caudal ligado a ENSO todo el año & ENSO $\rightarrow$ lluvia invernal $\rightar
 
 Aplicamos el Nivel A (abierto) de la política de IA del curso. Todas las sesiones con IA quedaron registradas en \archivo{BITACORA_AGENTES.md} con fecha, integrante, herramienta, tareas, validaciones y próximos pasos, siguiendo el protocolo de \archivo{AGENTS.md}.
 
-\paragraph{1. Herramientas y versiones.} GitHub Copilot en VS Code (Santiago Ortega, Rol B; Bryan Salazar, Rol D, para preparar la descarga ERA5; tareas del dashboard); Antigravity de Google DeepMind (Mateo Arango, Rol A; revisiones cruzadas y corrección del dashboard, registrada con el modelo Gemini 3.8 Flash); y Claude Code con el modelo Claude Opus 5.5, en la extensión de VS Code (Tomás Gómez, Rol C y apoyo al punto 5, y ensamblaje de este informe). La versión exacta del modelo de Copilot no quedó registrada.
+\paragraph{1. Herramientas y versiones.} GitHub Copilot en VS Code (Santiago Ortega Ruiz; Bryan Alexander Salazar Castañeda, para preparar la descarga ERA5; tareas del dashboard); Antigravity de Google DeepMind (Mateo Arango Cortés; revisiones cruzadas y corrección del dashboard, registrada con el modelo Gemini 3.8 Flash); y Claude Code con el modelo Claude Opus 5.5, en la extensión de VS Code (Tomás Gómez Zuleta: puntos 3 y 4, apoyo al punto 5 y ensamblaje de este informe). La versión exacta del modelo de Copilot no quedó registrada.
 
 \paragraph{2. Tareas en las que intervino la IA.} Programación y depuración de los scripts de análisis y de figuras; propuestas de métodos (errores HAC, corrección de Hamed--Rao, FDR, umbrales AR(1) por Monte Carlo, $n_{\mathrm{eff}}$ de Bretherton); configuración de la descarga del CDS; construcción del dashboard; búsqueda orientativa de bibliografía; y redacción y edición de los documentos \LaTeX{} y de este informe.
 
 \paragraph{3. Resultados verificados y cómo.} (i) Conversión de caudal a lámina comprobada a mano (mayo de 1980). (ii) Invarianza de la pendiente OLS frente a la anomalización y la estandarización, verificada numéricamente (diferencia $<10^{-13}$). (iii) Parseval verificado en todos los espectros (cociente 1.00). (iv) Media 0 y desviación 1 de $a$ y $z$ en la referencia, para los 48 pares variable--mes. (v) Campos ERA5 revisados en dimensiones, fechas, unidades y rangos físicos (\texttt{--verify} del script 15). (vi) Completitud diaria recalculada desde los archivos originales de CAMELS-CL. (vii) DOI de las referencias comprobados contra Crossref, DataCite y \texttt{doi.org}.
 
-\paragraph{4. Propuestas corregidas o rechazadas.} (a) La etiqueta ``IMERG V07'' de un registro inicial se corrigió a V06, conforme al script. (b) El factor de Hamed--Rao producía factores menores que 1, lo que \emph{reduciría} la varianza; se acotó a $\geq1$. (c) Un promedio en precisión simple (\texttt{float32}) de \texttt{xarray} sesgaba las anomalías de los campos; se forzó \texttt{float64}. (d) La SST bajo hielo marino generaba artefactos; se enmascaró. (e) Se resolvieron conflictos de \texttt{git} que rompían el dashboard. (f) Al ensamblar este informe, la verificación detectó DOI erróneos en notas automáticas de la tabla de extremos del punto 1 (por ejemplo, un DOI atribuido a Garreaud et al. 2017 que corresponde a otro artículo) y el DOI mal escrito de Gilman et al.; aquí se usan los DOI comprobados. (g) Se descartó la afirmación de que el caudal de mayo de 1993 era un valor mensual representativo, al comprobar que promedia solo tres días. (h) Se descartó afirmar ``seis meses bajo cero'' como criterio de clasificación, porque depende del producto de temperatura.
+\paragraph{4. Propuestas corregidas o rechazadas.} (a) La etiqueta ``IMERG V07'' de un registro inicial se corrigió a V06, conforme al script. (b) El factor de Hamed--Rao producía factores menores que 1, lo que \emph{reduciría} la varianza; se acotó a $\geq1$. (c) Un promedio en precisión simple (\texttt{float32}) de \texttt{xarray} sesgaba las anomalías de los campos; se forzó \texttt{float64}. (d) La SST bajo hielo marino generaba artefactos; se enmascaró. (e) Se resolvieron conflictos de \texttt{git} que rompían el dashboard. (f) Al ensamblar este informe, la verificación contra Crossref detectó DOI que la propia IA había escrito mal: cuatro en las notas de las tablas de extremos y de síntesis del punto 1 (por ejemplo, el atribuido a Garreaud et al. 2017 correspondía a otro artículo) y el de Gilman et al. en el documento del punto 4. Se corrigieron en \archivo{scripts/07_rol_a_explorador.py}, en las tablas regeneradas y en \archivo{documentos/punto4_fourier_analisis.tex}. (g) Se descartó la afirmación de que el caudal de mayo de 1993 era un valor mensual representativo, al comprobar que promedia solo tres días. (h) Se descartó afirmar ``seis meses bajo cero'' como criterio de clasificación, porque depende del producto de temperatura.
 
-\paragraph{5. Contribuciones de los integrantes.} \emph{Mateo Arango} (Rol A): datos de la fase 1, punto 1 (exploración, control de calidad, climatología y clasificación) y su documento. \emph{Santiago Ortega} (Rol B): punto 2 (relaciones, rezagos y validación cronológica), auditorías de IMERG y su documento. \emph{Tomás Gómez Zuleta} (Rol C): puntos 3 y 4 (tendencias, robustez, causas y Fourier), apoyo al punto 5 (descarga ERA5, mapas, robustez e interpretación), mapas de la cuenca, auditoría diaria y ensamblaje de este informe. \emph{Bryan Salazar} (Rol D): planteamiento del punto 5, preparación de la descarga ERA5 y edición. Los cuatro integrantes revisaron los resultados de los demás roles mediante la bitácora.
+\paragraph{5. Contribuciones de los integrantes.} \emph{Mateo Arango Cortés}: datos de la fase 1, punto 1 (exploración, control de calidad, climatología y clasificación) y su documento. \emph{Santiago Ortega Ruiz}: punto 2 (relaciones, rezagos y validación cronológica), auditorías de IMERG y su documento. \emph{Tomás Gómez Zuleta}: puntos 3 y 4 (tendencias, robustez, causas y Fourier), apoyo al punto 5 (descarga ERA5, mapas, robustez e interpretación), mapas de la cuenca, auditoría diaria y ensamblaje de este informe. \emph{Bryan Alexander Salazar Castañeda}: planteamiento del punto 5, preparación de la descarga ERA5 y edición. Los cuatro integrantes revisaron los resultados de los demás puntos mediante la bitácora.
 % =============================================================================
 % REFERENCIAS — DOI comprobados contra Crossref, DataCite y doi.org (octubre de 2026)
 % =============================================================================
@@ -1328,6 +1333,8 @@ Aplicamos el Nivel A (abierto) de la política de IA del curso. Todas las sesion
 \bibitem{AlvarezGarreton2021} Alvarez-Garreton, C., Boisier, J. P., Garreaud, R., Seibert, J., y Vis, M. (2021). Progressive water deficits during multiyear droughts in basins with long hydrological memory in Chile. \emph{Hydrology and Earth System Sciences}, 25, 429--446. \url{https://doi.org/10.5194/hess-25-429-2021}
 
 \bibitem{Amirthanathan2023} Amirthanathan, G. E., Bari, M. A., Woldemeskel, F. M., Tuteja, N. K., y Feikema, P. M. (2023). Regional significance of historical trends and step changes in Australian streamflow. \emph{Hydrology and Earth System Sciences}, 27, 229--254. \url{https://doi.org/10.5194/hess-27-229-2023}
+
+\bibitem{ASTERGDEM} NASA/METI/AIST/Japan Spacesystems y U.S./Japan ASTER Science Team (2019). ASTER Global Digital Elevation Model V003. NASA Land Processes Distributed Active Archive Center. \url{https://doi.org/10.5067/ASTER/ASTGTM.003}
 
 \bibitem{Ayala2020} Ayala, A., Farías-Barahona, D., Huss, M., Pellicciotti, F., McPhee, J., y Farinotti, D. (2020). Glacier runoff variations since 1955 in the Maipo River basin, in the semiarid Andes of central Chile. \emph{The Cryosphere}, 14, 2005--2027. \url{https://doi.org/10.5194/tc-14-2005-2020}
 
@@ -1449,6 +1456,7 @@ Script & Función y productos principales & Sección \\
 \archivo{02_descargar_satelite.py} & IMERG V06 y ERA5-Land mensuales en Earth Engine (requiere autenticación) & \ref{sec:datos} \\
 \archivo{03_integrar_datos.py} & Unión externa y CSV maestro \archivo{datos/datos_mensuales_maipo.csv} & \ref{sec:datos} \\
 \archivo{07_rol_a_explorador.py} & Figuras 1.1--1.7; tablas 1.1--1.6 & \ref{sec:p1} \\
+\archivo{22_p1_0_topografia_cuenca.py} & Mapa topográfico, curva hipsométrica y tabla 1.12 (ASTER GDEM v3) & \ref{sec:ficha} \\
 \archivo{20_p1_4_auditoria_diaria.py} & Completitud diaria, sensibilidad, ficha y picos por año; figura 1.8; tablas 1.7--1.11 & \ref{sec:ficha}, \ref{sec:qc}, \ref{sec:clim} \\
 \archivo{04_analisis_precipitacion.py} & Dispersión y métricas (figura 2.1; tablas 2.1) & \ref{sec:p2} \\
 \archivo{05_anomalias_rezagos.py} & Anomalías y rezagos (figura 2.2; tablas 2.2) & \ref{sec:p2} \\
@@ -1464,7 +1472,7 @@ Script & Función y productos principales & Sección \\
 \end{tabularx}
 \end{table}
 
-\paragraph{Datos entregados.} \archivo{datos/datos_mensuales_maipo.csv} (serie maestra mensual, incluidos IMERG y ERA5-Land); \archivo{datos/camels_cl_5710001/} (caudal diario, precipitación y temperaturas diarias CR2MET, atributos y polígono de la cuenca, subconjunto CAMELS-CL usado); \archivo{datos/campos_era5/} (SST, PNM y Z500 mensuales de ERA5, 1979--2020, y línea de costa de Natural Earth para los mapas). Las series procesadas, anomalías y tablas están en \archivo{figuras/} (\texttt{serie\_*.csv} y \texttt{tabla\_*.csv}).
+\paragraph{Datos entregados.} \archivo{datos/datos_mensuales_maipo.csv} (serie maestra mensual, incluidos IMERG y ERA5-Land); \archivo{datos/camels_cl_5710001/} (caudal diario, precipitación y temperaturas diarias CR2MET, atributos y polígono de la cuenca, subconjunto CAMELS-CL usado); \archivo{datos/ASTGTM_003-20261004_142607/} (cuatro teselas ASTER GDEM v3 de 1$^\circ$, S34--S35 y W070--W071, descargadas de NASA Earthdata); \archivo{datos/campos_era5/} (SST, PNM y Z500 mensuales de ERA5, 1979--2020, y línea de costa de Natural Earth para los mapas). Las series procesadas, anomalías y tablas están en \archivo{figuras/} (\texttt{serie\_*.csv} y \texttt{tabla\_*.csv}).
 
-\paragraph{Figuras de la cuenca.} El mapa topográfico y la curva hipsométrica se elaboraron con ASTER GDEM v3 (30~m) y el polígono CAMELS-CL. El mapa de ubicación se elaboró sobre una imagen satelital de fondo con el mismo polígono.
+\paragraph{Figuras de la cuenca.} El mapa topográfico y la curva hipsométrica (Figuras~\ref{fig:mapas}b y~\ref{fig:hipso}) los genera \archivo{scripts/22_p1_0_topografia_cuenca.py} con ASTER GDEM v3 (30~m) y el polígono CAMELS-CL; las áreas usan el tamaño real de cada píxel. El mapa de ubicación (Figura~\ref{fig:mapas}a) es una captura del visor de NASA Earthdata Search tomada durante la descarga de las teselas, y no se genera con código.
 \end{document}
