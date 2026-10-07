@@ -1,0 +1,1961 @@
+1
+
+Punto 2. Relaciones entre series y modelos estadísticos
+Río Maipo en El Manzano (CAMELS-CL 5710001)
+
+Santiago Ortega
+Rol B – Modelador
+
+Tarea 1 de Hidrología
+Universidad Nacional de Colombia
+7 de octubre de 2026
+
+1
+
+Resumen
+Se compararon las precipitaciones mensuales de referencia e IMERG, y sus relaciones
+con el caudal medio mensual del Río Maipo en El Manzano. La lluvia local–IMERG presentó
+correlación alta (Pearson 𝑟 = 0.888; Spearman 𝜌 = 0.824), pero sesgo medio −5.50 mm/mes,
+MAE 27.34 mm/mes y RMSE 48.66 mm/mes; los errores variaron con la estación y la intensidad.
+Las correlaciones contemporáneas lluvia–caudal fueron negativas en las series originales, pero
+se debilitaron y cambiaron de signo al retirar el ciclo mensual. Los máximos exploratorios de
+asociación lluvia previa–caudal no se interpretan como tiempos físicos. Se evaluaron correcciones
+de precipitación y modelos de caudal en tres bloques cronológicos externos no solapados, con
+selección y climatologías restringidas al ajuste. La corrección de lluvia no superó consistentemente
+a IMERG sin corregir; el modelo de anomalías con rezago redujo MAE y RMSE del caudal frente a
+la climatología mensual en los bloques examinados, aunque mantuvo sesgo positivo. La evidencia
+es retrospectiva y no demuestra causalidad ni estabilidad futura. La versión de los valores IMERG
+del CSV se identifica como V06 por la configuración vigente y el acuerdo del equipo, pero no se
+conserva el manifiesto de la exportación original.
+Palabras clave: precipitación satelital, anomalías, caudal, validación temporal, Andes centrales.
+
+1.
+
+Contexto, datos y decisiones metodológicas
+
+1.1.
+
+Fuente, unidades y cobertura
+La fuente única de los cálculos es datos/datos_mensuales_maipo.csv. El archivo
+
+contiene 484 marcas mensuales entre 1980-01 y 2020-04; P_local_mm tiene un faltante en 202004 y el caudal tiene 14 faltantes (470 valores válidos, 2.89 %). La precipitación satelital y la
+temperatura cubren 2000-06–2020-03. Se mantuvieron las series locales completas y se usaron
+pares completos por pregunta, sin imputar. Las ventanas resultantes son: 238 pares lluvia local–
+IMERG, 469 pares lluvia local–caudal y 230 pares IMERG–caudal.
+
+2
+Se usaron P_local_mm y P_IMERG_mm en mm/mes, Caudal_m3s en m3 /s y Q_lamina_mm
+en mm/mes. La lámina se deriva del caudal volumétrico y el área 𝐴 = 4837.4 km2 :
+
+𝑄 lamina,𝑚 =
+
+𝑄 𝑚 (𝐷 𝑚 86400)
+1000,
+𝐴 106
+
+(1)
+
+donde 𝐷 𝑚 es el número de días del mes. Esta conversión cambia unidades, no constituye una fuente
+independiente de observaciones.
+La documentación de CAMELS-CL describe precipitación nacional y global y advierte
+incertidumbre de precipitación en cabeceras montañosas (Alvarez-Garreton et al., 2018). El script
+vigente selecciona la colección mensual IMERG V06; la entrada de cierre del equipo adoptó V06
+como versión canónica a partir del script y el historial. Sin embargo, la auditoría de procedencia
+encontró que no se conserva el archivo intermedio, identificador de tarea ni manifiesto del raster
+que originó el CSV. Por rigor, este informe la denomina versión documentada/configurada V06; la
+trazabilidad de la exportación específica no es completa. NASA define IMERG Final como producto
+de investigación que incorpora análisis de pluviómetros (NASA Global Precipitation Measurement
+Mission, 2021, 2024).
+
+1.2.
+
+Diseño estadístico
+La regla de pares completos se aplica separadamente a cada relación y se reportan ventana
+
+y 𝑛. En lluvia local–IMERG se definió el error como 𝑒 𝑡 = 𝑃 𝐼,𝑡 − 𝑃 𝐿,𝑡 ; por ello, un sesgo negativo
+indica subestimación promedio de la referencia. Se calcularon sesgo medio, MAE, RMSE y
+Í
+PBIAS = 100
+
+𝑡 (𝑃 𝐼,𝑡 − 𝑃 𝐿,𝑡 )
+
+Í
+
+.
+
+(2)
+
+𝑡 𝑃 𝐿,𝑡
+
+Pearson resume asociación lineal y Spearman asociación monótona por rangos; ninguna mide
+por sí sola concordancia ni demuestra causalidad. MAE conserva la escala del error y RMSE
+da mayor peso a los errores grandes. Por esa diferencia se interpretan conjuntamente, siguiendo
+recomendaciones para evaluación de precipitación satelital y modelos hidrológicos (Gupta et al.,
+
+3
+
+2009; Hossain & Huffman, 2008; Willmott, 1981).
+Las anomalías se definieron por mes calendario como 𝑎 𝑋,𝑡 = 𝑋𝑡 − 𝑋¯ 𝑚(𝑡) y las anomalías
+estandarizadas como 𝑧 𝑋,𝑡 = 𝑎 𝑋,𝑡 /𝑠𝑚(𝑡) , con desviación estándar muestral (𝑑𝑑𝑜 𝑓 = 1). La referencia
+común fija es 2000-06–2020-03; no hubo desviaciones mensuales nulas. Estandarizar no implica
+normalidad ni equivale a un índice de sequía. El rezago se define como precipitación en 𝑡 − 𝑘
+frente a caudal en 𝑡, sin usar precipitación futura. El barrido de varios rezagos sobre una serie
+autocorrelacionada se interpreta como exploratorio; la autocorrelación afecta la inferencia de
+correlaciones (Pyper & Peterman, 1998).
+
+2.
+
+2.1. Diagramas de dispersión e interpretación
+
+2.1.
+
+Concordancia entre IMERG y precipitación local
+En los 238 pares de 2000-06 a 2020-03, la correlación fue 𝑟 = 0.8875 y 𝜌 = 0.8245. El
+
+sesgo medio 𝑃 𝐼 − 𝑃 𝐿 fue −5.503 mm/mes, MAE 27.344 mm/mes, RMSE 48.656 mm/mes y PBIAS
+−8.764 %. El signo medio no describe cada mes: IMERG estuvo por debajo de la referencia en 103
+pares y por encima en 135, y la mediana del error fue +3.856 mm/mes. Correlación alta coexiste
+así con errores relevantes en magnitud.
+Tabla 1
+Tamaño de muestra y asociación entre series mensuales
+Variables
+
+Periodo
+
+𝑃 𝐼 –𝑃 𝐿
+𝑃 𝐿 –𝑄
+𝑃 𝐼 –𝑄
+𝑃 𝐿 –𝑅
+𝑃 𝐼 –𝑅
+
+2000-06–2020-03
+1980-01–2020-03
+2000-06–2020-03
+1980-01–2020-03
+2000-06–2020-03
+
+𝑛
+
+Pearson 𝑟
+
+Spearman 𝜌
+
+238
+469
+230
+469
+230
+
+0.8875
+−0.2009
+−0.2772
+−0.1968
+−0.2708
+
+0.8245
+−0.3931
+−0.4234
+−0.3875
+−0.4145
+
+Nota. Casos completos por par; 𝑃 𝐿 es la precipitación de referencia, 𝑃 𝐼 IMERG, 𝑄 caudal volumétrico y 𝑅 lámina
+equivalente. Fuente: figuras/tabla_2_1_metricas_relaciones.csv.
+
+4
+
+Tabla 2
+Métricas de error de IMERG respecto de la precipitación local
+Sesgo 𝑃 𝐼 − 𝑃 𝐿 (mm/mes)
+−5.503
+Nota. PBIAS = 100
+
+Í
+
+MAE (mm/mes)
+
+RMSE (mm/mes)
+
+PBIAS ( %)
+
+Mediana del error (mm/mes)
+
+27.344
+
+48.656
+
+−8.764
+
++3.856
+
+Í
+(𝑃 𝐼 − 𝑃 𝐿 )/ 𝑃 𝐿 . Sesgo negativo indica que el promedio de IMERG es menor, no que todos los
+meses sean subestimados.
+
+Figura 1
+Relaciones mensuales entre precipitación de referencia, IMERG y respuesta de la cuenca
+
+Nota. El panel 𝑃 𝐼 –𝑃 𝐿 incluye línea 1:1 y ejes comparables. Los puntos se colorean por mes calendario. Las ventanas
+y tamaños de muestra se indican en cada panel; 𝑅 acompaña la relación lluvia–caudal para comparar láminas.
+
+La dispersión de 𝑃 𝐼 –𝑃 𝐿 se amplía en meses lluviosos. Por estación austral, el sesgo medio
+fue +6.85 mm/mes en verano, −9.38 en otoño, −11.33 en invierno y −8.28 en primavera. Por
+cuartil de precipitación local, los tres cuartiles inferiores mostraron sesgos positivos (+14.00,
++9.97 y +6.43 mm/mes), mientras el cuartil superior mostró −51.94 mm/mes y RMSE de 88.52
+mm/mes. La literatura demuestra que el error de IMERG puede depender de intensidad y densidad
+de pluviómetros en otros dominios; esos mecanismos motivan el desglose, pero no transfieren sus
+magnitudes a Maipo (Hosseini-Moghari & Tang, 2020; Tian et al., 2018).
+
+5
+
+Tabla 3
+Error de IMERG por estación austral e intensidad de precipitación local
+Agrupación
+
+Clase
+
+𝑛
+
+Sesgo 𝑃 𝐼 − 𝑃 𝐿 MAE
+mm/mes
+
+RMSE
+
+Estación
+
+Verano
+Otoño
+Invierno
+Primavera
+Q1 (0–8.53]
+Q2 (8.53–25.56]
+Q3 (25.56–78.47]
+Q4 (78.47–612.67]
+
+60
+58
+60
+60
+60
+59
+59
+60
+
++6.85
+−9.38
+−11.33
+−8.28
++14.00
++9.97
++6.43
+−51.94
+
+14.20
+47.76
+76.72
+33.13
+17.06
+20.54
+29.39
+88.52
+
+Cuartil 𝑃 𝐿
+
+11.26
+26.12
+49.10
+22.85
+14.09
+13.49
+22.74
+58.75
+
+Nota. Los cuartiles se definieron con 𝑃 𝐿 de los 238 pares. No se excluyeron eventos extremos del resultado principal.
+Fuente: figuras/tabla_2_1_errores_por_grupo.csv.
+
+Los cinco errores absolutos mayores suman 52.35 % del error cuadrático total. Son episodios
+para verificar frente a las fuentes originales, no datos que deban eliminarse automáticamente.
+Tabla 4
+Cinco meses con mayor error absoluto 𝑃 𝐼 − 𝑃 𝐿
+Mes
+2000-06
+2008-05
+2005-06
+2006-07
+2005-08
+
+𝑃 𝐿 (mm/mes)
+
+𝑃 𝐼 (mm/mes)
+
+Error (mm/mes)
+
+Estación
+
+612.67
+420.78
+443.17
+468.70
+416.03
+
+278.06
+187.26
+225.96
+259.77
+222.05
+
+−334.60
+−233.52
+−217.22
+−208.93
+−193.99
+
+Invierno
+Otoño
+Invierno
+Invierno
+Invierno
+
+Nota. Sensibilidad descriptiva al excluir estos cinco meses: Pearson cambia de 0.8875 a 0.8829 y RMSE de 48.66 a
+33.94 mm/mes. La serie principal los conserva.
+
+2.2.
+
+Relación contemporánea y respuesta estacional
+En las series originales, las correlaciones contemporáneas lluvia–caudal son negativas. Al
+
+quitar la media mensual, la asociación contemporánea se vuelve débilmente positiva: 𝑟 = 0.1569
+para lluvia local–Q y 𝑟 = 0.1783 para IMERG–Q. El cambio evidencia que el ciclo anual compartido
+influye en la correlación original. No se interpreta como contradicción: son preguntas estadísticas
+distintas, asociación entre niveles mensuales frente a covariación de anomalías.
+
+6
+
+Tabla 5
+Medias climatológicas mensuales en la referencia común 2000-06–2020-03
+Mes
+
+𝑛 𝑃𝐿
+
+𝑃 𝐿 (mm/mes)
+
+𝑃 𝐼 (mm/mes)
+
+𝑛𝑄
+
+𝑄 (m3 /s)
+
+Enero
+Febrero
+Marzo
+Abril
+Mayo
+Junio
+Julio
+Agosto
+Septiembre
+Octubre
+Noviembre
+Diciembre
+
+20
+20
+20
+19
+19
+20
+20
+20
+20
+20
+20
+20
+
+13.41
+12.28
+10.75
+44.40
+116.87
+168.08
+123.72
+118.27
+68.98
+39.75
+24.92
+13.83
+
+18.02
+17.49
+17.07
+37.48
+88.51
+140.24
+124.97
+110.88
+49.16
+35.26
+24.38
+24.55
+
+20
+20
+20
+18
+18
+19
+19
+19
+19
+19
+19
+20
+
+177.99
+133.96
+93.39
+72.55
+59.15
+60.98
+58.92
+61.22
+68.88
+95.43
+146.08
+192.03
+
+Nota. Las climatologías mensuales no son intervalos de confianza. La precipitación de referencia e IMERG comparten
+las mismas fechas válidas en esta ventana. Fuente: figuras/tabla_2_2_climatologia_referencia.csv.
+
+La climatología presenta máximos de lluvia en junio y de caudal en diciembre, con unos
+seis meses de separación. Estudios en Andes centrales y cuencas chilenas documentan la relevancia
+de nieve, almacenamiento subterráneo y glaciares para la respuesta cálida; Ayala et al. estudiaron
+específicamente el escurrimiento glaciar del Maipo. La compatibilidad física apoya una hipótesis de
+almacenamiento, no prueba que ese mecanismo cause por sí solo los rezagos observados (AlvarezGarreton et al., 2021; Ayala et al., 2020; Cortes & Margulis, 2017; Masiokas et al., 2006).
+
+2.3.
+
+Anomalías y rezagos exploratorios
+El máximo de Pearson local ocurrió en 𝑘 = 7 meses (𝑟 = 0.4773, 𝑛 = 463); para IMERG
+
+también en 𝑘 = 7 (𝑟 = 0.4222, 𝑛 = 224). Los valores exploratorios dependen de la climatología
+y del conjunto de pares; se evaluaron 13 rezagos sobre series autocorrelacionadas. El máximo
+seleccionado de una exploración no equivale a un tiempo físico de deshielo ni a una significancia
+inferencial; los problemas de dependencia temporal en las correlaciones están documentados (Pyper
+& Peterman, 1998).
+
+7
+Figura 2
+Correlación entre precipitación antecedente y caudal actual en anomalías mensuales
+
+Nota. Rezago 𝑘: precipitación en 𝑡 − 𝑘 frente a caudal en 𝑡. Curvas muestran Pearson y Spearman para lluvia local e
+IMERG. Análisis exploratorio sin intervalos de incertidumbre ajustados por dependencia/múltiples lags.
+
+8
+
+Tabla 6
+Correlaciones de anomalías por rezago de precipitación
+𝑘
+
+𝑛𝐿
+
+𝑟𝐿
+
+𝜌𝐿
+
+𝑛𝐼
+
+𝑟𝐼
+
+𝜌𝐼
+
+Sentido
+
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+
+469
+469
+468
+467
+466
+465
+464
+463
+462
+461
+460
+459
+458
+
+.157
+.152
+.146
+.253
+.315
+.380
+.454
+.477
+.380
+.195
+.100
+.047
+.005
+
+.175
+.207
+.229
+.279
+.305
+.291
+.304
+.295
+.304
+.208
+.148
+.067
+.004
+
+230
+230
+229
+228
+227
+226
+225
+224
+223
+222
+221
+220
+219
+
+.178
+.168
+.175
+.273
+.332
+.409
+.393
+.422
+.359
+.241
+.157
+.109
+.051
+
+.237
+.269
+.295
+.344
+.410
+.398
+.357
+.355
+.319
+.266
+.232
+.151
+.092
+
+𝑃(𝑡)–𝑄(𝑡)
+𝑃(𝑡 − 1)–𝑄(𝑡)
+𝑃(𝑡 − 2)–𝑄(𝑡)
+𝑃(𝑡 − 3)–𝑄(𝑡)
+𝑃(𝑡 − 4)–𝑄(𝑡)
+𝑃(𝑡 − 5)–𝑄(𝑡)
+𝑃(𝑡 − 6)–𝑄(𝑡)
+𝑃(𝑡 − 7)–𝑄(𝑡)
+𝑃(𝑡 − 8)–𝑄(𝑡)
+𝑃(𝑡 − 9)–𝑄(𝑡)
+𝑃(𝑡 − 10)–𝑄(𝑡)
+𝑃(𝑡 − 11)–𝑄(𝑡)
+𝑃(𝑡 − 12)–𝑄(𝑡)
+
+Nota. Subíndices 𝐿 e 𝐼 denotan precipitaciones local e IMERG. Ventana completa válida por rezago; las muestras
+cambian al desplazar las series. Fuente: figuras/tabla_2_2_correlaciones_rezagos.csv.
+
+3.
+
+2.2. Modelos para lluvia local y caudal
+
+3.1.
+
+Modelos candidatos y ecuaciones
+Se comparó la referencia sin corregir con regresiones de corrección de lluvia, y para caudal
+
+con una climatología mensual, regresión contemporánea y regresión de anomalías con rezago. La
+selección de modelo/rezago se hizo exclusivamente en una ventana interna de tres años, anterior al
+bloque externo. En cada partición se reajustaron parámetros con todo el entrenamiento disponible
+antes del test.
+Para estimar lluvia local desde IMERG se consideró la corrección lineal
+
+b𝐿,𝑡 = máx(0, 𝛽0,𝑏 + 𝛽1,𝑏 𝑃 𝐼,𝑡 ),
+𝑃
+
+(3)
+
+
+
+b𝐿,𝑡 = máx 0, 𝑆 𝑏 exp{𝛾0,𝑏 + 𝛾1,𝑏 ln(1 + 𝑃 𝐼,𝑡 )} − 1 ,
+𝑃
+
+(4)
+
+y una alternativa log-lineal
+
+9
+
+donde 𝑆 𝑏 es el factor de retrans formación por *smearing* estimado en el entrenamiento del bloque
+𝑏. Los valores negativos previos a la truncación inferior se contabilizaron; las predicciones finales
+negativas fueron cero.
+Para caudal, la referencia mensual usa 𝑄¯ 𝑚,train calculada solo con ajuste; la regresión
+contemporánea usa 𝑄ˆ 𝑡 = 𝑏 0,𝑏 + 𝑏 1,𝑏 𝑃𝑡 . El modelo de anomalías es
+
+
+b𝑡 = 𝑄¯ 𝑚(𝑡),train + 𝛼𝑏 + 𝛽𝑏 𝑃𝑡−𝑘 𝑏 − 𝑃¯𝑚(𝑡−𝑘 ),train ,
+𝑄
+𝑏
+
+(5)
+
+con 𝑘 𝑏 seleccionado en el tuning interno. La estructura es una relación empírica de predicción, no
+un balance de masa ni un modelo físico completo; no representa explícitamente evapotranspiración,
+almacenamiento, regulación ni las reservas de nieve/glaciar.
+Tabla 7
+Transformaciones y coeficientes seleccionados dentro de cada bloque
+Objetivo
+
+Bloque
+
+Modelo/rezago
+
+𝑃𝐿
+𝑃𝐿
+𝑃𝐿
+𝑄 de 𝑃 𝐿
+𝑄 de 𝑃 𝐿
+𝑄 de 𝑃 𝐿
+𝑄 de 𝑃 𝐼
+𝑄 de 𝑃 𝐼
+𝑄 de 𝑃 𝐼
+
+1
+2
+3
+1
+2
+3
+1
+2
+3
+
+Lineal corregido
+Log-lineal; 𝑆 = 1.384
+Lineal corregido
+Anomalía, 𝑘 = 6
+Anomalía, 𝑘 = 7
+Anomalía, 𝑘 = 7
+Anomalía, 𝑘 = 10
+Anomalía, 𝑘 = 7
+Anomalía, 𝑘 = 7
+
+𝛼
+
+𝛽
+
+Intercepto lineal
+
+Pendiente lineal
+
+–
+–
+–
+.010
+−.229
+−.079
+.923
+−6.281
+−9.266
+
+–
+–
+–
+.295
+.336
+.343
+.167
+.636
+.630
+
+−22.267
+−1.394
+−18.167
+137.892
+131.819
+128.597
+158.591
+139.561
+132.005
+
+1.520
+1.273
+1.411
+−.183
+−.171
+−.167
+−.457
+−.393
+−.375
+
+Nota. En las filas de caudal, 𝛼 y 𝛽 son los parámetros del modelo de anomalías; intercepto y pendiente lineal
+corresponden a 𝑄 ∼ 𝑃(𝑡). En filas de lluvia, intercepto y pendiente son los de la forma seleccionada y reajustada en el
+ajuste completo del bloque. Unidades: lluvia en mm/mes y caudal en m3 /s.
+
+3.2.
+
+Comparación agregada de los bloques externos
+Los bloques test fueron 2010-01–2012-12, 2013-01–2015-12 y 2016-01–2020-03. Son no
+
+solapados; el entrenamiento es expansivo y la muestra de un bloque anterior pasa a estar disponible
+en el siguiente, por lo que no constituyen réplicas independientes. En la selección de anomalías,
+la climatología del predictor y del caudal se vuelve a estimar solo en el ajuste de cada fold. Esto
+reduce fuga temporal, aunque la evaluación sigue siendo retrospectiva.
+
+10
+
+Tabla 8
+Métricas agregadas sobre predicciones externas de los tres bloques
+Objetivo / predictor
+
+Modelo
+
+𝑃 𝐿 desde 𝑃 𝐼
+𝑃 𝐿 desde 𝑃 𝐼
+𝑄 desde 𝑃 𝐿
+𝑄 desde 𝑃 𝐿
+𝑄 desde 𝑃 𝐿
+𝑄 desde 𝑃 𝐼
+𝑄 desde 𝑃 𝐼
+𝑄 desde 𝑃 𝐼
+
+IMERG sin corrección
+Corrección seleccionada
+Climatología mensual 𝑄
+Regresión lineal 𝑄 ∼ 𝑃(𝑡)
+Anomalía con rezago
+Climatología mensual 𝑄
+Regresión lineal 𝑄 ∼ 𝑃(𝑡)
+Anomalía con rezago
+
+𝑛
+123
+123
+115
+115
+115
+115
+115
+115
+
+Sesgo
+MAE RMSE
+(mm/mes o m3 /s)
+1.239
+5.546
+45.475
+46.883
+37.778
+45.475
+45.931
+34.507
+
+18.411
+21.653
+46.390
+54.166
+39.756
+46.390
+53.150
+39.600
+
+28.050
+33.312
+59.164
+59.332
+50.684
+59.164
+58.443
+52.746
+
+Nota. Sesgo = predicción − observado. Las ventanas agregadas contienen predicciones fuera del ajuste; las
+climatologías, selección y coeficientes se estimaron por fold. Fuentes:
+figuras/tabla_2_3_metricas_fuera_ajuste.csv y
+figuras/tabla_2_3_predicciones_fuera_ajuste.csv.
+
+La corrección de 𝑃 𝐼 no mejora el MAE/RMSE agregado: MAE y RMSE suben respecto
+de IMERG crudo, aunque la corrección lineal del bloque 3 reduce RMSE dentro de ese bloque.
+Por ello no se recomienda afirmar que la corrección mejora la lluvia local en general. Para 𝑄, el
+modelo de anomalías con rezago reduce MAE y RMSE frente a la climatología mensual en cada
+bloque para ambos predictores; conserva sesgo positivo. La regresión contemporánea no mejora
+uniformemente frente al baseline.
+Tabla 9
+MAE/RMSE en cada bloque externo y rezagos seleccionados para caudal
+Objetivo
+
+Bloque
+
+𝑛
+
+𝑘
+
+Baseline MAE/RMSE
+
+Lineal MAE/RMSE
+
+Rezago MAE/RMSE
+
+Sesgo rezago
+
+𝑃 𝐿 desde 𝑃 𝐼
+𝑃 𝐿 desde 𝑃 𝐼
+𝑃 𝐿 desde 𝑃 𝐼
+𝑄 desde 𝑃 𝐿
+𝑄 desde 𝑃 𝐿
+𝑄 desde 𝑃 𝐿
+𝑄 desde 𝑃 𝐼
+𝑄 desde 𝑃 𝐼
+𝑄 desde 𝑃 𝐼
+
+1
+2
+3
+1
+2
+3
+1
+2
+3
+
+36
+36
+51
+36
+28
+51
+36
+28
+51
+
+–
+–
+–
+6
+7
+7
+10
+7
+7
+
+17.25/23.51
+18.96/25.14
+18.84/32.58
+50.76/64.97
+48.02/58.47
+42.41/55.10
+50.76/64.97
+48.02/58.47
+42.41/55.10
+
+21.94/31.79
+22.50/37.97
+20.85/30.74
+60.64/65.37
+50.60/55.40
+51.56/56.88
+65.75/70.44
+48.06/52.21
+47.05/51.99
+
+–
+–
+–
+43.21/54.78
+38.44/48.54
+38.04/48.80
+49.25/64.06
+33.67/45.53
+36.05/47.32
+
+–
+–
+–
+42.90
+36.86
+34.67
+48.16
+31.78
+26.37
+
+Nota. Los valores de cada celda MAE/RMSE están en mm/mes para estimación de lluvia y m3 /s para caudal; sesgo
+del modelo con rezago en m3 /s. Bloque 1 = 2010–2012; bloque 2 = 2013–2015; bloque 3 = 2016–2020-03. Fuentes:
+figuras/tabla_2_3_metricas_por_bloque.csv y figuras/tabla_2_3_seleccion_modelos_ajuste.csv.
+
+11
+Figura 3
+Predicciones y residuos en los bloques externos
+
+Nota. La figura muestra los tres objetivos/modelos sobre sus ventanas de test y los residuos frente al valor predicho.
+Las líneas verticales marcan cambios de bloque; el diagnóstico visual se complementa con métricas tabuladas, no las
+sustituye.
+
+12
+Figura 4
+Residuos temporales en el test cronológico
+
+Nota. Residuo = predicción − observado. Los picos de residuo motivaron auditorías de máximos; los datos de los
+bloques externos no se excluyeron.
+
+4.
+
+2.3. Errores, máximos y robustez temporal
+Se generaron diagnósticos temporales, por valor estimado y por mes calendario; además
+
+hay tablas por año y estación. La mejora de Q con rezago aparece en las tres ventanas, aunque los
+rezagos seleccionados varían (6–7 meses para 𝑃 𝐿 y 7–10 para 𝑃 𝐼 ) y el sesgo permanece positivo. El
+entrenamiento expansivo significa que las ventanas no son réplicas independientes. Estos resultados
+apoyan utilidad en las condiciones evaluadas, no generalización irrestricta ni pronóstico futuro.
+
+13
+
+Tabla 10
+Auditoría empírica de las máximas predicciones por estrategia
+Objetivo/modeloFecha
+𝑃 𝐿 desde 𝑃 𝐼 ,
+corrección
+log-lineal
+𝑄 desde 𝑃 𝐿 ,
+anomalía con
+rezago
+𝑄 desde 𝑃 𝐼 ,
+anomalía con
+rezago
+
+Predicción
+
+Observado mismo mes
+
+Error
+
+Máximo observado del test
+mm/mes o m3 /s
+
+2015-08
+
+398.42
+
+240.49
+
++157.94
+
+240.49
+
+2016-11
+
+276.62
+
+137.23
+
++139.39
+
+186.00
+
+2016-11
+
+263.62
+
+137.23
+
++126.39
+
+186.00
+
+Nota. Las tres máximas caen dentro del rango observado antes del test y bajo el P99 de ajuste, pero sobrepasan el
+máximo observado del bloque. Cada una coincide con el mayor error absoluto de su bloque. Esto indica
+sobreestimación de eventos concretos, no imposibilidad física ni habilidad para extremos. Fuente:
+figuras/tabla_2_3_maximos_predichos.csv.
+
+El registro B-05 documenta una primera prueba histórica de un único corte cuyo Q desde
+IMERG alcanzó 302.77 m3 /s en 2016-12. Esa estimación corresponde a un ajuste fijo hasta 201512 y un único rezago 𝑘 = 8; no se mezcla con la evaluación multibloque, que reajusta/selecciona
+cada fold y cuyo máximo fue 263.62 m3 /s. En la reconstrucción histórica el caudal observado
+simultáneo fue 170.68 m3 /s, por lo que la predicción sobreestimó 77.4 %. La magnitud es posible
+dentro del historial estacional de ajuste, pero fue deficiente para esa fecha. No constituye una prueba
+de crecidas ni de caudales máximos.
+
+5.
+
+2.4. Interpretación física, fuentes compartidas y límites
+La diferencia entre los ciclos mensuales de precipitación y caudal y la memoria estimada en
+
+rezagos es compatible con procesos de almacenamiento. En la banda 30–37◦ S, el manto nival se ha
+relacionado con caudales de temporada cálida; estudios chilenos encuentran memoria hidrológica
+modulada por nieve y aguas subterráneas, y existe modelación de aportes glaciares para la cuenca
+del Maipo (Alvarez-Garreton et al., 2021; Ayala et al., 2020; Cortes & Margulis, 2017; Masiokas
+et al., 2006). La evidencia justifica formular esa hipótesis regional, pero no atribuir el rezago
+
+14
+
+predictivo seleccionado a nieve o deshielo como causa demostrada.
+Rojas et al. evaluaron IMERG V06 en campañas invernales del centro-sur de Chile y
+encontraron errores dependientes de elevación y régimen microfísico; Alcayaga y colegas analizaron
+3IMERG en estaciones de varias zonas hidroclimáticas de Chile. Esas publicaciones están más
+próximas al contexto local que una evaluación genérica, pero difieren del promedio mensual areal
+del Maipo y de su ventana temporal. da Silva et al. analiza IMERG Early, no Final; ZambranoBigiarini et al. examina gradientes chilenos pero no incluye IMERG. Por tanto, estos trabajos
+contextualizan la validación propia y no reemplazan sus 238 pares (da Silva et al., 2023; Rojas
+et al., 2021; Soto-Alvarez et al., 2020; Zambrano-Bigiarini et al., 2017).
+La procedencia local se describe en el proyecto como referencia CAMELS-CL/CR2MET,
+y NASA especifica que IMERG Final usa información mensual de pluviómetros. Ello hace posible
+una dependencia entre fuentes, pero no identifica estaciones compartidas en este caso. La entrada 25
+del handoff adopta V06 como versión canónica a partir de script e historial; el registro B-08 señala
+que no se conserva el manifiesto original de la exportación. El informe mantiene la etiqueta de
+proyecto V06 con esa salvedad y recomienda conservar metadatos completos en futuras descargas.
+
+15
+
+Tabla 11
+Síntesis de resultados, interpretación y límites
+Resultado observado
+
+Interpretación respaldada
+
+Límite principal
+
+𝑃 𝐼 –𝑃 𝐿 :
+𝑟
+=
+.888,
+sesgo
+−5.50
+mm/mes
+Lag exploratorio de anomalías cerca de 7
+meses
+Q con anomalía
+rezagada
+reduce
+MAE/RMSE
+en 3 folds
+Corrección de
+lluvia no mejora en agregado
+Máximos predichos superan
+máximos
+de
+test
+
+Asociación lineal alta, concordancia
+imperfecta; error cambia por estación/intensidad
+
+No demuestra causa orográfica ni independencia entre fuentes
+
+Compatible
+con
+memoria/almacenamiento
+documentados
+regionalmente
+
+Máximo de 13 rezagos; selección autocorrelacionada no identifica tiempo físico
+
+Evidencia retrospectiva de utilidad comparativa en las ventanas evaluadas
+
+Entrenamiento expansivo; una familia de
+cuencas; no demuestra habilidad prospectiva general
+
+Es preferible el producto sin corregir según MAE/RMSE agrupados
+
+Desempeño puede variar por fold, evento
+y producto/version
+
+Sobreestimación de casos puntuales, dentro del rango histórico de ajuste
+
+No es habilidad para eventos extremos ni
+límite físico independiente
+
+Nota. Las citas regionales respaldan plausibilidad de mecanismos, no causalidad en las series del proyecto. Los
+conteos, métricas y tablas provienen del CSV maestro y scripts.
+
+6.
+
+Síntesis del punto 2
+La relación mensual IMERG–referencia muestra covariación alta pero error significativo
+
+y dependiente de magnitud. La asociación contemporánea lluvia–caudal en datos sin transformar
+conserva el ciclo anual; al retirar la climatología mensual se atenúa y los lags previos ofrecen señales
+exploratorias. En validación externa por tres bloques, la corrección para reconstruir lluvia local no
+supera IMERG crudo en el conjunto agregado, mientras el modelo de anomalías con rezago mejora
+MAE/RMSE de caudal frente a la climatología mensual y la regresión contemporánea. Persiste
+sesgo positivo y los rezagos varían entre folds. La conclusión más defendible es utilidad predictiva
+preliminar, condicionada a estos periodos, no causalidad ni generalización futura. La clasificación
+
+16
+
+hidrológica de la cuenca y el balance hídrico requieren integrar los demás puntos de la tarea.
+
+Referencias
+Alvarez-Garreton, C., Boisier, J. P., Garreaud, R., Seibert, J., & Vis, M. (2021). Progressive
+water deficits during multiyear droughts in basins with long hydrological memory in Chile.
+Hydrology and Earth System Sciences, 25(1), 429-446. https://doi.org/10.5194/hess-25-42
+9-2021
+Alvarez-Garreton, C., Mendoza, P. A., Boisier, J. P., Addor, N., Galleguillos, M., ZambranoBigiarini, M., Lara, A., Puelma, C., Cortes, G., Garreaud, R., McPhee, J., & Ayala, A.
+(2018). The CAMELS-CL dataset: Catchment attributes and meteorology for large sample
+studies—Chile dataset. Hydrology and Earth System Sciences, 22(11), 5817-5846. https://d
+oi.org/10.5194/hess-22-5817-2018
+Ayala, A., Farias-Barahona, D., Huss, M., Pellicciotti, F., McPhee, J., & Farinotti, D. (2020).
+Glacier runoff variations since 1955 in the Maipo River basin, in the semiarid Andes of
+central Chile. The Cryosphere, 14(6), 2005-2027. https://doi.org/10.5194/tc-14-2005-2020
+Cortes, G., & Margulis, S. (2017). Impacts of El Nino and La Nina on interannual snow accumulation in the Andes: Results from a high-resolution 31 year reanalysis. Geophysical Research
+Letters, 44(13), 6859-6867. https://doi.org/10.1002/2017GL073826
+da Silva, L., Mahmoud, M., Gonzalez-Rodriguez, L., Mohammed, S., Rodriguez-Lopez, L., &
+Arias, M. (2023). Assessment of the IMERG Early-Run precipitation estimates over South
+American Country of Chile. Remote Sensing, 15(3), Artículo 573. https://doi.org/10.3390
+/rs15030573
+
+17
+
+Gupta, H. V., Kling, H., Yilmaz, K. K., & Martinez, G. F. (2009). Decomposition of the mean squared error and NSE performance criteria: Implications for improving hydrological modelling.
+Journal of Hydrology, 377(1–2), 80-91. https://doi.org/10.1016/j.jhydrol.2009.08.003
+Hossain, F., & Huffman, G. J. (2008). Investigating error metrics for satellite rainfall data at
+hydrologically relevant scales. Journal of Hydrometeorology, 9(3), 563-575. https://doi.or
+g/10.1175/2007JHM925.1
+Hosseini-Moghari, S.-M., & Tang, Q. (2020). Validation of GPM IMERG V05 and V06 precipitation products over Iran. Journal of Hydrometeorology, 21(5), 1011-1037. https://doi.org/1
+0.1175/JHM-D-19-0269.1
+Masiokas, M. H., Villalba, R., Luckman, B. H., Le Quesne, C., & Aravena, J. C. (2006). Snowpack
+variations in the central Andes of Argentina and Chile, 1951–2005: Large-scale atmospheric
+influences and implications for water resources in the region. Journal of Climate, 19(24),
+6334-6352. https://doi.org/10.1175/JCLI3969.1
+NASA Global Precipitation Measurement Mission. (2021). GPM IMERG Final precipitation L3
+one-month product, 0.1 degree grid (Version 06). NASA Goddard Earth Sciences Data;
+Information Services Center. https://doi.org/10.5067/GPM/IMERG/3B-MONTH/06
+NASA Global Precipitation Measurement Mission. (2024). GPM IMERG Final precipitation L3
+one-month product, 0.1 degree grid (Version 07). NASA Goddard Earth Sciences Data;
+Information Services Center. https://doi.org/10.5067/GPM/IMERG/3B-MONTH/07
+Pyper, B. J., & Peterman, R. M. (1998). Comparison of methods to account for autocorrelation
+in correlation analyses of fish data. Canadian Journal of Fisheries and Aquatic Sciences,
+55(9), 2127-2140. https://doi.org/10.1139/f98-104
+
+18
+
+Rojas, Y., Minder, J. R., Campbell, L. S., Massmann, A. K., & Garreaud, R. (2021). Assessment
+of GPM IMERG satellite precipitation estimation and its dependence on microphysical rain
+regimes over the mountains of south-central Chile. Atmospheric Research, 253, Artículo 105454. https://doi.org/10.1016/j.atmosres.2021.105454
+Soto-Alvarez, M., Alcayaga, H., Alarcon, V., Caamano, D., Palma, S., & Escanilla, R. (2020).
+Evaluation of products 3B42 V7 and 3IMERG for the hydroclimatic regions of Chile.
+Journal of South American Earth Sciences, 104, Artículo 102870. https://doi.org/10.1016
+/j.jsames.2020.102870
+Tian, F., Hou, S., Yang, L., Hu, H., & Hou, A. (2018). How does the evaluation of the GPM IMERG
+rainfall product depend on gauge density and rainfall intensity? Journal of Hydrometeorology, 19(2), 339-349. https://doi.org/10.1175/JHM-D-17-0161.1
+Willmott, C. J. (1981). On the validation of models. Physical Geography, 2(2), 184-194. https://d
+oi.org/10.1080/02723646.1981.10642213
+Zambrano-Bigiarini, M., Nauditt, A., Birkel, C., Verbist, K., & Ribbe, L. (2017). Temporal and
+spatial evaluation of satellite-based rainfall estimates across the complex topographical
+and climatic gradients of Chile. Hydrology and Earth System Sciences, 21(2), 1295-1320.
+https://doi.org/10.5194/hess-21-1295-2017
+
+A.
+
+Climatología mensual usada en anomalías
+La tabla completa procede de ‘figuras/tabla_2_2_climatologia_referencia.csv‘. Las medias,
+
+medianas y desviaciones son estadísticas entre años por mes calendario; 𝑛 es el número de valores
+válidos en la referencia 2000-06–2020-03. Las anomalías estandarizadas usan la desviación estándar
+muestral.
+
+19
+
+Cuadro 12: Climatología por variable y mes calendario
+
+Variable
+
+Mes
+
+𝑛
+
+Media
+
+Mediana
+
+DE
+
+𝑃𝐿
+
+Ene
+
+20
+
+13.41
+
+13.15
+
+10.58
+
+𝑃𝐿
+
+Feb
+
+20
+
+12.28
+
+7.54
+
+11.98
+
+𝑃𝐿
+
+Mar
+
+20
+
+10.75
+
+6.47
+
+14.25
+
+𝑃𝐿
+
+Abr
+
+19
+
+44.40
+
+27.66
+
+82.02
+
+𝑃𝐿
+
+May
+
+19
+
+116.87
+
+100.39
+
+105.43
+
+𝑃𝐿
+
+Jun
+
+20
+
+168.08
+
+132.59
+
+140.73
+
+𝑃𝐿
+
+Jul
+
+20
+
+123.72
+
+73.74
+
+127.48
+
+𝑃𝐿
+
+Ago
+
+20
+
+118.27
+
+68.83
+
+108.83
+
+𝑃𝐿
+
+Sep
+
+20
+
+68.98
+
+60.52
+
+63.13
+
+𝑃𝐿
+
+Oct
+
+20
+
+39.75
+
+21.54
+
+36.29
+
+𝑃𝐿
+
+Nov
+
+20
+
+24.92
+
+17.09
+
+23.74
+
+𝑃𝐿
+
+Dic
+
+20
+
+13.83
+
+6.37
+
+17.13
+
+𝑃𝐼
+
+Ene
+
+20
+
+18.02
+
+16.57
+
+9.93
+
+𝑃𝐼
+
+Feb
+
+20
+
+17.49
+
+15.48
+
+10.36
+
+𝑃𝐼
+
+Mar
+
+20
+
+17.07
+
+12.38
+
+12.75
+
+𝑃𝐼
+
+Abr
+
+19
+
+37.48
+
+22.82
+
+44.01
+
+𝑃𝐼
+
+May
+
+19
+
+88.51
+
+77.23
+
+50.24
+
+𝑃𝐼
+
+Jun
+
+20
+
+140.24
+
+128.37
+
+72.46
+
+𝑃𝐼
+
+Jul
+
+20
+
+124.97
+
+110.46
+
+57.61
+
+𝑃𝐼
+
+Ago
+
+20
+
+110.88
+
+107.51
+
+63.02
+
+𝑃𝐼
+
+Sep
+
+20
+
+49.16
+
+40.63
+
+26.05
+
+𝑃𝐼
+
+Oct
+
+20
+
+35.26
+
+33.56
+
+23.54
+
+𝑃𝐼
+
+Nov
+
+20
+
+24.38
+
+23.52
+
+11.22
+
+𝑃𝐼
+
+Dic
+
+20
+
+24.55
+
+23.47
+
+13.64
+
+20
+
+Variable
+
+Mes
+
+𝑛
+
+Media
+
+Mediana
+
+DE
+
+𝑄
+
+Ene
+
+20
+
+177.99
+
+157.16
+
+98.14
+
+𝑄
+
+Feb
+
+20
+
+133.96
+
+117.07
+
+63.75
+
+𝑄
+
+Mar
+
+20
+
+93.39
+
+81.55
+
+34.81
+
+𝑄
+
+Abr
+
+18
+
+72.55
+
+70.29
+
+20.59
+
+𝑄
+
+May
+
+18
+
+59.15
+
+60.14
+
+15.03
+
+𝑄
+
+Jun
+
+19
+
+60.98
+
+59.83
+
+18.84
+
+𝑄
+
+Jul
+
+19
+
+58.92
+
+55.46
+
+21.05
+
+𝑄
+
+Ago
+
+19
+
+61.22
+
+54.03
+
+23.73
+
+𝑄
+
+Sep
+
+19
+
+68.88
+
+63.92
+
+20.71
+
+𝑄
+
+Oct
+
+19
+
+95.43
+
+88.36
+
+33.00
+
+𝑄
+
+Nov
+
+19
+
+146.08
+
+121.91
+
+58.97
+
+𝑄
+
+Dic
+
+20
+
+192.03
+
+145.66
+
+100.71
+
+𝑅
+
+Ene
+
+20
+
+98.52
+
+86.99
+
+54.32
+
+𝑅
+
+Feb
+
+20
+
+67.42
+
+59.68
+
+31.68
+
+𝑅
+
+Mar
+
+20
+
+51.69
+
+45.14
+
+19.27
+
+𝑅
+
+Abr
+
+18
+
+38.86
+
+37.65
+
+11.03
+
+𝑅
+
+May
+
+18
+
+32.74
+
+33.29
+
+8.32
+
+𝑅
+
+Jun
+
+19
+
+32.66
+
+32.05
+
+10.09
+
+𝑅
+
+Jul
+
+19
+
+32.61
+
+30.70
+
+11.65
+
+𝑅
+
+Ago
+
+19
+
+33.88
+
+29.90
+
+13.13
+
+𝑅
+
+Sep
+
+19
+
+36.90
+
+34.24
+
+11.09
+
+𝑅
+
+Oct
+
+19
+
+52.82
+
+48.91
+
+18.27
+
+𝑅
+
+Nov
+
+19
+
+78.25
+
+65.30
+
+31.59
+
+𝑅
+
+Dic
+
+20
+
+106.29
+
+80.62
+
+55.74
+
+𝑇
+
+Ene
+
+20
+
+8.28
+
+8.43
+
+1.21
+
+21
+
+Variable
+
+Mes
+
+𝑛
+
+Media
+
+Mediana
+
+DE
+
+𝑇
+
+Feb
+
+20
+
+8.47
+
+8.54
+
+1.23
+
+𝑇
+
+Mar
+
+20
+
+6.88
+
+6.68
+
+1.46
+
+𝑇
+
+Abr
+
+19
+
+1.83
+
+1.63
+
+2.32
+
+𝑇
+
+May
+
+19
+
+−4.30
+
+−5.00
+
+2.50
+
+𝑇
+
+Jun
+
+20
+
+−7.78
+
+−8.02
+
+1.50
+
+𝑇
+
+Jul
+
+20
+
+−8.44
+
+−8.18
+
+1.46
+
+𝑇
+
+Ago
+
+20
+
+−7.30
+
+−6.94
+
+1.43
+
+𝑇
+
+Sep
+
+20
+
+−5.71
+
+−5.80
+
+1.51
+
+𝑇
+
+Oct
+
+20
+
+−2.89
+
+−2.74
+
+1.19
+
+𝑇
+
+Nov
+
+20
+
+0.26
+
+0.31
+
+1.15
+
+𝑇
+
+Dic
+
+20
+
+4.41
+
+4.25
+
+1.76
+
+Nota. Unidades: 𝑃 𝐿 , 𝑃 𝐼 , 𝑅 en mm/mes; 𝑄 en m3 /s; 𝑇 en ◦ C; DE = desviación estándar muestral. La lámina 𝑅 deriva
+de 𝑄 y no se interpreta como observación independiente.
+
+B.
+
+Archivos reproducibles asociados
+Relaciones: scripts/04_analisis_precipitacion.py; tablas tabla_2_1_*; Figura ??.
+Anomalías/rezagos: scripts/05_anomalias_rezagos.py; tablas tabla_2_2_*; Figura ??.
+Modelos multibloque: scripts/06_modelos_validacion_temporal.py; archivos
+tabla_2_3_metricas_fuera_ajuste.csv, tabla_2_3_metricas_por_bloque.csv,
+tabla_2_3_seleccion_modelos_ajuste.csv, tabla_2_3_maximos_predichos.csv,
+predicciones y desgloses anuales/mensuales/estacionales; Figuras ?? y ??
+
+22
+
+Entrada única para cálculos: datos/datos_mensuales_maipo.csv.
+
+

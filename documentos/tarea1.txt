@@ -1,0 +1,1161 @@
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Tarea 1
+Clasificación hidroclimática
+a escala mensual de una cuenca
+Curso de Hidrología · Semestre 202602
+Profesor: Carlos David Hoyos
+Universidad Nacional de Colombia — Sede Medellín
+Grupos de tres estudiantes · Entrega: lunes 5 de octubre de 2026
+
+La pregunta de la tarea
+¿Cómo se distribuyen la precipitación y el caudal en una cuenca, cómo cambian en el tiempo y qué procesos
+físicos explican su régimen y su relación con el clima regional y global?
+Cada grupo seleccionará una cuenca en cualquier lugar del mundo y construirá una clasificación hidroclimática sustentada en sus series mensuales. El punto de partida serán registros diarios de precipitación
+y caudal, complementados con precipitación IMERG para la misma cuenca. Todo el análisis se realizará a
+escala mensual; la temperatura se obtendrá de la base elegida o de ERA5-Land/ERA5.
+La clasificación debe surgir del análisis: cuándo llega el agua, cuándo sale por el río, qué tan marcada es
+la estacionalidad y cuánto cambia ese patrón entre años. Cada categoría deberá tener criterios explícitos y
+evidencia que permita discutirla.
+
+Selección de la cuenca
+Trabajo en grupos de tres personas. El grupo escoge y justifica su cuenca.
+Localización libre: cualquier país o región del mundo.
+Información indispensable: caudal diario observado y precipitación diaria representativa de la cuenca,
+con un registro común de al menos 25 años. Se admite como máximo un 10 % de datos diarios
+faltantes por variable en ese periodo común, calculado sobre los días esperados y antes de cualquier
+relleno. Reporten su distribución temporal; no basta la distancia entre la primera y la última fecha.
+Comparación satelital: precipitación IMERG para la misma cuenca y un periodo común con los registros de referencia. Verificar su disponibilidad antes de cerrar la selección.
+Temperatura para el análisis: usar la información disponible en la base; si no existe, obtener temperatura del aire a 2 m de ERA5-Land o ERA5. Trabajar con medias mensuales representativas de la
+cuenca.
+Tamaño: seleccionar una cuenca con área de drenaje entre 100 y 10 000 km2 , incluidos ambos límites.
+Reportar el área correspondiente a la estación de salida y justificar su representatividad respecto a la
+resolución de IMERG.
+Identificación: nombre, código de estación, coordenadas, área, mapa y fuente de la delimitación.
+Sugerencia de partida: explorar los proyectos CAMELS. Sus series y atributos facilitan conectar el clima
+con las características físicas de la cuenca. También pueden proponer otra fuente que cumpla los requisitos.
+
+1
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Requisito transversal: explicar la física de la cuenca
+El análisis estadístico debe conducir a una explicación hidrológica
+La tarea no se completa con gráficas, coeficientes, tendencias o mapas. En cada uno de los cinco
+puntos, interpreten los resultados mediante procesos físicos pertinentes para la cuenca y la región.
+Expliquen cómo llega el agua, cómo se almacena, cómo retorna a la atmósfera y cómo sale por el río.
+Distingan lo que muestran los datos de las hipótesis que proponen para explicarlo.
+
+Contexto físico para orientar las hipótesis
+Construyan una ficha breve y un mapa de la cuenca: ubicación, área, rango altitudinal, relieve, orientación
+respecto a las fuentes de humedad, coberturas del suelo y rasgos geológicos o de suelos que puedan afectar infiltración y almacenamiento. Identifiquen lagos, humedales, nieve, glaciares, embalses y extracciones
+cuando existan. Utilicen atributos CAMELS y fuentes adicionales, indicando procedencia y limitaciones.
+Seleccionen los rasgos que ayuden a explicar los resultados; no acumulen atributos sin interpretarlos.
+
+Buscar, leer y contrastar fuentes
+Consulten libros y capítulos de hidrología o climatología, artículos científicos, informes de instituciones y material técnico en línea. Combinen fundamentos de procesos con estudios de la región o de
+la cuenca y documentación de los productos utilizados. Evalúen autoría, institución, fecha, escala espacial
+y pertinencia de cada fuente. Si no encuentran estudios específicos, justifiquen el uso de evidencia de una
+región comparable.
+Cada explicación sustantiva deberá citar la fuente que la respalda y conectar esa fuente con un resultado
+propio. Incluyan referencias completas, DOI o enlace cuando exista y páginas o secciones pertinentes para
+libros e informes. Una bibliografía al final sin citas en la discusión no muestra cómo se usaron las fuentes.
+Las respuestas de IA pueden orientar la búsqueda, pero no sustituyen la lectura ni la comprobación de las
+referencias originales.
+
+Una secuencia de razonamiento para los cinco puntos
+1. Resultado: describan el rasgo observado y cuantifíquenlo, con su incertidumbre. Remitan a la figura o
+tabla correspondiente.
+2. Mecanismo: expliquen qué proceso podría producir ese rasgo y por qué sería pertinente en esa cuenca
+y época del año.
+3. Evidencia: relacionen los datos, atributos y bibliografía que apoyan la explicación. Eviten usar una
+referencia general como prueba de un mecanismo local no comprobado.
+4. Alternativas y contraste: planteen otra explicación plausible y señalen qué observación permitiría
+distinguirlas. Reconozcan los procesos para los que faltan datos.
+Por ejemplo, si el máximo de caudal ocurre después del máximo de lluvia, cuantifiquen el desfase y evalúen
+almacenamiento subterráneo, nieve o regulación según la cuenca; no escojan una causa únicamente por resultar plausible. De forma semejante, un pico interanual o una región de alta correlación exige un mecanismo
+de conexión y evidencia adicional.
+
+Síntesis física de la caracterización
+Cierren el informe con un esquema conceptual propio que conecte circulación regional, aportes de precipitación, almacenamiento, pérdidas y caudal, indicando las escalas temporales relevantes. Acompáñenlo
+con una tabla breve: resultado principal, mecanismo propuesto, evidencia propia, fuente consultada y limitación o explicación alternativa. Integren los cinco puntos y revisen la hipótesis inicial; la conclusión no
+debe limitarse a repetir los estadísticos.
+
+2
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Punto 1. Series mensuales: exploración y validación
+Propósito: construir una primera interpretación de la cuenca mediante gráficas cronológicas y análisis
+descriptivo de precipitación y caudal a escala mensual. Utilicen la exploración para detectar problemas de
+datos y de procesamiento antes de avanzar a las comparaciones.
+
+1.1. Graficar las series de caudal y precipitación
+Construyan la precipitación acumulada mensual y el caudal medio mensual a partir de los registros diarios.
+Grafiquen ambas series en paneles alineados, con el mismo eje de tiempo, unidades explícitas y vacíos
+visibles. Describan periodos húmedos y secos, máximos, mínimos, persistencia, cambios aparentes y posibles
+desfases. Esta será su aproximación inicial; contrastarán estas impresiones con los puntos siguientes.
+Para meses completos, con Pd como precipitación acumulada durante el día d, en mm, Qd como caudal
+medio diario en m3 /s y nm como número de días del mes:
+Pm =
+
+X
+
+Qm =
+
+Pd ,
+
+1 X
+Qd .
+nm
+d∈m
+
+d∈m
+
+Para comparar precipitación y escorrentía en unidades equivalentes, conviertan también el caudal a lámina
+mensual, usando el área de drenaje A en km2 :
+Rm =
+
+86.4 X
+Qd
+A
+
+[mm/mes].
+
+d∈m
+
+Si el caudal ya está expresado en lámina diaria, no repitan la conversión por área. Obtengan y grafiquen
+también la temperatura media mensual, usando la fuente original o ERA5-Land/ERA5 según el punto 3.1.
+
+1.2. Incorporar precipitación IMERG para la misma cuenca
+IMERG significa Integrated Multi-satellitE Retrievals for GPM. Es un producto de precipitación de la
+misión GPM que combina estimaciones de varios satélites en una malla espacial. Ofrece distintas resoluciones
+temporales y modalidades de procesamiento; la modalidad Final incorpora información de pluviómetros.
+Consulten la descripción oficial de NASA y la documentación de la versión seleccionada.
+Cada grupo deberá investigar cómo acceder, descargar y procesar IMERG. No se prescribe una
+plataforma ni una receta de descarga. Consigan la precipitación para la misma delimitación de cuenca y
+un periodo que se superponga con los registros de precipitación y caudal. Documenten producto, versión,
+modalidad, variable, unidades, resolución, fechas y procedimiento reproducible de acceso.
+Obtengan un promedio espacial representativo de la cuenca, justificando la ponderación de las celdas y el
+tratamiento de bordes. No sustituyan automáticamente el promedio de cuenca por el píxel de la estación
+de salida. Comprueben la resolución del producto frente al tamaño de la cuenca y su cobertura espacial y
+temporal. Si descargan tasas de precipitación, conviértanlas a acumulados con la duración correspondiente;
+un archivo mensual no necesariamente contiene mm/mes.
+En adelante, PL,m denota la precipitación de referencia de la base elegida (“lluvia local”) y PI,m la de
+IMERG. Expliquen si PL procede de estaciones, interpolación, satélites o reanálisis: no es necesariamente
+una observación local independiente. Agreguen IMERG a la figura cronológica y definan el periodo común
+de comparación.
+
+3
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+1.3. Describir la distribución de los datos mensuales
+Para PL , PI , Q y temperatura media mensual, presenten histogramas y una tabla con: número de meses
+válidos, media, mediana, desviación estándar, mínimo, máximo, rango, cuartiles, rango intercuartílico y
+percentiles 5, 10, 90 y 95. Incluyan R cuando se utilice para comparar láminas. Especifiquen las unidades,
+el periodo, el tratamiento de faltantes y la convención empleada para calcular percentiles.
+Construyan los histogramas con criterios explícitos de intervalos. Para comparar las dos precipitaciones,
+usen los mismos meses y límites de clase; justifiquen el uso de frecuencias relativas o densidades.
+Complementen con diagramas de caja. Examinen asimetría, diferencias entre media y mediana, dispersión,
+colas y frecuencia de meses con precipitación o caudal igual a cero. Distingan ceros de datos ausentes;
+una temperatura de cero grados Celsius no implica ausencia de temperatura.
+Identifiquen las fechas de los meses extremos y búsquenlas en las gráficas cronológicas. ¿Son coherentes
+entre variables? ¿Corresponden a un episodio plausible o a un problema de datos?
+Interpreten las cifras: ¿qué estadísticos representan mejor una condición típica?, ¿cuánto influyen los
+extremos?, ¿qué diferencias aparecen entre las dos fuentes de precipitación?
+Estos histogramas reúnen meses de distintas estaciones del año. No confundan esa distribución con la
+variabilidad entre años de un mismo mes calendario, que analizarán en el apartado 1.5. Distingan las
+estadísticas del registro completo de las calculadas sobre los meses comunes a las series comparadas.
+
+1.4. Usar la exploración como control de calidad
+1. Presenten una tabla o mapa de disponibilidad por año y mes: días válidos, meses retenidos y meses
+excluidos para cada variable. Justifiquen el criterio de completitud y apliquen el mismo criterio durante
+el análisis. No presenten sumas parciales como acumulados mensuales completos.
+2. Comprueben fechas, duplicados, unidades, códigos de faltantes, valores negativos y banderas de calidad.
+Una temperatura negativa en grados Celsius es físicamente posible; evalúen las anomalías según la variable. Identifiquen valores rellenados, reconstruidos o simulados. Revisen manualmente al menos un mes
+de agregación y conversión de unidades.
+3. Busquen saltos, secuencias constantes, extremos aislados y cambios de cobertura. Consulten metadatos
+cuando haya posibles cambios de estación, instrumentos o producto. No eliminen valores solo por aparecer
+fuera de los bigotes de un diagrama de caja.
+4. Registren cada anomalía relevante, la comprobación realizada, la decisión tomada y su efecto sobre el
+análisis. Distingan lo corregido de lo que permanece incierto.
+Coherencia hidrológica y límites de la validación
+Comparar gráficas y estadísticas permite detectar inconsistencias, pero no demuestra por sí solo que
+una fuente sea correcta. El residuo Pm − Rm no equivale automáticamente a evapotranspiración:
+intervienen almacenamiento e intercambios no representados. Un mes con Rm > Pm puede reflejar
+liberación de agua almacenada y no constituye, por sí solo, un error.
+Hipótesis inicial: formulen una primera interpretación del régimen y señalen qué evidencia la sostiene.
+Contrástenla con la climatología del apartado 1.5 y con los análisis posteriores.
+
+4
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+1.5. Climatología, variabilidad y explicación física
+Propósito: caracterizar exhaustivamente el ciclo anual, distinguirlo de su variabilidad entre años y explicar
+los procesos que lo controlan en la región de la cuenca.
+
+1.5.a. Construir la climatología de doce meses
+Para PL , PI , Q y, cuando se utilice, R, agrupen los datos por mes calendario sobre un periodo común.
+Incorporen temperatura media mensual de la base o de ERA5-Land/ERA5 (véase el punto 3.1). Presenten,
+para cada mes, número de años válidos, media, mediana, desviación estándar, cuartiles y percentiles 10 y
+90. Para comparar fuentes, utilicen los mismos pares de meses válidos.
+Grafiquen los ciclos de media y mediana con bandas intercuartílicas y percentiles 10–90, o diagramas de
+caja por mes. Las bandas describen dispersión entre años; no son intervalos de confianza de la media.
+Complementen con una representación que conserve los años individuales, como un mapa año–mes o curvas
+anuales superpuestas.
+
+1.5.b. Describir y contrastar el ciclo anual
+Identifiquen meses de máximos y mínimos, amplitud, duración de temporadas húmedas y secas, número
+de picos y concentración estacional. Justifiquen con indicadores explícitos la clasificación como régimen
+unimodal, bimodal o de estacionalidad débil.
+Comparen la fase y forma de los ciclos de precipitación y caudal. Cuantifiquen los desfases relevantes y
+discutan cómo cambia la interpretación al usar lluvia local o IMERG.
+Examinen qué meses tienen mayor variabilidad y asimetría, y cuánto influye cada año en el promedio.
+Si usan coeficiente de variación en precipitación o caudal, discutan su inestabilidad cerca de una media
+nula. No lo utilicen para temperatura en grados Celsius, cuya escala tiene un cero convencional.
+Evalúen si los picos del ciclo promedio aparecen en la mayoría de los años. Comparen dos subperiodos si
+la longitud del registro lo permite y discutan si la clasificación es estable; no atribuyan automáticamente
+las diferencias a una tendencia climática.
+Analicen las anomalías respecto al ciclo anual y conecten los resultados con los diagramas de dispersión
+del punto 2. Identifiquen años contrastantes y expliquen qué muestran sobre la variabilidad del régimen.
+
+1.5.c. Explicar los procesos regionales y de la cuenca
+Construyan una explicación física apoyada en bibliografía regional y evidencia de los datos. Según la localización, consideren migración de la zona de convergencia intertropical, monzones, frentes, circulación
+estacional, transporte de humedad, convección y efectos orográficos. Seleccionen los mecanismos pertinentes; no presenten una lista genérica.
+Expliquen cómo la cuenca transforma ese aporte: evapotranspiración y disponibilidad de energía, humedad
+del suelo, almacenamiento subterráneo, nieve y deshielo, glaciares, lagos, embalses y extracciones, según corresponda. Distingan controles del ciclo estacional de factores que modulan diferencias entre años. Sustenten
+cualquier atribución a modos de variabilidad climática con fuentes y evidencia adicional.
+Síntesis del ciclo anual: propongan una clasificación hidroclimática mensual de la cuenca; formulen los
+criterios, relacionen cada rasgo con evidencia y procesos, y expliciten alternativas e incertidumbres. Formulen
+una hipótesis que puedan contrastar con las relaciones del punto 2 y las tendencias del punto 3. No basta
+con copiar un atributo de CAMELS: la clasificación debe corresponder a las series y al periodo estudiados.
+Una categoría de aridez requiere un criterio climático justificado, no solo el total de precipitación.
+
+5
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Punto 2. Relaciones entre series y modelos estadísticos
+Todas las comparaciones y modelos de esta tarea serán mensuales. Utilicen meses coincidentes y
+válidos; reporten el periodo y el número de pares en cada análisis.
+
+2.1. Diagramas de dispersión e interpretación
+Construyan diagramas de dispersión para: (a) IMERG frente a lluvia local; (b) lluvia local frente a caudal; y (c) IMERG frente a caudal. Definan claramente los ejes. Para lluvia–caudal, usen Q y apoyen la
+interpretación con R cuando interese comparar láminas.
+Coloreen los puntos por mes calendario o estación climática. Describan dirección, forma, fuerza, dispersión,
+agrupamientos, valores influyentes y posibles cambios de variabilidad con la magnitud.
+En IMERG–lluvia local incluyan la línea 1:1, con escalas comparables. Calculen sesgo medio PI − PL ,
+MAE y RMSE; expliquen su significado respecto a la fuente de referencia. Una correlación alta no garantiza
+concordancia.
+Calculen correlaciones de Pearson y Spearman e interpreten sus diferencias. La correlación no demuestra
+causalidad ni basta para decidir que existe un buen modelo predictivo.
+Exploren si la lluvia de meses anteriores ayuda a explicar el caudal: justifiquen rezagos mensuales según
+almacenamiento, nieve o regulación. Definan el sentido del rezago y eviten utilizar lluvia futura para
+predecir caudal pasado.
+Comparen las relaciones originales con las de anomalías mensuales, restando a cada dato la climatología
+de su mes calendario. ¿La asociación persiste al retirar el ciclo anual compartido? Usen la climatología
+del apartado 1.5 y la definición de anomalías del punto 3.2.
+
+2.2. ¿Se pueden construir modelos útiles?
+Evalúen modelos para estimar (i) lluvia local a partir de IMERG y (ii) caudal a partir de lluvia local o
+IMERG. Justifiquen qué tipo de relación sugieren los datos. Consideren una regresión lineal como referencia;
+si la evidencia lo requiere, exploren una transformación, una relación no lineal sencilla o una regresión con
+rezagos. No es obligatorio forzar un modelo donde no exista capacidad explicativa suficiente.
+Si proponen modelos, presenten ecuación, variables, unidades, parámetros, supuestos, rango de aplicación y
+tratamiento de ceros o transformaciones. Comparen alternativas de complejidad razonable y expliquen por
+qué la seleccionada resulta apropiada. Una relación estadística lluvia–caudal no sustituye una explicación
+del balance hídrico ni garantiza conservar masa.
+
+2.3. Evaluar fuera del periodo de ajuste
+Separen ajuste y evaluación mediante bloques temporales o años completos; justifiquen la partición y eviten
+mezclar aleatoriamente meses dependientes. Seleccionen modelos, rezagos y transformaciones dentro del
+periodo de ajuste. Si usan anomalías para modelar, calculen su climatología únicamente con ese periodo.
+Evalúen sesgo, MAE y RMSE fuera del ajuste y examinen residuos frente al tiempo, al valor estimado y
+al mes calendario. Comparen con una referencia sencilla: IMERG sin corrección para estimar lluvia local y
+la climatología mensual del caudal para estimar caudal. Calculen esa climatología con los años de ajuste.
+Discutan errores, estacionalidad residual, predicciones físicamente implausibles y estabilidad entre periodos.
+Conclusión: ¿existe una relación aprovechable?, ¿de qué tipo?, ¿para qué meses o condiciones funciona?,
+¿mejora sobre la referencia? Un resultado negativo bien sustentado también responde la pregunta. MAE es
+el error absoluto medio y RMSE la raíz del error cuadrático medio. Consideren posibles fuentes compartidas:
+IMERG Final incorpora pluviómetros y la lluvia de referencia puede incluir información satelital.
+
+6
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Punto 3. Tendencias hidroclimáticas y sus posibles causas
+Analicen tendencias de la precipitación de referencia, la precipitación IMERG, el caudal y la temperatura. Trabajen siempre con datos mensuales. Comparen métodos lineales y no lineales, paramétricos y no
+paramétricos, y distingan magnitud del cambio, incertidumbre y evidencia estadística.
+
+3.1. Temperatura y periodos de análisis
+Si la base de la cuenca no incluye temperatura, obtengan temperatura del aire a 2 m de ERA5-Land
+o ERA5. También pueden usarla para complementar y contrastar los registros existentes. Son productos
+basados en reanálisis, no observaciones de una estación de la cuenca. ERA5-Land utiliza forzamientos de
+ERA5 para representar la superficie terrestre con mayor detalle espacial. Consulten la documentación de
+ERA5-Land o la descripción de ERA5 mensual.
+Investiguen el acceso y documenten producto, versión, variable, unidades, resolución, cobertura y procedimiento de descarga. Obtengan la temperatura media mensual representativa de la misma cuenca, con una
+ponderación espacial justificada. Si está en kelvin, conviértanla mediante T [◦ C] = T [K] − 273.15. Calculen
+la media temporal, no la suma; si parten de datos diarios completos, promedien todos los días del mes. Examinen las diferencias de altura y resolución espacial respecto a la cuenca. No unan sin evaluación registros
+locales y reanálisis en una sola serie: un cambio de fuente puede introducir un salto artificial.
+Usen el registro mensual completo disponible de cada variable para estudiar cambios de largo plazo y,
+adicionalmente, un periodo común para comparar variables y productos. Distingan esas dos preguntas. La
+menor duración de IMERG no debe recortar automáticamente los otros registros. Reporten fechas, cantidad
+de meses válidos, vacíos y cambios de fuente; “serie completa” no significa rellenar todos los faltantes.
+
+3.2. Series originales, anomalías y anomalías estandarizadas
+Para cada variable Xt , con mes calendario j(t), construyan:
+at = Xt − µj(t) ,
+
+zt =
+
+Xt − µj(t)
+.
+sj(t)
+
+Aquí µj y sj son la media y la desviación estándar de los valores del mes j en un periodo de referencia
+fijo, explícito y justificado. Utilicen el mismo periodo de referencia al comparar fuentes cuando la cobertura
+lo permita, y reporten el número de años válidos para cada mes. No calculen las anomalías restando una
+única media de todos los meses ni mediante una climatología móvil que pueda remover parte de la tendencia.
+Las anomalías conservan las unidades originales; las estandarizadas son adimensionales. Si sj = 0, la estandarización no está definida; si es muy pequeña o se estima con pocos datos, discutan su inestabilidad.
+Estandarizar no garantiza normalidad ni equivale a calcular un índice SPI. Presenten las tres representaciones y expliquen qué información conserva o modifica cada una.
+
+3.3. Dos escalas de evaluación temporal
+Todos los datos: evalúen la tendencia de la secuencia cronológica de meses, en sus tres representaciones.
+En la serie original, consideren explícitamente la estacionalidad.
+Mes a mes: construyan doce subseries: todos los eneros, todos los febreros, etc. Evalúen cómo cambia
+cada mes a través de los años, también en las tres representaciones. No ajusten una tendencia a las doce
+medias climatológicas: eso describe el ciclo anual, no su cambio en el tiempo.
+Usen las fechas reales como variable temporal, aun si existen vacíos. Verifiquen que, dentro de un mismo mes
+calendario y con la misma muestra, restar una constante no modifica la pendiente OLS; dividir por sj > 0
+solo cambia su escala. Estas transformaciones no constituyen evidencias independientes de tendencia.
+
+7
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+3.4. Métodos y comparación de resultados
+OLS es un método paramétrico de ajuste, no una categoría separada. Asimismo, “no paramétrico” no
+significa “no lineal”. Incluyan las siguientes tres aproximaciones y expliquen sus diferencias:
+1. Tendencia lineal por mínimos cuadrados ordinarios (OLS). Ajusten Xt = β0 + β1 t + εt y sus
+equivalentes para at y zt . Para la secuencia original de todos los meses, comparen con un ajuste que
+controle el mes calendario mediante efectos estacionales. Reporten pendiente, intervalo de confianza,
+periodo, tamaño de muestra y diagnóstico de residuos. Comprueben dependencia temporal y cambios en
+la dispersión; si están presentes, sustenten la inferencia con errores estándar robustos a heterocedasticidad
+y autocorrelación (HAC), o un remuestreo por bloques justificado, en lugar de aceptar automáticamente
+los errores estándar usuales.
+2. Tendencia monotónica no paramétrica. Comparen con la prueba de Mann–Kendall y una pendiente
+de Sen o Theil–Sen. Para la secuencia original con ciclo anual utilicen una variante estacional; para
+las doce subseries, una prueba por mes calendario. Evalúen la dependencia temporal y justifiquen la
+variante, corrección o remuestreo empleado. Reporten magnitud e incertidumbre, además del valor p.
+Estos métodos detectan asociación monotónica con el tiempo: no reconstruyen por sí solos una curva
+temporal no lineal.
+3. Evolución no lineal. Seleccionen un método justificable, como LOESS, un modelo aditivo con suavización temporal (GAM) o una regresión segmentada si hay evidencia de cambios de pendiente. Aplíquenlo
+a las tres representaciones y a las escalas global y por mes cuando haya datos suficientes. Documenten
+suavización, complejidad y tratamiento del ciclo anual; distingan una curva exploratoria de un modelo
+con inferencia estadística. Comparen con OLS y evalúen sensibilidad a extremos, bordes, suavización y
+longitud del registro. Eviten interpretar toda ondulación como un cambio físico o extrapolarla fuera del
+periodo observado.
+Si alguna subserie es demasiado corta o incompleta para un ajuste defendible, identifíquenla y expliquen
+la limitación. No fuercen modelos complejos para llenar una tabla. Para métodos no lineales, describan la
+forma y los intervalos de aumento o disminución: una única pendiente puede ocultar inversiones del cambio.
+
+3.5. Incertidumbre, robustez y presentación
+Expresen las pendientes por década, indicando las unidades de la variable por década; por ejemplo,
+◦
+C/década para temperatura y unidades estandarizadas/década para z. En precipitación, aclaren que se
+trata del cambio del acumulado mensual, no del total anual.
+Presenten series con ajustes e incertidumbre, una tabla comparativa por método y un gráfico de pendientes e intervalos para los doce meses. Identifiquen qué resultados son consistentes entre métodos,
+representaciones, fuentes y periodos, y expliquen las discrepancias.
+Fijen y documenten el nivel de significancia. Al realizar pruebas para doce meses y varias variables,
+definan la familia de pruebas y consideren comparaciones múltiples, por ejemplo mediante control de la
+tasa de falsos descubrimientos (FDR). No seleccionen solo los meses o métodos con valores p pequeños.
+Examinen sensibilidad a años extremos, fecha inicial y final, disponibilidad y posibles rupturas de homogeneidad. Distingan una tendencia gradual de un salto de nivel. Ausencia de significancia no demuestra
+ausencia de cambio; significancia tampoco garantiza relevancia hidrológica.
+Como apoyo metodológico, consulten este estudio de tendencias y cambios de nivel en caudales, que compara
+tratamientos de la persistencia temporal. Documenten las referencias y las implementaciones utilizadas.
+
+8
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+3.6. ¿A qué podrían deberse los cambios?
+Si encuentran cambios, propongan y evalúen explicaciones físicas consistentes con su distribución estacional
+y con las variables analizadas. Si la evidencia es débil o contradictoria, indiquen qué puede y qué no puede
+concluirse.
+1. Contrasten precipitación, caudal y temperatura. ¿Cambian en los mismos meses y periodos?
+¿El caudal responde de manera consistente con la precipitación? ¿Podrían intervenir cambios de evapotranspiración, almacenamiento, nieve o deshielo? Consideren rezagos y las diferencias entre IMERG y la
+precipitación de referencia.
+2. Investiguen el contexto de la cuenca. Consulten bibliografía y metadatos sobre cambios de cobertura,
+urbanización, deforestación, embalses, operación hidráulica, extracciones y modificaciones de la estación.
+Relacionen fechas documentadas con los cambios detectados, sin asumir que una coincidencia temporal
+demuestra causalidad.
+3. Distingan clima, variabilidad y observación. Evalúen si una fase de variabilidad de baja frecuencia
+o la elección de los extremos del registro puede producir una tendencia aparente. Consideren cambios en
+instrumentos, cobertura, productos o asimilación del reanálisis como explicaciones alternativas.
+4. Expliciten el grado de evidencia. Para cada hipótesis, indiquen mecanismo, evidencia favorable,
+evidencia faltante o contradictoria y datos adicionales necesarios para contrastarla. Una tendencia estadística aislada no permite atribuir el cambio a una causa específica, incluido el cambio climático.
+Síntesis del punto 3
+Respondan: ¿qué variable cambia, cuánto, en qué meses y durante qué periodo?, ¿es un cambio lineal,
+monotónico, no lineal o un salto?, ¿qué tan robusto es frente a método, fuente y periodo?, ¿cuáles
+son las explicaciones mejor sustentadas y qué incertidumbres permanecen? Diferencien resultados
+observados, resultados de reanálisis e hipótesis de interpretación.
+
+9
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Punto 4. Análisis de frecuencias mediante Fourier
+Pregunta: ¿en qué escalas temporales se concentra la variabilidad de la cuenca y cuáles son sus periodos
+dominantes? Construyan espectros de Fourier de las series mensuales originales y de sus anomalías para
+precipitación local, IMERG, caudal y temperatura. Comparen fuentes sobre periodos comunes y distingan
+estos resultados de los obtenidos con registros de distinta longitud.
+
+4.1. Preparar las series y documentar el cálculo
+Usen la secuencia mensual cronológica, no las doce medias climatológicas. La transformada discreta requiere muestreo regular: no eliminen meses faltantes y concatenen los restantes como si fueran consecutivos.
+Seleccionen un tramo continuo o justifiquen el tratamiento de vacíos y evalúen su efecto sobre el espectro.
+No rellenen silenciosamente con ceros.
+Comparen la serie original centrada (restando su media global, conservando el ciclo anual) con las anomalías respecto a la climatología mensual. Examinen además la sensibilidad a retirar la tendencia identificada
+en el punto 3: una tendencia puede dominar las bajas frecuencias. Reporten qué transformación se aplicó
+a cada espectro.
+Documenten número de meses N , intervalo ∆t = 1 mes, ventana temporal, normalización y estimador
+espectral. Pueden utilizar la FFT para calcular la transformada y un periodograma para representar
+potencia. Si usan una ventana como Hann o un promedio de segmentos (Welch), expliquen cómo se
+controla la fuga espectral y qué resolución se sacrifica.
+Para la transformada del registro completo, sin relleno con ceros, las frecuencias positivas y sus periodos
+son:
+k
+1
+1
+fk =
+,
+Tk = ,
+∆f =
+.
+N ∆t
+fk
+N ∆t
+En Welch, el espaciamiento depende de la longitud del segmento, y la resolución efectiva también depende
+de la ventana. Con datos mensuales, la frecuencia de Nyquist es 0.5 ciclos/mes y el periodo mínimo resoluble
+es dos meses. La frecuencia cero corresponde a la media, no a un periodo finito. El relleno con ceros puede
+refinar la representación gráfica, pero no aumenta la resolución física del registro.
+
+4.2. Construir e interpretar los espectros
+Presenten espectros unilaterales de potencia o densidad espectral, indicando la convención, unidades y
+normalización. Muestren frecuencia en ciclos/mes y una referencia equivalente de periodos en meses o años.
+Mantengan criterios comparables entre variables; si normalizan por la varianza para comparar formas,
+declárenlo y no interpreten las alturas como variabilidad absoluta.
+1. Identifiquen picos o bandas dominantes y tabulen periodo aproximado, resolución, variable, transformación y número de ciclos observados. No asignen precisión que el registro no permite.
+2. Examinen las bandas anual (12 meses), semianual (6 meses) e interanuales. ¿Cuáles dominan en las
+series originales? ¿Cuáles se atenúan al retirar la climatología? ¿Cómo difieren precipitación, caudal y
+temperatura?
+3. Discutan si el almacenamiento de la cuenca atenúa variaciones rápidas o favorece persistencia. No infieran
+desfases a partir de espectros de potencia: estos no contienen la fase relativa entre dos series.
+4. Evalúen la estabilidad de los picos frente a ventana, tendencia, extremos y periodo de análisis. Un máximo
+del periodograma no demuestra por sí solo una periodicidad significativa. Si afirman significancia, justifiquen un fondo de ruido compatible con la persistencia de la serie, por ejemplo AR(1), y el tratamiento
+de la búsqueda entre frecuencias.
+Conclusión: relacionen los periodos dominantes con la climatología y los procesos regionales. Un pico
+interanual no basta para atribuir la variabilidad a ENSO u otro modo climático. Consideren las bandas
+amplias y la incertidumbre de los periodos con pocos ciclos dentro del registro.
+
+10
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Punto 5. Mapas de correlación con el clima global
+Pregunta: ¿qué regiones oceánicas y patrones atmosféricos se asocian con la variabilidad mensual de
+precipitación y caudal de la cuenca, y cómo cambia esa asociación según el mes del año?
+
+5.1. Seleccionar los campos climáticos
+Obtengan campos mensuales globales de temperatura superficial del mar (SST) y escojan otras
+dos variables atmosféricas, justificadas por mecanismos relevantes para la región. Se requieren campos
+espaciales para construir mapas; un índice climático escalar puede complementar, pero no sustituye, estos
+campos.
+Como opciones atmosféricas consideren presión al nivel del mar, altura geopotencial a 500 hPa, componentes
+del viento a 850 o 200 hPa, o humedad específica en un nivel pertinente. Una combinación inicial posible es
+presión al nivel del mar y altura geopotencial a 500 hPa, pero el grupo debe justificar su elección. Indiquen
+nivel vertical, componente y unidades cuando corresponda; distingan geopotencial de altura geopotencial y
+controlen celdas bajo la superficie en niveles de presión.
+Exploren el catálogo de SST de NOAA PSL y los productos ERA5 mensual de superficie y ERA5 mensual en
+niveles de presión. Cada grupo investigará cómo acceder a los datos. Documenten fuente, versión, resolución,
+periodo, máscaras y transformaciones. Pueden usar una malla global de resolución moderada adecuada para
+patrones de gran escala, justificando cualquier remuestreo.
+
+5.2. Definir y calcular los mapas mensuales
+Construyan como base mapas para la precipitación local y el caudal de la cuenca frente a cada uno de los
+tres campos. Usen IMERG para contrastar la sensibilidad de los patrones más relevantes a la fuente de
+precipitación; pueden ampliar el análisis a temperatura. Para cada combinación, presenten doce mapas,
+uno por mes calendario, organizados en paneles comparables.
+En cada celda correlacionen los valores a través de los años: por ejemplo, todos los eneros de precipitación de
+la cuenca con todos los eneros de SST de esa celda. No es una correlación espacial entre celdas ni una
+correlación calculada con un único enero. Empleen Pearson como referencia y examinen Spearman
+cuando asimetría, extremos o relaciones monotónicas no lineales puedan afectar la interpretación.
+Con aX (t) como anomalía de la variable de cuenca y aY (λ, ϕ, t) como anomalía del campo climático, definan:
+rj (λ, ϕ; ℓ) = corr{t:j(t)=j} [aX (t), aY (λ, ϕ, t − ℓ)] .
+Aquí j es el mes calendario de la respuesta de la cuenca. Pueden trabajar sin rezago (ℓ = 0) o explorar
+rezagos justificados; con esta convención, ℓ > 0 significa que el campo climático antecede a la respuesta.
+Verifiquen el cambio de año: enero con un rezago de un mes se empareja con diciembre del año anterior.
+Reporten el rezago en cada figura y la cantidad efectiva de pares.
+Construyan anomalías por mes calendario y por celda con una referencia fija, compatible con la de la cuenca.
+Para un mes fijo y la misma muestra, centrar o estandarizar con constantes positivas no cambia Pearson:
+estos mapas no constituyen evidencias independientes. Si añaden un mapa con todos los meses juntos, usen
+anomalías para evitar asociaciones dominadas por el ciclo anual.
+
+11
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+5.3. Robustez y presentación de los patrones
+Usen una escala divergente común de −1 a 1, centrada en cero; identifiquen meses, variable de cuenca,
+campo, nivel, periodo y rezago. Marquen la cuenca y enmascaren tierra en SST, valores inválidos y
+celdas con pares insuficientes. Definan el mínimo de años y reporten cómo varía el tamaño de muestra
+espacialmente.
+Comparen las asociaciones de anomalías con las obtenidas tras retirar tendencias de ambas series. Expliquen el método usado. Así distinguirán asociaciones entre fluctuaciones de relaciones influidas por
+cambios de largo plazo; no interpreten automáticamente ninguna como causal.
+Consideren persistencia temporal al estimar incertidumbre o significancia, mediante un tamaño de muestra
+efectivo o remuestreo temporal por bloques justificado. Para mapas de un mes calendario, la dependencia
+relevante se evalúa entre los años de esa subserie.
+Miles de celdas, doce meses y posibles rezagos generan múltiples comparaciones. Definan una familia de
+pruebas y un procedimiento de control, como FDR, cuyos supuestos discutan. Distingan significancia
+puntual de evidencia de un patrón espacial; no interpreten píxeles aislados ni escojan el rezago de mayor
+correlación sin reconocer la búsqueda realizada.
+Examinen la estabilidad de las regiones de mayor asociación entre subperiodos, frente a años extremos y
+al cambio entre precipitación local e IMERG, siempre que haya suficientes años. Un mapa robusto debe
+aportar más que unos pocos coeficientes altos.
+
+5.4. Interpretación física e integración
+Describan regiones coherentes, signos, estaciones del año y posibles cambios de signo o ubicación. Propongan mecanismos que conecten SST y circulación atmosférica con transporte de humedad, precipitación y
+respuesta de la cuenca. Contrasten la explicación con bibliografía regional, el ciclo anual y los resultados
+previos.
+¿Coinciden los meses de mayor asociación para precipitación y caudal? ¿Los patrones atmosféricos apoyan la
+explicación sugerida por SST? ¿Un rezago, si lo usaron, es compatible con los procesos propuestos? Señalen
+posibles dependencias entre los campos climáticos: correlaciones separadas no representan necesariamente
+influencias independientes.
+Relacionen las asociaciones con las bandas dominantes del punto 4, sin suponer que compartir un periodo
+demuestra conexión causal. Pueden contrastar una hipótesis concreta con un índice climático documentado
+de NOAA PSL, como complemento a los mapas. La correlación simultánea describe asociación y no establece
+capacidad de pronóstico; una afirmación predictiva requiere evaluación fuera de muestra.
+Síntesis de los puntos 4 y 5
+Identifiquen las escalas dominantes de variabilidad y las regiones climáticas asociadas con la cuenca,
+sus cambios entre meses y su robustez. Distingan resultados sólidos, asociaciones exploratorias y
+explicaciones todavía no comprobadas. Reporten también la ausencia de patrones claros cuando
+corresponda.
+Cierre de la tarea: integren los cinco puntos en una caracterización y clasificación hidroclimática sustentada: distribución y ciclo anual, relaciones lluvia–caudal, tendencias, escalas dominantes y asociaciones con
+el clima global. Expliquen qué aspectos de la hipótesis inicial se mantuvieron y cuáles cambiaron, y qué
+incertidumbres limitan la interpretación.
+
+12
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Uso de IA y responsabilidad del grupo
+Aplica el Nivel A: abierto de la política de IA del semestre 202602. El curso exige usar estas herramientas
+con criterio: pueden apoyar la programación, depuración, exploración de métodos, figuras y redacción. Los
+tres integrantes deben entender el análisis y poder explicar sus decisiones.
+No deleguen la realización completa del trabajo a una IA
+No entreguen el PDF de esta guía o su rúbrica a Claude, Codex u otra herramienta con
+la instrucción de resolver íntegramente la tarea y luego presenten esa salida como su
+trabajo. Compartir la guía para comprender los requisitos o solicitar apoyo específico es compatible
+con el uso autorizado de IA; delegar las decisiones, la interpretación y la verificación del conjunto del
+trabajo no lo es.
+El grupo debe formular sus preguntas, justificar las decisiones metodológicas, ejecutar y verificar el
+análisis, leer las fuentes citadas y construir la interpretación física. No presenten código que no puedan
+explicar, resultados que no hayan comprobado ni referencias que no hayan consultado. Declaren de
+manera concreta la contribución de la IA y la de cada integrante.
+En la presentación deberán poder explicar sus figuras, rastrear un resultado hasta los datos y el código,
+justificar una decisión metodológica y discutir una limitación física. Conserven evidencia de sus comprobaciones y correcciones. El uso de IA por sí mismo no constituye una falta: se evaluarán la comprensión, la
+verificación, la transparencia y el cumplimiento de la política del curso.
+La sección de uso de IA del informe incluirá la declaración establecida por la política, con un anexo de
+apoyo cuando sea necesario:
+1. Herramientas utilizadas y versión, cuando se conozca.
+2. Tareas concretas en las que intervinieron.
+3. Resultados verificados y procedimientos de verificación.
+4. Propuestas de la herramienta que rechazaron o corrigieron, si las hubo.
+Verificar forma parte del trabajo
+Ejecuten el código y lean sus mensajes. Una falla de descarga o de lectura debe quedar visible: no
+la sustituyan silenciosamente por datos sintéticos. Cada cifra y figura debe poder rastrearse a los
+archivos y procedimientos de la entrega. Reporten las anomalías y sus limitaciones con honestidad.
+La política completa del curso rige las condiciones de integridad y evaluación. La presentación oral será
+Nivel C: cerrado, sin IA durante la evaluación.
+
+13
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Estructura del informe y entregables
+Cada grupo debe entregar un informe escrito organizado en las siguientes secciones. Los cinco puntos
+de la tarea deben integrarse en esta estructura, con figuras y tablas citadas en el texto.
+1. Introducción. Presenten la cuenca y su contexto hidroclimático, la motivación, los objetivos y las
+preguntas o hipótesis del trabajo. Apóyense en bibliografía pertinente.
+2. Metodología. Describan las fuentes y periodos de datos, control de calidad, tratamiento de faltantes,
+agregación mensual y procedimientos de los cinco puntos. Justifiquen las decisiones, supuestos y criterios
+de comparación, de modo que el análisis pueda reproducirse.
+3. Resultados y discusión física. Presenten los hallazgos de los cinco puntos mediante figuras, tablas
+y texto. Relacionen los resultados con procesos físicos y con libros, artículos y otras fuentes técnicas;
+contrasten hipótesis, explicaciones alternativas, incertidumbres y limitaciones. Incluyan el esquema conceptual de la cuenca y la tabla de evidencias.
+4. Conclusiones. Respondan los objetivos y preguntas iniciales, sinteticen la caracterización hidroclimática
+y destaquen los resultados mejor sustentados y sus límites. No se limiten a repetir cifras ni introduzcan
+resultados nuevos.
+5. Uso de inteligencia artificial (IA). Documenten herramientas y versiones, tareas en las que se utilizaron, verificaciones realizadas y propuestas corregidas o rechazadas. Indiquen las contribuciones de los
+tres integrantes. Esta sección cumple la declaración exigida por la política del curso; pueden añadir un
+anexo si necesitan ampliar la evidencia.
+Incluyan además una lista de referencias correspondiente a las citas del texto y anexos cuando sean
+necesarios. La discusión física y las fuentes consultadas deben acompañar los resultados, no quedar relegadas
+a la bibliografía o a los anexos.
+
+14
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Entrega en un único archivo ZIP
+Entreguen todo en un único archivo ZIP a través de Google Classroom el lunes 5 de octubre
+de 2026. El paquete debe contener el informe, los códigos y los datos de la cuenca efectivamente utilizados,
+incluidos los datos de IMERG. Los enlaces de descarga y los scripts de acceso complementan los archivos,
+pero no sustituyen la entrega de los datos usados.
+Informe: documento final en PDF, con las cinco secciones requeridas y las referencias.
+Códigos: scripts o cuadernos completos para reproducir el procesamiento, las tablas y las figuras. Incluyan
+dependencias y sus versiones, y utilicen rutas relativas dentro del paquete.
+Datos: archivos de entrada de precipitación, caudal y temperatura de la cuenca, delimitación utilizada,
+datos de IMERG y datos de ERA5/ERA5-Land o campos climáticos empleados. Incluyan los subconjuntos
+y periodos efectivamente analizados, con metadatos de fuente, versión, unidades y procesamiento; no es
+necesario adjuntar bases nacionales completas ni archivos ajenos al análisis.
+Productos del análisis: series mensuales procesadas, anomalías, tablas y figuras utilizadas en el informe.
+README: integrantes, descripción de las carpetas, procedencia de los datos, requisitos y orden de
+ejecución. Verifiquen que al descomprimir el ZIP se pueda reproducir el análisis sin depender de archivos
+que quedaron fuera de la entrega. No incluyan contraseñas ni credenciales de acceso.
+Anexos de apoyo: resultados complementarios, comprobaciones y evidencia adicional de uso de IA,
+cuando se requieran para respaldar el informe.
+
+Presentación oral y ponderación
+Las presentaciones comenzarán el martes 29 de septiembre de 2026 y continuarán el miércoles 30
+de septiembre de 2026. Cada grupo tendrá una presentación oral de 15 minutos, que representa
+el 50 % de la nota del trabajo. El 50 % restante corresponde al informe y al material reproducible
+entregado en el ZIP. Esta distribución es interna a la nota del trabajo.
+Presenten las preguntas, los resultados principales, su explicación física y las conclusiones; seleccionen evidencia que integre los cinco puntos. Los tres integrantes deben comprender el análisis y estar preparados
+para explicar sus métodos, decisiones y limitaciones.
+
+15
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Rúbrica de evaluación
+La nota del trabajo se compone de 50 % por el informe y el material reproducible del ZIP y 50 %
+por la presentación oral de 15 minutos. Los pesos son porcentajes de la nota total del trabajo. La
+interpretación física recibe 50 % y el dominio y defensa del análisis otro 10 %: juntos concentran 60 % de
+la nota.
+
+Informe y material reproducible: 50 %
+Criterio
+
+Peso
+
+Evidencia que se evaluará
+
+Interpretación física
+e integración
+
+25 %
+
+Calidad de datos y
+metodología
+
+10 %
+
+Resultados de los cinco
+puntos
+
+7%
+
+Reproducibilidad y
+entrega
+
+5%
+
+Comunicación y
+transparencia de IA
+
+3%
+
+Conexión entre resultados, procesos regionales y características de la
+cuenca. Integración de los cinco puntos, esquema conceptual, contraste
+de hipótesis, bibliografía pertinente y reconocimiento de explicaciones
+alternativas.
+Procedencia, cobertura, control de calidad, agregación mensual,
+comparabilidad espacial y temporal, selección justificada de métodos y
+tratamiento de supuestos e incertidumbre.
+Análisis completos y coherentes, cálculos correctos, figuras y tablas
+legibles, unidades y periodos explícitos. Se valora la selección de
+evidencia relevante, no la cantidad de gráficos.
+ZIP con informe, códigos, datos usados —incluido IMERG—,
+productos y README. Posibilidad de rastrear y reproducir resultados
+sin archivos externos omitidos.
+Estructura solicitada, claridad, citas y referencias verificables;
+declaración concreta del uso de IA, comprobaciones, correcciones y
+contribuciones de los integrantes.
+
+Presentación oral: 50 %
+Criterio
+
+Peso
+
+Evidencia que se evaluará
+
+Comprensión y
+explicación física
+
+25 %
+
+Dominio y defensa
+del análisis
+
+10 %
+
+Síntesis y selección de
+evidencia
+
+8%
+
+Claridad y manejo del
+tiempo
+Preparación y
+coordinación del grupo
+
+5%
+
+Explicación propia de mecanismos, escalas y relaciones entre clima y
+respuesta de la cuenca. Capacidad de conectar figuras y resultados con
+procesos, sin limitarse a leer cifras o repetir definiciones.
+Capacidad de explicar decisiones, rastrear resultados, reconocer
+supuestos y discutir qué evidencia apoya o debilita una interpretación.
+Respuestas fundamentadas a preguntas cuando se formulen.
+Presentación de una historia coherente que conecte objetivos,
+resultados principales de los cinco puntos y conclusiones, priorizando lo
+que permite comprender la cuenca.
+Exposición comprensible, figuras legibles, organización y cumplimiento
+de los 15 minutos.
+Coherencia entre las intervenciones y preparación de los integrantes
+para explicar el trabajo conjunto.
+
+2%
+
+16
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Niveles de desempeño y cálculo de la nota
+Cada criterio se calificará entre 0 y 5, con una cifra decimal. Los siguientes niveles orientan la evaluación;
+pueden asignarse valores intermedios según la evidencia presentada.
+Excelente: 4.5–5.0.
+Cumple de forma rigurosa y autónoma. Conecta evidencia, mecanismo y contexto; contrasta alternativas y reconoce límites. En criterios técnicos, el procedimiento es correcto, verificable y bien justificado.
+Sólido: 3.5–4.4.
+Cumple lo esencial y sustenta sus decisiones. Presenta explicaciones pertinentes, aunque algunas
+conexiones, comprobaciones o limitaciones requieren mayor desarrollo.
+Básico: 3.0–3.4.
+Presenta los elementos principales, pero predomina la descripción. La justificación física o metodológica es parcial, o la evidencia no respalda completamente las conclusiones.
+Insuficiente: 0.1–2.9.
+Hay omisiones o errores importantes, explicaciones genéricas o afirmaciones sin respaldo. No demuestra
+comprensión suficiente del criterio evaluado o no permite verificar sus resultados.
+Sin evidencia: 0.
+El elemento requerido no se entrega o no se presenta evidencia evaluable para ese criterio.
+Con wi como el peso porcentual de cada criterio y ni como su calificación entre 0 y 5:
+X
+X wi
+ni ,
+wi = 100.
+Ntrabajo =
+100
+i
+i
+Qué se entiende por una buena interpretación física
+Una explicación de alto desempeño identifica el resultado, propone un mecanismo pertinente, lo
+contrasta con datos y bibliografía y reconoce alternativas. Nombrar procesos como ENSO, infiltración
+o cambio climático sin demostrar su pertinencia no constituye una explicación suficiente. Un resultado
+sin tendencia o correlación significativa puede obtener la máxima calificación si el análisis es correcto
+y su interpretación está bien sustentada.
+No se premia la complejidad del código, la cantidad de modelos o la apariencia de las figuras por encima
+de la comprensión. La asistencia de IA no reduce por sí sola la calificación: se evalúan la verificación, la
+transparencia y el dominio del trabajo, conforme a la política del curso.
+Los criterios se aplican al componente escrito y al oral según la tabla. No implican penalizaciones automáticas
+adicionales. El tratamiento de incumplimientos de integridad se rige por la política del curso.
+
+17
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Anexo. Directorio de proyectos CAMELS
+CAMELS significa Catchment Attributes and Meteorology for Large-sample Studies. Es una familia
+de iniciativas; cambian las variables, los productos meteorológicos, las versiones y los criterios de
+selección entre países.
+Directorio ampliado: consulta del 17 de septiembre de 2026. Se identificaron 20 colecciones nacionales, seis extensiones y siete bases afines. Los enlaces azules son clicables y
+llevan al repositorio o portal de acceso y a la documentación. Las cifras corresponden a las versiones descritas; cada cuenca debe cumplir los límites de área, registro y faltantes de esta guía.
+Algunas colecciones cortas requieren registros adicionales compatibles. Los preprints se identifican
+como tales.
+
+América
+CAMELS-US — Estados Unidos 671 cuencas en la colección de referencia. Ofrece varios forzamientos meteorológicos. Descargar las series de caudal observado y elegir un producto de precipitación; los
+archivos de salida de modelos no son observaciones.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-BR — Brasil 897 cuencas seleccionadas. El repositorio separa caudales observados, simulados, precipitación y temperatura. Usar streamflow_selected_catchments, precipitation y temperature,
+junto con atributos y delimitaciones.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-CL — Chile 516 cuencas en la publicación original, con gran diversidad climática. El
+portal de CR2 ofrece distintas versiones: registrar cuál se descarga y revisar cobertura, nieve y glaciares.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-COL — Colombia 347 estaciones en el manuscrito; incluye caudal observado, precipitación y temperatura. Artículo disponible como preprint en revisión. Comprobar el periodo común de la
+estación seleccionada.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-PE — Perú 136 cuencas en el preprint de 2026. Contiene caudal observado y simulado:
+seleccionar y documentar las observaciones. Ofrece series hidroclimáticas y atributos de cuenca.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+18
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Oceanía y Asia
+CAMELS-AUS v2 — Australia 561 cuencas; la segunda versión extiende las series hasta 2022. Revisar la disponibilidad y las banderas de calidad de cada estación, particularmente en cuencas intermitentes.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-NZ — Nueva Zelanda 369 cuencas, con información diaria y horaria. En 14 estaciones
+los caudales requieren permiso del proveedor y sus archivos están vacíos; elegir una estación con datos
+accesibles y suficientes.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-IND — India peninsular 472 cuencas; 228 tienen caudal observado en más del 30 %
+de 1980–2020. Ese porcentaje no garantiza meses completos. Separar caudal observado y predicciones, y
+comprobar continuidad.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-KR — Corea del Sur 282 cuencas en el preprint de 2026. Incluye series diarias observadas
+y reconstruidas mediante modelos. Identificar su procedencia; es una colección distinta de CAMELSH-KR,
+incluida más adelante.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+El periodo del proyecto no es el periodo de su cuenca
+Un intervalo publicado para toda una base no implica que cada estación tenga registros completos
+durante esos años. Antes de elegir, comprueben el solapamiento real entre precipitación y caudal,
+cuántos meses utilizables quedan y si la temperatura corresponde al mismo periodo.
+
+19
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Europa occidental y central
+CAMELS-GB v2 — Gran Bretaña 671 cuencas. Actualización publicada en 2026, con series
+diarias de 1970–2022 y datos adicionales. La cobertura efectiva varía por estación y variable.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-FR — Francia 654 cuencas, con series diarias hidroclimáticas de 1970–2021 en la publicación. Los atributos permiten examinar relieve y posibles controles sobre el régimen.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-DE — Alemania 1582 estaciones en la publicación original. El registro varía por estación.
+La base incluye simulaciones HBV y LSTM además de observaciones: usar caudales medidos para esta tarea.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-CH — Suiza y cuencas transfronterizas 331 unidades: 298 cuencas fluviales y 33
+lagos. Para esta tarea seleccionar una cuenca con caudal observado en la salida; no confundir niveles de lago
+con caudales.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-LUX — Luxemburgo y entorno 56 cuencas anidadas; datos de 2004–2021 en el preprint. Esta edición, por sí sola, no cumple los 25 años mínimos: requiere una extensión compatible y documentada del registro.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+20
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Europa septentrional, oriental y España
+CAMELS-SE — Suecia 50 cuencas con precipitación, temperatura y caudal; periodo 1961–2020.
+Revisar el papel de la nieve al interpretar el desfase entre precipitación y caudal.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-FI — Finlandia 320 cuencas; publicación de 2026. Incluye distintos grados de regulación,
+que deben considerarse al interpretar el ciclo anual.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-DK — Dinamarca 3330 cuencas, pero solo 304 estaciones con caudal observado en la
+publicación. El resto no cumple automáticamente el requisito de caudal medido.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-CZ — Chequia Colección publicada en Zenodo con series y atributos. Consultar la descripción y los archivos del repositorio para establecer la cobertura de la cuenca elegida.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-PL — Polonia 354 cuencas; repositorio publicado en 2026. Incluye observaciones y simulaciones HBV/LSTM. La ficha describe los archivos y contiene documentación; no equiparar el depósito con
+una publicación arbitrada.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-ES — España 269 cuencas; disponible como extensión de Caravan. Revisar la procedencia
+de los forzamientos meteorológicos y el periodo común con el caudal.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+21
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Extensiones espaciales, horarias y de química
+Estas seis colecciones complementan bases nacionales; no representan seis países adicionales. Las extensiones
+horarias exigen controlar los intervalos de integración y la completitud.
+
+CAMELS-SPAT — Estados Unidos y Canadá 1426 cuencas; amplía la información espacial
+para estudios distribuidos. Puede requerir más procesamiento que las series ya promediadas sobre la cuenca.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELSH — Estados Unidos Colección horaria. El enlace corresponde a la parte con observaciones; existen también productos sin caudal observado. Agregar a diario antes del análisis mensual y revisar
+faltantes.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELSH-KR — Corea del Sur 178 cuencas con datos horarios de 2000–2019 y atributos. Esta
+edición no alcanza por sí sola los 25 años mínimos; requiere una extensión compatible y agregación temporal
+consistente.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-DE-1h — Alemania 1611 cuencas con series horarias, pronósticos meteorológicos y atributos. Preprint de 2026; distinguir observaciones, simulaciones y pronósticos.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-Chem — Estados Unidos Extensión de química del agua y de la atmósfera. Para la
+tarea, combinar con las series diarias de CAMELS-US mediante identificadores documentados.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CAMELS-CH-Chem — Suiza Extensión de química del agua para 115 cuencas. Complementa
+CAMELS-CH; comprobar correspondencia de estaciones y disponibilidad de las series diarias necesarias.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+22
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Bases afines y vías complementarias de acceso
+Las siguientes bases amplían las opciones geográficas. No se presentan como nuevos proyectos nacionales
+CAMELS.
+
+Caravan — Global Integra colecciones regionales en un formato común. El repositorio oficial enlaza
+las versiones de datos; los forzamientos basados en ERA5-Land pueden diferir de los CAMELS nacionales.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+GRDC-Caravan — Global Amplía Caravan con estaciones del Global Runoff Data Centre. Filtrar
+por área, cobertura y condiciones de uso.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CABra — Brasil 735 cuencas; alternativa brasileña con atributos y series hidroclimáticas. Es una base
+distinta de CAMELS-BR.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+HYSETS — América del Norte 14425 cuencas de Estados Unidos, Canadá y México en la publicación. Filtrar cuencas grandes y revisar el origen de cada producto meteorológico.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+LamaH-CE — Europa central 859 cuencas en la publicación. Ofrece series diarias y horarias;
+distinguir cuencas completas de áreas intermedias en redes anidadas.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+LamaH-Ice — Islandia 107 cuencas en la publicación. Incluye información de nieve y glaciares; los
+registros pueden presentar interrupciones asociadas al hielo.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+CCAM — China Atributos y meteorología para miles de cuencas, con caudal disponible solo para un
+subconjunto. Verificar acceso a caudal observado antes de seleccionar.
+Datos / acceso oficial
+
+|
+
+Publicación / documentación
+
+23
+
+Hidrología
+
+Tarea 1 · Semestre 202602
+
+Iniciativas anunciadas y recursos de seguimiento
+CAMELS-Nordic: iniciativa presentada para Noruega y Suecia. El anuncio no garantiza acceso
+inmediato a una colección descargable; confirmar repositorio antes de escogerla.
+CAMELS-PLUS: iniciativa de flujos de trabajo reproducibles. No se cuenta como otra colección nacional independiente.
+Colección temática de Earth System Science Data: reúne publicaciones de esta familia y
+facilita consultar actualizaciones.
+Registrar exactamente qué se descargó
+Guarden el nombre de la base, versión, DOI o enlace, fecha de descarga, código de estación
+y descripción de las variables. Si usan Caravan, indíquenlo: compartir un nombre de cuenca
+con un CAMELS nacional no implica tener los mismos forzamientos. La comparación entre
+CAMELS y Caravan documenta estas diferencias.
+
+24
+
+
