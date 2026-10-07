@@ -355,11 +355,11 @@ def _contexto_fisico_extremo(var, fecha_str, val, tipo):
     Asigna contexto físico individualizado a cada mes extremo, basado en
     eventos hidrometeorológicos documentados en la literatura.
     Referencias:
-      - El Niño 1982-83: Rutllant & Fuenzalida (1991), DOI:10.1002/joc.3370110706
-      - Megasequía chilena 2010-2019: Garreaud et al. (2017), DOI:10.1002/joc.5176;
+      - El Niño 1982-83: Rutllant & Fuenzalida (1991), DOI:10.1002/joc.3370110105
+      - Megasequía chilena 2010-2019: Garreaud et al. (2017), DOI:10.5194/hess-21-6307-2017;
         CR2 (2015) "La Megasequía 2010-2015", Centro de Ciencia del Clima y la
         Resiliencia (CR2), Universidad de Chile.
-      - Ríos atmosféricos: Viale & Nuñez (2011), DOI:10.1002/joc.2000
+      - Ríos atmosféricos: Viale & Nuñez (2011), DOI:10.1175/2010JHM1284.1
     """
     anio = int(fecha_str[:4])
     mes = int(fecha_str[5:7])
@@ -371,10 +371,10 @@ def _contexto_fisico_extremo(var, fecha_str, val, tipo):
     if anio == 1982 and mes == 6 and tipo == 'Máximo' and 'P_local' in var:
         return ('Evento El Niño 1982-83: precipitación récord de 705 mm en junio 1982. '
                 'El Niño más intenso del siglo XX intensificó los frentes extratropicales '
-                'sobre Chile central (Rutllant & Fuenzalida, 1991, DOI:10.1002/joc.3370110706)')
+                'sobre Chile central (Rutllant & Fuenzalida, 1991, DOI:10.1002/joc.3370110105)')
     if anio == 2000 and mes == 6 and tipo == 'Máximo' and 'P_local' in var:
         return ('Evento de precipitación extrema junio 2000 (612.7 mm): posible río atmosférico '
-                'o tormenta frontal intensa de invierno (Viale & Nuñez, 2011, DOI:10.1002/joc.2000)')
+                'o tormenta frontal intensa de invierno (Viale & Nuñez, 2011, DOI:10.1175/2010JHM1284.1)')
     if anio == 1987 and mes == 7 and tipo == 'Máximo' and 'P_local' in var:
         return ('Precipitación extrema julio 1987 (609.4 mm): cola del evento El Niño 1986-87; '
                 'coherente con la intensificación de frentes fríos extratropicales')
@@ -389,11 +389,11 @@ def _contexto_fisico_extremo(var, fecha_str, val, tipo):
     # Megasequía 2010-2019
     if anio in range(2015, 2020) and tipo == 'Mínimo' and ('Caudal' in var or 'Q_lamina' in var):
         return (f'Estiaje extremo durante la Megasequía de Chile central (2010-2019): '
-                f'déficit hídrico acumulado sostenido (Garreaud et al., 2017, DOI:10.1002/joc.5176; '
+                f'déficit hídrico acumulado sostenido (Garreaud et al., 2017, DOI:10.5194/hess-21-6307-2017; '
                 f'CR2, 2015, "La Megasequía 2010-2015")')
     if anio == 2019 and tipo == 'Mínimo' and ('Caudal' in var or 'Q_lamina' in var):
         return ('Año pico hiperárido de la Megasequía: caudales mínimos históricos en 2019 '
-                '(Garreaud et al., 2017, DOI:10.1002/joc.5176)')
+                '(Garreaud et al., 2017, DOI:10.5194/hess-21-6307-2017)')
 
     # Temperatura extrema
     if 'Temp' in var and tipo == 'Mínimo':
@@ -409,7 +409,7 @@ def _contexto_fisico_extremo(var, fecha_str, val, tipo):
     if tipo == 'Máximo':
         if 'P_' in var and es_invierno:
             return ('Evento pluvial extremo de invierno austral: tormentas frontales '
-                    'extratropicales y posibles ríos atmosféricos (Viale & Nuñez, 2011, DOI:10.1002/joc.2000)')
+                    'extratropicales y posibles ríos atmosféricos (Viale & Nuñez, 2011, DOI:10.1175/2010JHM1284.1)')
         elif 'P_' in var:
             return ('Evento de precipitación atípico fuera de la estación invernal principal; '
                     'posible tormenta convectiva o extensión frontal tardía')
@@ -423,7 +423,7 @@ def _contexto_fisico_extremo(var, fecha_str, val, tipo):
         if 'P_' in var:
             if es_verano:
                 return ('Mes seco de verano mediterráneo: bloqueo anticiclónico del Pacífico '
-                        'SE impide incursión de frentes (Garreaud et al., 2017, DOI:10.1002/joc.5176)')
+                        'SE impide incursión de frentes (Garreaud et al., 2017, DOI:10.5194/hess-21-6307-2017)')
             else:
                 return 'Mes con precipitación inusualmente baja para la estación'
         elif 'Caudal' in var or 'Q_lamina' in var:
@@ -912,12 +912,12 @@ def calcular_indices_estacionalidad_y_clasificacion(df):
         {'Indicador': 'Mes_Pico_Precipitacion', 'Valor': mes_max_p,
          'Unidad': f'Mes ({NOMBRES_MESES[mes_max_p]})',
          'Interpretacion': (f'Máximo invernal por frentes fríos extratropicales ({val_max_p:.2f} mm/mes). '
-                            f'Garreaud (2009, DOI:10.1016/j.earscirev.2008.10.006)')},
+                            f'Garreaud et al. (2009, DOI:10.1016/j.palaeo.2007.10.032)')},
         {'Indicador': 'Mes_Minimo_Precipitacion', 'Valor': mes_min_p,
          'Unidad': f'Mes ({NOMBRES_MESES[mes_min_p]})',
          'Interpretacion': (f'Mínimo estival por bloqueo del Anticiclón Subtropical del '
                             f'Pacífico SE ({val_min_p:.2f} mm/mes). '
-                            f'Garreaud et al. (2009, DOI:10.1016/j.earscirev.2008.10.006)')},
+                            f'Garreaud et al. (2009, DOI:10.1016/j.palaeo.2007.10.032)')},
         {'Indicador': 'Mes_Pico_Caudal', 'Valor': mes_max_q,
          'Unidad': f'Mes ({NOMBRES_MESES[mes_max_q]})',
          'Interpretacion': (f'Máximo estival por derretimiento nival/glaciar ({val_max_q:.2f} mm/mes). '

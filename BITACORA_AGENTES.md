@@ -976,6 +976,50 @@ next_actions:
 - Recordatorio: borrar `documentos/bitacora_datos_temporal/` antes del ZIP final.
 
 
+## ENTRADA #26: PUNTO 5 — DESCARGA ERA5, MAPAS DE CORRELACIÓN, ROBUSTEZ E INTERPRETACIÓN
+- **Fecha:** 2026-10-07
+- **Integrante Responsable:** Tomás Gómez (apoyo al Rol D)
+- **Agente de IA utilizado:** Claude Code (Claude Opus 5.5, extensión VS Code)
+- **Estado de la Fase:** COMPLETADA (análisis, LaTeX, dashboard y guía); referencias marcadas `% VERIFICAR` pendientes de lectura
+
+### 1. Revisión de Pares (Peer Review del trabajo previo)
+- Se revisó `scripts/08_descargar_era5_mensual.py` (Rol D, Bryan): pedía 2000–2020 y no incluía SST. Para correlacionar mes a mes con P_L y Q (1980–2020) se necesita 1979–2020 y SST. No se modificó su script; se creó `15_p5_1_descargar_campos_era5.py`. Además, su nombre `08_` coincide con `08_build_dashboard_data.py`.
+- **Excepción a `AGENTS.md` (decidida por el integrante):** los NetCDF del punto 5 se versionan en `datos/campos_era5/` (91 MB y 48 MB, menores que el límite de 100 MB de GitHub). Se añadió una negación en `.gitignore` y una nota en `AGENTS.md` (sección 2.C).
+
+### 2. Resumen de lo Realizado en esta Sesión
+- **Descarga (CDS API):** ERA5 *monthly averaged reanalysis*, global, 1°, 1979-01 a 2020-12 (504 meses): SST + PNM (single levels) y geopotencial de 500 hPa (pressure levels). Verificados tiempos, mallas, unidades y rangos.
+- `scripts/p5_comun.py`: lectura y conversión (K→°C, Pa→hPa, Φ/g0→Z en m), máscara de hielo (SST ≤ −1.6 °C), anomalías con la referencia 2000-06/2020-03, correlación vectorizada por celda y mes con rezago ℓ, n_eff (Bretherton et al. 1999), FDR BH α = 0.10 (Wilks 2016), costas Natural Earth 110 m (`datos/campos_era5/ne_110m_coastline.geojson`, dominio público), sin cartopy.
+- **5.1** `16_p5_1_campos_climaticos.py`: metadatos y climatologías.
+- **5.2** `17_p5_2_mapas_correlacion.py`: 6 combinaciones × 12 mapas (ℓ = 0), Q–SST con ℓ = 6 y Pearson frente a Spearman.
+- **5.3** `18_p5_3_robustez.py`: significancia FDR, con/sin tendencia, subperiodos, sin extremos, P_L frente a IMERG y mapa de todos los meses.
+- **5.4** `19_p5_4_interpretacion.py`: índices a priori (Niño 3.4, PNM Pacífico SE, Z500 Chile central), perfiles mensuales con IC, rezagos, memoria nival, correlación parcial, subperiodos y coherencia espectral.
+- `documentos/punto5_teleconexiones_analisis.tex` y `.pdf`: análisis de 5.1–5.4 y síntesis de los puntos 4–5.
+- Dashboard: vista "Rol D: Teleconexiones" con 5 diapositivas y mapa interactivo (variable/campo/mes/FDR); `08_build_dashboard_data.py` con `build_role_d` y JSON compacto (data.js 1.6 MB; autocontenido 5.3 MB). Se quitaron los tiempos de los botones del Rol C.
+- `documentos/guion_exposicion_punto5.tex` y `.pdf`: guía de 3 minutos.
+
+### 3. Archivos Modificados o Generados
+- `datos/campos_era5/` (2 NetCDF + GeoJSON de costas), `.gitignore`, `AGENTS.md`
+- `scripts/15_p5_1_descargar_campos_era5.py`, `scripts/p5_comun.py`, `scripts/16_p5_1_...` a `scripts/19_p5_4_...`, `scripts/08_build_dashboard_data.py`
+- `figuras/figura_5_1_*`, `figura_5_2a–h_*`, `figura_5_3a–d_*`, `figura_5_4a–d_*`, `tabla_5_*`, `serie_5_4_indices_climaticos.csv`
+- `dashboard/index.html`, `dashboard/js/app.js`, `dashboard/css/styles.css`, `dashboard/js/data.js`, `dashboard/dashboard_autocontenido.html`
+- `documentos/punto5_teleconexiones_analisis.tex/.pdf`, `documentos/guion_exposicion_punto5.tex/.pdf`
+
+### 4. Conclusiones y Métricas Relevantes
+- P_L con PNM del Pacífico SE (abr–oct): r de −0.38 a −0.64; con Z500 de Chile central: r de −0.46 a −0.69 (16 de 30 pruebas significativas tras FDR, de un total de 72). Con Niño 3.4 solo en ago–oct (0.40, 0.50, 0.62).
+- Q con Niño 3.4 todo el año (0.27–0.63; 7 meses tras FDR). Q (oct–mar) frente a P_L de may–ago previa: r = 0.84–0.92 (memoria nival).
+- Correlación parcial P_L–Niño 3.4 en agosto: 0.40 → 0.20 al controlar la PNM (ENSO actúa vía la circulación local).
+- Robustez (correlación entre patrones): con/sin tendencia 0.89–0.99; sin extremos 0.75–0.92; IMERG 0.82–0.86; subperiodos 0.04–0.34 (no estacionario: Q–Niño 3.4 en septiembre 0.81 → 0.31).
+- Coherencia con Niño 3.4 en 2–7 años: marginal (máximo 0.46–0.49, umbral 0.39).
+- Verificación: los scripts 15–19 y 08 se ejecutan sin errores; ambos `.tex` compilan sin errores; el JS del dashboard se probó con DOM simulado (28 gráficas sin excepciones). No se revisó en un navegador real.
+
+### 5. Próximos Pasos para el Siguiente Integrante / Agente
+- Rol D (Bryan): revisar y apropiarse del análisis (es su punto en el plan); decidir si se retira `08_descargar_era5_mensual.py` o se renombra.
+- Verificar las referencias y el DOI del producto de niveles de presión (`% VERIFICAR`).
+- Abrir el dashboard y revisar visualmente la vista del Rol D (claro y oscuro).
+- Recordatorio: borrar `documentos/bitacora_datos_temporal/` antes del ZIP final.
+
+---
+
 ## PLANTILLA PARA NUEVAS ENTRADAS (COPIAR Y PEGAR ABAJO)
 
 ```markdown
@@ -1197,3 +1241,68 @@ next_actions:
 - Recordar al equipo hacer commit y push en GitHub Desktop para compartir la corrección con todos los integrantes.
 
 
+
+---
+
+## ENTRADA #28: ANÁLISIS COMPLETO DE ROLES C Y D EN EL DASHBOARD E INFORME FINAL INTEGRADO
+- **Fecha:** 2026-10-07
+- **Integrante Responsable:** Tomás Gómez — Rol C (ensamblaje del informe final)
+- **Agente de IA utilizado:** Claude Code (Claude Opus 5.5, extensión VS Code)
+- **Estado de la Fase:** COMPLETADA (pendientes del equipo listados abajo)
+
+### 1. Revisión de Pares
+- Se releyeron los documentos de los puntos 1–5, las tablas `figuras/tabla_*.csv` y la guía completa (`documentos/tarea1.txt`). Se verificaron 50+ DOI contra Crossref, DataCite y doi.org.
+- Hallazgos: (a) el caudal mensual del CSV maestro no tiene mínimo de días; 7 meses son medias parciales (1993-05 = 3 días, incluido el pico de 722 m³/s del día 3) y 2020-04 usa solo el día 1; (b) la conversión Q→R usó A = 4839.047 km² (CAMELS) y no 4837.4 (diferencia de 0.034 %); (c) DOI erróneos en `tabla_1_2_meses_extremos.csv` y en `tabla_1_6_sintesis_clasificacion.csv` (joc.3370110706, joc.5176, earscirev.2008.10.006 y joc.2000 no corresponden a las obras citadas); (d) el DOI de Gilman 1963 en el documento del punto 4 está mal escrito (debe terminar en OTPSON); (e) `punto1_exploracion_validacion.tex` ubica mal los faltantes de Q (están en 1987-12/1988-04, 1990-11 y 2015-04/11); (f) la guía recomienda Amirthanathan et al. (2023, HESS 27:229) y nadie lo citaba; (g) la guía pide usar la temperatura de la base: CAMELS-CL trae Tmax/Tmin CR2MET 1979–2020, 5.6 °C más cálida que ERA5-Land.
+
+### 2. Resumen de lo Realizado
+- Dashboard: secciones «Análisis completo» para los roles C (series con OLS/LOESS, tabla de métodos, pendientes mensuales, sensibilidad, espectros con AR(1) Monte Carlo, bandas, picos) y D (12 mapas por combinación, incl. IMERG y Q–SST ℓ=6; resumen, índices por subperiodo, matriz de rezagos, robustez, n_eff, dependencia y coherencia). Se retiró «3 MINUTOS» y los tiempos de las diapositivas del Rol C. Se corrigió un error: los selectores del modo del Rol B eran globales.
+- Nuevos scripts: `20_p1_4_auditoria_diaria.py` (completitud diaria, sensibilidad, ficha, picos por año; figura 1.8; tablas 1.7–1.11) y `21_p3_1_temperatura_cr2met.py` (tablas 3.1).
+- Datos: `datos/camels_cl_5710001/` (subconjunto diario CAMELS-CL usado; excepción documentada en AGENTS.md).
+- Informe: `documentos/informe_final_tarea1.tex` y `.pdf` (61 páginas, plantilla púrpura), con las cinco secciones exigidas, esquema conceptual, tabla de evidencias, uso de IA y anexo de trazabilidad.
+
+### 3. Validaciones numéricas
+- Faltantes diarios 1980-01-01 a 2020-04-30: Q 4.37 % (644/14 731 días), P CR2MET 0 %.
+- Q con criterio ≥ 80 % de días: OLS −18.0 (frente a −18.2) m³/s/déc; Pettitt 2007 (p = 0.014) en ambos.
+- Máximo de Q en nov–ene en 35/36 años hidrológicos (la excepción es 1993-05 parcial); máximo de P en may–ago en el 81 %.
+- T CR2MET 1980–2020: +0.18 °C/déc (p = 0.002); 2000–2020: +0.25 (p = 0.10), frente a ERA5-Land +0.28 (p = 0.23).
+
+### 4. Próximos Pasos (equipo)
+- Revisar y aprobar el informe; confirmar el texto de contribuciones y de uso de IA; confirmar con el profesor el grupo de 4 integrantes.
+- Decidir si se aplica el criterio de 80 % al CSV maestro y se reejecuta todo.
+- Corregir los DOI en las tablas del punto 1 (script 07) y en `punto4_fourier_analisis.tex`.
+- Actualizar README (integrantes, carpetas, orden de ejecución) y crear `requirements.txt` con versiones.
+- Agregar al repositorio el código que generó los mapas de la cuenca y la curva hipsométrica, o documentar su procedencia.
+- Borrar `documentos/bitacora_datos_temporal/` antes del ZIP. Hacer Commit y Push en GitHub Desktop.
+
+
+---
+
+## ENTRADA #29: AUTORES, DASHBOARD SIN ROLES, SCRIPT DE TOPOGRAFÍA Y DOI CORREGIDOS
+- **Fecha:** 2026-10-07
+- **Integrante Responsable:** Tomás Gómez Zuleta
+- **Agente de IA utilizado:** Claude Code (Claude Opus 5.5, extensión VS Code)
+- **Estado de la Fase:** COMPLETADA
+
+### 1. Revisión de Pares
+- Se revisó la entrada #28. Se confirmó que los DOI erróneos del script 07 y del documento del punto 4 los había escrito la propia IA; ahora se declaran así en la sección de uso de IA del informe.
+
+### 2. Resumen de lo Realizado
+- Informe final (`documentos/informe_final_tarea1.tex/.pdf`): los autores aparecen con su nombre completo, sin roles. La cédula y el correo de cada uno van en notas al pie numeradas 1–4. También se quitaron los roles del texto de uso de IA, de las contribuciones y de una leyenda. La Figura 1a se acredita como captura de NASA Earthdata Search. La Figura 1b y la Figura 2 remiten al nuevo script 22, y se añadió la cita de ASTER GDEM v3 (DOI 10.5067/ASTER/ASTGTM.003, verificado en DataCite). El anexo de trazabilidad incluye el script 22 y la carpeta ASTGTM.
+- Dashboard: cada pestaña lleva una sola palabra (Exploración, Modelación, Tendencias, Teleconexiones). Se quitaron los nombres y los «Rol X» de los encabezados y de las etiquetas aria. Se regeneraron `data.js` y `dashboard_autocontenido.html`.
+- Nuevo `scripts/22_p1_0_topografia_cuenca.py`: une las 4 teselas ASTER GDEM v3 de `datos/ASTGTM_003-20261004_142607/`, rasteriza el polígono CAMELS-CL y genera `figuras/mapa_topografico_Maipo.png`, `figuras/curva_hipsometrica_Maipo.png` y `figuras/tabla_1_12_hipsometria.csv`.
+- DOI corregidos en `scripts/07_rol_a_explorador.py`:
+  - Rutllant & Fuenzalida 1991 → 10.1002/joc.3370110105
+  - Garreaud et al. 2017 → 10.5194/hess-21-6307-2017
+  - Viale & Nuñez 2011 → 10.1175/2010JHM1284.1
+  - Garreaud et al. 2009 → 10.1016/j.palaeo.2007.10.032
+  - Con el script se regeneraron `tabla_1_2` y `tabla_1_6`. Los PNG del punto 1 se restauraron a la versión de git porque su contenido no cambia; solo variaban unos píxeles por las fuentes.
+- `documentos/punto4_fourier_analisis.tex/.pdf`: corregido el DOI de Gilman et al. 1963 (OTPSON); recompilado.
+
+### 3. Validaciones numéricas
+- Script 22 frente a las figuras originales: mínimo 869 m, máximo 6559 m, media 3181 m, mediana 3225 m, 60 % del área sobre 3000 m, 17 % sobre 4000 m y franja máxima de 3250–3500 m (598 km²). Son idénticos a los valores de las figuras previas.
+- Área de los píxeles DEM dentro del polígono: 4852 km² (CAMELS-CL: 4839 km²; +0.3 % por la rasterización).
+- Todos los DOI nuevos se comprobaron en Crossref o DataCite.
+
+### 4. Próximos Pasos (equipo)
+- Los pendientes de la entrada #28 siguen vigentes, salvo los ya resueltos: DOI y código de los mapas.
+- Borrar `documentos/bitacora_datos_temporal/` antes del ZIP. Hacer Commit y Push en GitHub Desktop.

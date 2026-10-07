@@ -28,3 +28,8 @@ Thumbs.db
 *.synctex.gz
 *.out
 *.toc
+
+# Excepción acordada (2026-10-07): campos ERA5 mensuales a 1° del punto 5 SÍ se versionan
+# para que todo el equipo los tenga (cada archivo < 100 MB, límite de GitHub).
+!datos/campos_era5/
+!datos/campos_era5/*.nc

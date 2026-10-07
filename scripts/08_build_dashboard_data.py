@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import json
+import warnings
 import os
 
 def build_role_c(base_dir, df):
@@ -116,7 +117,208 @@ def build_role_c(base_dir, df):
         fractions[key] = {c.split(' ')[0]: round(float(row[c]), 3) for c in band_cols}
 
     return {'monthlySlopes': slopes, 'headline': headline, 'waterYear': waterYear,
-            'balance': balance, 'spectra': spectra, 'bandFractions': fractions}
+            'balance': balance, 'spectra': spectra, 'bandFractions': fractions,
+            'full': build_role_c_full(base_dir)}
+
+
+def _records(frame, digits=4):
+    """Tabla -> lista de dicts JSON (NaN -> None, flotantes redondeados)."""
+    out = []
+    for row in frame.to_dict(orient='records'):
+        clean = {}
+        for key, value in row.items():
+            if isinstance(value, (float, np.floating)):
+                clean[key] = None if not np.isfinite(value) else round(float(value), digits)
+            elif isinstance(value, (np.integer,)):
+                clean[key] = int(value)
+            elif isinstance(value, (np.bool_,)):
+                clean[key] = bool(value)
+            else:
+                clean[key] = value
+        out.append(clean)
+    return out
+
+
+def build_role_c_full(base_dir):
+    """Datos de la vista 'Análisis completo' del Rol C (puntos 3 y 4).
+
+    Reúne las series con LOESS, las tablas de métodos, pendientes mensuales,
+    sensibilidad y los espectros (boxcar, Hann y Welch) con el fondo AR(1) y los
+    umbrales Monte Carlo calculados con las mismas funciones del script 14."""
+    import importlib.util
+    import sys
+    fig_dir = os.path.join(base_dir, 'figuras')
+    scripts_dir = os.path.join(base_dir, 'scripts')
+    read = lambda name: pd.read_csv(os.path.join(fig_dir, name))
+
+    # Series (X, a, z) con LOESS e IC, y recta OLS de la tabla de tendencias globales.
+    loess = read('serie_3_4_loess_global.csv')
+    glob = read('tabla_3_4_tendencias_globales.csv')
+    series = {}
+    for (var, rep), g in loess.groupby(['variable', 'representacion']):
+        ols = glob[(glob['variable'] == var) & (glob['representacion'] == rep) & (glob['metodo'] == 'OLS')].iloc[0]
+        t = g['t'].to_numpy()
+        line = ols['intercept_at_mean_t'] + ols['slope_dec'] / 10 * (t - ols['t_mean'])
+        nan_round = lambda arr, d=3: [None if not np.isfinite(v) else round(float(v), d) for v in arr]
+        series[f'{var}|{rep}'] = {
+            'date': g['date'].str.slice(0, 7).tolist(), 'y': nan_round(g['y'].to_numpy()),
+            'loess': nan_round(g['loess'].to_numpy()), 'lo': nan_round(g['lo'].to_numpy()),
+            'hi': nan_round(g['hi'].to_numpy()), 'ols': nan_round(line)}
+
+    # Pendientes mensuales: OLS-HAC y Sen (IC Hamed-Rao) por representación; q FDR por variable.
+    monthly = read('tabla_3_4_tendencias_mensuales.csv')
+    fdr = read('tabla_3_5_fdr_mensual.csv')
+    monthly_out = {}
+    for (var, rep), g in monthly.groupby(['variable', 'representacion']):
+        g = g.sort_values('mes')
+        q = fdr[fdr['variable'] == var].sort_values('mes')
+        monthly_out[f'{var}|{rep}'] = {
+            'n': g['n'].astype(int).tolist(),
+            'ols': g['ols_slope_dec'].round(4).tolist(),
+            'olsLo': g['ols_ci_low_hac_dec'].round(4).tolist(), 'olsHi': g['ols_ci_high_hac_dec'].round(4).tolist(),
+            'sen': g['mk_sen_dec'].round(4).tolist(),
+            'senLo': g['mk_sen_low_hr_dec'].round(4).tolist(), 'senHi': g['mk_sen_high_hr_dec'].round(4).tolist(),
+            'pOls': g['ols_p_hac'].round(4).tolist(), 'pMk': g['mk_p_mk_hr'].round(4).tolist(),
+            'qOls': q['q_ols_hac'].round(4).tolist(), 'qMk': q['q_mk_hr'].round(4).tolist(),
+            'sigOls': q['signif_ols_fdr'].astype(bool).tolist(), 'sigMk': q['signif_mk_fdr'].astype(bool).tolist()}
+
+    # Espectros con las funciones del script 14 (mismo estimador y semilla que las figuras).
+    sys.path.insert(0, scripts_dir)
+    spec_path = os.path.join(scripts_dir, '14_p4_2_espectros_interpretacion.py')
+    module_spec = importlib.util.spec_from_file_location('p4_2_espectros', spec_path)
+    p42 = importlib.util.module_from_spec(module_spec)
+    module_spec.loader.exec_module(p42)
+    ser = read('serie_4_1_series_espectrales.csv')
+    spectra = {}
+    for (seg, var, tr), g in ser.groupby(['tramo', 'variable', 'transformacion']):
+        x = g['valor'].to_numpy(float)
+        for method in ('boxcar', 'hann', 'welch'):
+            f, p = p42.spectrum(x, method)
+            entry = {'f': f.round(5).tolist(), 'p': [float(f'{v:.4g}') for v in p], 'var': round(float(np.var(x)), 4)}
+            if tr != 'C' and method != 'boxcar':
+                thr = p42.ar1_thresholds(x, method)
+                entry.update({'r1': round(float(thr['r1']), 3),
+                              'theory': [float(f'{v:.4g}') for v in thr['theory']],
+                              'point95': [float(f'{v:.4g}') for v in thr['point95']],
+                              'global95': [float(f'{v:.4g}') for v in thr['global95']]})
+            spectra[f'{seg}|{var}|{tr}|{method}'] = entry
+
+    return {
+        'series': series, 'monthly': monthly_out, 'spectra': spectra,
+        'methods': _records(read('tabla_3_5_comparacion_metodos.csv')),
+        'fdrGlobal': _records(read('tabla_3_5_fdr_global.csv')),
+        'sensitivity': _records(read('tabla_3_5_sensibilidad.csv')),
+        'step': _records(read('tabla_3_5_salto_vs_tendencia.csv')),
+        'loessIntervals': _records(read('tabla_3_4_loess_intervalos.csv')),
+        'refClim': _records(read('tabla_3_2_climatologia_referencia.csv')),
+        'periods': _records(read('tabla_3_2_periodos_analisis.csv')),
+        'peaks': _records(read('tabla_4_2_picos_espectrales.csv')),
+        'bands': _records(read('tabla_4_2_fracciones_banda.csv')),
+        'persistence': _records(read('tabla_4_2_persistencia.csv')),
+        'stability': _records(read('tabla_4_2_estabilidad_picos.csv')),
+        'specDoc': _records(read('tabla_4_1_documentacion_espectral.csv'))
+    }
+
+
+def build_role_d(base_dir):
+    """Resume las salidas del punto 5 (scripts 16-19) para la vista de exposición.
+
+    Los mapas se recalculan con scripts/p5_comun.py y se promedian en bloques de 3°x3°
+    (r redondeado a 2 decimales) para que el HTML autocontenido siga siendo liviano."""
+    import sys
+    fig_dir = os.path.join(base_dir, 'figuras')
+    needed = ['tabla_5_3_robustez.csv', 'tabla_5_4_perfiles_indices.csv', 'tabla_5_4_dependencia_indices.csv',
+              'tabla_5_4_memoria_nival.csv', 'tabla_5_4_coherencia.csv']
+    missing = [n for n in needed if not os.path.exists(os.path.join(fig_dir, n))]
+    if missing:
+        print(f"Aviso: faltan salidas del punto 5 {missing}; ejecutar scripts 16-19.")
+        return None
+    sys.path.insert(0, os.path.join(base_dir, 'scripts'))
+    import p5_comun as c
+    try:
+        fields, f_anom, b_anom, lat, lon = c.load_all()
+    except FileNotFoundError as error:
+        print(f"Aviso: no se encontraron los campos ERA5 ({error}); se omite el Rol D.")
+        return None
+
+    block = 3
+    lat_keep = (lat >= -72) & (lat <= 72)
+    lat_c, lon_c = lat[lat_keep], lon
+    ny, nx = len(lat_c) // block, len(lon_c) // block
+    lat_out = lat_c[: ny * block].reshape(ny, block).mean(axis=1)
+    lon_out = lon_c[: nx * block].reshape(nx, block).mean(axis=1)
+
+    def coarsen(arr, how='mean'):
+        a = arr[lat_keep][: ny * block, : nx * block].reshape(ny, block, nx, block)
+        with np.errstate(invalid='ignore'), warnings.catch_warnings():
+            warnings.simplefilter('ignore', RuntimeWarning)  # bloques 100 % tierra en SST
+            if how == 'mean':
+                return np.nanmean(a, axis=(1, 3))
+            return np.nanmean(a.astype(float), axis=(1, 3)) >= 0.5
+
+    maps = {}
+    # Combinaciones base (P_L y Q), contraste con IMERG (2000-2020) y Q-SST con rezago de 6 meses.
+    combos = [(var, field, 0) for var in ['P_local_mm', 'Caudal_m3s', 'P_IMERG_mm']
+              for field in ['sst', 'msl', 'z500']] + [('Caudal_m3s', 'sst', 6)]
+    for var, field, lag in combos:
+        key = f"{var}|{field}" + (f"|lag{lag}" if lag else '')
+        maps[key] = []
+        for res in c.monthly_maps(b_anom[var], f_anom[field], lag=lag):
+            valid = np.isfinite(res['r'])
+            r = coarsen(res['r'])
+            sig = coarsen(np.where(valid, res['sig'], np.nan), how='sig')
+            maps[key].append({
+                # r x 100 como entero (se divide en el navegador): reduce el tamaño del HTML.
+                'r100': [[None if not np.isfinite(v) else int(round(100 * float(v))) for v in row] for row in r],
+                'sig': np.flatnonzero(sig.ravel()).tolist(),
+                'n': int(res['n_pairs']),
+                'areaFdr': round(c.area_fraction(res['sig'], valid, lat), 3)
+            })
+    coast = []
+    for seg in c.coastline_segments():
+        coast.extend([[round(float(x), 1), round(float(y), 1)] for x, y in seg[::2]])
+        coast.append(None)
+
+    prof = pd.read_csv(os.path.join(fig_dir, 'tabla_5_4_perfiles_indices.csv'))
+    profiles = {}
+    for (var, idx, period), g in prof.groupby(['variable_cuenca', 'indice', 'periodo']):
+        g = g.sort_values('mes')
+        profiles[f"{var}|{idx}|{period}"] = {
+            'r': g['r'].round(3).tolist(), 'lo': g['ic_inf'].round(3).tolist(), 'hi': g['ic_sup'].round(3).tolist(),
+            'q': [None if pd.isna(v) else round(float(v), 4) for v in g['q_fdr']]}
+    rob = pd.read_csv(os.path.join(fig_dir, 'tabla_5_3_robustez.csv'))
+    robustness = {}
+    for col in ['patron_anomalia_vs_sin_tendencia', 'patron_completo_vs_sin_3_extremos',
+                'patron_PL_vs_IMERG_2000_2020', 'patron_1980_1999_vs_2000_2019']:
+        vals = rob[col].dropna()
+        robustness[col] = {'min': round(float(rob.groupby(['variable_cuenca', 'campo'])[col].median().min()), 2),
+                           'max': round(float(rob.groupby(['variable_cuenca', 'campo'])[col].median().max()), 2)} if len(vals) else None
+    dep = pd.read_csv(os.path.join(fig_dir, 'tabla_5_4_dependencia_indices.csv')).sort_values('mes')
+    memory = pd.read_csv(os.path.join(fig_dir, 'tabla_5_4_memoria_nival.csv'))
+    coh = pd.read_csv(os.path.join(fig_dir, 'tabla_5_4_coherencia.csv')).set_index('variable_cuenca')
+    read = lambda name: pd.read_csv(os.path.join(fig_dir, name))
+    rez = read('tabla_5_4_rezagos.csv')
+    lags = {}
+    for (var, month), g in rez.groupby(['variable_cuenca', 'mes']):
+        g = g.sort_values('rezago')
+        lags[f"{var}|{int(month)}"] = {'lag': g['rezago'].astype(int).tolist(), 'r': g['r'].round(3).tolist(),
+                                       'p': g['p'].round(4).tolist()}
+    tables = {name: _records(read(f'{name}.csv'), 3) for name in
+              ['tabla_5_1_metadatos_campos', 'tabla_5_2_resumen_mapas', 'tabla_5_2_pearson_vs_spearman',
+               'tabla_5_3_robustez', 'tabla_5_3_tamano_muestra', 'tabla_5_4_memoria_nival', 'tabla_5_4_coherencia']}
+    return {
+        'lags': lags, 'tables': tables,
+        'lat': [round(float(v), 1) for v in lat_out], 'lon': [round(float(v), 1) for v in lon_out],
+        'basin': [c.BASIN_LON, c.BASIN_LAT], 'coast': coast, 'maps': maps, 'profiles': profiles,
+        'robustness': robustness,
+        'dependence': {k: dep[k].round(3).tolist() for k in dep.columns if k != 'mes'},
+        'memory': {'months': memory['mes_Q'].tolist(), 'rPL': memory['r_Q_vs_PL_may_ago'].round(3).tolist(),
+                   'rNino': memory['r_Q_vs_Nino34_may_ago'].round(3).tolist(), 'n': memory['n'].tolist()},
+        'coherence': {v: {'mean': round(float(coh.loc[v, 'coherencia_media_2_7_anios']), 2),
+                          'max': round(float(coh.loc[v, 'coherencia_max_2_7_anios']), 2),
+                          'periodYears': round(float(coh.loc[v, 'periodo_max_anios']), 1),
+                          'threshold': round(float(coh.loc[v, 'umbral_95_aprox']), 2)} for v in coh.index}
+    }
 
 
 def build_data():
@@ -396,10 +598,13 @@ def build_data():
     
     # 9. Rol C: datos de la exposición de tendencias y Fourier (requiere scripts 09-14).
     rolC = build_role_c(base_dir, df)
+    # 10. Rol D (punto 5): mapas de correlación e índices climáticos (requiere scripts 16-19).
+    rolD = build_role_d(base_dir)
 
     # Combinar todo el dataset
     dashboard_data = {
         'rolC': rolC,
+        'rolD': rolD,
         'qualitySummary': qualitySummary,
         'cicloAnual': cicloAnual,
         'histPrecip': histPrecip,
@@ -418,7 +623,7 @@ def build_data():
     }
     
     # Guardar en js/data.js
-    js_content = f"window.dashboardData = {json.dumps(dashboard_data, indent=2)};\n"
+    js_content = f"window.dashboardData = {json.dumps(dashboard_data, separators=(',', ':'), ensure_ascii=False)};\n"
     out_js = os.path.join(base_dir, 'dashboard', 'js', 'data.js')
     os.makedirs(os.path.dirname(out_js), exist_ok=True)
     with open(out_js, 'w', encoding='utf-8') as f:
@@ -461,7 +666,7 @@ def build_data():
     # 3. Reemplazar data.js y app.js al final
     scripts_bundle = f"""
     <script>
-    window.dashboardData = {json.dumps(dashboard_data, indent=2)};
+    window.dashboardData = {json.dumps(dashboard_data, separators=(',', ':'), ensure_ascii=False)};
     </script>
     <script>
     {app_js_content}
