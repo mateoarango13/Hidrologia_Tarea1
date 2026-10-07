@@ -1,0 +1,3 @@
+serie,meses_validos,media_m3s,maximo_m3s,fecha_maximo,mes_climatologico_max,mes_climatologico_min,ols_hac_m3s_dec,ols_ic_inf,ols_ic_sup,ols_p_hac,sen_m3s_dec,mk_hr_p,pettitt_anio,pettitt_p
+CSV maestro (sin mínimo de días),470,112.4755,592.8387,1983-01,12,8,-18.2026,-26.0941,-10.311,0.0,-14.8691,0.0001,2007,0.0139
+criterio >= 80 % de días,463,111.8314,592.8387,1983-01,12,6,-17.9654,-25.9557,-9.9752,0.0,-14.7606,0.0001,2007,0.0139

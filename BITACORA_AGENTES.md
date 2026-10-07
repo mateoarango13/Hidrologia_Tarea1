@@ -1241,3 +1241,35 @@ next_actions:
 - Recordar al equipo hacer commit y push en GitHub Desktop para compartir la corrección con todos los integrantes.
 
 
+
+---
+
+## ENTRADA #28: ANÁLISIS COMPLETO DE ROLES C Y D EN EL DASHBOARD E INFORME FINAL INTEGRADO
+- **Fecha:** 2026-10-07
+- **Integrante Responsable:** Tomás Gómez — Rol C (ensamblaje del informe final)
+- **Agente de IA utilizado:** Claude Code (Claude Opus 5.5, extensión VS Code)
+- **Estado de la Fase:** COMPLETADA (pendientes del equipo listados abajo)
+
+### 1. Revisión de Pares
+- Se releyeron los documentos de los puntos 1–5, las tablas `figuras/tabla_*.csv` y la guía completa (`documentos/tarea1.txt`). Se verificaron 50+ DOI contra Crossref, DataCite y doi.org.
+- Hallazgos: (a) el caudal mensual del CSV maestro no tiene mínimo de días; 7 meses son medias parciales (1993-05 = 3 días, incluido el pico de 722 m³/s del día 3) y 2020-04 usa solo el día 1; (b) la conversión Q→R usó A = 4839.047 km² (CAMELS) y no 4837.4 (diferencia de 0.034 %); (c) DOI erróneos en `tabla_1_2_meses_extremos.csv` y en `tabla_1_6_sintesis_clasificacion.csv` (joc.3370110706, joc.5176, earscirev.2008.10.006 y joc.2000 no corresponden a las obras citadas); (d) el DOI de Gilman 1963 en el documento del punto 4 está mal escrito (debe terminar en OTPSON); (e) `punto1_exploracion_validacion.tex` ubica mal los faltantes de Q (están en 1987-12/1988-04, 1990-11 y 2015-04/11); (f) la guía recomienda Amirthanathan et al. (2023, HESS 27:229) y nadie lo citaba; (g) la guía pide usar la temperatura de la base: CAMELS-CL trae Tmax/Tmin CR2MET 1979–2020, 5.6 °C más cálida que ERA5-Land.
+
+### 2. Resumen de lo Realizado
+- Dashboard: secciones «Análisis completo» para los roles C (series con OLS/LOESS, tabla de métodos, pendientes mensuales, sensibilidad, espectros con AR(1) Monte Carlo, bandas, picos) y D (12 mapas por combinación, incl. IMERG y Q–SST ℓ=6; resumen, índices por subperiodo, matriz de rezagos, robustez, n_eff, dependencia y coherencia). Se retiró «3 MINUTOS» y los tiempos de las diapositivas del Rol C. Se corrigió un error: los selectores del modo del Rol B eran globales.
+- Nuevos scripts: `20_p1_4_auditoria_diaria.py` (completitud diaria, sensibilidad, ficha, picos por año; figura 1.8; tablas 1.7–1.11) y `21_p3_1_temperatura_cr2met.py` (tablas 3.1).
+- Datos: `datos/camels_cl_5710001/` (subconjunto diario CAMELS-CL usado; excepción documentada en AGENTS.md).
+- Informe: `documentos/informe_final_tarea1.tex` y `.pdf` (61 páginas, plantilla púrpura), con las cinco secciones exigidas, esquema conceptual, tabla de evidencias, uso de IA y anexo de trazabilidad.
+
+### 3. Validaciones numéricas
+- Faltantes diarios 1980-01-01 a 2020-04-30: Q 4.37 % (644/14 731 días), P CR2MET 0 %.
+- Q con criterio ≥ 80 % de días: OLS −18.0 (frente a −18.2) m³/s/déc; Pettitt 2007 (p = 0.014) en ambos.
+- Máximo de Q en nov–ene en 35/36 años hidrológicos (la excepción es 1993-05 parcial); máximo de P en may–ago en el 81 %.
+- T CR2MET 1980–2020: +0.18 °C/déc (p = 0.002); 2000–2020: +0.25 (p = 0.10), frente a ERA5-Land +0.28 (p = 0.23).
+
+### 4. Próximos Pasos (equipo)
+- Revisar y aprobar el informe; confirmar el texto de contribuciones y de uso de IA; confirmar con el profesor el grupo de 4 integrantes.
+- Decidir si se aplica el criterio de 80 % al CSV maestro y se reejecuta todo.
+- Corregir los DOI en las tablas del punto 1 (script 07) y en `punto4_fourier_analisis.tex`.
+- Actualizar README (integrantes, carpetas, orden de ejecución) y crear `requirements.txt` con versiones.
+- Agregar al repositorio el código que generó los mapas de la cuenca y la curva hipsométrica, o documentar su procedencia.
+- Borrar `documentos/bitacora_datos_temporal/` antes del ZIP. Hacer Commit y Push en GitHub Desktop.

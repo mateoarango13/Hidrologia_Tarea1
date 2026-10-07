@@ -1437,3 +1437,16 @@ body {
     .rd-chart-map { height: 260px; }
     .rd-segment button { min-width: 30px; padding: 4px 6px; }
 }
+
+/* Rol C y Rol D: vista "Análisis completo" */
+#rc-analysis .rd-controls,
+#rd-analysis .rd-controls { margin: 0 0 14px; }
+.rcf-sticky { margin-top: 22px !important; }
+.rdf-chart-grid { height: 780px; }
+#rc-analysis .rd-segment button:disabled { opacity: 0.35; cursor: not-allowed; }
+@media (max-width: 900px) {
+    .rdf-chart-grid { height: 620px; }
+}
+@media (max-width: 650px) {
+    .rdf-chart-grid { height: 480px; }
+}
