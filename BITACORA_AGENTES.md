@@ -1160,3 +1160,40 @@ next_actions:
 ### 5. Próximos Pasos para el Siguiente Integrante / Agente
 - **Rol D (Climatología Global):** Desarrollar el Punto 5 mediante la descarga de mapas de temperatura superficial del mar y correlacionarlos con las anomalías del Caudal del Maipo.
 
+---
+
+## ENTRADA #27: CORRECCIÓN Y RECONCILIACIÓN DEL DASHBOARD (ROLES A, B Y C) TRAS MERGE DE GIT
+- **Fecha:** 2026-10-07
+- **Integrante Responsable:** Equipo de Trabajo (Revisión técnica de frontend)
+- **Agente de IA utilizado:** Antigravity (Gemini 3.8 Flash)
+- **Estado de la Fase:** COMPLETADA
+
+### 1. Revisión de Pares (Peer Review del trabajo previo)
+- Se detectó que durante la integración de las ramas del Rol C con los cambios recientes del Rol A y Rol B, se generaron conflictos de merge no resueltos (`<<<<<<< HEAD`, `=======`, `>>>>>>>`) dentro de `dashboard/js/app.js` (específicamente en los controladores de diapositivas y modos de exposición de los roles A y B).
+- Debido a estos marcadores, el motor JavaScript fallaba en tiempo de análisis con `SyntaxError: Unexpected token '<<'`, impidiendo la ejecución de `app.js` y bloqueando la interactividad y renderizado de gráficos de todos los roles (A, B y C).
+
+### 2. Resumen de lo Realizado en esta Sesión
+- **Diagnóstico y Comparación:** Se comparó el `index.html` previo suministrado por el usuario contra el `index.html` actual del repositorio. Se comprobó que el marcado HTML del Rol A y Rol B estaba íntegro y que el Rol C ya contaba con su pestaña y estructura en el DOM.
+- **Resolución de Conflictos en `dashboard/js/app.js`:**
+  - Se eliminaron todos los marcadores residuales de conflicto de git.
+  - Se integraron limpiamente los controladores de diapositivas y conmutación de modos ("Exposición" vs "Análisis completo") para el **Rol A** (`raPresentationSlides`, `setRaPresentationSlide`, `setRoleAMode`), para el **Rol B** (`rbPresentationSlides`, `setRbPresentationSlide`, `setRoleBMode`) y para el **Rol C** (`rcSlides`, `setRoleCSlide`, `renderRoleC`).
+  - Se blindaron los eventos de teclado y conmutación de pestañas para evitar colisiones entre roles.
+- **Validación Sintáctica:** Se ejecutó `node --check dashboard/js/app.js`, verificando que no existieran errores sintácticos ni referencias huérfanas.
+- **Regeneración del Dashboard Standalone:** Se corrió `python scripts/08_build_dashboard_data.py`, actualizando `dashboard/js/data.js` y generando exitosamente `dashboard/dashboard_autocontenido.html` libre de errores y 100% operativo.
+
+### 3. Archivos Modificados o Generados
+- `dashboard/js/app.js`: Resueltos los conflictos de git e integrados armoniosamente los controladores de los Roles A, B y C.
+- `dashboard/dashboard_autocontenido.html`: Recompilado y sincronizado en su versión standalone.
+- `BITACORA_AGENTES.md`: Entrada #27 añadida.
+
+### 4. Conclusiones y Métricas Relevantes
+- El dashboard web (`index.html`) y el standalone (`dashboard_autocontenido.html`) ahora muestran y alternan perfectamente la información y gráficos de los **tres roles**:
+  - **Rol A (Explorador):** Modos Exposición (Integridad, Ciclo Anual, Megasequía) y Análisis Completo con ciclo anual, histograma local vs IMERG, subperiodos y tabla de síntesis.
+  - **Rol B (Modelador):** Modos Exposición (Concordancia, Rezagos, Evaluación, Síntesis) y Análisis Completo con 11 gráficos interactivos y tablas de error por bloques.
+  - **Rol C (Tendencias y Fourier):** Exposición guiada en 5 pasos (Tendencias mensuales relativas, Test de Pettitt / quiebre vs lineal, Balance anual de escorrentía, Espectros de Fourier / AR(1) y Síntesis).
+
+### 5. Próximos Pasos para el Siguiente Integrante / Agente
+- Continuar con el **Rol D** (Teleconexiones / Climatología Global con ENOS / PDO) en el Punto 5.
+- Recordar al equipo hacer commit y push en GitHub Desktop para compartir la corrección con todos los integrantes.
+
+

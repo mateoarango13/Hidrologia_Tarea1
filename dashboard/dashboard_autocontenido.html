@@ -12125,17 +12125,13 @@ body {
         };
     };
 
-<<<<<<< HEAD
-    const presentationSlides = [...document.querySelectorAll('#rb-exposition .rb-slide')];
-    const presentationSteps = [...document.querySelectorAll('#rb-exposition .rb-slide-step')];
-    let currentPresentationSlide = 0;
-=======
+    // === ROL A: Controles de presentación y modo ===
     const raPresentationSlides = [...document.querySelectorAll('#ra-exposition .ra-slide')];
     const raPresentationSteps = [...document.querySelectorAll('.ra-slide-step')];
     let currentRaSlide = 0;
->>>>>>> 923b5326f3dec8d8b29766b6c8cc46e8dd637b22
 
     const setRaPresentationSlide = index => {
+        if (!raPresentationSlides.length) return;
         currentRaSlide = Math.max(0, Math.min(raPresentationSlides.length - 1, index));
         raPresentationSlides.forEach((slide, slideIndex) => {
             const active = slideIndex === currentRaSlide;
@@ -12148,24 +12144,26 @@ body {
             if (active) step.setAttribute('aria-current', 'step');
             else step.removeAttribute('aria-current');
         });
-<<<<<<< HEAD
-        document.getElementById('rb-slide-count').textContent = `${currentPresentationSlide + 1} / ${presentationSlides.length}`;
-        document.querySelector('#rb-exposition .rb-present-prev').disabled = currentPresentationSlide === 0;
-        document.querySelector('#rb-exposition .rb-present-next').innerHTML = currentPresentationSlide === presentationSlides.length - 1
-=======
-        document.getElementById('ra-slide-count').textContent = `${currentRaSlide + 1} / ${raPresentationSlides.length}`;
-        document.querySelector('.ra-present-prev').disabled = currentRaSlide === 0;
-        document.querySelector('.ra-present-next').innerHTML = currentRaSlide === raPresentationSlides.length - 1
-            ? 'Volver al inicio <i class="fa-solid fa-rotate-left"></i>'
-            : 'Siguiente <i class="fa-solid fa-arrow-right"></i>';
+        const countEl = document.getElementById('ra-slide-count');
+        if (countEl) countEl.textContent = `${currentRaSlide + 1} / ${raPresentationSlides.length}`;
+        const prevBtn = document.querySelector('.ra-present-prev');
+        if (prevBtn) prevBtn.disabled = currentRaSlide === 0;
+        const nextBtn = document.querySelector('.ra-present-next');
+        if (nextBtn) {
+            nextBtn.innerHTML = currentRaSlide === raPresentationSlides.length - 1
+                ? 'Volver al inicio <i class="fa-solid fa-rotate-left"></i>'
+                : 'Siguiente <i class="fa-solid fa-arrow-right"></i>';
+        }
         window.dispatchEvent(new Event('resize'));
     };
 
     const setRoleAMode = mode => {
         const exposition = mode === 'exposition';
         if (exposition) setRaPresentationSlide(0);
-        document.getElementById('ra-exposition').hidden = !exposition;
-        document.getElementById('ra-analysis').hidden = exposition;
+        const expoEl = document.getElementById('ra-exposition');
+        const analEl = document.getElementById('ra-analysis');
+        if (expoEl) expoEl.hidden = !exposition;
+        if (analEl) analEl.hidden = exposition;
         document.querySelectorAll('.ra-mode-btn').forEach(button => {
             const active = button.dataset.raMode === mode;
             button.classList.toggle('active', active);
@@ -12178,15 +12176,18 @@ body {
         button.addEventListener('click', () => setRoleAMode(button.dataset.raMode));
     });
     raPresentationSteps.forEach((button, index) => button.addEventListener('click', () => setRaPresentationSlide(index)));
-    document.querySelector('.ra-present-prev').addEventListener('click', () => setRaPresentationSlide(currentRaSlide - 1));
-    document.querySelector('.ra-present-next').addEventListener('click', () => setRaPresentationSlide(currentRaSlide === raPresentationSlides.length - 1 ? 0 : currentRaSlide + 1));
+    const raPrev = document.querySelector('.ra-present-prev');
+    if (raPrev) raPrev.addEventListener('click', () => setRaPresentationSlide(currentRaSlide - 1));
+    const raNext = document.querySelector('.ra-present-next');
+    if (raNext) raNext.addEventListener('click', () => setRaPresentationSlide(currentRaSlide === raPresentationSlides.length - 1 ? 0 : currentRaSlide + 1));
 
-
+    // === ROL B: Controles de presentación y modo ===
     const rbPresentationSlides = [...document.querySelectorAll('#rb-exposition .rb-slide')];
     const rbPresentationSteps = [...document.querySelectorAll('#rb-exposition .rb-slide-step')];
     let currentRbSlide = 0;
 
     const setRbPresentationSlide = index => {
+        if (!rbPresentationSlides.length) return;
         currentRbSlide = Math.max(0, Math.min(rbPresentationSlides.length - 1, index));
         rbPresentationSlides.forEach((slide, slideIndex) => {
             const active = slideIndex === currentRbSlide;
@@ -12199,20 +12200,26 @@ body {
             if (active) step.setAttribute('aria-current', 'step');
             else step.removeAttribute('aria-current');
         });
-        document.getElementById('rb-slide-count').textContent = `${currentRbSlide + 1} / ${rbPresentationSlides.length}`;
-        document.querySelector('.rb-present-prev').disabled = currentRbSlide === 0;
-        document.querySelector('.rb-present-next').innerHTML = currentRbSlide === rbPresentationSlides.length - 1
->>>>>>> 923b5326f3dec8d8b29766b6c8cc46e8dd637b22
-            ? 'Volver al inicio <i class="fa-solid fa-rotate-left"></i>'
-            : 'Siguiente <i class="fa-solid fa-arrow-right"></i>';
+        const countEl = document.getElementById('rb-slide-count');
+        if (countEl) countEl.textContent = `${currentRbSlide + 1} / ${rbPresentationSlides.length}`;
+        const prevBtn = document.querySelector('#rb-exposition .rb-present-prev') || document.querySelector('.rb-present-prev');
+        if (prevBtn) prevBtn.disabled = currentRbSlide === 0;
+        const nextBtn = document.querySelector('#rb-exposition .rb-present-next') || document.querySelector('.rb-present-next');
+        if (nextBtn) {
+            nextBtn.innerHTML = currentRbSlide === rbPresentationSlides.length - 1
+                ? 'Volver al inicio <i class="fa-solid fa-rotate-left"></i>'
+                : 'Siguiente <i class="fa-solid fa-arrow-right"></i>';
+        }
         window.dispatchEvent(new Event('resize'));
     };
 
     const setRoleBMode = mode => {
         const exposition = mode === 'exposition';
         if (exposition) setRbPresentationSlide(0);
-        document.getElementById('rb-exposition').hidden = !exposition;
-        document.getElementById('rb-analysis').hidden = exposition;
+        const expoEl = document.getElementById('rb-exposition');
+        const analEl = document.getElementById('rb-analysis');
+        if (expoEl) expoEl.hidden = !exposition;
+        if (analEl) analEl.hidden = exposition;
         document.querySelectorAll('.rb-mode-btn').forEach(button => {
             const active = button.dataset.rbMode === mode;
             button.classList.toggle('active', active);
@@ -12224,16 +12231,11 @@ body {
     document.querySelectorAll('.rb-mode-btn').forEach(button => {
         button.addEventListener('click', () => setRoleBMode(button.dataset.rbMode));
     });
-<<<<<<< HEAD
-    presentationSteps.forEach((button, index) => button.addEventListener('click', () => setPresentationSlide(index)));
-    document.querySelector('#rb-exposition .rb-present-prev').addEventListener('click', () => setPresentationSlide(currentPresentationSlide - 1));
-    document.querySelector('#rb-exposition .rb-present-next').addEventListener('click', () => setPresentationSlide(currentPresentationSlide === presentationSlides.length - 1 ? 0 : currentPresentationSlide + 1));
-=======
     rbPresentationSteps.forEach((button, index) => button.addEventListener('click', () => setRbPresentationSlide(index)));
-    document.querySelector('.rb-present-prev').addEventListener('click', () => setRbPresentationSlide(currentRbSlide - 1));
-    document.querySelector('.rb-present-next').addEventListener('click', () => setRbPresentationSlide(currentRbSlide === rbPresentationSlides.length - 1 ? 0 : currentRbSlide + 1));
-    
->>>>>>> 923b5326f3dec8d8b29766b6c8cc46e8dd637b22
+    const rbPrev = document.querySelector('#rb-exposition .rb-present-prev') || document.querySelector('.rb-present-prev');
+    if (rbPrev) rbPrev.addEventListener('click', () => setRbPresentationSlide(currentRbSlide - 1));
+    const rbNext = document.querySelector('#rb-exposition .rb-present-next') || document.querySelector('.rb-present-next');
+    if (rbNext) rbNext.addEventListener('click', () => setRbPresentationSlide(currentRbSlide === rbPresentationSlides.length - 1 ? 0 : currentRbSlide + 1));
     document.addEventListener('keydown', event => {
         const expoAActive = document.getElementById('rol-a').classList.contains('active') && !document.getElementById('ra-exposition').hidden;
         const expoBActive = document.getElementById('rol-b').classList.contains('active') && !document.getElementById('rb-exposition').hidden;
