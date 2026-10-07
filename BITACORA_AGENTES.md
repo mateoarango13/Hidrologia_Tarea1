@@ -807,6 +807,7 @@ next_actions:
 ### 2. Resumen de lo Realizado en esta Sesión
 - Se añadieron dos modos dentro de Rol B: **Exposición** y **Análisis completo**. El segundo preserva la vista detallada previa para documentación, evaluación y preguntas.
 - La exposición contiene cuatro etapas con duración objetivo de 40, 40, 65 y 35 segundos (180 s total): concordancia IMERG–referencia; rezagos exploratorios; comparación fuera de muestra; síntesis y límites.
+- Se preparó y entregó al responsable un guion oral sugerido, alineado con las cuatro etapas y con duración aproximada de tres minutos; se compartió por conversación y no requirió un archivo adicional.
 - Los tres gráficos resumidos muestran concordancia con métricas, Pearson por rezago y MAE de climatología/modelos rezagados por bloque. Las cifras y muestras se obtienen de las salidas reproducibles; las flechas y los controles anterior/siguiente permiten recorrer la ruta.
 - Se añadieron tamaños válidos por lag al dataset del dashboard y se corrigió la búsqueda de métricas de precipitación para admitir el orden inverso de variables entre tabla y ejes del scatter.
 - Al volver desde Análisis completo, la ruta de exposición se reinicia en la primera diapositiva.
@@ -1037,3 +1038,62 @@ next_actions:
 - [Qué debe hacer el siguiente compañero y qué archivo debe tomar como base].
 ```
 
+---
+
+## ENTRADA #25: FASE DE CIERRE — RESOLUCIÓN DE INCERTIDUMBRE IMERG Y AJUSTES LATEX
+- **Fecha:** 2026-10-05
+- **Integrante Responsable:** Equipo de Trabajo (Revisión Cruzada)
+- **Agente de IA utilizado:** Antigravity
+- **Estado de la Fase:** COMPLETADA
+
+### 1. Revisión de Pares (Peer Review del trabajo previo)
+- Se auditaron las discrepancias señaladas por Rol C respecto a la versión de IMERG (V06 vs V07) y las atribuciones automáticas de descenso de caudal a la megasequía.
+- Se verificaron y rellenaron los marcadores `% VERIFICAR` en el documento LaTeX del Punto 3 respecto a la infraestructura antrópica (Embalse El Yeso, Alto Maipo).
+
+### 2. Resumen de lo Realizado en esta Sesión
+- **Resolución Canónica de Procedencia IMERG:** Tras revisar `scripts/02_descargar_satelite.py` y los datos del CSV maestro, se confirma de manera definitiva que los datos satelitales corresponden a **IMERG Final Monthly V06** (`NASA/GPM_L3/IMERG_MONTHLY_V06`). Cualquier mención histórica a V07 en la bitácora fue un error de registro documental en la Entrada #1. Todos los análisis de los roles A, B y C son válidos y consistentes con la V06.
+- **Ajustes en LaTeX (Puntos 3 y 4):** Se modificó `documentos/punto3_tendencias_analisis.tex` para incluir la capacidad del embalse El Yeso (250 hm³ desde 1964) y se aclaró que el proyecto Alto Maipo entró en operación después del periodo de análisis (finales de 2021). Se matizó la atribución del quiebre en tendencias, ya que Pettitt muestra saltos en 2007 (Q) antes del inicio oficial de la megasequía (2010).
+- Se resolvió la nota sobre el extremo de mayo de 1993, confirmando su validez como evento meteorológico extremo documentado en la zona central.
+
+### 3. Archivos Modificados o Generados
+- `documentos/punto3_tendencias_analisis.tex`: Etiquetas `% VERIFICAR` eliminadas y texto enriquecido.
+- `documentos/punto4_fourier_analisis.tex`: Etiquetas de verificación eliminadas.
+- `BITACORA_AGENTES.md`: Entrada #25 añadida resolviendo el conflicto V06 vs V07.
+
+### 4. Conclusiones y Métricas Relevantes
+- La calidad de los datos queda re-certificada y lista para el análisis de Climatología Global (Punto 5). La base temporal y el CSV maestro son sólidos.
+
+### 5. Próximos Pasos para el Siguiente Integrante / Agente
+- **Rol D (Climatología Global):** Debe ejecutar el Punto 5. Debe cruzarse la serie `serie_3_2_anomalias_rol_c.csv` con datos globales (e.g. NOAA ERSST y NCEP Reanalysis).
+- Rellenar `documentos/bitacora_datos_temporal/rol_d_climatologia_global.md` con sus hallazgos.
+- ¡RECUERDEN BORRAR TODA LA CARPETA TEMPORAL `documentos/bitacora_datos_temporal` ANTES DE EMPAQUETAR EL ZIP FINAL!
+
+---
+
+## ENTRADA #26: FASE DE CIERRE — INTEGRACIÓN ROL A EN DASHBOARD Y DOCUMENTO LATEX
+- **Fecha:** 2026-10-05
+- **Integrante Responsable:** Mateo Arango — Rol A (Explorador)
+- **Agente de IA utilizado:** Antigravity
+- **Estado de la Fase:** COMPLETADA
+
+### 1. Revisión de Pares (Peer Review del trabajo previo)
+- Se verificó la consistencia estructural del Dashboard (construido para el Rol B) y se replicó su funcionalidad (modo presentación/análisis) para el Rol A.
+- Se revisaron los requisitos de la rúbrica para redactar el documento LaTeX del Rol A.
+
+### 2. Resumen de lo Realizado en esta Sesión
+- **Dashboard Rol A:** Se modificó la vista del Rol A en `index.html` para incluir un modo de "Exposición" mediante diapositivas interactivas (Integridad, Ciclo Anual, Megasequía). Se agregaron los manejadores de eventos correspondientes en `app.js` y se replicaron los gráficos de Plotly ajustados para la presentación.
+- **Dashboard Standalone:** Se re-ejecutó `scripts/08_build_dashboard_data.py` (vía `py`) para consolidar la nueva lógica del Rol A dentro de `dashboard_autocontenido.html`.
+- **LaTeX Rol A:** Se redactó `documentos/punto1_exploracion_validacion.tex` siguiendo el estilo académico de las entregas del Rol C. En él se describen el régimen nivo-pluvial (desfase 6 meses), la completitud del registro local (14 faltantes en Q, 1 en P_L) y las implicaciones recientes de la Megasequía. Se compiló satisfactoriamente generando su respectivo PDF.
+
+### 3. Archivos Modificados o Generados
+- `dashboard/index.html` y `dashboard/js/app.js`: Actualizados con modo presentación Rol A.
+- `dashboard/dashboard_autocontenido.html`: Actualizado con cambios de frontend.
+- `documentos/punto1_exploracion_validacion.tex` y `.pdf`: Creados y compilados.
+- `BITACORA_AGENTES.md`: Entrada #26 añadida.
+
+### 4. Conclusiones y Métricas Relevantes
+- El dashboard ha unificado su experiencia de usuario, permitiendo la presentación guiada de ambos roles analíticos (A y B) en una sola plataforma robusta.
+- Ya se tienen 3/4 secciones del informe formal completas (Puntos 1, 3 y 4).
+
+### 5. Próximos Pasos para el Siguiente Integrante / Agente
+- **Rol D (Climatología Global):** Desarrollar el Punto 5 mediante la descarga de mapas de temperatura superficial del mar y correlacionarlos con las anomalías del Caudal del Maipo.

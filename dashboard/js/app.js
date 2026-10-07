@@ -159,26 +159,84 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     };
 
+<<<<<<< HEAD
     const presentationSlides = [...document.querySelectorAll('#rb-exposition .rb-slide')];
     const presentationSteps = [...document.querySelectorAll('#rb-exposition .rb-slide-step')];
     let currentPresentationSlide = 0;
+=======
+    const raPresentationSlides = [...document.querySelectorAll('#ra-exposition .ra-slide')];
+    const raPresentationSteps = [...document.querySelectorAll('.ra-slide-step')];
+    let currentRaSlide = 0;
+>>>>>>> 923b5326f3dec8d8b29766b6c8cc46e8dd637b22
 
-    const setPresentationSlide = index => {
-        currentPresentationSlide = Math.max(0, Math.min(presentationSlides.length - 1, index));
-        presentationSlides.forEach((slide, slideIndex) => {
-            const active = slideIndex === currentPresentationSlide;
+    const setRaPresentationSlide = index => {
+        currentRaSlide = Math.max(0, Math.min(raPresentationSlides.length - 1, index));
+        raPresentationSlides.forEach((slide, slideIndex) => {
+            const active = slideIndex === currentRaSlide;
             slide.hidden = !active;
             slide.classList.toggle('active', active);
         });
-        presentationSteps.forEach((step, stepIndex) => {
-            const active = stepIndex === currentPresentationSlide;
+        raPresentationSteps.forEach((step, stepIndex) => {
+            const active = stepIndex === currentRaSlide;
             step.classList.toggle('active', active);
             if (active) step.setAttribute('aria-current', 'step');
             else step.removeAttribute('aria-current');
         });
+<<<<<<< HEAD
         document.getElementById('rb-slide-count').textContent = `${currentPresentationSlide + 1} / ${presentationSlides.length}`;
         document.querySelector('#rb-exposition .rb-present-prev').disabled = currentPresentationSlide === 0;
         document.querySelector('#rb-exposition .rb-present-next').innerHTML = currentPresentationSlide === presentationSlides.length - 1
+=======
+        document.getElementById('ra-slide-count').textContent = `${currentRaSlide + 1} / ${raPresentationSlides.length}`;
+        document.querySelector('.ra-present-prev').disabled = currentRaSlide === 0;
+        document.querySelector('.ra-present-next').innerHTML = currentRaSlide === raPresentationSlides.length - 1
+            ? 'Volver al inicio <i class="fa-solid fa-rotate-left"></i>'
+            : 'Siguiente <i class="fa-solid fa-arrow-right"></i>';
+        window.dispatchEvent(new Event('resize'));
+    };
+
+    const setRoleAMode = mode => {
+        const exposition = mode === 'exposition';
+        if (exposition) setRaPresentationSlide(0);
+        document.getElementById('ra-exposition').hidden = !exposition;
+        document.getElementById('ra-analysis').hidden = exposition;
+        document.querySelectorAll('.ra-mode-btn').forEach(button => {
+            const active = button.dataset.raMode === mode;
+            button.classList.toggle('active', active);
+            button.setAttribute('aria-selected', String(active));
+        });
+        window.dispatchEvent(new Event('resize'));
+    };
+
+    document.querySelectorAll('.ra-mode-btn').forEach(button => {
+        button.addEventListener('click', () => setRoleAMode(button.dataset.raMode));
+    });
+    raPresentationSteps.forEach((button, index) => button.addEventListener('click', () => setRaPresentationSlide(index)));
+    document.querySelector('.ra-present-prev').addEventListener('click', () => setRaPresentationSlide(currentRaSlide - 1));
+    document.querySelector('.ra-present-next').addEventListener('click', () => setRaPresentationSlide(currentRaSlide === raPresentationSlides.length - 1 ? 0 : currentRaSlide + 1));
+
+
+    const rbPresentationSlides = [...document.querySelectorAll('#rb-exposition .rb-slide')];
+    const rbPresentationSteps = [...document.querySelectorAll('#rb-exposition .rb-slide-step')];
+    let currentRbSlide = 0;
+
+    const setRbPresentationSlide = index => {
+        currentRbSlide = Math.max(0, Math.min(rbPresentationSlides.length - 1, index));
+        rbPresentationSlides.forEach((slide, slideIndex) => {
+            const active = slideIndex === currentRbSlide;
+            slide.hidden = !active;
+            slide.classList.toggle('active', active);
+        });
+        rbPresentationSteps.forEach((step, stepIndex) => {
+            const active = stepIndex === currentRbSlide;
+            step.classList.toggle('active', active);
+            if (active) step.setAttribute('aria-current', 'step');
+            else step.removeAttribute('aria-current');
+        });
+        document.getElementById('rb-slide-count').textContent = `${currentRbSlide + 1} / ${rbPresentationSlides.length}`;
+        document.querySelector('.rb-present-prev').disabled = currentRbSlide === 0;
+        document.querySelector('.rb-present-next').innerHTML = currentRbSlide === rbPresentationSlides.length - 1
+>>>>>>> 923b5326f3dec8d8b29766b6c8cc46e8dd637b22
             ? 'Volver al inicio <i class="fa-solid fa-rotate-left"></i>'
             : 'Siguiente <i class="fa-solid fa-arrow-right"></i>';
         window.dispatchEvent(new Event('resize'));
@@ -186,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const setRoleBMode = mode => {
         const exposition = mode === 'exposition';
-        if (exposition) setPresentationSlide(0);
+        if (exposition) setRbPresentationSlide(0);
         document.getElementById('rb-exposition').hidden = !exposition;
         document.getElementById('rb-analysis').hidden = exposition;
         document.querySelectorAll('.rb-mode-btn').forEach(button => {
@@ -200,14 +258,28 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.rb-mode-btn').forEach(button => {
         button.addEventListener('click', () => setRoleBMode(button.dataset.rbMode));
     });
+<<<<<<< HEAD
     presentationSteps.forEach((button, index) => button.addEventListener('click', () => setPresentationSlide(index)));
     document.querySelector('#rb-exposition .rb-present-prev').addEventListener('click', () => setPresentationSlide(currentPresentationSlide - 1));
     document.querySelector('#rb-exposition .rb-present-next').addEventListener('click', () => setPresentationSlide(currentPresentationSlide === presentationSlides.length - 1 ? 0 : currentPresentationSlide + 1));
+=======
+    rbPresentationSteps.forEach((button, index) => button.addEventListener('click', () => setRbPresentationSlide(index)));
+    document.querySelector('.rb-present-prev').addEventListener('click', () => setRbPresentationSlide(currentRbSlide - 1));
+    document.querySelector('.rb-present-next').addEventListener('click', () => setRbPresentationSlide(currentRbSlide === rbPresentationSlides.length - 1 ? 0 : currentRbSlide + 1));
+    
+>>>>>>> 923b5326f3dec8d8b29766b6c8cc46e8dd637b22
     document.addEventListener('keydown', event => {
-        const expositionActive = document.getElementById('rol-b').classList.contains('active') && !document.getElementById('rb-exposition').hidden;
-        if (!expositionActive || (event.target instanceof HTMLElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(event.target.tagName))) return;
-        if (event.key === 'ArrowRight') setPresentationSlide(currentPresentationSlide + 1);
-        if (event.key === 'ArrowLeft') setPresentationSlide(currentPresentationSlide - 1);
+        const expoAActive = document.getElementById('rol-a').classList.contains('active') && !document.getElementById('ra-exposition').hidden;
+        const expoBActive = document.getElementById('rol-b').classList.contains('active') && !document.getElementById('rb-exposition').hidden;
+        if ((!expoAActive && !expoBActive) || (event.target instanceof HTMLElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(event.target.tagName))) return;
+        if (event.key === 'ArrowRight') {
+            if (expoAActive) setRaPresentationSlide(currentRaSlide + 1);
+            if (expoBActive) setRbPresentationSlide(currentRbSlide + 1);
+        }
+        if (event.key === 'ArrowLeft') {
+            if (expoAActive) setRaPresentationSlide(currentRaSlide - 1);
+            if (expoBActive) setRbPresentationSlide(currentRbSlide - 1);
+        }
     });
 
     const renderHomeQuality = summary => {
@@ -267,8 +339,8 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // === ROL A: Ciclo Anual ===
-        if (data.cicloAnual && document.getElementById('chart-ciclo-anual')) {
-            Plotly.newPlot('chart-ciclo-anual', [
+        if (data.cicloAnual) {
+            const traces = [
                 {
                     x: data.cicloAnual.meses,
                     y: data.cicloAnual.precip,
@@ -287,16 +359,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     marker: { size: 8 },
                     yaxis: 'y2'
                 }
-            ], {
+            ];
+            const layout = {
                 ...baseLayout,
                 yaxis: { title: 'Precipitación (mm/mes)', gridcolor: colors.grid },
                 yaxis2: { title: 'Caudal (m³/s)', overlaying: 'y', side: 'right', showgrid: false },
                 legend: { orientation: 'h', y: 1.15, x: 0.1 }
-            }, {responsive: true, displayModeBar: false});
+            };
+            if (document.getElementById('chart-ciclo-anual')) {
+                Plotly.newPlot('chart-ciclo-anual', traces, layout, {responsive: true, displayModeBar: false});
+            }
+            if (document.getElementById('chart-ciclo-anual-expo')) {
+                Plotly.newPlot('chart-ciclo-anual-expo', traces, { ...layout, margin: { t: 15, r: 40, l: 50, b: 30 } }, {responsive: true, displayModeBar: false});
+            }
         }
 
         // === ROL A: Histograma Precipitación Local vs IMERG ===
-        if (data.histPrecip && document.getElementById('chart-hist-precip')) {
+        if (data.histPrecip) {
             const traces = [
                 {
                     x: data.histPrecip.x,
@@ -315,18 +394,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     marker: { color: colors.accent, opacity: 0.75 }
                 });
             }
-            Plotly.newPlot('chart-hist-precip', traces, {
+            const layout = {
                 ...baseLayout,
                 barmode: 'group',
                 xaxis: { title: 'Precipitación Mensual (mm)' },
                 yaxis: { title: 'Frecuencia (Meses)' },
                 legend: { orientation: 'h', y: 1.15 }
-            }, {responsive: true, displayModeBar: false});
+            };
+            if (document.getElementById('chart-hist-precip')) {
+                Plotly.newPlot('chart-hist-precip', traces, layout, {responsive: true, displayModeBar: false});
+            }
+            if (document.getElementById('chart-hist-precip-expo')) {
+                Plotly.newPlot('chart-hist-precip-expo', traces, { ...layout, margin: { t: 15, r: 15, l: 50, b: 40 } }, {responsive: true, displayModeBar: false});
+            }
         }
 
         // === ROL A: Impacto de la Megasequía (Subperiodos) ===
-        if (data.subperiodos && document.getElementById('chart-subperiodos')) {
-            Plotly.newPlot('chart-subperiodos', [
+        if (data.subperiodos) {
+            const traces = [
                 {
                     x: data.subperiodos.meses,
                     y: data.subperiodos.r_1980_1999,
@@ -345,12 +430,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     line: { color: colors.red, width: 3 },
                     marker: { size: 7 }
                 }
-            ], {
+            ];
+            const layout = {
                 ...baseLayout,
                 xaxis: { title: 'Mes Calendario' },
                 yaxis: { title: 'Lámina de Escorrentía (mm/mes)' },
                 legend: { orientation: 'h', y: 1.15 }
-            }, {responsive: true, displayModeBar: false});
+            };
+            if (document.getElementById('chart-subperiodos')) {
+                Plotly.newPlot('chart-subperiodos', traces, layout, {responsive: true, displayModeBar: false});
+            }
+            if (document.getElementById('chart-subperiodos-expo')) {
+                Plotly.newPlot('chart-subperiodos-expo', traces, { ...layout, margin: { t: 15, r: 15, l: 50, b: 40 } }, {responsive: true, displayModeBar: false});
+            }
         }
 
         // === ROL B: Relaciones y concordancia ===
