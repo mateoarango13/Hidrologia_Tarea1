@@ -807,6 +807,7 @@ next_actions:
 ### 2. Resumen de lo Realizado en esta Sesión
 - Se añadieron dos modos dentro de Rol B: **Exposición** y **Análisis completo**. El segundo preserva la vista detallada previa para documentación, evaluación y preguntas.
 - La exposición contiene cuatro etapas con duración objetivo de 40, 40, 65 y 35 segundos (180 s total): concordancia IMERG–referencia; rezagos exploratorios; comparación fuera de muestra; síntesis y límites.
+- Se preparó y entregó al responsable un guion oral sugerido, alineado con las cuatro etapas y con duración aproximada de tres minutos; se compartió por conversación y no requirió un archivo adicional.
 - Los tres gráficos resumidos muestran concordancia con métricas, Pearson por rezago y MAE de climatología/modelos rezagados por bloque. Las cifras y muestras se obtienen de las salidas reproducibles; las flechas y los controles anterior/siguiente permiten recorrer la ruta.
 - Se añadieron tamaños válidos por lag al dataset del dashboard y se corrigió la búsqueda de métricas de precipitación para admitir el orden inverso de variables entre tabla y ejes del scatter.
 - Al volver desde Análisis completo, la ruta de exposición se reinicia en la primera diapositiva.
