@@ -1354,3 +1354,44 @@ body {
     .rb-conclusion-grid article { padding-top: 10px; }
     .rb-presentation-stage { min-height: 0; }
 }
+
+/* Rol C: exposición de tendencias y Fourier (reutiliza la gramática visual del Rol B) */
+.rc-shell {
+    max-width: 1460px;
+    margin: 0 auto;
+    padding-bottom: 28px;
+}
+.rc-slide-nav { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.rc-chart { height: 360px; }
+.rc-chart-tall { height: 400px; }
+.rc-hypotheses {
+    display: grid;
+    gap: 7px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: var(--text-secondary);
+    font-size: 0.74rem;
+    line-height: 1.4;
+}
+.rc-hypotheses li { display: flex; gap: 8px; align-items: baseline; }
+.rc-ev {
+    flex: 0 0 68px;
+    padding: 2px 0;
+    border-radius: 4px;
+    font-size: 0.64rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--text-primary);
+}
+.rc-ev-high { background: rgba(121, 168, 120, 0.28); }
+.rc-ev-mid { background: rgba(226, 166, 76, 0.28); }
+.rc-ev-low { background: rgba(148, 163, 184, 0.22); }
+
+@media (max-width: 900px) {
+    .rc-slide-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 650px) {
+    .rc-chart { height: 300px; }
+    .rc-chart-tall { height: 340px; }
+}

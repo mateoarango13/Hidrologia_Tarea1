@@ -50,9 +50,9 @@
                     <i class="fa-solid fa-chart-line"></i>
                     <span>Rol B: Modelador</span>
                 </button>
-                <button class="nav-btn disabled" data-target="rol-c">
+                <button class="nav-btn" data-target="rol-c">
                     <i class="fa-solid fa-wave-square"></i>
-                    <span>Rol C: Tendencias (Próximamente)</span>
+                    <span>Rol C: Tendencias y Fourier</span>
                 </button>
                 <button class="nav-btn disabled" data-target="rol-d">
                     <i class="fa-solid fa-globe"></i>
@@ -145,44 +145,129 @@
 
                 <!-- VISTA: ROL A -->
                 <section id="rol-a" class="view">
-                    <div class="header-section">
-                        <h2>Rol A: Explorador (Climatología)</h2>
-                        <p>Caracterización de la cuenca, ciclo anual, identificación de eventos extremos y clasificación hidroclimática.</p>
+                    <div class="rb-mode-switch" role="tablist" aria-label="Vista del Rol A">
+                        <button class="ra-mode-btn rb-mode-btn active" id="ra-mode-expo" data-ra-mode="exposition" role="tab" aria-selected="true" aria-controls="ra-exposition">Exposición</button>
+                        <button class="ra-mode-btn rb-mode-btn" id="ra-mode-analysis" data-ra-mode="analysis" role="tab" aria-selected="false" aria-controls="ra-analysis">Análisis completo</button>
                     </div>
 
-                    <div class="dashboard-grid">
-                        <div class="chart-container glass-panel full-width">
-                            <div class="chart-header">
-                                <h3>Ciclo Anual de Precipitación y Caudal</h3>
-                                <p class="subtitle">Evidencia del régimen Nivo-Pluvial (Periodo Común 2000-2020)</p>
+                    <section id="ra-exposition" class="rb-mode-panel" role="tabpanel" aria-labelledby="ra-mode-expo">
+                        <header class="rb-presentation-head">
+                            <div>
+                                <p class="rb-kicker">ROL A · MATEO ARANGO · PUNTO 1</p>
+                                <h2>Exploración de Series y Contexto Climatológico</h2>
+                                <p>Caracterización de la cuenca, validación de la integridad del registro, ciclo anual e identificación del régimen nivo-pluvial.</p>
                             </div>
-                            <div id="chart-ciclo-anual" class="plotly-chart"></div>
+                        </header>
+
+                        <nav class="ra-slide-nav rb-slide-nav" aria-label="Pasos de la exposición">
+                            <button class="ra-slide-step rb-slide-step active" data-slide-to="0" aria-current="step"><span>01</span><b>Integridad</b></button>
+                            <button class="ra-slide-step rb-slide-step" data-slide-to="1"><span>02</span><b>Ciclo Anual</b></button>
+                            <button class="ra-slide-step rb-slide-step" data-slide-to="2"><span>03</span><b>Megasequía</b></button>
+                        </nav>
+
+                        <div class="ra-presentation-stage rb-presentation-stage" aria-live="polite">
+                            <section class="ra-slide rb-slide active" data-slide="0" aria-labelledby="ra-slide-title-0">
+                                <header class="rb-slide-heading"><div><p class="rb-kicker">01 · INTEGRIDAD DE DATOS</p><h3 id="ra-slide-title-0">¿La información base es sólida para modelar?</h3></div></header>
+                                <div class="rb-slide-grid">
+                                    <article class="rb-panel rb-slide-chart-panel">
+                                        <div class="rb-panel-heading"><div><h4>Distribución de valores de precipitación</h4><p>Frecuencia de intensidades (mm/mes) local vs satelital</p></div></div>
+                                        <div id="chart-hist-precip-expo" class="rb-chart rb-expo-chart-square"></div>
+                                    </article>
+                                    <aside class="rb-slide-aside">
+                                        <p class="rb-kicker">CALIDAD DEL REGISTRO</p>
+                                        <div class="rb-slide-metrics">
+                                            <div><span>Faltantes en Caudal</span><b>14 / 484 meses</b></div>
+                                            <div><span>Faltantes en P Local</span><b>1 / 484 meses</b></div>
+                                        </div>
+                                        <p class="rb-slide-takeaway">La serie local de 40 años tiene una completitud superior al 97%. IMERG no requiere imputación, simplemente cubre un periodo más reciente (2000-2020).</p>
+                                    </aside>
+                                </div>
+                            </section>
+
+                            <section class="ra-slide rb-slide" data-slide="1" aria-labelledby="ra-slide-title-1" hidden>
+                                <header class="rb-slide-heading"><div><p class="rb-kicker">02 · CICLO ANUAL</p><h3 id="ra-slide-title-1">Régimen Nivo-Pluvial de la cuenca</h3></div></header>
+                                <div class="rb-slide-grid rb-slide-grid-wide">
+                                    <article class="rb-panel rb-slide-chart-panel">
+                                        <div class="rb-panel-heading"><div><h4>Promedios mensuales (Periodo Común 2000-2020)</h4><p>Precipitación (mm/mes) frente a Caudal (m³/s)</p></div></div>
+                                        <div id="chart-ciclo-anual-expo" class="rb-chart rb-expo-chart-model"></div>
+                                    </article>
+                                    <aside class="rb-slide-aside">
+                                        <p class="rb-kicker">INTERPRETACIÓN FÍSICA</p>
+                                        <p class="rb-slide-takeaway">La precipitación máxima ocurre en invierno (Junio-Agosto), pero el caudal máximo se da en verano (Diciembre-Enero).</p>
+                                        <p class="rb-slide-small-result">Este desfase de ~6 meses confirma el rol de la cordillera como embalse natural (nieve y glaciares).</p>
+                                    </aside>
+                                </div>
+                            </section>
+
+                            <section class="ra-slide rb-slide" data-slide="2" aria-labelledby="ra-slide-title-2" hidden>
+                                <header class="rb-slide-heading"><div><p class="rb-kicker">03 · MEGASEQUÍA</p><h3 id="ra-slide-title-2">¿Cómo ha cambiado el sistema en las últimas décadas?</h3></div></header>
+                                <div class="rb-slide-grid">
+                                    <article class="rb-panel rb-slide-chart-panel">
+                                        <div class="rb-panel-heading"><div><h4>Subperiodos (1980-1999 vs 2000-2020)</h4><p>Comparación por mes calendario del descenso generalizado</p></div></div>
+                                        <div id="chart-subperiodos-expo" class="rb-chart rb-expo-chart-lag"></div>
+                                    </article>
+                                    <aside class="rb-slide-aside">
+                                        <p class="rb-kicker">SÍNTESIS</p>
+                                        <div class="rb-conclusion-grid" style="display:flex; flex-direction:column; gap:1rem;">
+                                            <article><span>01</span><h4>Déficit Pluviométrico</h4><p>El segundo periodo es notablemente más seco en la estación invernal (acumulación).</p></article>
+                                            <article><span>02</span><h4>Respuesta del Caudal</h4><p>La caída se refleja transversalmente durante todo el año hidroclimático.</p></article>
+                                        </div>
+                                    </aside>
+                                </div>
+                            </section>
                         </div>
 
-                        <div class="chart-container glass-panel">
-                            <div class="chart-header">
-                                <h3>Distribución Estadística (Precipitación)</h3>
-                                <p class="subtitle">Frecuencia de intensidades pluviométricas</p>
-                            </div>
-                            <div id="chart-hist-precip" class="plotly-chart"></div>
-                        </div>
+                        <footer class="rb-presentation-controls">
+                            <button class="ra-present-prev rb-present-prev" type="button" disabled><i class="fa-solid fa-arrow-left"></i> Anterior</button>
+                            <span id="ra-slide-count">1 / 3</span>
+                            <button class="ra-present-next rb-present-next" type="button">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+                        </footer>
+                    </section>
 
-                        <div class="chart-container glass-panel">
-                            <div class="chart-header">
-                                <h3>Impacto de la Megasequía (Subperiodos)</h3>
-                                <p class="subtitle">Comparación 1980-1999 vs 2000-2020</p>
-                            </div>
-                            <div id="chart-subperiodos" class="plotly-chart"></div>
-                        </div>
-                    </div>
+                    <div id="ra-analysis" class="rb-mode-panel" role="tabpanel" aria-labelledby="ra-mode-analysis" hidden>
+                        <div class="role-b-shell">
+                            <header class="rb-intro">
+                                <div>
+                                    <p class="rb-kicker">PUNTO 1 · EXPLORACIÓN Y VALIDACIÓN</p>
+                                    <h2>Vista ampliada del Rol A</h2>
+                                    <p>Métricas detalladas, cuadros síntesis e histogramas de precipitación.</p>
+                                </div>
+                            </header>
 
-                    <!-- Tabla dinámica -->
-                    <div class="table-container glass-panel">
-                        <div class="chart-header">
-                            <h3>Síntesis y Clasificación Hidroclimática</h3>
-                        </div>
-                        <div class="custom-table-wrapper" id="tabla-sintesis-rol-a">
-                            <!-- Inyectado por JS -->
+                            <div class="dashboard-grid">
+                                <div class="chart-container glass-panel full-width">
+                                    <div class="chart-header">
+                                        <h3>Ciclo Anual de Precipitación y Caudal</h3>
+                                        <p class="subtitle">Evidencia del régimen Nivo-Pluvial (Periodo Común 2000-2020)</p>
+                                    </div>
+                                    <div id="chart-ciclo-anual" class="plotly-chart"></div>
+                                </div>
+
+                                <div class="chart-container glass-panel">
+                                    <div class="chart-header">
+                                        <h3>Distribución Estadística (Precipitación)</h3>
+                                        <p class="subtitle">Frecuencia de intensidades pluviométricas</p>
+                                    </div>
+                                    <div id="chart-hist-precip" class="plotly-chart"></div>
+                                </div>
+
+                                <div class="chart-container glass-panel">
+                                    <div class="chart-header">
+                                        <h3>Impacto de la Megasequía (Subperiodos)</h3>
+                                        <p class="subtitle">Comparación 1980-1999 vs 2000-2020</p>
+                                    </div>
+                                    <div id="chart-subperiodos" class="plotly-chart"></div>
+                                </div>
+                            </div>
+
+                            <div class="table-container glass-panel" style="margin-top: 2rem;">
+                                <div class="chart-header">
+                                    <h3>Síntesis y Clasificación Hidroclimática</h3>
+                                </div>
+                                <div class="custom-table-wrapper" id="tabla-sintesis-rol-a">
+                                    <!-- Inyectado por JS -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -441,6 +526,85 @@
                         </footer>
                     </div>
                     </div>
+                </section>
+
+                <!-- VISTA: ROL C -->
+                <section id="rol-c" class="view">
+                    <section id="rc-exposition" class="rc-shell">
+                        <header class="rb-presentation-head">
+                            <div>
+                                <p class="rb-kicker">ROL C · TOMÁS GÓMEZ · PUNTOS 3 Y 4 · 3 MINUTOS</p>
+                                <h2>¿Qué cambia en la cuenca y en qué escalas varía?</h2>
+                                <p>Cinco gráficas que responden las preguntas de tendencias (3.3–3.6) y de Fourier (4.2). El análisis completo y las figuras de respaldo están en el informe.</p>
+                            </div>
+                        </header>
+
+                        <nav class="rb-slide-nav rc-slide-nav" aria-label="Pasos de la exposición del Rol C">
+                            <button class="rb-slide-step rc-step active" data-slide-to="0" aria-current="step"><span>01 · 40 s</span><b>¿Qué cambia?</b></button>
+                            <button class="rb-slide-step rc-step" data-slide-to="1"><span>02 · 35 s</span><b>¿Tendencia o salto?</b></button>
+                            <button class="rb-slide-step rc-step" data-slide-to="2"><span>03 · 45 s</span><b>¿Por qué?</b></button>
+                            <button class="rb-slide-step rc-step" data-slide-to="3"><span>04 · 40 s</span><b>¿Qué escalas?</b></button>
+                            <button class="rb-slide-step rc-step" data-slide-to="4"><span>05 · 20 s</span><b>Síntesis</b></button>
+                        </nav>
+
+                        <div class="rb-presentation-stage" aria-live="polite">
+                            <section class="rb-slide rc-slide active" data-slide="0" aria-labelledby="rc-slide-title-0">
+                                <header class="rb-slide-heading"><div><p class="rb-kicker">01 · PUNTOS 3.3–3.5 · QUÉ VARIABLE CAMBIA, CUÁNTO Y EN QUÉ MESES</p><h3 id="rc-slide-title-0">El caudal baja en los 12 meses; la lluvia, solo en invierno</h3></div><span>≈ 40 s</span></header>
+                                <div class="rb-slide-grid">
+                                    <article class="rb-panel rb-slide-chart-panel"><div class="rb-panel-heading"><div><h4>Tendencia OLS por mes calendario, relativa a la media del mes</h4><p>% por década · barras: IC 95 % HAC · relleno: significativo tras FDR (48 pruebas)</p></div><span class="rb-sample">1980–2020</span></div><div id="chart-rc-mensual" class="rb-chart rc-chart"></div></article>
+                                    <aside class="rb-slide-aside"><p class="rb-kicker">PENDIENTES GLOBALES (ANOMALÍAS)</p><div class="rb-slide-metrics"><div><span>Caudal Q</span><b id="rc-q-ols"></b></div><div><span>Precipitación P<sub>L</sub></span><b id="rc-p-ols"></b></div><div><span>IMERG (2000–2020)</span><b id="rc-pi-ols"></b></div><div><span>Temperatura ERA5-Land</span><b id="rc-t-ols"></b></div></div><p class="rb-slide-takeaway">La lluvia cae en mayo–julio, la estación de acumulación de nieve; el caudal cae todo el año y más en diciembre–enero, el deshielo.</p><small>Respaldo: figuras 3.4a y 3.5a del informe. Mes a mes, a y z dan la misma prueba que X (invarianza verificada).</small></aside>
+                                </div>
+                            </section>
+
+                            <section class="rb-slide rc-slide" data-slide="1" aria-labelledby="rc-slide-title-1" hidden>
+                                <header class="rb-slide-heading"><div><p class="rb-kicker">02 · PUNTOS 3.4–3.5 · ¿LINEAL, MONOTÓNICO O SALTO? ¿QUÉ TAN ROBUSTO?</p><h3 id="rc-slide-title-1">El cambio se concentra después de 2007–2010</h3></div><span>≈ 35 s</span></header>
+                                <div class="rb-slide-grid">
+                                    <article class="rb-panel rb-slide-chart-panel"><div class="rb-panel-heading"><div><h4>Anomalía media por año hidrológico (abr–mar)</h4><p>Tendencia lineal frente a escalón en el cambio de Pettitt · arriba P<sub>L</sub> (mm/mes), abajo Q (m³/s)</p></div><span class="rb-tag">Referencia 2000–2020</span></div><div id="chart-rc-salto" class="rb-chart rc-chart-tall"></div></article>
+                                    <aside class="rb-slide-aside"><p class="rb-kicker">ROBUSTEZ</p><div class="rb-slide-metrics"><div><span>Pettitt Q / P<sub>L</sub></span><b id="rc-pettitt"></b></div><div><span>Solo 1980–2009 (Q)</span><b id="rc-q-2009"></b></div><div><span>Solo 1980–2009 (P<sub>L</sub>)</span><b id="rc-p-2009"></b></div><div><span>ΔAIC tendencia − escalón</span><b id="rc-aic"></b></div></div><p class="rb-slide-takeaway">Sin la década de 2010 no hay tendencia significativa. Los datos no distinguen una tendencia gradual de un salto de nivel.</p><small>El signo negativo se mantiene al quitar los años más húmedos (1982, 1987, 1997) y en el 85 % de las ventanas de ≥ 15 años. Respaldo: figuras 3.5b y 3.5c.</small></aside>
+                                </div>
+                            </section>
+
+                            <section class="rb-slide rc-slide" data-slide="2" aria-labelledby="rc-slide-title-2" hidden>
+                                <header class="rb-slide-heading"><div><p class="rb-kicker">03 · PUNTO 3.6 · ¿A QUÉ PODRÍAN DEBERSE LOS CAMBIOS?</p><h3 id="rc-slide-title-2">El caudal responde en proporción a la lluvia perdida</h3></div><span>≈ 45 s</span></header>
+                                <div class="rb-slide-grid">
+                                    <article class="rb-panel rb-slide-chart-panel"><div class="rb-panel-heading"><div><h4>Precipitación P<sub>L</sub> y escorrentía R por año hidrológico</h4><p>mm/año · líneas discontinuas: medias 1980–2009 y 2010–2019 · solo años completos</p></div><span class="rb-sample" id="rc-balance-n"></span></div><div id="chart-rc-balance" class="rb-chart rc-chart"></div></article>
+                                    <aside class="rb-slide-aside"><p class="rb-kicker">2010–2019 FRENTE A 1980–2009</p><div class="rb-slide-metrics"><div><span>Cambio de P / de R</span><b id="rc-dpdr"></b></div><div><span>Elasticidad ΔR/ΔP</span><b id="rc-elast"></b></div><div><span>Residuo de R tras P<sub>t</sub> y P<sub>t−1</sub></span><b id="rc-resid"></b></div></div>
+                                        <ol class="rc-hypotheses">
+                                            <li><b class="rc-ev rc-ev-high">Fuerte</b> Déficit de lluvia invernal (megasequía) → menos nieve → menos caudal</li>
+                                            <li><b class="rc-ev rc-ev-mid">Moderada</b> Memoria hidrológica: se agotan nieve remanente y acuíferos</li>
+                                            <li><b class="rc-ev rc-ev-low">Abierta</b> Calentamiento (+0.28 °C/déc, n.s.) y regulación de El Yeso</li>
+                                            <li><b class="rc-ev rc-ev-low">Cautela</b> Inicio húmedo y final seco del registro; homogeneidad de productos</li>
+                                        </ol>
+                                        <small>Una tendencia aislada no prueba una causa, ni siquiera el cambio climático. Respaldo: tabla de hipótesis del informe 3.6.</small></aside>
+                                </div>
+                            </section>
+
+                            <section class="rb-slide rc-slide" data-slide="3" aria-labelledby="rc-slide-title-3" hidden>
+                                <header class="rb-slide-heading"><div><p class="rb-kicker">04 · PUNTO 4.2 · ¿EN QUÉ ESCALAS SE CONCENTRA LA VARIABILIDAD?</p><h3 id="rc-slide-title-3">La cuenca filtra la lluvia: ruido casi blanco entra, señal roja sale</h3></div><span>≈ 40 s</span></header>
+                                <div class="rb-slide-grid">
+                                    <article class="rb-panel rb-slide-chart-panel"><div class="rb-panel-heading"><div><h4>Espectro de anomalías normalizado por la varianza</h4><p>Welch (Hann, 120 meses) · 1980–2020 · línea discontinua: ruido rojo AR(1) de cada serie</p></div><span class="rb-tag">Formas, no magnitudes</span></div><div id="chart-rc-espectro" class="rb-chart rc-chart"></div></article>
+                                    <aside class="rb-slide-aside"><p class="rb-kicker">FRACCIÓN DE VARIANZA</p><div class="rb-slide-metrics"><div><span>Ciclo anual (serie original) T / P<sub>I</sub> / Q / P<sub>L</sub></span><b id="rc-anual"></b></div><div><span>Interanual en anomalías P<sub>L</sub> / Q</span><b id="rc-interanual"></b></div><div><span>Persistencia r<sub>1</sub> P<sub>L</sub> / Q</span><b id="rc-r1"></b></div></div><p class="rb-slide-takeaway">El ciclo anual es el único pico robusto. Ningún pico interanual supera el umbral global del AR(1), y su periodo cambia con la ventana y el periodo de análisis.</p><small>El pico de 6 meses es un armónico de un ciclo anual no sinusoidal. El espectro no da la fase: el desfase de 6–7 meses viene de los puntos 1 y 2. Respaldo: figuras 4.2a, 4.2b y 4.2d.</small></aside>
+                                </div>
+                            </section>
+
+                            <section class="rb-slide rc-slide" data-slide="4" aria-labelledby="rc-slide-title-4" hidden>
+                                <header class="rb-slide-heading"><div><p class="rb-kicker">05 · SÍNTESIS DE LOS PUNTOS 3 Y 4</p><h3 id="rc-slide-title-4">Menos lluvia invernal, menos nieve, menos río, todo el año</h3></div><span>≈ 20 s</span></header>
+                                <div class="rb-conclusion-grid">
+                                    <article><span>01 · Resultado</span><h4>Caudal ≈ −18 m³/s por década</h4><p>Negativo en los 12 meses y robusto frente a método y extremos; la lluvia cae en invierno.</p></article>
+                                    <article><span>02 · Mecanismo</span><h4>Almacenamiento nival</h4><p>Traslada el déficit invernal al deshielo y vuelve rojo el espectro del caudal (r<sub>1</sub> = 0.81).</p></article>
+                                    <article><span>03 · Límite</span><h4>Megasequía, no ciclo</h4><p>El cambio se concentra después de 2007–2010 y no hay un periodo interanual significativo; no se extrapola.</p></article>
+                                </div>
+                                <p class="rb-final-line">La hipótesis nivo-pluvial del punto 1 se mantiene: la cuenca integra y retrasa la lluvia, y por eso la sequía se nota más en el río.</p>
+                                <p class="rb-final-caveat">T es reanálisis de 20 años e IMERG tiene la versión sin confirmar (V06 según script); la tendencia de P<sub>L</sub> depende del método (Sen estacional p = 0.08).</p>
+                            </section>
+                        </div>
+
+                        <footer class="rb-presentation-controls">
+                            <button class="rc-present-prev" type="button" disabled><i class="fa-solid fa-arrow-left"></i> Anterior</button>
+                            <span id="rc-slide-count">1 / 5</span>
+                            <button class="rc-present-next" type="button">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+                        </footer>
+                    </section>
                 </section>
 
             </div>

@@ -159,26 +159,84 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     };
 
+<<<<<<< HEAD
     const presentationSlides = [...document.querySelectorAll('#rb-exposition .rb-slide')];
-    const presentationSteps = [...document.querySelectorAll('.rb-slide-step')];
+    const presentationSteps = [...document.querySelectorAll('#rb-exposition .rb-slide-step')];
     let currentPresentationSlide = 0;
+=======
+    const raPresentationSlides = [...document.querySelectorAll('#ra-exposition .ra-slide')];
+    const raPresentationSteps = [...document.querySelectorAll('.ra-slide-step')];
+    let currentRaSlide = 0;
+>>>>>>> 923b5326f3dec8d8b29766b6c8cc46e8dd637b22
 
-    const setPresentationSlide = index => {
-        currentPresentationSlide = Math.max(0, Math.min(presentationSlides.length - 1, index));
-        presentationSlides.forEach((slide, slideIndex) => {
-            const active = slideIndex === currentPresentationSlide;
+    const setRaPresentationSlide = index => {
+        currentRaSlide = Math.max(0, Math.min(raPresentationSlides.length - 1, index));
+        raPresentationSlides.forEach((slide, slideIndex) => {
+            const active = slideIndex === currentRaSlide;
             slide.hidden = !active;
             slide.classList.toggle('active', active);
         });
-        presentationSteps.forEach((step, stepIndex) => {
-            const active = stepIndex === currentPresentationSlide;
+        raPresentationSteps.forEach((step, stepIndex) => {
+            const active = stepIndex === currentRaSlide;
             step.classList.toggle('active', active);
             if (active) step.setAttribute('aria-current', 'step');
             else step.removeAttribute('aria-current');
         });
+<<<<<<< HEAD
         document.getElementById('rb-slide-count').textContent = `${currentPresentationSlide + 1} / ${presentationSlides.length}`;
-        document.querySelector('.rb-present-prev').disabled = currentPresentationSlide === 0;
-        document.querySelector('.rb-present-next').innerHTML = currentPresentationSlide === presentationSlides.length - 1
+        document.querySelector('#rb-exposition .rb-present-prev').disabled = currentPresentationSlide === 0;
+        document.querySelector('#rb-exposition .rb-present-next').innerHTML = currentPresentationSlide === presentationSlides.length - 1
+=======
+        document.getElementById('ra-slide-count').textContent = `${currentRaSlide + 1} / ${raPresentationSlides.length}`;
+        document.querySelector('.ra-present-prev').disabled = currentRaSlide === 0;
+        document.querySelector('.ra-present-next').innerHTML = currentRaSlide === raPresentationSlides.length - 1
+            ? 'Volver al inicio <i class="fa-solid fa-rotate-left"></i>'
+            : 'Siguiente <i class="fa-solid fa-arrow-right"></i>';
+        window.dispatchEvent(new Event('resize'));
+    };
+
+    const setRoleAMode = mode => {
+        const exposition = mode === 'exposition';
+        if (exposition) setRaPresentationSlide(0);
+        document.getElementById('ra-exposition').hidden = !exposition;
+        document.getElementById('ra-analysis').hidden = exposition;
+        document.querySelectorAll('.ra-mode-btn').forEach(button => {
+            const active = button.dataset.raMode === mode;
+            button.classList.toggle('active', active);
+            button.setAttribute('aria-selected', String(active));
+        });
+        window.dispatchEvent(new Event('resize'));
+    };
+
+    document.querySelectorAll('.ra-mode-btn').forEach(button => {
+        button.addEventListener('click', () => setRoleAMode(button.dataset.raMode));
+    });
+    raPresentationSteps.forEach((button, index) => button.addEventListener('click', () => setRaPresentationSlide(index)));
+    document.querySelector('.ra-present-prev').addEventListener('click', () => setRaPresentationSlide(currentRaSlide - 1));
+    document.querySelector('.ra-present-next').addEventListener('click', () => setRaPresentationSlide(currentRaSlide === raPresentationSlides.length - 1 ? 0 : currentRaSlide + 1));
+
+
+    const rbPresentationSlides = [...document.querySelectorAll('#rb-exposition .rb-slide')];
+    const rbPresentationSteps = [...document.querySelectorAll('#rb-exposition .rb-slide-step')];
+    let currentRbSlide = 0;
+
+    const setRbPresentationSlide = index => {
+        currentRbSlide = Math.max(0, Math.min(rbPresentationSlides.length - 1, index));
+        rbPresentationSlides.forEach((slide, slideIndex) => {
+            const active = slideIndex === currentRbSlide;
+            slide.hidden = !active;
+            slide.classList.toggle('active', active);
+        });
+        rbPresentationSteps.forEach((step, stepIndex) => {
+            const active = stepIndex === currentRbSlide;
+            step.classList.toggle('active', active);
+            if (active) step.setAttribute('aria-current', 'step');
+            else step.removeAttribute('aria-current');
+        });
+        document.getElementById('rb-slide-count').textContent = `${currentRbSlide + 1} / ${rbPresentationSlides.length}`;
+        document.querySelector('.rb-present-prev').disabled = currentRbSlide === 0;
+        document.querySelector('.rb-present-next').innerHTML = currentRbSlide === rbPresentationSlides.length - 1
+>>>>>>> 923b5326f3dec8d8b29766b6c8cc46e8dd637b22
             ? 'Volver al inicio <i class="fa-solid fa-rotate-left"></i>'
             : 'Siguiente <i class="fa-solid fa-arrow-right"></i>';
         window.dispatchEvent(new Event('resize'));
@@ -186,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const setRoleBMode = mode => {
         const exposition = mode === 'exposition';
-        if (exposition) setPresentationSlide(0);
+        if (exposition) setRbPresentationSlide(0);
         document.getElementById('rb-exposition').hidden = !exposition;
         document.getElementById('rb-analysis').hidden = exposition;
         document.querySelectorAll('.rb-mode-btn').forEach(button => {
@@ -200,14 +258,28 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.rb-mode-btn').forEach(button => {
         button.addEventListener('click', () => setRoleBMode(button.dataset.rbMode));
     });
+<<<<<<< HEAD
     presentationSteps.forEach((button, index) => button.addEventListener('click', () => setPresentationSlide(index)));
-    document.querySelector('.rb-present-prev').addEventListener('click', () => setPresentationSlide(currentPresentationSlide - 1));
-    document.querySelector('.rb-present-next').addEventListener('click', () => setPresentationSlide(currentPresentationSlide === presentationSlides.length - 1 ? 0 : currentPresentationSlide + 1));
+    document.querySelector('#rb-exposition .rb-present-prev').addEventListener('click', () => setPresentationSlide(currentPresentationSlide - 1));
+    document.querySelector('#rb-exposition .rb-present-next').addEventListener('click', () => setPresentationSlide(currentPresentationSlide === presentationSlides.length - 1 ? 0 : currentPresentationSlide + 1));
+=======
+    rbPresentationSteps.forEach((button, index) => button.addEventListener('click', () => setRbPresentationSlide(index)));
+    document.querySelector('.rb-present-prev').addEventListener('click', () => setRbPresentationSlide(currentRbSlide - 1));
+    document.querySelector('.rb-present-next').addEventListener('click', () => setRbPresentationSlide(currentRbSlide === rbPresentationSlides.length - 1 ? 0 : currentRbSlide + 1));
+    
+>>>>>>> 923b5326f3dec8d8b29766b6c8cc46e8dd637b22
     document.addEventListener('keydown', event => {
-        const expositionActive = document.getElementById('rol-b').classList.contains('active') && !document.getElementById('rb-exposition').hidden;
-        if (!expositionActive || (event.target instanceof HTMLElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(event.target.tagName))) return;
-        if (event.key === 'ArrowRight') setPresentationSlide(currentPresentationSlide + 1);
-        if (event.key === 'ArrowLeft') setPresentationSlide(currentPresentationSlide - 1);
+        const expoAActive = document.getElementById('rol-a').classList.contains('active') && !document.getElementById('ra-exposition').hidden;
+        const expoBActive = document.getElementById('rol-b').classList.contains('active') && !document.getElementById('rb-exposition').hidden;
+        if ((!expoAActive && !expoBActive) || (event.target instanceof HTMLElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(event.target.tagName))) return;
+        if (event.key === 'ArrowRight') {
+            if (expoAActive) setRaPresentationSlide(currentRaSlide + 1);
+            if (expoBActive) setRbPresentationSlide(currentRbSlide + 1);
+        }
+        if (event.key === 'ArrowLeft') {
+            if (expoAActive) setRaPresentationSlide(currentRaSlide - 1);
+            if (expoBActive) setRbPresentationSlide(currentRbSlide - 1);
+        }
     });
 
     const renderHomeQuality = summary => {
@@ -267,8 +339,8 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // === ROL A: Ciclo Anual ===
-        if (data.cicloAnual && document.getElementById('chart-ciclo-anual')) {
-            Plotly.newPlot('chart-ciclo-anual', [
+        if (data.cicloAnual) {
+            const traces = [
                 {
                     x: data.cicloAnual.meses,
                     y: data.cicloAnual.precip,
@@ -287,16 +359,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     marker: { size: 8 },
                     yaxis: 'y2'
                 }
-            ], {
+            ];
+            const layout = {
                 ...baseLayout,
                 yaxis: { title: 'Precipitación (mm/mes)', gridcolor: colors.grid },
                 yaxis2: { title: 'Caudal (m³/s)', overlaying: 'y', side: 'right', showgrid: false },
                 legend: { orientation: 'h', y: 1.15, x: 0.1 }
-            }, {responsive: true, displayModeBar: false});
+            };
+            if (document.getElementById('chart-ciclo-anual')) {
+                Plotly.newPlot('chart-ciclo-anual', traces, layout, {responsive: true, displayModeBar: false});
+            }
+            if (document.getElementById('chart-ciclo-anual-expo')) {
+                Plotly.newPlot('chart-ciclo-anual-expo', traces, { ...layout, margin: { t: 15, r: 40, l: 50, b: 30 } }, {responsive: true, displayModeBar: false});
+            }
         }
 
         // === ROL A: Histograma Precipitación Local vs IMERG ===
-        if (data.histPrecip && document.getElementById('chart-hist-precip')) {
+        if (data.histPrecip) {
             const traces = [
                 {
                     x: data.histPrecip.x,
@@ -315,18 +394,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     marker: { color: colors.accent, opacity: 0.75 }
                 });
             }
-            Plotly.newPlot('chart-hist-precip', traces, {
+            const layout = {
                 ...baseLayout,
                 barmode: 'group',
                 xaxis: { title: 'Precipitación Mensual (mm)' },
                 yaxis: { title: 'Frecuencia (Meses)' },
                 legend: { orientation: 'h', y: 1.15 }
-            }, {responsive: true, displayModeBar: false});
+            };
+            if (document.getElementById('chart-hist-precip')) {
+                Plotly.newPlot('chart-hist-precip', traces, layout, {responsive: true, displayModeBar: false});
+            }
+            if (document.getElementById('chart-hist-precip-expo')) {
+                Plotly.newPlot('chart-hist-precip-expo', traces, { ...layout, margin: { t: 15, r: 15, l: 50, b: 40 } }, {responsive: true, displayModeBar: false});
+            }
         }
 
         // === ROL A: Impacto de la Megasequía (Subperiodos) ===
-        if (data.subperiodos && document.getElementById('chart-subperiodos')) {
-            Plotly.newPlot('chart-subperiodos', [
+        if (data.subperiodos) {
+            const traces = [
                 {
                     x: data.subperiodos.meses,
                     y: data.subperiodos.r_1980_1999,
@@ -345,12 +430,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     line: { color: colors.red, width: 3 },
                     marker: { size: 7 }
                 }
-            ], {
+            ];
+            const layout = {
                 ...baseLayout,
                 xaxis: { title: 'Mes Calendario' },
                 yaxis: { title: 'Lámina de Escorrentía (mm/mes)' },
                 legend: { orientation: 'h', y: 1.15 }
-            }, {responsive: true, displayModeBar: false});
+            };
+            if (document.getElementById('chart-subperiodos')) {
+                Plotly.newPlot('chart-subperiodos', traces, layout, {responsive: true, displayModeBar: false});
+            }
+            if (document.getElementById('chart-subperiodos-expo')) {
+                Plotly.newPlot('chart-subperiodos-expo', traces, { ...layout, margin: { t: 15, r: 15, l: 50, b: 40 } }, {responsive: true, displayModeBar: false});
+            }
         }
 
         // === ROL B: Relaciones y concordancia ===
@@ -617,6 +709,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }, { responsive: true, displayModeBar: false });
         }
 
+        renderRoleC(data.rolC);
+
         // === ROL A: Tabla Síntesis ===
         if (data.tablaSintesisA && document.getElementById('tabla-sintesis-rol-a')) {
             const container = document.getElementById('tabla-sintesis-rol-a');
@@ -653,6 +747,172 @@ document.addEventListener('DOMContentLoaded', () => {
             renderQModelChart();
         });
     });
+
+
+    // === ROL C: exposición de tendencias y Fourier ===
+    const rcSlides = [...document.querySelectorAll('#rc-exposition .rc-slide')];
+    const rcSteps = [...document.querySelectorAll('#rc-exposition .rc-step')];
+    let rcCurrent = 0;
+    const setRoleCSlide = index => {
+        if (!rcSlides.length) return;
+        rcCurrent = Math.max(0, Math.min(rcSlides.length - 1, index));
+        rcSlides.forEach((slide, i) => {
+            slide.hidden = i !== rcCurrent;
+            slide.classList.toggle('active', i === rcCurrent);
+        });
+        rcSteps.forEach((step, i) => {
+            step.classList.toggle('active', i === rcCurrent);
+            if (i === rcCurrent) step.setAttribute('aria-current', 'step');
+            else step.removeAttribute('aria-current');
+        });
+        document.getElementById('rc-slide-count').textContent = `${rcCurrent + 1} / ${rcSlides.length}`;
+        document.querySelector('#rc-exposition .rc-present-prev').disabled = rcCurrent === 0;
+        document.querySelector('#rc-exposition .rc-present-next').innerHTML = rcCurrent === rcSlides.length - 1
+            ? 'Volver al inicio <i class="fa-solid fa-rotate-left"></i>'
+            : 'Siguiente <i class="fa-solid fa-arrow-right"></i>';
+        window.dispatchEvent(new Event('resize'));
+    };
+    if (rcSlides.length) {
+        rcSteps.forEach((step, i) => step.addEventListener('click', () => setRoleCSlide(i)));
+        document.querySelector('#rc-exposition .rc-present-prev').addEventListener('click', () => setRoleCSlide(rcCurrent - 1));
+        document.querySelector('#rc-exposition .rc-present-next').addEventListener('click', () => setRoleCSlide(rcCurrent === rcSlides.length - 1 ? 0 : rcCurrent + 1));
+        document.addEventListener('keydown', event => {
+            if (!document.getElementById('rol-c').classList.contains('active')) return;
+            if (event.target instanceof HTMLElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(event.target.tagName)) return;
+            if (event.key === 'ArrowRight') setRoleCSlide(rcCurrent + 1);
+            if (event.key === 'ArrowLeft') setRoleCSlide(rcCurrent - 1);
+        });
+    }
+
+    const rcColors = { pl: '#56a9ba', q: '#d97853', pos: 'rgba(86, 169, 186, 0.55)', neg: 'rgba(217, 120, 83, 0.55)' };
+    const setText = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+    const signed = (value, digits = 1) => `${value > 0 ? '+' : value < 0 ? '−' : ''}${Math.abs(Number(value)).toFixed(digits)}`;
+    const pText = p => (p < 0.001 ? 'p < 0.001' : `p = ${Number(p).toFixed(3)}`);
+    const plotConfig = { responsive: true, displayModeBar: false };
+
+    const renderRoleC = rc => {
+        if (!rc || !document.getElementById('chart-rc-mensual')) return;
+        const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+        const h = rc.headline;
+        setText('rc-q-ols', `${signed(h.Caudal_m3s.ols.pendiente)} m³/s/déc · ${pText(h.Caudal_m3s.ols.p)}`);
+        setText('rc-p-ols', `${signed(h.P_local_mm.ols.pendiente)} mm/mes/déc · ${pText(h.P_local_mm.ols.p)}`);
+        setText('rc-pi-ols', `${signed(h.P_IMERG_mm.ols.pendiente)} mm/mes/déc · ${pText(h.P_IMERG_mm.ols.p)}`);
+        setText('rc-t-ols', `${signed(h.Temp_C.ols.pendiente, 2)} °C/déc · ${pText(h.Temp_C.ols.p)} (n.s.)`);
+
+        // 01 · Pendientes mensuales relativas
+        const monthlyTrace = (key, name, color, offset) => {
+            const d = rc.monthlySlopes[key];
+            return {
+                x: months.map((_, i) => i + 1 + offset), y: d.pct, name, type: 'scatter', mode: 'markers',
+                error_y: { type: 'data', symmetric: false, array: d.pctHigh.map((v, i) => v - d.pct[i]),
+                    arrayminus: d.pct.map((v, i) => v - d.pctLow[i]), color, thickness: 2, width: 0 },
+                marker: { size: 10, color, symbol: d.signifFdr.map(s => (s ? 'circle' : 'circle-open')), line: { width: 2, color } },
+                customdata: d.abs.map((v, i) => [months[i], v, d.q[i]]),
+                hovertemplate: `<b>${name} · %{customdata[0]}</b><br>%{y:.1f} % por década<br>Pendiente: %{customdata[1]:.2f} ${key === 'Caudal_m3s' ? 'm³/s' : 'mm/mes'} por década<br>q FDR = %{customdata[2]:.3f}<extra></extra>`
+            };
+        };
+        Plotly.newPlot('chart-rc-mensual', [
+            monthlyTrace('P_local_mm', 'Precipitación P_L', rcColors.pl, -0.14),
+            monthlyTrace('Caudal_m3s', 'Caudal Q', rcColors.q, 0.14)
+        ], {
+            ...baseChartLayout(),
+            xaxis: { ...baseChartLayout().xaxis, tickvals: months.map((_, i) => i + 1), ticktext: months },
+            yaxis: { ...baseChartLayout().yaxis, title: '% de la media mensual por década', zeroline: true, zerolinewidth: 1.5 },
+            legend: { orientation: 'h', y: 1.1, x: 0 },
+            margin: { t: 26, r: 12, l: 62, b: 36 }
+        }, plotConfig);
+
+        // 02 · Tendencia frente a escalón
+        const wyP = rc.waterYear.P_local_mm, wyQ = rc.waterYear.Caudal_m3s;
+        setText('rc-pettitt', `${wyQ.stepYear} (${pText(wyQ.pPettitt)}) / ${wyP.stepYear} (${pText(wyP.pPettitt)})`);
+        setText('rc-q-2009', `${signed(wyQ.until2009Slope)} m³/s/déc · ${pText(wyQ.until2009P)}`);
+        setText('rc-p-2009', `${signed(wyP.until2009Slope)} mm/mes/déc · ${pText(wyP.until2009P)}`);
+        setText('rc-aic', `${signed(wyQ.deltaAic, 2)} (Q) · ${signed(wyP.deltaAic, 2)} (P_L)`);
+        const stepTraces = (wy, axis, unit, showLegend) => [
+            { x: wy.years, y: wy.anomaly, type: 'bar', yaxis: axis, xaxis: 'x', showlegend: false,
+              marker: { color: wy.anomaly.map(v => (v >= 0 ? rcColors.pos : rcColors.neg)) },
+              hovertemplate: `Año hidrológico %{x}<br>Anomalía media: %{y:.1f} ${unit}<extra></extra>` },
+            { x: wy.years, y: wy.trend, type: 'scatter', mode: 'lines', yaxis: axis, name: 'Tendencia lineal',
+              line: { color: '#3b82f6', width: 2.5 }, showlegend: showLegend, hoverinfo: 'skip' },
+            { x: wy.years, y: wy.step, type: 'scatter', mode: 'lines', yaxis: axis, name: 'Escalón (Pettitt)',
+              line: { color: '#e2a64c', width: 2.5, shape: 'hv' }, showlegend: showLegend, hoverinfo: 'skip' }
+        ];
+        const base2 = baseChartLayout();
+        Plotly.newPlot('chart-rc-salto', [
+            ...stepTraces(wyP, 'y', 'mm/mes', true),
+            ...stepTraces(wyQ, 'y2', 'm³/s', false)
+        ], {
+            ...base2,
+            grid: { rows: 2, columns: 1, pattern: 'independent', roworder: 'top to bottom' },
+            xaxis: { ...base2.xaxis, anchor: 'y2', range: [1979, 2020] },
+            yaxis: { ...base2.yaxis, domain: [0.55, 1], title: 'P_L [mm/mes]', zeroline: true },
+            yaxis2: { ...base2.yaxis, domain: [0, 0.45], title: 'Q [m³/s]', zeroline: true },
+            legend: { orientation: 'h', y: 1.12, x: 0 },
+            bargap: 0.15,
+            margin: { t: 26, r: 12, l: 62, b: 36 }
+        }, plotConfig);
+
+        // 03 · Balance anual
+        const b = rc.balance;
+        setText('rc-balance-n', `${b.nPre} + ${b.nPost} años`);
+        setText('rc-dpdr', `${signed(b.dPpct)} % / ${signed(b.dRpct)} %`);
+        setText('rc-elast', `≈ ${Number(b.elasticity).toFixed(2)}`);
+        setText('rc-resid', `${signed(b.residPre, 0)} → ${signed(b.residPost, 0)} mm/año`);
+        const allYears = Array.from({ length: 40 }, (_, i) => 1980 + i);
+        const byYear = arr => allYears.map(y => { const i = b.years.indexOf(y); return i >= 0 ? arr[i] : null; });
+        const meanSeg = (value, from, to, color) => ({ x: [from, to], y: [value, value], type: 'scatter', mode: 'lines',
+            line: { color, width: 2, dash: 'dash' }, showlegend: false, hovertemplate: `Media ${from}–${to}: ${value} mm/año<extra></extra>` });
+        Plotly.newPlot('chart-rc-balance', [
+            { x: allYears, y: byYear(b.P), name: 'Precipitación P_L', type: 'scatter', mode: 'lines+markers',
+              line: { color: rcColors.pl, width: 2 }, marker: { size: 6 }, connectgaps: false,
+              hovertemplate: 'Año %{x}<br>P = %{y:.0f} mm<extra></extra>' },
+            { x: allYears, y: byYear(b.R), name: 'Escorrentía R', type: 'scatter', mode: 'lines+markers',
+              line: { color: rcColors.q, width: 2 }, marker: { size: 6 }, connectgaps: false,
+              hovertemplate: 'Año %{x}<br>R = %{y:.0f} mm<extra></extra>' },
+            meanSeg(b.preP, 1980, 2009, rcColors.pl), meanSeg(b.postP, 2010, 2019, rcColors.pl),
+            meanSeg(b.preR, 1980, 2009, rcColors.q), meanSeg(b.postR, 2010, 2019, rcColors.q)
+        ], {
+            ...baseChartLayout(),
+            xaxis: { ...baseChartLayout().xaxis, title: 'Año hidrológico (abr–mar)' },
+            yaxis: { ...baseChartLayout().yaxis, title: 'mm/año', rangemode: 'tozero' },
+            shapes: [{ type: 'line', x0: 2009.5, x1: 2009.5, yref: 'paper', y0: 0, y1: 1, line: { color: '#94a3b8', width: 1, dash: 'dot' } }],
+            annotations: [{ x: 2010, y: 1, yref: 'paper', text: 'Megasequía', showarrow: false, xanchor: 'left', font: { size: 10 } }],
+            legend: { orientation: 'h', y: 1.1, x: 0 },
+            margin: { t: 26, r: 12, l: 62, b: 44 }
+        }, plotConfig);
+
+        // 04 · Espectros
+        const fr = rc.bandFractions;
+        const ann = key => Math.round(100 * fr[key].anual);
+        setText('rc-anual', `${ann('comun|Temp_C|C')} / ${ann('comun|P_IMERG_mm|C')} / ${ann('completo|Caudal_m3s|C')} / ${ann('completo|P_local_mm|C')} %`);
+        setText('rc-interanual', `${Math.round(100 * fr['completo|P_local_mm|A'].interanual)} % / ${Math.round(100 * fr['completo|Caudal_m3s|A'].interanual)} %`);
+        setText('rc-r1', `${rc.spectra.P_local_mm.r1.toFixed(2)} / ${rc.spectra.Caudal_m3s.r1.toFixed(2)}`);
+        const spec = (key, name, color) => [
+            { x: rc.spectra[key].f, y: rc.spectra[key].p, name, type: 'scatter', mode: 'lines', line: { color, width: 2.5 },
+              hovertemplate: `${name}<br>f = %{x:.3f} ciclos/mes (periodo %{customdata:.1f} meses)<br>DEP/var = %{y:.2f}<extra></extra>`,
+              customdata: rc.spectra[key].f.map(f => 1 / f) },
+            { x: rc.spectra[key].f, y: rc.spectra[key].ar1, name: `AR(1) r₁=${rc.spectra[key].r1.toFixed(2)}`, type: 'scatter', mode: 'lines',
+              line: { color, width: 1.5, dash: 'dash' }, hoverinfo: 'skip' }
+        ];
+        const base4 = baseChartLayout();
+        Plotly.newPlot('chart-rc-espectro', [...spec('P_local_mm', 'Precipitación P_L', rcColors.pl), ...spec('Caudal_m3s', 'Caudal Q', rcColors.q)], {
+            ...base4,
+            xaxis: { ...base4.xaxis, title: 'Frecuencia [ciclos/mes]', range: [0, 0.5] },
+            yaxis: { ...base4.yaxis, title: 'DEP / varianza', type: 'log' },
+            shapes: [
+                { type: 'rect', x0: 0, x1: 1 / 18, yref: 'paper', y0: 0, y1: 1, fillcolor: 'rgba(148,163,184,0.12)', line: { width: 0 } },
+                { type: 'line', x0: 1 / 12, x1: 1 / 12, yref: 'paper', y0: 0, y1: 1, line: { color: '#94a3b8', width: 1, dash: 'dot' } },
+                { type: 'line', x0: 1 / 6, x1: 1 / 6, yref: 'paper', y0: 0, y1: 1, line: { color: '#94a3b8', width: 1, dash: 'dot' } }
+            ],
+            annotations: [
+                { x: 1 / 36, y: 1.02, yref: 'paper', text: 'Interanual', showarrow: false, font: { size: 10 } },
+                { x: 1 / 12, y: 1.02, yref: 'paper', text: '12 m', showarrow: false, font: { size: 10 } },
+                { x: 1 / 6, y: 1.02, yref: 'paper', text: '6 m', showarrow: false, font: { size: 10 } }
+            ],
+            legend: { orientation: 'h', y: -0.22, x: 0 },
+            margin: { t: 26, r: 12, l: 62, b: 70 }
+        }, plotConfig);
+    };
 
     // Renderizar al cargar
     setTimeout(renderAllCharts, 120);
