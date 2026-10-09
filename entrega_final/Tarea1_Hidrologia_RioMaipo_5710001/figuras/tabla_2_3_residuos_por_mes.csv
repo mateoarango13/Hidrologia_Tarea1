@@ -1,0 +1,289 @@
+task,predictor,target,model,model_variant,outer_fold,calendar_month,season,n,bias_pred_minus_obs,mae,rmse,negative_predictions,minimum_prediction,maximum_prediction
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_1,1,Verano,3,-0.372498,5.179983,5.379496,0,10.640073,20.512377
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_1,2,Verano,3,5.865743,5.865743,6.262008,0,6.244895,30.930857
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_1,3,Otono,3,3.774647,4.339366,5.873329,0,4.239228,11.431136
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_1,4,Otono,3,-2.104324,7.376017,7.950279,0,12.924977,28.847600
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_1,5,Otono,3,-2.048739,27.425875,30.143571,0,22.401781,94.349184
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_1,6,Invierno,3,-20.234539,20.234539,21.053226,0,90.371957,199.476882
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_1,7,Invierno,3,49.595780,49.595780,51.438383,0,90.449602,104.841917
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_1,8,Invierno,3,16.605453,34.900509,36.191963,0,69.944858,119.047473
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_1,9,Primavera,3,19.473784,22.072454,26.148984,0,16.051928,42.474986
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_1,10,Primavera,3,-9.221365,9.221365,12.083354,0,14.487911,46.137977
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_1,11,Primavera,3,-3.860555,11.791118,14.841053,0,11.366008,27.087186
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_1,12,Verano,3,0.108435,9.054521,10.577036,0,13.892277,61.854816
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_2,1,Verano,3,-0.510472,7.394482,8.041645,0,6.460221,19.324459
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_2,2,Verano,3,5.304430,12.932417,13.340242,0,10.054048,48.006593
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_2,3,Otono,3,10.613449,10.613449,12.782567,0,7.303873,29.050417
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_2,4,Otono,3,3.119342,4.119421,5.041067,0,9.234883,24.141431
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_2,5,Otono,3,-24.190461,36.907331,39.234153,0,25.743659,117.457137
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_2,6,Invierno,3,13.808996,26.222951,26.852137,0,37.001062,147.580845
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_2,7,Invierno,3,-5.084792,38.592624,44.348279,0,79.292055,138.113998
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_2,8,Invierno,3,26.070897,26.070897,34.665727,0,105.523598,255.112151
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_2,9,Primavera,3,-35.897462,35.897462,36.673556,0,35.923585,80.912542
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_2,10,Primavera,3,2.303566,10.116159,11.978153,0,13.447710,115.330559
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_2,11,Primavera,3,4.820412,7.542371,8.408360,0,16.488027,29.160103
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_2,12,Verano,3,9.545402,11.105610,12.722104,0,13.240567,21.132368
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_3,1,Verano,5,7.437973,10.751403,16.382104,0,6.250466,47.959580
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_3,2,Verano,5,7.907175,7.907175,9.027589,0,9.996716,34.422867
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_3,3,Otono,5,8.718825,8.718825,9.961746,0,2.827578,17.321354
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_3,4,Otono,4,-42.029462,51.399434,87.603270,0,13.804561,197.996544
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_3,5,Otono,4,1.101917,15.147031,16.446654,0,45.681792,112.896363
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_3,6,Invierno,4,7.483840,26.870554,28.841302,0,64.709962,129.470410
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_3,7,Invierno,4,15.941707,35.446273,37.551289,0,73.436113,127.637466
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_3,8,Invierno,4,5.568981,16.925813,20.670295,0,31.773887,94.474526
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_3,9,Primavera,4,-18.888606,28.926908,40.423133,0,12.760315,64.027850
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_3,10,Primavera,4,-16.460004,18.084248,23.795363,0,18.577411,49.440263
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_3,11,Primavera,4,6.308575,6.958416,9.782177,0,12.485291,25.735465
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_3,12,Verano,4,-1.624910,6.229101,7.787093,0,2.846906,29.915872
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_1,1,Verano,3,-12.248093,12.248093,13.754134,0,0.000000,8.912675
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_1,2,Verano,3,-1.179446,2.985728,3.340690,0,0.000000,24.749411
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_1,3,Otono,3,-4.740103,4.740103,7.176961,0,0.000000,0.000000
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_1,4,Otono,3,-11.895545,11.895545,13.380687,0,0.000000,21.582731
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_1,5,Otono,3,9.311525,20.919461,26.205616,0,11.784686,121.149202
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_1,6,Invierno,3,29.805975,29.805975,35.212966,0,115.103570,280.949823
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_1,7,Invierno,3,77.942390,77.942390,79.127354,0,115.221595,137.098806
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_1,8,Invierno,3,40.463945,40.463945,45.593168,0,84.053112,158.692133
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_1,9,Primavera,3,12.463520,24.341798,26.148704,0,2.132516,42.297203
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_1,10,Primavera,3,-18.338672,18.338672,18.648792,0,0.000000,47.865177
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_1,11,Primavera,3,-13.235804,15.712772,19.515855,0,0.000000,18.906793
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_1,12,Verano,3,-3.930523,3.930523,4.493646,0,0.000000,71.755747
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Log-lineal corregido,bloque_2,1,Verano,3,-4.524661,5.919189,9.116001,0,3.050405,14.500052
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Log-lineal corregido,bloque_2,2,Verano,3,2.157695,12.534113,12.802766,0,5.931400,47.320629
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Log-lineal corregido,bloque_2,3,Otono,3,6.499343,7.986947,9.419524,0,3.698419,24.747678
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Log-lineal corregido,bloque_2,4,Otono,3,-1.253935,4.043635,4.435380,0,5.248366,19.439577
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Log-lineal corregido,bloque_2,5,Otono,3,-14.433894,24.083978,26.038007,0,21.143481,148.426343
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Log-lineal corregido,bloque_2,6,Invierno,3,30.974096,40.913200,50.968083,0,33.849006,198.515924
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Log-lineal corregido,bloque_2,7,Invierno,3,17.886251,26.689711,36.141898,0,89.929895,182.444734
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Log-lineal corregido,bloque_2,8,Invierno,3,90.570262,90.570262,104.732919,0,129.484238,398.421703
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Log-lineal corregido,bloque_2,9,Primavera,3,-30.280160,30.280160,32.990411,0,32.582187,92.282490
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Log-lineal corregido,bloque_2,10,Primavera,3,9.435683,11.410576,13.019101,0,8.902499,145.010961
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Log-lineal corregido,bloque_2,11,Primavera,3,0.208415,6.099919,6.905404,0,11.733709,24.869166
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Log-lineal corregido,bloque_2,12,Verano,3,4.838542,9.415719,9.591743,0,8.715114,16.320185
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_3,1,Verano,5,-0.268663,15.057434,19.386037,0,0.000000,49.509802
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_3,2,Verano,5,-2.070080,3.250030,4.080007,0,0.000000,30.407864
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_3,3,Otono,5,-0.036592,1.822884,2.369027,0,0.000000,6.275561
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_3,4,Otono,4,-29.399840,39.378820,57.688873,0,1.312941,261.230099
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_3,5,Otono,4,16.844666,26.868745,28.386017,0,46.295568,141.143454
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_3,6,Invierno,4,29.984096,45.152483,47.131912,0,73.146616,164.531438
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_3,7,Invierno,4,39.616730,41.967562,47.615032,0,85.460271,161.944933
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_3,8,Invierno,4,8.779214,24.976029,27.051007,0,26.669833,115.148015
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_3,9,Primavera,4,-21.772443,24.619045,36.295666,0,0.000000,72.184074
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_3,10,Primavera,4,-18.930416,18.930416,24.810567,0,8.048009,51.599225
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_3,11,Primavera,4,-3.846620,8.679779,9.234295,0,0.000000,18.148889
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_3,12,Verano,4,-10.143070,10.143070,13.314716,0,0.000000,24.047949
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,1,Verano,3,109.616141,109.616141,121.207235,0,233.363452,233.363452
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,2,Verano,3,66.147915,66.147915,73.288770,0,170.771602,170.771602
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,3,Otono,3,29.444296,31.259210,37.337599,0,115.309887,115.309887
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,4,Otono,3,18.155694,18.620787,22.577305,0,80.872360,80.872360
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,5,Otono,3,15.712980,15.712980,17.765482,0,68.639862,68.639862
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,6,Invierno,3,21.721649,21.721649,24.155776,0,68.293872,68.293872
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,7,Invierno,3,29.460321,29.460321,30.294855,0,71.753869,71.753869
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,8,Invierno,3,31.086325,31.086325,32.166002,0,70.843315,70.843315
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,9,Primavera,3,30.566945,30.566945,30.846354,0,80.102501,80.102501
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,10,Primavera,3,46.755647,46.755647,47.651267,0,111.911560,111.911560
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,11,Primavera,3,67.879206,67.879206,70.199538,0,173.528095,173.528095
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,12,Verano,3,129.664276,129.664276,130.804274,0,240.180405,240.180405
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,1,Verano,3,101.482638,101.482638,103.547595,0,223.086939,223.086939
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,2,Verano,3,75.342854,75.342854,75.964810,0,164.570235,164.570235
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,3,Otono,2,41.972065,41.972065,41.982417,0,112.549484,112.549484
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,4,Otono,2,23.462288,23.462288,23.749336,0,79.170264,79.170264
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,5,Otono,2,19.783767,19.783767,19.969346,0,67.119251,67.119251
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,6,Invierno,2,16.560801,16.560801,16.579952,0,66.257467,66.257467
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,7,Invierno,2,23.296626,23.296626,23.320713,0,69.075658,69.075658
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,8,Invierno,2,20.070511,20.070511,20.200219,0,68.017285,68.017285
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,9,Primavera,2,25.465354,25.465354,25.969392,0,77.323687,77.323687
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,10,Primavera,2,22.766929,22.766929,23.349637,0,107.528219,107.528219
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,11,Primavera,2,54.980807,54.980807,54.981054,0,166.959140,166.959140
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,12,Verano,2,111.279217,111.279217,113.165783,0,228.024379,228.024379
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,1,Verano,5,83.100195,83.100195,91.828053,0,214.388427,214.388427
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,2,Verano,5,49.917063,49.917063,57.856043,0,158.112276,158.112276
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,3,Otono,5,36.447778,36.447778,40.249105,0,110.080539,110.080539
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,4,Otono,4,4.378463,22.548398,24.814921,0,77.790129,77.790129
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,5,Otono,4,13.436612,18.126495,21.260432,0,65.920235,65.920235
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,6,Invierno,4,15.015352,20.448701,24.088970,0,65.283302,65.283302
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,7,Invierno,4,22.760971,22.760971,27.908520,0,67.744422,67.744422
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,8,Invierno,4,20.117979,20.274715,24.429484,0,66.870399,66.870399
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,9,Primavera,4,18.589200,18.866604,22.050591,0,75.868524,75.868524
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,10,Primavera,4,38.884915,38.884915,43.081497,0,106.188988,106.188988
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,11,Primavera,4,63.003487,63.003487,68.494580,0,163.626970,163.626970
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,12,Verano,4,100.596212,100.596212,107.895120,0,221.478543,221.478543
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,1,Verano,3,11.635098,50.883351,51.347119,0,133.439538,137.740524
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,2,Verano,3,31.916712,39.282592,44.143409,0,134.018159,138.165466
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,3,Otono,3,51.612671,51.612671,56.181706,0,135.970585,138.426318
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,4,Otono,3,70.826586,70.826586,71.624645,0,131.251619,137.422794
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,5,Otono,3,72.157023,72.157023,73.914960,0,110.713086,136.785914
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,6,Invierno,3,59.998603,59.998603,62.344653,0,93.409932,117.920074
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,7,Invierno,3,86.586968,86.586968,86.806221,0,125.220175,132.783155
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,8,Invierno,3,84.251277,84.251277,84.565777,0,109.127238,134.122710
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,9,Primavera,3,86.918014,86.918014,86.982473,0,134.436186,137.536268
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,10,Primavera,3,66.411408,66.411408,66.694543,0,125.361766,135.485491
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,11,Primavera,3,27.686915,27.686915,32.598735,0,128.606653,136.012822
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,12,Verano,3,21.068975,28.722730,31.337427,0,123.370980,138.127676
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,1,Verano,3,8.459096,18.795146,23.315584,0,128.513932,132.083559
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,2,Verano,3,38.846792,38.846792,40.364683,0,125.142928,130.820956
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,3,Otono,2,61.095869,61.095869,61.112607,0,131.175307,132.171268
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,4,Otono,2,73.271280,73.271280,73.454063,0,127.481879,130.476635
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,5,Otono,2,59.759854,59.759854,59.872159,0,100.713788,113.476888
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,6,Invierno,2,64.256200,64.256200,64.301378,0,110.746249,117.159485
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,7,Invierno,2,74.945149,74.945149,75.115976,0,114.601443,126.846920
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,8,Invierno,2,70.153156,70.153156,70.483625,0,113.568080,122.631780
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,9,Primavera,2,62.319657,62.319657,62.343946,0,110.826425,117.529557
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,10,Primavera,2,44.877504,44.877504,45.226582,0,129.214339,130.063250
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,11,Primavera,2,17.506791,17.506791,17.549120,0,128.431965,130.538282
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,12,Verano,2,13.589412,19.609814,23.858268,0,129.366968,131.302178
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,1,Verano,5,-4.248275,35.690148,38.685303,0,125.711307,128.675754
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,2,Verano,5,19.137130,29.658687,36.233853,0,123.152099,128.981185
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,3,Otono,5,54.959373,54.959373,57.590299,0,127.707532,128.998696
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,4,Otono,4,34.184813,60.814618,61.784069,0,60.870391,128.324475
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,5,Otono,4,61.620934,61.620934,65.082152,0,109.104372,120.244076
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,6,Invierno,4,61.996350,61.996350,65.336544,0,110.059016,116.496733
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,7,Invierno,4,68.305841,68.305841,72.525506,0,98.498794,125.261346
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,8,Invierno,4,73.748890,73.748890,75.735155,0,113.466570,126.564086
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,9,Primavera,4,61.476534,61.476534,62.211885,0,103.096825,128.461004
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,10,Primavera,4,51.694350,51.694350,55.780028,0,114.099941,126.193174
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,11,Primavera,4,26.024232,30.917797,37.616222,0,125.235562,128.384939
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,12,Verano,4,5.135801,34.075205,40.517275,0,123.394890,128.371463
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,1,Verano,3,74.101115,76.497748,92.483392,0,193.017953,202.789592
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,2,Verano,3,61.868103,61.868103,66.094121,0,137.437683,187.656773
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,3,Otono,3,24.773546,24.773546,25.315387,0,88.815630,149.923005
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,4,Otono,3,14.086976,15.672075,18.449158,0,74.404141,79.192351
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,5,Otono,3,18.714511,18.714511,22.054636,0,67.268792,77.291511
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,6,Invierno,3,20.628743,20.628743,24.720895,0,64.680112,72.061068
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,7,Invierno,3,30.687412,30.687412,31.950750,0,69.495675,75.852519
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,8,Invierno,3,30.534129,30.534129,32.234432,0,67.889274,74.018981
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,9,Primavera,3,27.958847,27.958847,28.495350,0,76.093180,79.722745
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,10,Primavera,3,37.920009,37.920009,39.964505,0,97.341974,106.462950
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,11,Primavera,3,43.363091,43.363091,43.413498,0,131.716448,170.252005
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,12,Verano,3,118.104844,118.104844,118.254663,0,211.846820,248.072731
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,1,Verano,3,82.818645,82.818645,84.603267,0,184.241780,233.180590
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,2,Verano,3,38.614411,38.614411,43.294971,0,120.271433,142.706007
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,3,Otono,2,23.313621,23.313621,24.591003,0,85.136219,102.645861
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,4,Otono,2,7.875527,8.915467,11.895775,0,50.986727,76.180280
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,5,Otono,2,20.371544,20.371544,23.531342,0,58.645032,76.769025
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,6,Invierno,2,13.127951,13.127951,13.132163,0,62.360557,63.288677
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,7,Invierno,2,31.691024,31.691024,33.484177,0,65.599776,89.340336
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,8,Invierno,2,21.876548,21.876548,22.118334,0,68.847313,70.799332
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,9,Primavera,2,31.636058,31.636058,32.610084,0,80.675472,86.313312
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,10,Primavera,2,19.386138,19.386138,19.853578,0,103.246337,105.048520
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,11,Primavera,2,43.310993,43.310993,43.385672,0,152.579835,157.998817
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,12,Verano,2,108.518387,108.518387,108.893445,0,213.716196,236.810900
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,1,Verano,5,67.866094,67.866094,70.935384,0,170.612100,227.852156
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,2,Verano,5,35.565335,41.982529,45.381097,0,120.261626,194.472768
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,3,Otono,5,29.100879,31.002116,36.466606,0,82.117876,127.387959
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,4,Otono,4,18.924528,22.556665,25.277210,0,84.020754,106.865726
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,5,Otono,4,12.564801,16.795677,20.848364,0,61.993136,66.838246
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,6,Invierno,4,15.217561,22.721469,25.378168,0,61.142184,70.454282
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,7,Invierno,4,21.984069,21.984069,27.449790,0,64.446285,69.737240
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,8,Invierno,4,19.759474,21.878713,24.504642,0,62.945393,73.237093
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,9,Primavera,4,15.397572,17.694472,19.581149,0,71.829532,74.074329
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,10,Primavera,4,61.182366,61.182366,71.356960,0,91.491035,211.883341
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,11,Primavera,4,44.410743,44.410743,49.034942,0,134.076388,153.958574
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,12,Verano,4,70.140616,70.140616,79.393933,0,183.468884,194.958946
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,1,Verano,3,109.616141,109.616141,121.207235,0,233.363452,233.363452
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,2,Verano,3,66.147915,66.147915,73.288770,0,170.771602,170.771602
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,3,Otono,3,29.444296,31.259210,37.337599,0,115.309887,115.309887
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,4,Otono,3,18.155694,18.620787,22.577305,0,80.872360,80.872360
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,5,Otono,3,15.712980,15.712980,17.765482,0,68.639862,68.639862
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,6,Invierno,3,21.721649,21.721649,24.155776,0,68.293872,68.293872
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,7,Invierno,3,29.460321,29.460321,30.294855,0,71.753869,71.753869
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,8,Invierno,3,31.086325,31.086325,32.166002,0,70.843315,70.843315
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,9,Primavera,3,30.566945,30.566945,30.846354,0,80.102501,80.102501
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,10,Primavera,3,46.755647,46.755647,47.651267,0,111.911560,111.911560
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,11,Primavera,3,67.879206,67.879206,70.199538,0,173.528095,173.528095
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,12,Verano,3,129.664276,129.664276,130.804274,0,240.180405,240.180405
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,1,Verano,3,101.482638,101.482638,103.547595,0,223.086939,223.086939
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,2,Verano,3,75.342854,75.342854,75.964810,0,164.570235,164.570235
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,3,Otono,2,41.972065,41.972065,41.982417,0,112.549484,112.549484
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,4,Otono,2,23.462288,23.462288,23.749336,0,79.170264,79.170264
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,5,Otono,2,19.783767,19.783767,19.969346,0,67.119251,67.119251
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,6,Invierno,2,16.560801,16.560801,16.579952,0,66.257467,66.257467
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,7,Invierno,2,23.296626,23.296626,23.320713,0,69.075658,69.075658
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,8,Invierno,2,20.070511,20.070511,20.200219,0,68.017285,68.017285
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,9,Primavera,2,25.465354,25.465354,25.969392,0,77.323687,77.323687
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,10,Primavera,2,22.766929,22.766929,23.349637,0,107.528219,107.528219
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,11,Primavera,2,54.980807,54.980807,54.981054,0,166.959140,166.959140
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,12,Verano,2,111.279217,111.279217,113.165783,0,228.024379,228.024379
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,1,Verano,5,83.100195,83.100195,91.828053,0,214.388427,214.388427
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,2,Verano,5,49.917063,49.917063,57.856043,0,158.112276,158.112276
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,3,Otono,5,36.447778,36.447778,40.249105,0,110.080539,110.080539
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,4,Otono,4,4.378463,22.548398,24.814921,0,77.790129,77.790129
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,5,Otono,4,13.436612,18.126495,21.260432,0,65.920235,65.920235
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,6,Invierno,4,15.015352,20.448701,24.088970,0,65.283302,65.283302
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,7,Invierno,4,22.760971,22.760971,27.908520,0,67.744422,67.744422
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,8,Invierno,4,20.117979,20.274715,24.429484,0,66.870399,66.870399
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,9,Primavera,4,18.589200,18.866604,22.050591,0,75.868524,75.868524
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,10,Primavera,4,38.884915,38.884915,43.081497,0,106.188988,106.188988
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,11,Primavera,4,63.003487,63.003487,68.494580,0,163.626970,163.626970
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,12,Verano,4,100.596212,100.596212,107.895120,0,221.478543,221.478543
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,1,Verano,3,28.774276,56.874018,57.908652,0,149.906184,154.463290
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,2,Verano,3,47.690869,47.690869,55.861249,0,145.096961,156.492126
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,3,Otono,3,69.578758,69.578758,73.362592,0,154.098131,157.417952
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,4,Otono,3,86.359675,86.359675,86.996757,0,146.058603,153.408566
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,5,Otono,3,76.600125,76.600125,79.483727,0,115.822742,149.034026
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,6,Invierno,3,48.622345,48.622345,55.152688,0,67.295266,117.658650
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,7,Invierno,3,72.156444,72.156444,72.692001,0,110.979243,117.622808
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,8,Invierno,3,78.676638,78.676638,79.023795,0,104.421887,127.087902
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,9,Primavera,3,96.297061,96.297061,96.571616,0,139.768133,151.965150
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,10,Primavera,3,82.645357,82.645357,82.758630,0,138.077278,152.687108
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,11,Primavera,3,43.759359,43.759359,46.159924,0,146.871219,154.128194
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,12,Verano,3,33.019499,35.705704,42.287794,0,130.822306,152.962056
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,1,Verano,3,13.854549,22.381431,26.486965,0,132.306451,137.394126
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,2,Verano,3,39.733041,39.733041,40.796167,0,120.962958,135.972804
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,3,Otono,2,65.481387,65.481387,65.481424,0,135.057142,137.060470
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,4,Otono,2,77.025957,77.025957,77.260369,0,130.401387,135.066481
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,5,Otono,2,57.565035,57.565035,58.217024,0,93.495973,116.305065
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,6,Invierno,2,48.786923,48.786923,51.376269,0,81.582353,115.384825
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,7,Invierno,2,61.404512,61.404512,61.405491,0,105.777214,108.589876
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,8,Invierno,2,49.484812,49.484812,49.507586,0,96.647605,98.215567
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,9,Primavera,2,66.127618,66.127618,66.181259,0,110.230238,125.741665
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,10,Primavera,2,45.915551,45.915551,46.815969,0,126.723037,134.630645
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,11,Primavera,2,20.354269,20.354269,20.375533,0,131.236973,133.428231
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,12,Verano,2,16.406843,22.137983,27.554941,0,131.591441,134.712568
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,1,Verano,5,-6.071197,38.533826,41.921222,0,114.039413,129.673836
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,2,Verano,5,17.444775,30.632762,36.490393,0,119.113573,128.269576
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,3,Otono,5,54.283150,54.283150,57.516134,0,125.523977,130.956886
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,4,Otono,4,30.525975,58.691517,60.647359,0,57.798916,126.842227
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,5,Otono,4,48.615590,48.615590,54.753595,0,89.698232,114.893229
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,6,Invierno,4,44.670025,44.670025,47.943721,0,83.485545,107.760629
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,7,Invierno,4,48.883417,48.883417,53.576122,0,84.172614,104.489681
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,8,Invierno,4,65.773460,65.773460,67.955355,0,96.603552,120.106528
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,9,Primavera,4,60.839505,60.839505,61.298649,0,108.016314,127.233657
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,10,Primavera,4,50.401201,50.401201,55.266389,0,113.484388,125.053151
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,11,Primavera,4,24.213554,31.645222,37.427049,0,122.369996,127.336748
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,12,Verano,4,5.639084,36.419943,42.773573,0,120.802994,130.949641
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,1,Verano,3,83.566955,83.566955,96.927376,0,196.792643,214.320781
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,2,Verano,3,47.584354,47.584354,56.122927,0,149.013514,154.717917
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,3,Otono,3,27.547617,27.547617,29.441935,0,91.454035,134.000990
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,4,Otono,3,15.088317,15.088317,15.656515,0,65.545475,95.941622
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,5,Otono,3,12.182715,12.182715,14.056257,0,63.966742,67.346226
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,6,Invierno,3,26.558042,26.558042,27.767994,0,70.976065,77.074169
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,7,Invierno,3,31.677507,31.677507,32.432868,0,68.569862,78.453901
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,8,Invierno,3,31.463131,31.463131,32.910831,0,69.221489,73.912205
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,9,Primavera,3,34.092659,34.092659,35.225314,0,79.328161,91.057423
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,10,Primavera,3,42.999465,42.999465,43.755765,0,106.123912,109.541068
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,11,Primavera,3,66.061242,66.061242,68.153131,0,167.250889,174.816348
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,12,Verano,3,113.388665,113.388665,114.034745,0,203.825843,238.010859
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,1,Verano,3,77.081136,77.081136,85.250102,0,151.251566,238.972622
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,2,Verano,3,36.732191,36.732191,37.843895,0,122.070665,129.195807
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,3,Otono,2,19.378871,19.378871,21.021947,0,80.876540,99.036039
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,4,Otono,2,11.633044,11.633044,12.986801,0,65.249178,69.432863
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,5,Otono,2,14.358884,14.358884,19.473216,0,51.256464,72.132273
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,6,Invierno,2,5.078317,5.078317,6.590865,0,51.370436,58.179531
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,7,Invierno,2,25.814083,25.814083,28.442912,0,58.590560,84.595671
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,8,Invierno,2,11.063073,11.063073,11.132597,0,55.482132,62.537561
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,9,Primavera,2,29.071458,29.071458,33.783530,0,68.811658,93.047925
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,10,Primavera,2,11.105620,11.105620,13.022741,0,94.249532,97.484288
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,11,Primavera,2,41.832252,41.832252,41.986986,0,150.044242,157.576928
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,12,Verano,2,101.454607,101.454607,101.477653,0,199.784948,236.614589
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,1,Verano,5,33.734604,62.007358,66.163266,0,133.437614,192.401067
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,2,Verano,5,27.526674,28.038069,33.097276,0,113.016945,154.259059
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,3,Otono,5,6.883309,35.393726,45.150723,0,41.717105,184.129650
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,4,Otono,4,-6.167313,20.262725,21.627034,0,44.116191,87.573734
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,5,Otono,4,22.650672,22.650672,25.502065,0,59.759194,108.905970
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,6,Invierno,4,4.969916,15.109981,16.880978,0,52.566687,58.960135
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,7,Invierno,4,8.634252,14.815919,16.480650,0,50.037155,61.056065
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,8,Invierno,4,12.900532,13.117319,15.695226,0,50.853524,77.449509
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,9,Primavera,4,10.763959,16.066730,16.447007,0,63.419613,78.027171
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,10,Primavera,4,26.430412,26.430412,31.231337,0,89.287096,96.510182
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,11,Primavera,4,84.696527,84.696527,88.416012,0,146.356627,263.807388
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,12,Verano,4,87.186731,87.186731,90.711167,0,184.603822,227.463464

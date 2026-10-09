@@ -1,0 +1,25 @@
+task,predictor,target,model,model_variant,outer_fold,test_start,test_end,n,bias_pred_minus_obs,mae,rmse,negative_predictions,minimum_prediction,maximum_prediction
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_1,2010-01,2012-12,36,4.798485,17.254773,23.514890,0,4.239228,199.476882
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_2,2013-01,2015-12,36,0.825276,18.959598,25.135057,0,6.460221,255.112151
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,IMERG sin corrección,IMERG sin corrección,bloque_3,2016-01,2020-03,51,-0.981804,18.839963,32.578074,0,2.827578,197.996544
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_1,2010-01,2012-12,36,8.701597,21.943750,31.793663,0,0.000000,280.949823
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Log-lineal corregido,bloque_2,2013-01,2015-12,36,9.339803,22.495617,37.973573,0,3.050405,398.421703
+estimar_precipitacion_local,P_IMERG_mm,P_local_mm,Corrección seleccionada en ajuste,Lineal corregido,bloque_3,2016-01,2020-03,51,0.640247,20.853246,30.738910,0,0.000000,261.230099
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,2010-01,2012-12,36,49.684283,49.874283,64.599849,0,68.293872,240.180405
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,2013-01,2015-02,26,48.067431,48.067431,59.316809,0,66.257467,228.024379
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,2016-01,2020-03,51,39.891332,42.144454,54.914184,0,65.283302,221.478543
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,2010-01,2012-12,36,55.922521,60.444845,65.171206,0,93.409932,138.426318
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,2013-01,2015-02,26,47.133362,48.789091,53.729186,0,100.713788,132.171268
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,2016-01,2020-03,51,41.686120,51.375355,56.716393,0,60.870391,128.998696
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,2010-01,2012-12,36,41.895110,42.226922,54.266574,0,64.680112,248.072731
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,2013-01,2015-02,26,38.712106,38.792101,49.480958,0,50.986727,236.810900
+estimar_caudal,P_local_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,2016-01,2020-03,51,34.921342,37.288487,46.678734,0,61.142184,227.852156
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_1,2010-01,2012-12,36,49.684283,49.874283,64.599849,0,68.293872,240.180405
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_2,2013-01,2015-02,26,48.067431,48.067431,59.316809,0,66.257467,228.024379
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Climatología mensual Q,Climatología mensual Q,bloque_3,2016-01,2020-03,51,39.891332,42.144454,54.914184,0,65.283302,221.478543
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_1,2010-01,2012-12,36,63.681700,66.247196,70.950000,0,67.295266,157.417952
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_2,2013-01,2015-02,26,45.302638,46.727366,50.991945,0,81.582353,137.394126
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión lineal Q~P(t),Regresión lineal Q~P(t),bloque_3,2016-01,2020-03,51,36.206488,47.078592,52.019268,0,57.798916,130.956886
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_1,2010-01,2012-12,36,44.350889,44.350889,55.949731,0,63.966742,238.010859
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_2,2013-01,2015-02,26,33.962323,33.962323,46.729425,0,51.256464,238.972622
+estimar_caudal,P_IMERG_mm (mm/mes),Caudal_m3s,Regresión de anomalías con rezago,Regresión de anomalías con rezago,bloque_3,2016-01,2020-03,51,26.450700,35.853800,47.363678,0,41.717105,263.807388

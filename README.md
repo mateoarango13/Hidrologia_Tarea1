@@ -103,4 +103,4 @@ Para generar la carpeta y el ZIP de entrega, desde la raíz del repositorio:
 python documentos/material_interno/armar_entrega.py
 ```
 
-El script copia a `entrega_final/Tarea1_Hidrologia_RioMaipo_5710001/` solo lo que exige la guía, usa `README_entrega.md` como README del paquete y genera el `.zip` a su lado. Deja fuera el material de trabajo, los archivos auxiliares de LaTeX, `__pycache__`, los `*_num.tif` de ASTER (metadatos de calidad que no se usan), `.git/` y `.vscode/`. `entrega_final/` está en `.gitignore`.
+El script copia a `entrega_final/Tarea1_Hidrologia_RioMaipo_5710001/` solo lo que exige la guía, usa `README_entrega.md` como README del paquete y genera el `.zip` a su lado. Deja fuera el material de trabajo, los archivos auxiliares de LaTeX, `__pycache__`, los `*_num.tif` de ASTER (metadatos de calidad que no se usan), `.git/` y `.vscode/`. La carpeta `entrega_final/` se versiona en GitHub para revisarla; el `.zip` no, porque supera el límite de 100 MB de GitHub, y cada integrante lo genera con el script.

@@ -1,0 +1,9 @@
+Criterio_QA,Resultado,Estado
+Filas Totales en CSV,484,Conforme (1980-01 a 2020-04)
+Fechas Duplicadas,0,0 duplicados (Conforme)
+Precipitación Local Negativa (<0),0,0 valores negativos (Conforme)
+Precipitación IMERG Negativa (<0),0,0 valores negativos (Conforme)
+Caudal Negativo (<0),0,0 valores negativos (Conforme)
+Faltantes Precipitación Local,0 (Mes 2020-04),0.21% (< 10% permitido)
+Faltantes Caudal Observado,21 meses,2.89% (< 10% permitido)
+Verificación Manual Mayo 1980 Q->R,CSV: 64.8681 mm vs Calc: 64.8681 mm (Dif: 0.000000 mm),Verificado con fórmula teórica exacta

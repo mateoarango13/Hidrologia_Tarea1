@@ -8,7 +8,8 @@ calidad de ASTER que no se usan.
 
 Uso, desde la raíz del repositorio:
     python documentos/material_interno/armar_entrega.py
-Resultado: entrega_final/<NOMBRE>/ y entrega_final/<NOMBRE>.zip (entrega_final/ está en .gitignore).
+Resultado: entrega_final/<NOMBRE>/ (versionada en GitHub) y entrega_final/<NOMBRE>.zip
+(ignorado por git: supera el límite de 100 MB de GitHub; se genera localmente).
 """
 import shutil
 import sys

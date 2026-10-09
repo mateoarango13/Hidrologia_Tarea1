@@ -1,0 +1,13 @@
+Indicador,Valor,Unidad,Interpretacion
+Periodo_Referencia,2000-06 a 2020-03,Fechas,Periodo común coordinado con todos los roles (238 meses)
+P_anual_media_mm,755.27,mm/año,Precipitación anual media en periodo común
+R_anual_media_mm,663.18,mm/año,Escorrentía anual media en periodo común
+Coeficiente_Escorrentia_C,0.878,-,"Relación R/P anual del periodo común; valores cercanos a 1.0 son típicos de cuencas andinas de alta montaña con ET limitada y aportes de deshielo glaciar (Ayala et al., 2020, DOI:10.5194/tc-14-2005-2020)"
+SI_Precipitacion_Walsh_Lawler,0.745,-,"Estacional (0.60 <= SI < 0.80): régimen con estacionalidad clara (Walsh & Lawler, 1981, DOI:10.1002/j.1477-8696.1981.tb05400.x)"
+SI_Escorrentia_Walsh_Lawler,0.389,-,"Escorrentía relativamente uniforme (SI < 0.40) (Walsh & Lawler, 1981, DOI:10.1002/j.1477-8696.1981.tb05400.x)"
+Mes_Pico_Precipitacion,6,Mes (Junio),"Máximo invernal por frentes fríos extratropicales (168.08 mm/mes). Garreaud et al. (2009, DOI:10.1016/j.palaeo.2007.10.032)"
+Mes_Minimo_Precipitacion,3,Mes (Marzo),"Mínimo estival por bloqueo del Anticiclón Subtropical del Pacífico SE (10.75 mm/mes). Garreaud et al. (2009, DOI:10.1016/j.palaeo.2007.10.032)"
+Mes_Pico_Caudal,12,Mes (Diciembre),"Máximo estival por derretimiento nival/glaciar (105.95 mm/mes). Masiokas et al. (2006, DOI:10.1175/JCLI3969.1)"
+Mes_Minimo_Caudal,7,Mes (Julio),"Mínimo invernal por retención criosférica (32.61 mm/mes). Alvarez-Garreton et al. (2021, DOI:10.5194/hess-25-429-2021)"
+Desfase_Pico_Lluvia_a_Caudal,6,Meses,"Retardo físico de 6 meses por almacenamiento nivo-glaciar: precipitación invernal se acumula como nieve y se libera por deshielo en primavera-verano (Masiokas et al., 2006, DOI:10.1175/JCLI3969.1; Ayala et al., 2020, DOI:10.5194/tc-14-2005-2020)"
+Clasificacion_Hidroclimatica_Sintesis,Régimen Nivo-Pluvial de Montaña Mediterránea,Cualitativa,"70.9% de precipitación nival (CAMELS-CL, Alvarez-Garreton et al., 2018, DOI:10.5194/hess-22-5817-2018); invierno pluvioso y frío, verano cálido y seco con pico de caudal por deshielo; 7.18% del área es glaciar (Ayala et al., 2020, DOI:10.5194/tc-14-2005-2020)"

@@ -1,0 +1,31 @@
+indicador,valor
+años hidrológicos completos (P y R),32.0
+años completos 1980-2009,24.0
+años completos 2010-2019,8.0
+P media 1980-2009 (mm/año),919.0805520416667
+P media 2010-2019 (mm/año),555.3981112499999
+R media 1980-2009 (mm/año),820.7311546249999
+R media 2010-2019 (mm/año),478.66230737499995
+cambio relativo de P (%),-39.57024658869934
+cambio relativo de R (%),-41.678550317283204
+elasticidad aparente ΔR/R ÷ ΔP/P,1.0532800250273386
+R/P medio 1980-2009,0.9466249535461092
+R/P medio 2010-2019,0.9102121911778369
+R/P mediana (todos),0.892650768848261
+Sen de R/P (por década),-0.008945297425941714
+p MK Hamed-Rao de R/P,0.6614992026619251
+regresión: n años,31.0
+regresión: b0 (mm),0.9590801059401315
+regresión: b1 (P del año),0.690903463412229
+regresión: b2 (P del año previo),0.1943340924128545
+regresión: p de b2,2.8595257814336506e-05
+regresión: R²,0.9229628235824068
+residuo medio hasta 2009 (mm/año),10.343951563500974
+residuo medio 2010-2019 (mm/año),-29.73886074506604
+años con IMERG completo,19.0
+P_I - P_L: Sen (mm/año por década),106.48701928571427
+P_I - P_L: p MK Hamed-Rao,0.05886224110862792
+P_I - P_L: OLS (mm/año por década),94.70477249122808
+P_I - P_L: p HAC,0.03189028363664614
+P_I/P_L mínimo,0.667045950827749
+P_I/P_L máximo,1.4448988207228517

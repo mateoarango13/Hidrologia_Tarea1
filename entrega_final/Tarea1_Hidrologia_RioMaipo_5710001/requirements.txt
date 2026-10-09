@@ -1,0 +1,15 @@
+# Dependencias de Python para reproducir la Tarea 1 (Python 3.13; probado en un entorno virtual limpio el 2026-10-07).
+# Importante: statsmodels 0.14.5 no es compatible con pandas 3.x; usar pandas 2.3.x.
+numpy==2.3.4
+pandas==2.3.3
+scipy==1.16.3
+statsmodels==0.14.5
+matplotlib==3.10.6
+xarray==2025.10.1
+netCDF4==1.7.3
+Pillow==12.0.0
+
+# Solo para volver a descargar datos (no hacen falta para reproducir figuras y tablas):
+# cdsapi            -> scripts/15_p5_1_descargar_campos_era5.py (requiere ~/.cdsapirc, que no se entrega)
+# earthengine-api   -> scripts/02_descargar_satelite.py (IMERG V06 y ERA5-Land; requiere autenticación)
+# geopandas         -> scripts/02_descargar_satelite.py

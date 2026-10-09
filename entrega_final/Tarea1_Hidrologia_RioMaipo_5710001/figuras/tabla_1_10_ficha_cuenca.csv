@@ -1,0 +1,42 @@
+atributo,valor,descripcion
+gauge_name,Rio Maipo En El Manzano,gauge name (based on DGA records)
+gauge_lat,-33.5939,gauge latitude based on DGA records (degrees)
+gauge_lon,-70.3792,gauge longitude based on DGA records (degrees)
+outlet_camels_elev,875,CAMELS-CL outlet elevation (m a.s.l.) obtained from the 30 m ASTER GDEM elevation data
+area_km2,4839.047,catchment area (km2)
+mean_elev,3181.017,catchment mean elevation (m a.s.l.)
+med_elev,3226,catchment median elevation (m a.s.l.)
+max_elev,6550,catchment maximum elevation (m a.s.l.)
+min_elev,872,catchment minimum elevation (m a.s.l.)
+mean_slope_perc,27.59767,catchment mean slope (%)
+geol_class_1st,Acid volcanic rocks,most common geologic class in the catchment
+geol_class_1st_frac,0.277,fraction of the catchment area associated with its most common geologic class
+geol_class_2nd,Pyroclastics,second most common geologic class in the catchment
+geol_class_2nd_frac,0.245,fraction of the catchment area associated with its second most common geologic class
+lc_barren,69.47224,percentage of the catchment covered by barren lands (level 1). Includes three types of level 2 classes: dry salt flats;  sandy areas and bare exposed rocks
+lc_grass,12.97416,percentage of the catchment covered by grasslands; level 1. Includes three types of level 2 classes: pastures; other grasslands; and withered grasslands.
+lc_shrub,11.54589,percentage of the catchment covered by shrublands; level 1. Includes five types of level 2 classes: shrublands; shrubs and sparse trees mosaic; succulents; shrub plantations; and withered shrublands.
+lc_glacier,7.182593,percentage of the catchment covered by glaciers.
+lc_snow,3.054837,percentage of the catchment covered by snow and ice; level 1. Includes two types of level 2 classes: snow and ice.
+lc_wet,2.186968,percentage of the catchment covered by wetlands and water bodies (level 1). Includes six types of level 2 classes: marshlands; mudflats; other wetlands; lakes; reservoirs/ponds; rivers and ocean.
+lc_forest,0.218455,fraction of the catchment covered by forests; including native forest and forest plantation (fp_frac+nf_frac).
+lc_imp,0.1023648,percentage of the catchment covered by impervious surfaces (level 1). Urbanised areas are usually contained in this class.
+p_mean_cr2met_1979_2010,2.467322,mean daily precipitation calculated from CR2MET period 1979-2010
+pet_mean_1979_2010,1.838717,mean daily PET (calculated with Hargreaves formula)
+aridity_cr2met_1979_2010,0.745228,aridity; calculated as the ratio of mean daily PET (pet_mean) to mean daily precipitation (p_mean_cr2met) period 1979-2010
+frac_snow_cr2met_1979_2010,0.7091864,fraction of precipitation (CR2MET) falling as snow (i.e.; on days colder than 0 degrees C) period 1979-2010
+p_seasonality_cr2met_1979_2010,-1.117883,seasonality and timing of precipitation (CR2MET) estimated using sine curves to represent the annual temperature and precipitation cycles; positive (negative) values indicate that precipitation peaks in summer (winter); values close to 0 indicate uniform precipitation throughout the year)
+runoff_ratio_cr2met_1979_2010,0.8981467,runoff ratio (ratio of mean daily discharge to mean daily precipitation); for product CR2MET
+stream_elas_cr2met_1979_2010,0.8006512,streamflow precipitation elasticity (sensitivity of streamflow to changes in precipitation at the annual timescale; using the mean daily discharge as reference and precipitation product CR2MET)
+baseflow_index_1979_2010,0.8133871,baseflow index (ratio of mean daily baseflow to mean daily discharge; hydrograph separation performed using the Ladson et al. (2013) digital filter with _ set to 0.925)
+hfd_mean,236.3,mean half-flow date (date on which the cumulative discharge since 1 April reaches half of the annual discharge)
+q_mean_1979_2010,2.188404,mean daily discharge period 1979-2010
+sur_rights_flow_m3s,24.43859,annual flow calculated for consumptive permanent continuous surface water rights
+IAI_Q,19.86006,intervention degree defined as the annual flow of surface water rights (consumptive permanent continuous); normalised by mean annual streamflow.
+dam_index,1,0 if there is no dam within the catchment; 1 if there is at least one dam classified as large
+record_period_start,1946-11-12,start date of streamflow records
+record_period_end,2020-04-07,end date of streamflow records
+area_poligono_calculada_km2,4844.3,"área del polígono CAMELS-CL (proyección equivalente local, este script)"
+area_implicita_en_Q_lamina_mm_km2,4839.047,área con la que el script 01 convierte Q a lámina (R = 86.4 n Q / A)
+centroide_poligono_lat_lon,"-33.693, -70.074",promedio de los vértices del anillo exterior (aproximado)
+extension_poligono,lat -34.29 a -33.05; lon -70.44 a -69.77,caja envolvente de la delimitación
